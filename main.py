@@ -7,6 +7,7 @@ import tempfile
 import asyncio
 import time
 import threading
+from http.server import BaseHTTPRequestHandler, HTTPServer
 from captioning import transcribe_and_caption
 from smart_cut import smart_cut
 from word_caption import burn_word_captions
@@ -97,6 +98,28 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = discord.Client(intents=intents)
+
+class RenderHealthHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == "/healthz":
+            self.send_response(200)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"OK")
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def log_message(self, format, *args):
+        pass
+
+
+def start_render_health_server():
+    port = int(os.getenv("PORT", "10000"))
+    server = HTTPServer(("0.0.0.0", port), RenderHealthHandler)
+    print(f"RENDER HEALTH SERVER: listening on 0.0.0.0:{port}", flush=True)
+    server.serve_forever()
+
 
 # Active editing sessions
 SESSIONS = {}
@@ -4319,6 +4342,7 @@ async def handle_live_command(message, content):
 
 
 client.run(TOKEN)
+
 
 
 
