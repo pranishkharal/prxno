@@ -1,0 +1,150 @@
+﻿    return return_code
+
+
+def get_video_size(input_file):
+    command = [
+        "ffprobe",
+        "-v", "error",
+        "-select_streams", "v:0",
+        "-show_entries", "stream=width,height",
+        "-of", "csv=s=x:p=0",
+        str(input_file)
+    ]
+
+    result = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+
+    value = result.stdout.strip()
+
+    try:
+        width, height = value.split("x")
+        return int(width), int(height)
+    except Exception:
+        return 1920, 1080
+
+
+def get_video_duration(input_file):
+    command = [
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration",
+        "-of",
+        "default=noprint_wrappers=1:nokey=1",
+        str(input_file)
+    ]
+
+    result = subprocess.run(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+
+    try:
+        return float(result.stdout.strip())
+    except Exception:
+        return 60.0
+
+
+def upload_to_transfersh(file_path, timeout=120):
+    """
+    Upload a file to transfer.sh using the bundled curl-cffi.exe if available.
+    Returns the public URL on success or None on failure.
+    """
+    file_path = Path(file_path)
+
+    try:
+        scripts_dir = Path(sys.executable).parent / "Scripts"
+        curl_exe = scripts_dir / "curl-cffi.exe"
+
+        if not curl_exe.exists():
+            curl_cmd = "curl"
+        else:
+            curl_cmd = str(curl_exe)
+
+        cmd = [
+            curl_cmd,
+            "-s",
+            "--upload-file",
+            str(file_path),
+            f"https://transfer.sh/{file_path.name}"
+        ]
+
+        result = subprocess.run(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            timeout=timeout
+        )
+
+        if result.returncode != 0:
+            print("transfer.sh upload failed:", result.stderr.strip())
+            return None
+
+        url = result.stdout.strip()
+
+        if url.startswith("http"):
+            return url
+
+    except Exception as e:
+        print("transfer.sh upload error:", e)
+
+    return None
+
+
+def reencode_to_target_size(input_file, output_file, target_mb, presets=None, timeout=1800):
+    """
+    Try re-encoding the input_file to fit under target_mb by iterating
+    over a small set of scale and CRF presets. Returns the output_path
+    on success or None on failure.
+    """
+    input_file = Path(input_file)
+    output_file = Path(output_file)
+
+    if presets is None:
+        presets = [
+            # (scale_width, crf)
+            (1280, 28),
+            (1280, 30),
+            (960, 28),
+            (960, 30),
+            (720, 28),
+            (720, 30),
+            (None, 32),
+        ]
+
+    for scale_w, crf in presets:
+
+        if scale_w:
+            vf = f"scale='min({scale_w},iw)':-2"
+            out_name = f"compressed_{scale_w}_crf{crf}.mp4"
+        else:
+            vf = None
+            out_name = f"compressed_crf{crf}.mp4"
+
+        candidate = output_file.parent / (
+            f"{output_file.stem.rsplit('.',1)[0]}_{out_name}"
+        )
+
+        cmd = [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(input_file),
+        ]
+
+        if vf:
+            cmd += ["-vf", vf]
+
+        cmd += [
+            "-c:v",
+            "libx264",
+            "-preset",
+            "slow",

@@ -1,0 +1,69 @@
+﻿
+main.py:15:import traceback
+main.py:37:    raise RuntimeError(
+main.py:120:        except Exception:
+main.py:124:        raise RuntimeError(
+main.py:133:        except Exception:
+main.py:141:        print("FFMPEG ERROR")
+main.py:147:        raise RuntimeError(
+main.py:158:        "-v", "error",
+main.py:177:    except Exception:
+main.py:185:        "error",
+main.py:202:    except Exception:
+main.py:247:    except Exception as e:
+main.py:248:        print("transfer.sh upload error:", e)
+main.py:323:        except Exception as e:
+main.py:345:    except Exception:
+main.py:382:    except Exception:
+main.py:418:        raise RuntimeError(
+main.py:428:        shutil.rmtree(job_dir, ignore_errors=True)
+main.py:450:    # object here (not a plain string), or they raise an AssertionError.
+main.py:456:    except Exception as impersonate_error:
+main.py:459:            f"{impersonate_error}"
+main.py:496:            raise RuntimeError(
+main.py:511:            raise RuntimeError(
+main.py:519:    except Exception as e:
+main.py:520:        shutil.rmtree(job_dir, ignore_errors=True)
+main.py:523:        print(" KICK DOWNLOAD ERROR (FULL TRACEBACK)")
+main.py:525:        traceback.print_exc()
+main.py:529:        raise RuntimeError(
+main.py:555:            shutil.rmtree(parent, ignore_errors=True)
+main.py:557:    except Exception as e:
+main.py:643:        "error",
+main.py:664:        raise RuntimeError(
+main.py:669:        raise RuntimeError(
+main.py:724:        except Exception:
+main.py:1184:                    "error",
+main.py:1225:                except Exception as ocr_error:
+main.py:1227:                        "OCR frame error:",
+main.py:1228:                        ocr_error
+main.py:2364:        except asyncio.TimeoutError:
+main.py:2393:        except Exception as e:
+main.py:2394:            print(f"Split Screen upload error: {e}")
+main.py:2412:        except Exception:
+main.py:2538:                raise RuntimeError(
+main.py:2568:                        raise RuntimeError(
+main.py:2577:                    except Exception:
+main.py:2594:                except Exception as caption_error:
+main.py:2598:                        caption_error
+main.py:2601:                    traceback.print_exc()
+main.py:2605:                    except Exception:
+main.py:2648:            except discord.HTTPException as upload_error:
+main.py:2652:                    upload_error
+main.py:2685:                    except discord.HTTPException as dm_error:
+main.py:2689:                            dm_error
+main.py:2709:        except Exception as e:
+main.py:2711:            print("\nEDIT ERROR:", e)
+main.py:2712:            traceback.print_exc()
+main.py:2720:            except Exception as notify_error:
+main.py:2724:                    notify_error
+main.py:2738:                except Exception:
+main.py:2752:                except Exception:
+main.py:2866:    except asyncio.TimeoutError:
+main.py:2929:        except Exception as caption_error:
+main.py:2930:            print("Caption generation failed:", caption_error)
+main.py:2964:            raise RuntimeError(
+main.py:3009:    except Exception as e:
+main.py:3011:        print("\nKICK DOWNLOAD ERROR:", e)
+
+

@@ -1,0 +1,151 @@
+﻿            "slow",
+            "-crf",
+            str(crf),
+            "-c:a",
+            "aac",
+            "-b:a",
+            "96k",
+            str(candidate)
+        ]
+
+        try:
+            run_ffmpeg(cmd, timeout=timeout)
+
+            if candidate.exists():
+                size_mb = candidate.stat().st_size / (1024 * 1024)
+                print(f"Compressed attempt: {size_mb:.2f} MB ({candidate})")
+                if size_mb <= target_mb:
+                    return candidate
+
+                # keep candidate as potential smaller intermediate
+                # but continue trying other presets
+
+        except Exception as e:
+            print("Re-encode attempt failed:", e)
+            continue
+
+    return None
+
+
+# ---------------------------------------------------------
+# KICK URL validation + downloader
+# ---------------------------------------------------------
+
+def is_kick_clip_url(url):
+    """
+    Accept normal KICK Clip URLs while rejecting arbitrary URLs.
+
+    KICK URLs can change their exact path format, so validation is
+    intentionally based on the hostname plus the presence of a
+    clip-like path.
+    """
+
+    try:
+        parsed = urlparse(url.strip())
+    except Exception:
+        return False
+
+    host = (parsed.hostname or "").lower()
+
+    if host not in {"kick.com", "www.kick.com"}:
+        return False
+
+    path = (parsed.path or "").lower()
+
+    return (
+        "/clip/" in path
+        or "/clips/" in path
+    )
+
+
+def extract_streamer_from_url(url):
+    """
+    Extract the creator/streamer username directly from a KICK Clip URL.
+
+    KICK Clip URLs follow the pattern:
+        https://kick.com/<username>/clips/<clip_id>
+
+    The first path segment is always the streamer's username, so this
+    is a fast and reliable way to identify the streamer without
+    needing OCR at all. OCR is kept as a fallback in case the
+    username doesn't match any overlay filename we have on file.
+    """
+
+    try:
+        parsed = urlparse(url.strip())
+        path = (parsed.path or "").strip("/")
+        segments = [segment for segment in path.split("/") if segment]
+
+        if segments:
+            return segments[0]
+
+    except Exception:
+        pass
+
+    return None
+
+
+def clean_url_from_message(text):
+    """
+    Extract the first HTTP(S) URL from a Discord message.
+    """
+
+    match = re.search(
+        r"https?://[^\s<>]+",
+        text.strip()
+    )
+
+    if not match:
+        return None
+
+    url = match.group(0).rstrip(".,)>]}")
+
+    return url
+
+
+def download_kick_clip(url, user_id):
+    """
+    Download a KICK Clip to the local USB uploads directory.
+
+    yt-dlp currently has a KICK Clips extractor. The download is
+    temporary and is deleted after editing finishes.
+
+    curl_cffi is recommended because some KICK endpoints can reject
+    ordinary HTTP clients.
+    """
+
+    if not is_kick_clip_url(url):
+        raise RuntimeError(
+            "That does not look like a KICK Clip URL.\n"
+            "Please paste a link such as https://kick.com/.../clip/..."
+        )
+
+    # Unique temporary working directory prevents two users from
+    # accidentally overwriting each other's source file.
+    job_dir = UPLOAD_DIR / f"kick_{user_id}"
+
+    if job_dir.exists():
+        shutil.rmtree(job_dir, ignore_errors=True)
+
+    job_dir.mkdir(parents=True, exist_ok=True)
+
+    output_template = str(
+        job_dir / "kick_clip_%(id)s.%(ext)s"
+    )
+
+    ydl_opts = {
+        "outtmpl": output_template,
+        "format": "best[ext=mp4]/best",
+        "merge_output_format": "mp4",
+        "noplaylist": True,
+        "quiet": False,
+        "no_warnings": False,
+        "retries": 3,
+        "fragment_retries": 3,
+        "socket_timeout": 60,
+    }
+
+    # Prefer curl_cffi impersonation when the installed yt-dlp version
+    # supports it. Newer yt-dlp versions require an ImpersonateTarget
+    # object here (not a plain string), or they raise an AssertionError.
+    # If anything about impersonation isn't available, fall back to

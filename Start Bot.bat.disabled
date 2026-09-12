@@ -1,0 +1,26 @@
+@echo off
+title Auto Clips Bot Launcher
+cd /d "%~dp0"
+
+echo Checking Python...
+
+where python >nul 2>&1
+if %errorlevel%==0 (
+    echo Python found!
+    goto run
+)
+
+echo Python not found. Downloading portable Python...
+echo Please wait...
+
+powershell -Command "Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.12.6/python-3.12.6-embed-amd64.zip' -OutFile 'python_portable.zip'"
+powershell -Command "Expand-Archive -Path 'python_portable.zip' -DestinationPath 'python_portable' -Force"
+del python_portable.zip
+
+set PATH=%cd%\python_portable;%PATH%
+echo Portable Python ready!
+
+:run
+echo Starting bot...
+python main.py
+pause

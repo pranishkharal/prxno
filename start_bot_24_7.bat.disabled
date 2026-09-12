@@ -1,0 +1,10 @@
+@echo off
+cd /d "D:\Auto Clips for Kick"
+
+:START
+"D:\Auto Clips for Kick\.venv\Scripts\python.exe" "D:\Auto Clips for Kick\main.py"
+
+echo.
+echo Bot stopped or crashed. Restarting in 10 seconds...
+timeout /t 10 /nobreak >nul
+goto START

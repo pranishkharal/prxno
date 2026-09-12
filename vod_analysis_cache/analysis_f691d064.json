@@ -1,0 +1,4603 @@
+{
+  "transcript": {
+    "full_text": "but I wrote pro chat. Genuinely, if you think I would crack mysterious, you guys have something in your head, it's like, I would never crack that. Plus mysterious, I would like black guys. Oh, holy nice black guys. That's not true. Yeah, I would.",
+    "segments": [
+      {
+        "text": "but I wrote pro chat.",
+        "start": 0.0,
+        "end": 1.02,
+        "words": [
+          {
+            "word": "but",
+            "start": 0.0,
+            "end": 0.1,
+            "confidence": 0.119713194668293
+          },
+          {
+            "word": "I",
+            "start": 0.1,
+            "end": 0.24,
+            "confidence": 0.8399763703346252
+          },
+          {
+            "word": "wrote",
+            "start": 0.24,
+            "end": 0.44,
+            "confidence": 0.49430644512176514
+          },
+          {
+            "word": "pro",
+            "start": 0.44,
+            "end": 0.8,
+            "confidence": 0.2470862865447998
+          },
+          {
+            "word": "chat.",
+            "start": 0.8,
+            "end": 1.02,
+            "confidence": 0.8010625243186951
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "Genuinely, if you think I would crack mysterious,",
+        "start": 1.8,
+        "end": 3.98,
+        "words": [
+          {
+            "word": "Genuinely,",
+            "start": 1.8,
+            "end": 2.24,
+            "confidence": 0.6041785031557083
+          },
+          {
+            "word": "if",
+            "start": 2.44,
+            "end": 2.58,
+            "confidence": 0.9923264980316162
+          },
+          {
+            "word": "you",
+            "start": 2.58,
+            "end": 2.66,
+            "confidence": 0.9985700845718384
+          },
+          {
+            "word": "think",
+            "start": 2.66,
+            "end": 2.88,
+            "confidence": 0.9955984354019165
+          },
+          {
+            "word": "I",
+            "start": 2.88,
+            "end": 3.04,
+            "confidence": 0.9896390438079834
+          },
+          {
+            "word": "would",
+            "start": 3.04,
+            "end": 3.16,
+            "confidence": 0.9541562795639038
+          },
+          {
+            "word": "crack",
+            "start": 3.16,
+            "end": 3.52,
+            "confidence": 0.9710795879364014
+          },
+          {
+            "word": "mysterious,",
+            "start": 3.52,
+            "end": 3.98,
+            "confidence": 0.8463395833969116
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "you guys have something in your head,",
+        "start": 4.54,
+        "end": 6.22,
+        "words": [
+          {
+            "word": "you",
+            "start": 4.54,
+            "end": 4.68,
+            "confidence": 0.5181744694709778
+          },
+          {
+            "word": "guys",
+            "start": 4.68,
+            "end": 4.86,
+            "confidence": 0.9973434805870056
+          },
+          {
+            "word": "have",
+            "start": 4.86,
+            "end": 5.02,
+            "confidence": 0.9689123630523682
+          },
+          {
+            "word": "something",
+            "start": 5.02,
+            "end": 5.46,
+            "confidence": 0.9896786212921143
+          },
+          {
+            "word": "in",
+            "start": 5.46,
+            "end": 5.66,
+            "confidence": 0.9840644001960754
+          },
+          {
+            "word": "your",
+            "start": 5.66,
+            "end": 5.76,
+            "confidence": 0.996644914150238
+          },
+          {
+            "word": "head,",
+            "start": 5.76,
+            "end": 6.22,
+            "confidence": 0.9984569549560547
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "it's like, I would never crack that.",
+        "start": 6.84,
+        "end": 9.42,
+        "words": [
+          {
+            "word": "it's",
+            "start": 6.84,
+            "end": 7.28,
+            "confidence": 0.7711617350578308
+          },
+          {
+            "word": "like,",
+            "start": 7.28,
+            "end": 7.46,
+            "confidence": 0.9926198124885559
+          },
+          {
+            "word": "I",
+            "start": 7.66,
+            "end": 8.24,
+            "confidence": 0.9758409857749939
+          },
+          {
+            "word": "would",
+            "start": 8.24,
+            "end": 8.44,
+            "confidence": 0.8827815651893616
+          },
+          {
+            "word": "never",
+            "start": 8.44,
+            "end": 8.8,
+            "confidence": 0.8993194103240967
+          },
+          {
+            "word": "crack",
+            "start": 8.8,
+            "end": 9.22,
+            "confidence": 0.9614355564117432
+          },
+          {
+            "word": "that.",
+            "start": 9.22,
+            "end": 9.42,
+            "confidence": 0.7386115789413452
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "Plus mysterious, I would like black guys.",
+        "start": 9.5,
+        "end": 11.18,
+        "words": [
+          {
+            "word": "Plus",
+            "start": 9.5,
+            "end": 9.68,
+            "confidence": 0.9052618741989136
+          },
+          {
+            "word": "mysterious,",
+            "start": 9.68,
+            "end": 10.0,
+            "confidence": 0.8108114004135132
+          },
+          {
+            "word": "I",
+            "start": 10.02,
+            "end": 10.28,
+            "confidence": 0.5070186257362366
+          },
+          {
+            "word": "would",
+            "start": 10.28,
+            "end": 10.34,
+            "confidence": 0.15099547803401947
+          },
+          {
+            "word": "like",
+            "start": 10.34,
+            "end": 10.54,
+            "confidence": 0.7898698449134827
+          },
+          {
+            "word": "black",
+            "start": 10.54,
+            "end": 10.88,
+            "confidence": 0.7517842054367065
+          },
+          {
+            "word": "guys.",
+            "start": 10.88,
+            "end": 11.18,
+            "confidence": 0.9845578074455261
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "Oh, holy nice black guys.",
+        "start": 11.68,
+        "end": 14.5,
+        "words": [
+          {
+            "word": "Oh,",
+            "start": 11.68,
+            "end": 11.68,
+            "confidence": 0.11213339120149612
+          },
+          {
+            "word": "holy",
+            "start": 12.32,
+            "end": 13.28,
+            "confidence": 0.34688106179237366
+          },
+          {
+            "word": "nice",
+            "start": 13.28,
+            "end": 13.54,
+            "confidence": 0.3085629940032959
+          },
+          {
+            "word": "black",
+            "start": 13.54,
+            "end": 13.86,
+            "confidence": 0.8309654593467712
+          },
+          {
+            "word": "guys.",
+            "start": 13.86,
+            "end": 14.5,
+            "confidence": 0.9824519753456116
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "That's not true.",
+        "start": 15.12,
+        "end": 16.22,
+        "words": [
+          {
+            "word": "That's",
+            "start": 15.12,
+            "end": 15.52,
+            "confidence": 0.9752000868320465
+          },
+          {
+            "word": "not",
+            "start": 15.52,
+            "end": 15.74,
+            "confidence": 0.9510889053344727
+          },
+          {
+            "word": "true.",
+            "start": 15.74,
+            "end": 16.22,
+            "confidence": 0.9945110082626343
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "Yeah, I would.",
+        "start": 19.24,
+        "end": 19.92,
+        "words": [
+          {
+            "word": "Yeah,",
+            "start": 19.24,
+            "end": 19.68,
+            "confidence": 0.19212070107460022
+          },
+          {
+            "word": "I",
+            "start": 19.74,
+            "end": 19.86,
+            "confidence": 0.8876075744628906
+          },
+          {
+            "word": "would.",
+            "start": 19.86,
+            "end": 19.92,
+            "confidence": 0.7795964479446411
+          }
+        ],
+        "speaker": null
+      }
+    ],
+    "duration": 19.92,
+    "word_count": 45,
+    "language": "en",
+    "topics": [],
+    "emotions": [],
+    "storytelling_score": 0,
+    "hook_candidates": [],
+    "payoff_candidates": [],
+    "controversy_score": 0,
+    "surprise_score": 0,
+    "named_entities": [],
+    "questions": [],
+    "arguments": [],
+    "key_phrases": []
+  },
+  "audio_signals": [
+    {
+      "signal_type": "laughter",
+      "timestamp": 0.05,
+      "strength": 68.19501761951369,
+      "details": {
+        "confidence": 0.68,
+        "zcr": 0.096,
+        "centroid": 1044.0
+      },
+      "window": {
+        "start": 0.0,
+        "end": 0.1,
+        "rms_db": -16.32658344197349,
+        "energy_score": 18.427078458311538,
+        "spectral_centroid": 1044.336462605313,
+        "spectral_rolloff": 1360.0,
+        "zero_crossing_rate": 0.095625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.681950176195137
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 0.15000000000000002,
+      "strength": 73.30140401199658,
+      "details": {
+        "confidence": 0.73,
+        "zcr": 0.088,
+        "centroid": 1074.0
+      },
+      "window": {
+        "start": 0.1,
+        "end": 0.2,
+        "rms_db": -13.593579725149587,
+        "energy_score": 25.0,
+        "spectral_centroid": 1073.5205349328785,
+        "spectral_rolloff": 1530.0,
+        "zero_crossing_rate": 0.088125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7330140401199658
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 0.35,
+      "strength": 66.83956619052927,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.071,
+        "centroid": 1145.0
+      },
+      "window": {
+        "start": 0.3,
+        "end": 0.4,
+        "rms_db": -12.67951753673209,
+        "energy_score": 25.0,
+        "spectral_centroid": 1145.2754920705684,
+        "spectral_rolloff": 1410.0,
+        "zero_crossing_rate": 0.070625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6683956619052926
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 0.55,
+      "strength": 27.266669372803836,
+      "details": {
+        "prev_energy": 22.7,
+        "curr_energy": 0.0,
+        "drop_magnitude": 22.7
+      },
+      "window": {
+        "start": 0.5,
+        "end": 0.6,
+        "rms_db": -30.293227414126616,
+        "energy_score": 0.0,
+        "spectral_centroid": 912.7136246820944,
+        "spectral_rolloff": 1380.0,
+        "zero_crossing_rate": 0.055,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 0.75,
+      "strength": 62.84186919407263,
+      "details": {
+        "confidence": 0.63,
+        "zcr": 0.083,
+        "centroid": 1030.0
+      },
+      "window": {
+        "start": 0.7,
+        "end": 0.7999999999999999,
+        "rms_db": -16.394218433248355,
+        "energy_score": 18.224173484486943,
+        "spectral_centroid": 1029.7148016917724,
+        "spectral_rolloff": 1540.0,
+        "zero_crossing_rate": 0.083125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6284186919407263
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 0.75,
+      "strength": 27.336260226730417,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 18.2,
+        "next_energy": 0.0,
+        "shift_magnitude": 18.2
+      },
+      "window": {
+        "start": 0.7,
+        "end": 0.7999999999999999,
+        "rms_db": -16.394218433248355,
+        "energy_score": 18.224173484486943,
+        "spectral_centroid": 1029.7148016917724,
+        "spectral_rolloff": 1540.0,
+        "zero_crossing_rate": 0.083125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6284186919407263
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 0.8500000000000001,
+      "strength": 21.86900818138433,
+      "details": {
+        "prev_energy": 18.2,
+        "curr_energy": 0.0,
+        "drop_magnitude": 18.2
+      },
+      "window": {
+        "start": 0.8,
+        "end": 0.9,
+        "rms_db": -25.034674749748504,
+        "energy_score": 0.0,
+        "spectral_centroid": 1893.9052825927056,
+        "spectral_rolloff": 4440.0,
+        "zero_crossing_rate": 0.178125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 1.85,
+      "strength": 75.25276890787109,
+      "details": {
+        "confidence": 0.75,
+        "zcr": 0.149,
+        "centroid": 2195.0
+      },
+      "window": {
+        "start": 1.8,
+        "end": 1.9000000000000001,
+        "rms_db": -17.24984906909954,
+        "energy_score": 15.65728157693339,
+        "spectral_centroid": 2195.2041354068024,
+        "spectral_rolloff": 4800.0,
+        "zero_crossing_rate": 0.14875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7525276890787109
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 1.95,
+      "strength": 67.98396254660322,
+      "details": {
+        "confidence": 0.68,
+        "zcr": 0.068,
+        "centroid": 1431.0
+      },
+      "window": {
+        "start": 1.9,
+        "end": 2.0,
+        "rms_db": -10.739177182973542,
+        "energy_score": 25.0,
+        "spectral_centroid": 1431.1950062137637,
+        "spectral_rolloff": 2840.0,
+        "zero_crossing_rate": 0.068125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6798396254660323
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 2.3499999999999996,
+      "strength": 69.77711418895916,
+      "details": {
+        "confidence": 0.7,
+        "zcr": 0.08,
+        "centroid": 1647.0
+      },
+      "window": {
+        "start": 2.3,
+        "end": 2.4,
+        "rms_db": -15.405971475750537,
+        "energy_score": 21.188914356980398,
+        "spectral_centroid": 1646.7222614110233,
+        "spectral_rolloff": 3860.0,
+        "zero_crossing_rate": 0.08,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6977711418895916
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 2.45,
+      "strength": 67.68896598493168,
+      "details": {
+        "confidence": 0.68,
+        "zcr": 0.079,
+        "centroid": 1548.0
+      },
+      "window": {
+        "start": 2.4,
+        "end": 2.5,
+        "rms_db": -15.642396505351787,
+        "energy_score": 20.479639268176648,
+        "spectral_centroid": 1548.4531817492934,
+        "spectral_rolloff": 3750.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6768896598493168
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 2.95,
+      "strength": 24.36851308572007,
+      "details": {
+        "prev_energy": 20.3,
+        "curr_energy": 7.9,
+        "drop_magnitude": 12.4
+      },
+      "window": {
+        "start": 2.9,
+        "end": 3.0,
+        "rms_db": -19.837612561702432,
+        "energy_score": 7.893991099124712,
+        "spectral_centroid": 1454.330837246546,
+        "spectral_rolloff": 2490.0,
+        "zero_crossing_rate": 0.099375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 3.05,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -13.0,
+        "energy_score": 25.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 969.0
+      },
+      "window": {
+        "start": 3.0,
+        "end": 3.1,
+        "rms_db": -12.959731473702798,
+        "energy_score": 25.0,
+        "spectral_centroid": 968.9240856254843,
+        "spectral_rolloff": 1350.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6726693064219114
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 3.05,
+      "strength": 67.26693064219114,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.075,
+        "centroid": 969.0
+      },
+      "window": {
+        "start": 3.0,
+        "end": 3.1,
+        "rms_db": -12.959731473702798,
+        "energy_score": 25.0,
+        "spectral_centroid": 968.9240856254843,
+        "spectral_rolloff": 1350.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6726693064219114
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 3.05,
+      "strength": 37.5,
+      "details": {
+        "prev_energy": 7.9,
+        "curr_energy": 25.0,
+        "next_energy": 14.6,
+        "shift_magnitude": 17.1
+      },
+      "window": {
+        "start": 3.0,
+        "end": 3.1,
+        "rms_db": -12.959731473702798,
+        "energy_score": 25.0,
+        "spectral_centroid": 968.9240856254843,
+        "spectral_rolloff": 1350.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6726693064219114
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 4.25,
+      "strength": 40.85780184643471,
+      "details": {
+        "rms_db": -15.7,
+        "energy_score": 20.4,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1305.0
+      },
+      "window": {
+        "start": 4.2,
+        "end": 4.3,
+        "rms_db": -15.659309287004884,
+        "energy_score": 20.428900923217356,
+        "spectral_centroid": 1304.6350814484733,
+        "spectral_rolloff": 2730.0,
+        "zero_crossing_rate": 0.048125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 4.75,
+      "strength": 40.568004430721196,
+      "details": {
+        "rms_db": -15.7,
+        "energy_score": 20.3,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1176.0
+      },
+      "window": {
+        "start": 4.7,
+        "end": 4.8,
+        "rms_db": -15.70760885629047,
+        "energy_score": 20.284002215360598,
+        "spectral_centroid": 1176.3821679541206,
+        "spectral_rolloff": 1760.0,
+        "zero_crossing_rate": 0.06625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 4.85,
+      "strength": 67.75421300471835,
+      "details": {
+        "confidence": 0.68,
+        "zcr": 0.117,
+        "centroid": 1497.0
+      },
+      "window": {
+        "start": 4.8,
+        "end": 4.8999999999999995,
+        "rms_db": -17.877231197999155,
+        "energy_score": 13.775135190234543,
+        "spectral_centroid": 1496.5401035249197,
+        "spectral_rolloff": 2240.0,
+        "zero_crossing_rate": 0.1175,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6775421300471836
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.3,
+      "strength": 35.25,
+      "details": {
+        "speech_windows": 141,
+        "density": 0.7
+      },
+      "window": {
+        "start": 5.3,
+        "end": 5.3999999999999995,
+        "rms_db": -22.21943988376043,
+        "energy_score": 0.7485091329507192,
+        "spectral_centroid": 711.8718355524087,
+        "spectral_rolloff": 850.0,
+        "zero_crossing_rate": 0.04,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.4,
+      "strength": 35.5,
+      "details": {
+        "speech_windows": 142,
+        "density": 0.71
+      },
+      "window": {
+        "start": 5.4,
+        "end": 5.5,
+        "rms_db": -19.679960298894457,
+        "energy_score": 8.366947887548637,
+        "spectral_centroid": 1201.1428392294229,
+        "spectral_rolloff": 2630.0,
+        "zero_crossing_rate": 0.04375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.5,
+      "strength": 35.75,
+      "details": {
+        "speech_windows": 143,
+        "density": 0.71
+      },
+      "window": {
+        "start": 5.5,
+        "end": 5.6,
+        "rms_db": -19.340422361798744,
+        "energy_score": 9.385561698835776,
+        "spectral_centroid": 1658.5006289621658,
+        "spectral_rolloff": 3640.0,
+        "zero_crossing_rate": 0.08,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.6,
+      "strength": 36.0,
+      "details": {
+        "speech_windows": 144,
+        "density": 0.72
+      },
+      "window": {
+        "start": 5.6,
+        "end": 5.699999999999999,
+        "rms_db": -18.324281542205973,
+        "energy_score": 12.433984157614088,
+        "spectral_centroid": 1440.7295298469537,
+        "spectral_rolloff": 3210.0,
+        "zero_crossing_rate": 0.086875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6047625246298906
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 5.6499999999999995,
+      "strength": 60.47625246298905,
+      "details": {
+        "confidence": 0.6,
+        "zcr": 0.087,
+        "centroid": 1441.0
+      },
+      "window": {
+        "start": 5.6,
+        "end": 5.699999999999999,
+        "rms_db": -18.324281542205973,
+        "energy_score": 12.433984157614088,
+        "spectral_centroid": 1440.7295298469537,
+        "spectral_rolloff": 3210.0,
+        "zero_crossing_rate": 0.086875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6047625246298906
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.7,
+      "strength": 36.25,
+      "details": {
+        "speech_windows": 145,
+        "density": 0.72
+      },
+      "window": {
+        "start": 5.7,
+        "end": 5.8,
+        "rms_db": -17.247206530694886,
+        "energy_score": 15.665209192147351,
+        "spectral_centroid": 1191.2647236766243,
+        "spectral_rolloff": 2070.0,
+        "zero_crossing_rate": 0.060625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.8,
+      "strength": 36.5,
+      "details": {
+        "speech_windows": 146,
+        "density": 0.73
+      },
+      "window": {
+        "start": 5.8,
+        "end": 5.8999999999999995,
+        "rms_db": -28.093905306947367,
+        "energy_score": 0.0,
+        "spectral_centroid": 1564.0725880673958,
+        "spectral_rolloff": 3110.0,
+        "zero_crossing_rate": 0.106875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 5.85,
+      "strength": 18.79825103057682,
+      "details": {
+        "prev_energy": 15.7,
+        "curr_energy": 0.0,
+        "drop_magnitude": 15.7
+      },
+      "window": {
+        "start": 5.8,
+        "end": 5.8999999999999995,
+        "rms_db": -28.093905306947367,
+        "energy_score": 0.0,
+        "spectral_centroid": 1564.0725880673958,
+        "spectral_rolloff": 3110.0,
+        "zero_crossing_rate": 0.106875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 5.9,
+      "strength": 36.75,
+      "details": {
+        "speech_windows": 147,
+        "density": 0.73
+      },
+      "window": {
+        "start": 5.9,
+        "end": 6.0,
+        "rms_db": -32.73264304482929,
+        "energy_score": 0.0,
+        "spectral_centroid": 1687.5980314090175,
+        "spectral_rolloff": 3210.0,
+        "zero_crossing_rate": 0.150625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.0,
+      "strength": 37.0,
+      "details": {
+        "speech_windows": 148,
+        "density": 0.74
+      },
+      "window": {
+        "start": 6.0,
+        "end": 6.1,
+        "rms_db": -17.259281574311945,
+        "energy_score": 15.628984061296173,
+        "spectral_centroid": 1160.6305964010255,
+        "spectral_rolloff": 2150.0,
+        "zero_crossing_rate": 0.07625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.1,
+      "strength": 37.0,
+      "details": {
+        "speech_windows": 148,
+        "density": 0.74
+      },
+      "window": {
+        "start": 6.1,
+        "end": 6.199999999999999,
+        "rms_db": -14.131944137115916,
+        "energy_score": 25.0,
+        "spectral_centroid": 1028.3787432476527,
+        "spectral_rolloff": 2000.0,
+        "zero_crossing_rate": 0.07125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6621284057435739
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 6.1499999999999995,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -14.1,
+        "energy_score": 25.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1028.0
+      },
+      "window": {
+        "start": 6.1,
+        "end": 6.199999999999999,
+        "rms_db": -14.131944137115916,
+        "energy_score": 25.0,
+        "spectral_centroid": 1028.3787432476527,
+        "spectral_rolloff": 2000.0,
+        "zero_crossing_rate": 0.07125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6621284057435739
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 6.1499999999999995,
+      "strength": 66.21284057435739,
+      "details": {
+        "confidence": 0.66,
+        "zcr": 0.071,
+        "centroid": 1028.0
+      },
+      "window": {
+        "start": 6.1,
+        "end": 6.199999999999999,
+        "rms_db": -14.131944137115916,
+        "energy_score": 25.0,
+        "spectral_centroid": 1028.3787432476527,
+        "spectral_rolloff": 2000.0,
+        "zero_crossing_rate": 0.07125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6621284057435739
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.2,
+      "strength": 37.5,
+      "details": {
+        "speech_windows": 150,
+        "density": 0.75
+      },
+      "window": {
+        "start": 6.2,
+        "end": 6.3,
+        "rms_db": -26.283982108631818,
+        "energy_score": 0.0,
+        "spectral_centroid": 954.3706474808116,
+        "spectral_rolloff": 1950.0,
+        "zero_crossing_rate": 0.055,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 6.25,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 25.0
+      },
+      "window": {
+        "start": 6.2,
+        "end": 6.3,
+        "rms_db": -26.283982108631818,
+        "energy_score": 0.0,
+        "spectral_centroid": 954.3706474808116,
+        "spectral_rolloff": 1950.0,
+        "zero_crossing_rate": 0.055,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.3,
+      "strength": 37.75,
+      "details": {
+        "speech_windows": 151,
+        "density": 0.76
+      },
+      "window": {
+        "start": 6.3,
+        "end": 6.3999999999999995,
+        "rms_db": -36.076879767580735,
+        "energy_score": 0.0,
+        "spectral_centroid": 1702.406808770046,
+        "spectral_rolloff": 3570.0,
+        "zero_crossing_rate": 0.1,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.4,
+      "strength": 38.0,
+      "details": {
+        "speech_windows": 152,
+        "density": 0.76
+      },
+      "window": {
+        "start": 6.4,
+        "end": 6.5,
+        "rms_db": -29.341836397750214,
+        "energy_score": 0.0,
+        "spectral_centroid": 1631.5699962090143,
+        "spectral_rolloff": 2770.0,
+        "zero_crossing_rate": 0.1375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.5,
+      "strength": 38.25,
+      "details": {
+        "speech_windows": 153,
+        "density": 0.77
+      },
+      "window": {
+        "start": 6.5,
+        "end": 6.6,
+        "rms_db": -30.469846360606518,
+        "energy_score": 0.0,
+        "spectral_centroid": 1515.6930486050455,
+        "spectral_rolloff": 3010.0,
+        "zero_crossing_rate": 0.110625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.6,
+      "strength": 38.25,
+      "details": {
+        "speech_windows": 153,
+        "density": 0.77
+      },
+      "window": {
+        "start": 6.6,
+        "end": 6.699999999999999,
+        "rms_db": -29.916371937179026,
+        "energy_score": 0.0,
+        "spectral_centroid": 1925.2875777774454,
+        "spectral_rolloff": 3350.0,
+        "zero_crossing_rate": 0.165625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 6.7,
+      "strength": 38.75,
+      "details": {
+        "speech_windows": 155,
+        "density": 0.78
+      },
+      "window": {
+        "start": 6.7,
+        "end": 6.8,
+        "rms_db": -36.73263834103495,
+        "energy_score": 0.0,
+        "spectral_centroid": 1973.3892340631141,
+        "spectral_rolloff": 3940.0,
+        "zero_crossing_rate": 0.13125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.1,
+      "strength": 39.5,
+      "details": {
+        "speech_windows": 158,
+        "density": 0.79
+      },
+      "window": {
+        "start": 7.1,
+        "end": 7.199999999999999,
+        "rms_db": -12.58052693895847,
+        "energy_score": 25.0,
+        "spectral_centroid": 975.6614362870044,
+        "spectral_rolloff": 1980.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6131746077215253
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 7.1499999999999995,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -12.6,
+        "energy_score": 25.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 976.0
+      },
+      "window": {
+        "start": 7.1,
+        "end": 7.199999999999999,
+        "rms_db": -12.58052693895847,
+        "energy_score": 25.0,
+        "spectral_centroid": 975.6614362870044,
+        "spectral_rolloff": 1980.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6131746077215253
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 7.1499999999999995,
+      "strength": 61.31746077215253,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.06,
+        "centroid": 976.0
+      },
+      "window": {
+        "start": 7.1,
+        "end": 7.199999999999999,
+        "rms_db": -12.58052693895847,
+        "energy_score": 25.0,
+        "spectral_centroid": 975.6614362870044,
+        "spectral_rolloff": 1980.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6131746077215253
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 7.1499999999999995,
+      "strength": 37.5,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 25.0,
+        "next_energy": 2.4,
+        "shift_magnitude": 25.0
+      },
+      "window": {
+        "start": 7.1,
+        "end": 7.199999999999999,
+        "rms_db": -12.58052693895847,
+        "energy_score": 25.0,
+        "spectral_centroid": 975.6614362870044,
+        "spectral_rolloff": 1980.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6131746077215253
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.2,
+      "strength": 40.0,
+      "details": {
+        "speech_windows": 160,
+        "density": 0.8
+      },
+      "window": {
+        "start": 7.2,
+        "end": 7.3,
+        "rms_db": -21.656153046527514,
+        "energy_score": 2.438369644649466,
+        "spectral_centroid": 1305.9219207233764,
+        "spectral_rolloff": 3010.0,
+        "zero_crossing_rate": 0.0525,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 7.25,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 2.4,
+        "drop_magnitude": 22.6
+      },
+      "window": {
+        "start": 7.2,
+        "end": 7.3,
+        "rms_db": -21.656153046527514,
+        "energy_score": 2.438369644649466,
+        "spectral_centroid": 1305.9219207233764,
+        "spectral_rolloff": 3010.0,
+        "zero_crossing_rate": 0.0525,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.3,
+      "strength": 40.25,
+      "details": {
+        "speech_windows": 161,
+        "density": 0.81
+      },
+      "window": {
+        "start": 7.3,
+        "end": 7.3999999999999995,
+        "rms_db": -15.559549144027292,
+        "energy_score": 20.72818135215013,
+        "spectral_centroid": 1150.4963080296454,
+        "spectral_rolloff": 1680.0,
+        "zero_crossing_rate": 0.076875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.642525399328025
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 7.35,
+      "strength": 41.45636270430026,
+      "details": {
+        "rms_db": -15.6,
+        "energy_score": 20.7,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1150.0
+      },
+      "window": {
+        "start": 7.3,
+        "end": 7.3999999999999995,
+        "rms_db": -15.559549144027292,
+        "energy_score": 20.72818135215013,
+        "spectral_centroid": 1150.4963080296454,
+        "spectral_rolloff": 1680.0,
+        "zero_crossing_rate": 0.076875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.642525399328025
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 7.35,
+      "strength": 64.2525399328025,
+      "details": {
+        "confidence": 0.64,
+        "zcr": 0.077,
+        "centroid": 1150.0
+      },
+      "window": {
+        "start": 7.3,
+        "end": 7.3999999999999995,
+        "rms_db": -15.559549144027292,
+        "energy_score": 20.72818135215013,
+        "spectral_centroid": 1150.4963080296454,
+        "spectral_rolloff": 1680.0,
+        "zero_crossing_rate": 0.076875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.642525399328025
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.4,
+      "strength": 40.5,
+      "details": {
+        "speech_windows": 162,
+        "density": 0.81
+      },
+      "window": {
+        "start": 7.4,
+        "end": 7.5,
+        "rms_db": -17.14241141975543,
+        "energy_score": 15.97959452496572,
+        "spectral_centroid": 1233.9576989004838,
+        "spectral_rolloff": 2200.0,
+        "zero_crossing_rate": 0.08125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6093019617171249
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 7.45,
+      "strength": 60.930196171712495,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.081,
+        "centroid": 1234.0
+      },
+      "window": {
+        "start": 7.4,
+        "end": 7.5,
+        "rms_db": -17.14241141975543,
+        "energy_score": 15.97959452496572,
+        "spectral_centroid": 1233.9576989004838,
+        "spectral_rolloff": 2200.0,
+        "zero_crossing_rate": 0.08125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6093019617171249
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.5,
+      "strength": 40.75,
+      "details": {
+        "speech_windows": 163,
+        "density": 0.81
+      },
+      "window": {
+        "start": 7.5,
+        "end": 7.6,
+        "rms_db": -33.309191012788546,
+        "energy_score": 0.0,
+        "spectral_centroid": 1579.4020920195944,
+        "spectral_rolloff": 2820.0,
+        "zero_crossing_rate": 0.12125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 7.55,
+      "strength": 19.175513429958862,
+      "details": {
+        "prev_energy": 16.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 16.0
+      },
+      "window": {
+        "start": 7.5,
+        "end": 7.6,
+        "rms_db": -33.309191012788546,
+        "energy_score": 0.0,
+        "spectral_centroid": 1579.4020920195944,
+        "spectral_rolloff": 2820.0,
+        "zero_crossing_rate": 0.12125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.6,
+      "strength": 40.75,
+      "details": {
+        "speech_windows": 163,
+        "density": 0.81
+      },
+      "window": {
+        "start": 7.6,
+        "end": 7.699999999999999,
+        "rms_db": -33.188178931842366,
+        "energy_score": 0.0,
+        "spectral_centroid": 1481.7059878754949,
+        "spectral_rolloff": 2740.0,
+        "zero_crossing_rate": 0.0975,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.7,
+      "strength": 41.25,
+      "details": {
+        "speech_windows": 165,
+        "density": 0.82
+      },
+      "window": {
+        "start": 7.7,
+        "end": 7.8,
+        "rms_db": -32.1745701321418,
+        "energy_score": 0.0,
+        "spectral_centroid": 1579.4334904471305,
+        "spectral_rolloff": 2990.0,
+        "zero_crossing_rate": 0.1075,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.8,
+      "strength": 41.5,
+      "details": {
+        "speech_windows": 166,
+        "density": 0.83
+      },
+      "window": {
+        "start": 7.8,
+        "end": 7.8999999999999995,
+        "rms_db": -34.79515534214782,
+        "energy_score": 0.0,
+        "spectral_centroid": 1626.5026747683269,
+        "spectral_rolloff": 3670.0,
+        "zero_crossing_rate": 0.100625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 7.9,
+      "strength": 41.75,
+      "details": {
+        "speech_windows": 167,
+        "density": 0.83
+      },
+      "window": {
+        "start": 7.9,
+        "end": 8.0,
+        "rms_db": -36.615775097437115,
+        "energy_score": 0.0,
+        "spectral_centroid": 1753.5338079377361,
+        "spectral_rolloff": 3820.0,
+        "zero_crossing_rate": 0.130625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.0,
+      "strength": 42.0,
+      "details": {
+        "speech_windows": 168,
+        "density": 0.84
+      },
+      "window": {
+        "start": 8.0,
+        "end": 8.1,
+        "rms_db": -39.27406318600396,
+        "energy_score": 0.0,
+        "spectral_centroid": 2357.543717952418,
+        "spectral_rolloff": 5160.0,
+        "zero_crossing_rate": 0.185,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.1,
+      "strength": 42.0,
+      "details": {
+        "speech_windows": 168,
+        "density": 0.84
+      },
+      "window": {
+        "start": 8.1,
+        "end": 8.2,
+        "rms_db": -12.98680326567923,
+        "energy_score": 25.0,
+        "spectral_centroid": 1397.7188196163215,
+        "spectral_rolloff": 1740.0,
+        "zero_crossing_rate": 0.17,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8048289114712242
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.149999999999999,
+      "strength": 80.48289114712242,
+      "details": {
+        "confidence": 0.8,
+        "zcr": 0.17,
+        "centroid": 1398.0
+      },
+      "window": {
+        "start": 8.1,
+        "end": 8.2,
+        "rms_db": -12.98680326567923,
+        "energy_score": 25.0,
+        "spectral_centroid": 1397.7188196163215,
+        "spectral_rolloff": 1740.0,
+        "zero_crossing_rate": 0.17,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8048289114712242
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.2,
+      "strength": 42.5,
+      "details": {
+        "speech_windows": 170,
+        "density": 0.85
+      },
+      "window": {
+        "start": 8.2,
+        "end": 8.299999999999999,
+        "rms_db": -11.290371787676154,
+        "energy_score": 25.0,
+        "spectral_centroid": 1202.0530262503655,
+        "spectral_rolloff": 1570.0,
+        "zero_crossing_rate": 0.0875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7401539769687775
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.25,
+      "strength": 74.01539769687776,
+      "details": {
+        "confidence": 0.74,
+        "zcr": 0.087,
+        "centroid": 1202.0
+      },
+      "window": {
+        "start": 8.2,
+        "end": 8.299999999999999,
+        "rms_db": -11.290371787676154,
+        "energy_score": 25.0,
+        "spectral_centroid": 1202.0530262503655,
+        "spectral_rolloff": 1570.0,
+        "zero_crossing_rate": 0.0875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7401539769687775
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.3,
+      "strength": 42.75,
+      "details": {
+        "speech_windows": 171,
+        "density": 0.85
+      },
+      "window": {
+        "start": 8.3,
+        "end": 8.4,
+        "rms_db": -12.391166925085273,
+        "energy_score": 25.0,
+        "spectral_centroid": 962.3312081057026,
+        "spectral_rolloff": 1530.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6121748406079277
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.350000000000001,
+      "strength": 61.21748406079277,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.06,
+        "centroid": 962.0
+      },
+      "window": {
+        "start": 8.3,
+        "end": 8.4,
+        "rms_db": -12.391166925085273,
+        "energy_score": 25.0,
+        "spectral_centroid": 962.3312081057026,
+        "spectral_rolloff": 1530.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6121748406079277
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.4,
+      "strength": 42.75,
+      "details": {
+        "speech_windows": 171,
+        "density": 0.85
+      },
+      "window": {
+        "start": 8.4,
+        "end": 8.5,
+        "rms_db": -12.378700760199708,
+        "energy_score": 25.0,
+        "spectral_centroid": 922.8185453539186,
+        "spectral_rolloff": 1620.0,
+        "zero_crossing_rate": 0.054375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.5,
+      "strength": 43.0,
+      "details": {
+        "speech_windows": 172,
+        "density": 0.86
+      },
+      "window": {
+        "start": 8.5,
+        "end": 8.6,
+        "rms_db": -17.363297555973965,
+        "energy_score": 15.316936116310114,
+        "spectral_centroid": 985.2171878054116,
+        "spectral_rolloff": 2060.0,
+        "zero_crossing_rate": 0.045,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.6,
+      "strength": 43.0,
+      "details": {
+        "speech_windows": 172,
+        "density": 0.86
+      },
+      "window": {
+        "start": 8.6,
+        "end": 8.7,
+        "rms_db": -21.960440008925527,
+        "energy_score": 1.5255087574554267,
+        "spectral_centroid": 1374.108877896818,
+        "spectral_rolloff": 3250.0,
+        "zero_crossing_rate": 0.033125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 8.649999999999999,
+      "strength": 18.380323339572136,
+      "details": {
+        "prev_energy": 15.3,
+        "curr_energy": 1.5,
+        "drop_magnitude": 13.8
+      },
+      "window": {
+        "start": 8.6,
+        "end": 8.7,
+        "rms_db": -21.960440008925527,
+        "energy_score": 1.5255087574554267,
+        "spectral_centroid": 1374.108877896818,
+        "spectral_rolloff": 3250.0,
+        "zero_crossing_rate": 0.033125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.7,
+      "strength": 43.5,
+      "details": {
+        "speech_windows": 174,
+        "density": 0.87
+      },
+      "window": {
+        "start": 8.7,
+        "end": 8.799999999999999,
+        "rms_db": -15.397804548158367,
+        "energy_score": 21.213415139756904,
+        "spectral_centroid": 1319.338040113334,
+        "spectral_rolloff": 2450.0,
+        "zero_crossing_rate": 0.065625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6160113346855829
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.75,
+      "strength": 61.60113346855829,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.066,
+        "centroid": 1319.0
+      },
+      "window": {
+        "start": 8.7,
+        "end": 8.799999999999999,
+        "rms_db": -15.397804548158367,
+        "energy_score": 21.213415139756904,
+        "spectral_centroid": 1319.338040113334,
+        "spectral_rolloff": 2450.0,
+        "zero_crossing_rate": 0.065625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6160113346855829
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.8,
+      "strength": 43.5,
+      "details": {
+        "speech_windows": 174,
+        "density": 0.87
+      },
+      "window": {
+        "start": 8.8,
+        "end": 8.9,
+        "rms_db": -11.836272039544191,
+        "energy_score": 25.0,
+        "spectral_centroid": 1229.3830076996474,
+        "spectral_rolloff": 2200.0,
+        "zero_crossing_rate": 0.06625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6572037255774736
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.850000000000001,
+      "strength": 65.72037255774737,
+      "details": {
+        "confidence": 0.66,
+        "zcr": 0.066,
+        "centroid": 1229.0
+      },
+      "window": {
+        "start": 8.8,
+        "end": 8.9,
+        "rms_db": -11.836272039544191,
+        "energy_score": 25.0,
+        "spectral_centroid": 1229.3830076996474,
+        "spectral_rolloff": 2200.0,
+        "zero_crossing_rate": 0.06625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6572037255774736
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 8.9,
+      "strength": 43.75,
+      "details": {
+        "speech_windows": 175,
+        "density": 0.88
+      },
+      "window": {
+        "start": 8.9,
+        "end": 9.0,
+        "rms_db": -13.81038859563359,
+        "energy_score": 25.0,
+        "spectral_centroid": 967.6645989320282,
+        "spectral_rolloff": 1580.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6175748449199021
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.95,
+      "strength": 61.75748449199021,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.061,
+        "centroid": 968.0
+      },
+      "window": {
+        "start": 8.9,
+        "end": 9.0,
+        "rms_db": -13.81038859563359,
+        "energy_score": 25.0,
+        "spectral_centroid": 967.6645989320282,
+        "spectral_rolloff": 1580.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6175748449199021
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.0,
+      "strength": 43.75,
+      "details": {
+        "speech_windows": 175,
+        "density": 0.88
+      },
+      "window": {
+        "start": 9.0,
+        "end": 9.1,
+        "rms_db": -23.089148061713296,
+        "energy_score": 0.0,
+        "spectral_centroid": 1319.363749836874,
+        "spectral_rolloff": 2070.0,
+        "zero_crossing_rate": 0.09125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 9.05,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 25.0
+      },
+      "window": {
+        "start": 9.0,
+        "end": 9.1,
+        "rms_db": -23.089148061713296,
+        "energy_score": 0.0,
+        "spectral_centroid": 1319.363749836874,
+        "spectral_rolloff": 2070.0,
+        "zero_crossing_rate": 0.09125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.1,
+      "strength": 43.75,
+      "details": {
+        "speech_windows": 175,
+        "density": 0.88
+      },
+      "window": {
+        "start": 9.1,
+        "end": 9.2,
+        "rms_db": -15.792610664537936,
+        "energy_score": 20.0289967906182,
+        "spectral_centroid": 1211.9045233808142,
+        "spectral_rolloff": 1790.0,
+        "zero_crossing_rate": 0.126875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7312408007409794
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 9.149999999999999,
+      "strength": 40.0579935812364,
+      "details": {
+        "rms_db": -15.8,
+        "energy_score": 20.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1212.0
+      },
+      "window": {
+        "start": 9.1,
+        "end": 9.2,
+        "rms_db": -15.792610664537936,
+        "energy_score": 20.0289967906182,
+        "spectral_centroid": 1211.9045233808142,
+        "spectral_rolloff": 1790.0,
+        "zero_crossing_rate": 0.126875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7312408007409794
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 9.149999999999999,
+      "strength": 73.12408007409795,
+      "details": {
+        "confidence": 0.73,
+        "zcr": 0.127,
+        "centroid": 1212.0
+      },
+      "window": {
+        "start": 9.1,
+        "end": 9.2,
+        "rms_db": -15.792610664537936,
+        "energy_score": 20.0289967906182,
+        "spectral_centroid": 1211.9045233808142,
+        "spectral_rolloff": 1790.0,
+        "zero_crossing_rate": 0.126875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7312408007409794
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 9.149999999999999,
+      "strength": 30.043495185927302,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 20.0,
+        "next_energy": 8.1,
+        "shift_magnitude": 20.0
+      },
+      "window": {
+        "start": 9.1,
+        "end": 9.2,
+        "rms_db": -15.792610664537936,
+        "energy_score": 20.0289967906182,
+        "spectral_centroid": 1211.9045233808142,
+        "spectral_rolloff": 1790.0,
+        "zero_crossing_rate": 0.126875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7312408007409794
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.2,
+      "strength": 44.25,
+      "details": {
+        "speech_windows": 177,
+        "density": 0.89
+      },
+      "window": {
+        "start": 9.2,
+        "end": 9.299999999999999,
+        "rms_db": -19.755369824607914,
+        "energy_score": 8.140719310408265,
+        "spectral_centroid": 1363.8149030014395,
+        "spectral_rolloff": 1970.0,
+        "zero_crossing_rate": 0.143125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.3,
+      "strength": 44.5,
+      "details": {
+        "speech_windows": 178,
+        "density": 0.89
+      },
+      "window": {
+        "start": 9.3,
+        "end": 9.4,
+        "rms_db": -22.141992026293735,
+        "energy_score": 0.9808527053508023,
+        "spectral_centroid": 1120.771571504757,
+        "spectral_rolloff": 1890.0,
+        "zero_crossing_rate": 0.101875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.4,
+      "strength": 44.75,
+      "details": {
+        "speech_windows": 179,
+        "density": 0.9
+      },
+      "window": {
+        "start": 9.4,
+        "end": 9.5,
+        "rms_db": -27.3127017497946,
+        "energy_score": 0.0,
+        "spectral_centroid": 1992.1592483428026,
+        "spectral_rolloff": 5220.0,
+        "zero_crossing_rate": 0.14875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.5,
+      "strength": 45.0,
+      "details": {
+        "speech_windows": 180,
+        "density": 0.9
+      },
+      "window": {
+        "start": 9.5,
+        "end": 9.6,
+        "rms_db": -34.29309072952404,
+        "energy_score": 0.0,
+        "spectral_centroid": 2451.876828532555,
+        "spectral_rolloff": 5410.0,
+        "zero_crossing_rate": 0.195,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.6,
+      "strength": 45.0,
+      "details": {
+        "speech_windows": 180,
+        "density": 0.9
+      },
+      "window": {
+        "start": 9.6,
+        "end": 9.7,
+        "rms_db": -11.857278133784448,
+        "energy_score": 25.0,
+        "spectral_centroid": 1070.8039864729508,
+        "spectral_rolloff": 1610.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6953102989854714
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 9.649999999999999,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -11.9,
+        "energy_score": 25.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1071.0
+      },
+      "window": {
+        "start": 9.6,
+        "end": 9.7,
+        "rms_db": -11.857278133784448,
+        "energy_score": 25.0,
+        "spectral_centroid": 1070.8039864729508,
+        "spectral_rolloff": 1610.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6953102989854714
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 9.649999999999999,
+      "strength": 69.53102989854713,
+      "details": {
+        "confidence": 0.7,
+        "zcr": 0.079,
+        "centroid": 1071.0
+      },
+      "window": {
+        "start": 9.6,
+        "end": 9.7,
+        "rms_db": -11.857278133784448,
+        "energy_score": 25.0,
+        "spectral_centroid": 1070.8039864729508,
+        "spectral_rolloff": 1610.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6953102989854714
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 9.649999999999999,
+      "strength": 37.5,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 25.0,
+        "next_energy": 0.0,
+        "shift_magnitude": 25.0
+      },
+      "window": {
+        "start": 9.6,
+        "end": 9.7,
+        "rms_db": -11.857278133784448,
+        "energy_score": 25.0,
+        "spectral_centroid": 1070.8039864729508,
+        "spectral_rolloff": 1610.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6953102989854714
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.7,
+      "strength": 45.5,
+      "details": {
+        "speech_windows": 182,
+        "density": 0.91
+      },
+      "window": {
+        "start": 9.7,
+        "end": 9.799999999999999,
+        "rms_db": -22.920838241210866,
+        "energy_score": 0.0,
+        "spectral_centroid": 1937.627825698911,
+        "spectral_rolloff": 4960.0,
+        "zero_crossing_rate": 0.118125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 9.75,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 25.0
+      },
+      "window": {
+        "start": 9.7,
+        "end": 9.799999999999999,
+        "rms_db": -22.920838241210866,
+        "energy_score": 0.0,
+        "spectral_centroid": 1937.627825698911,
+        "spectral_rolloff": 4960.0,
+        "zero_crossing_rate": 0.118125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.8,
+      "strength": 45.75,
+      "details": {
+        "speech_windows": 183,
+        "density": 0.92
+      },
+      "window": {
+        "start": 9.8,
+        "end": 9.9,
+        "rms_db": -18.952501299461336,
+        "energy_score": 10.549324885848002,
+        "spectral_centroid": 1130.730005207405,
+        "spectral_rolloff": 2100.0,
+        "zero_crossing_rate": 0.04625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 9.9,
+      "strength": 46.0,
+      "details": {
+        "speech_windows": 184,
+        "density": 0.92
+      },
+      "window": {
+        "start": 9.9,
+        "end": 10.0,
+        "rms_db": -28.04937312606524,
+        "energy_score": 0.0,
+        "spectral_centroid": 2598.9818241035828,
+        "spectral_rolloff": 5740.0,
+        "zero_crossing_rate": 0.165,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.0,
+      "strength": 46.0,
+      "details": {
+        "speech_windows": 184,
+        "density": 0.92
+      },
+      "window": {
+        "start": 10.0,
+        "end": 10.1,
+        "rms_db": -17.826508507740268,
+        "energy_score": 13.927303261011204,
+        "spectral_centroid": 1359.6950009658628,
+        "spectral_rolloff": 2210.0,
+        "zero_crossing_rate": 0.106875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6691047642045742
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 10.05,
+      "strength": 66.91047642045743,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.107,
+        "centroid": 1360.0
+      },
+      "window": {
+        "start": 10.0,
+        "end": 10.1,
+        "rms_db": -17.826508507740268,
+        "energy_score": 13.927303261011204,
+        "spectral_centroid": 1359.6950009658628,
+        "spectral_rolloff": 2210.0,
+        "zero_crossing_rate": 0.106875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6691047642045742
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.1,
+      "strength": 45.75,
+      "details": {
+        "speech_windows": 183,
+        "density": 0.92
+      },
+      "window": {
+        "start": 10.1,
+        "end": 10.2,
+        "rms_db": -18.52032631538659,
+        "energy_score": 11.845849838072237,
+        "spectral_centroid": 1428.0838593844996,
+        "spectral_rolloff": 2660.0,
+        "zero_crossing_rate": 0.06875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.2,
+      "strength": 45.5,
+      "details": {
+        "speech_windows": 182,
+        "density": 0.91
+      },
+      "window": {
+        "start": 10.2,
+        "end": 10.299999999999999,
+        "rms_db": -18.02592533911153,
+        "energy_score": 13.329052766897416,
+        "spectral_centroid": 1102.1020508762126,
+        "spectral_rolloff": 1510.0,
+        "zero_crossing_rate": 0.048125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.3,
+      "strength": 45.25,
+      "details": {
+        "speech_windows": 181,
+        "density": 0.91
+      },
+      "window": {
+        "start": 10.3,
+        "end": 10.4,
+        "rms_db": -17.260520051903907,
+        "energy_score": 15.625268628520288,
+        "spectral_centroid": 850.4360867637287,
+        "spectral_rolloff": 1080.0,
+        "zero_crossing_rate": 0.03875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.4,
+      "strength": 45.0,
+      "details": {
+        "speech_windows": 180,
+        "density": 0.9
+      },
+      "window": {
+        "start": 10.4,
+        "end": 10.5,
+        "rms_db": -19.03750032305997,
+        "energy_score": 10.2943278150521,
+        "spectral_centroid": 1291.0143192790401,
+        "spectral_rolloff": 1870.0,
+        "zero_crossing_rate": 0.076875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.5,
+      "strength": 44.75,
+      "details": {
+        "speech_windows": 179,
+        "density": 0.9
+      },
+      "window": {
+        "start": 10.5,
+        "end": 10.6,
+        "rms_db": -17.582338602214453,
+        "energy_score": 14.65981297758865,
+        "spectral_centroid": 1329.1080181473696,
+        "spectral_rolloff": 2440.0,
+        "zero_crossing_rate": 0.061875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.6,
+      "strength": 44.5,
+      "details": {
+        "speech_windows": 178,
+        "density": 0.89
+      },
+      "window": {
+        "start": 10.6,
+        "end": 10.7,
+        "rms_db": -24.239961100332398,
+        "energy_score": 0.0,
+        "spectral_centroid": 1178.3163893363155,
+        "spectral_rolloff": 2580.0,
+        "zero_crossing_rate": 0.05375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.7,
+      "strength": 44.25,
+      "details": {
+        "speech_windows": 177,
+        "density": 0.89
+      },
+      "window": {
+        "start": 10.7,
+        "end": 10.799999999999999,
+        "rms_db": -23.07843768214078,
+        "energy_score": 0.0,
+        "spectral_centroid": 846.1437733797984,
+        "spectral_rolloff": 1390.0,
+        "zero_crossing_rate": 0.03875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.8,
+      "strength": 44.0,
+      "details": {
+        "speech_windows": 176,
+        "density": 0.88
+      },
+      "window": {
+        "start": 10.8,
+        "end": 10.9,
+        "rms_db": -15.878429006307286,
+        "energy_score": 19.77154176531015,
+        "spectral_centroid": 1135.6631400170752,
+        "spectral_rolloff": 1740.0,
+        "zero_crossing_rate": 0.10125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7224332366850024
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 10.850000000000001,
+      "strength": 72.24332366850024,
+      "details": {
+        "confidence": 0.72,
+        "zcr": 0.101,
+        "centroid": 1136.0
+      },
+      "window": {
+        "start": 10.8,
+        "end": 10.9,
+        "rms_db": -15.878429006307286,
+        "energy_score": 19.77154176531015,
+        "spectral_centroid": 1135.6631400170752,
+        "spectral_rolloff": 1740.0,
+        "zero_crossing_rate": 0.10125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7224332366850024
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 10.850000000000001,
+      "strength": 29.657312647965227,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 19.8,
+        "next_energy": 0.0,
+        "shift_magnitude": 19.8
+      },
+      "window": {
+        "start": 10.8,
+        "end": 10.9,
+        "rms_db": -15.878429006307286,
+        "energy_score": 19.77154176531015,
+        "spectral_centroid": 1135.6631400170752,
+        "spectral_rolloff": 1740.0,
+        "zero_crossing_rate": 0.10125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7224332366850024
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 10.9,
+      "strength": 43.75,
+      "details": {
+        "speech_windows": 175,
+        "density": 0.88
+      },
+      "window": {
+        "start": 10.9,
+        "end": 11.0,
+        "rms_db": -25.315795961376864,
+        "energy_score": 0.0,
+        "spectral_centroid": 998.8074797738285,
+        "spectral_rolloff": 1840.0,
+        "zero_crossing_rate": 0.068125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 10.95,
+      "strength": 23.72585011837218,
+      "details": {
+        "prev_energy": 19.8,
+        "curr_energy": 0.0,
+        "drop_magnitude": 19.8
+      },
+      "window": {
+        "start": 10.9,
+        "end": 11.0,
+        "rms_db": -25.315795961376864,
+        "energy_score": 0.0,
+        "spectral_centroid": 998.8074797738285,
+        "spectral_rolloff": 1840.0,
+        "zero_crossing_rate": 0.068125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.0,
+      "strength": 43.5,
+      "details": {
+        "speech_windows": 174,
+        "density": 0.87
+      },
+      "window": {
+        "start": 11.0,
+        "end": 11.1,
+        "rms_db": -23.10261525788761,
+        "energy_score": 0.0,
+        "spectral_centroid": 937.2162067911022,
+        "spectral_rolloff": 1550.0,
+        "zero_crossing_rate": 0.0875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.1,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.1,
+        "end": 11.2,
+        "rms_db": -26.73514633896361,
+        "energy_score": 0.0,
+        "spectral_centroid": 1000.197240029274,
+        "spectral_rolloff": 1630.0,
+        "zero_crossing_rate": 0.09375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.2,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.2,
+        "end": 11.299999999999999,
+        "rms_db": -35.16060484188667,
+        "energy_score": 0.0,
+        "spectral_centroid": 1767.130204124942,
+        "spectral_rolloff": 4510.0,
+        "zero_crossing_rate": 0.144375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.3,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.3,
+        "end": 11.4,
+        "rms_db": -38.3852918289222,
+        "energy_score": 0.0,
+        "spectral_centroid": 2540.367021227536,
+        "spectral_rolloff": 5440.0,
+        "zero_crossing_rate": 0.228125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.4,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.4,
+        "end": 11.5,
+        "rms_db": -32.59730061358348,
+        "energy_score": 0.0,
+        "spectral_centroid": 1300.5769438349096,
+        "spectral_rolloff": 3680.0,
+        "zero_crossing_rate": 0.038125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.5,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.5,
+        "end": 11.6,
+        "rms_db": -37.72821253592439,
+        "energy_score": 0.0,
+        "spectral_centroid": 1166.2857791413533,
+        "spectral_rolloff": 2630.0,
+        "zero_crossing_rate": 0.04625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.6,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.6,
+        "end": 11.7,
+        "rms_db": -26.51036117497953,
+        "energy_score": 0.0,
+        "spectral_centroid": 849.7245269112486,
+        "spectral_rolloff": 930.0,
+        "zero_crossing_rate": 0.080625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.7,
+      "strength": 43.25,
+      "details": {
+        "speech_windows": 173,
+        "density": 0.86
+      },
+      "window": {
+        "start": 11.7,
+        "end": 11.799999999999999,
+        "rms_db": -39.09956671945989,
+        "energy_score": 0.0,
+        "spectral_centroid": 1524.2743451323313,
+        "spectral_rolloff": 3260.0,
+        "zero_crossing_rate": 0.098125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 11.9,
+      "strength": 42.75,
+      "details": {
+        "speech_windows": 171,
+        "density": 0.85
+      },
+      "window": {
+        "start": 11.9,
+        "end": 12.0,
+        "rms_db": -36.96041116949928,
+        "energy_score": 0.0,
+        "spectral_centroid": 1558.2401434822934,
+        "spectral_rolloff": 3250.0,
+        "zero_crossing_rate": 0.093125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.0,
+      "strength": 42.5,
+      "details": {
+        "speech_windows": 170,
+        "density": 0.85
+      },
+      "window": {
+        "start": 12.0,
+        "end": 12.1,
+        "rms_db": -33.199932910431905,
+        "energy_score": 0.0,
+        "spectral_centroid": 1489.814539334944,
+        "spectral_rolloff": 3350.0,
+        "zero_crossing_rate": 0.08375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.1,
+      "strength": 42.25,
+      "details": {
+        "speech_windows": 169,
+        "density": 0.84
+      },
+      "window": {
+        "start": 12.1,
+        "end": 12.2,
+        "rms_db": -32.946313918211196,
+        "energy_score": 0.0,
+        "spectral_centroid": 1452.1775888923735,
+        "spectral_rolloff": 3730.0,
+        "zero_crossing_rate": 0.055625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.2,
+      "strength": 42.0,
+      "details": {
+        "speech_windows": 168,
+        "density": 0.84
+      },
+      "window": {
+        "start": 12.2,
+        "end": 12.299999999999999,
+        "rms_db": -37.78806134702065,
+        "energy_score": 0.0,
+        "spectral_centroid": 1775.3183803837605,
+        "spectral_rolloff": 4570.0,
+        "zero_crossing_rate": 0.06875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.5,
+      "strength": 41.25,
+      "details": {
+        "speech_windows": 165,
+        "density": 0.82
+      },
+      "window": {
+        "start": 12.5,
+        "end": 12.6,
+        "rms_db": -29.57796972103605,
+        "energy_score": 0.0,
+        "spectral_centroid": 1517.676782148194,
+        "spectral_rolloff": 3890.0,
+        "zero_crossing_rate": 0.11375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.6,
+      "strength": 41.0,
+      "details": {
+        "speech_windows": 164,
+        "density": 0.82
+      },
+      "window": {
+        "start": 12.6,
+        "end": 12.7,
+        "rms_db": -14.272761365110957,
+        "energy_score": 24.588544688899134,
+        "spectral_centroid": 1057.9871461440896,
+        "spectral_rolloff": 1440.0,
+        "zero_crossing_rate": 0.093125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7469115722275963
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 12.649999999999999,
+      "strength": 74.69115722275963,
+      "details": {
+        "confidence": 0.75,
+        "zcr": 0.093,
+        "centroid": 1058.0
+      },
+      "window": {
+        "start": 12.6,
+        "end": 12.7,
+        "rms_db": -14.272761365110957,
+        "energy_score": 24.588544688899134,
+        "spectral_centroid": 1057.9871461440896,
+        "spectral_rolloff": 1440.0,
+        "zero_crossing_rate": 0.093125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7469115722275963
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.7,
+      "strength": 40.75,
+      "details": {
+        "speech_windows": 163,
+        "density": 0.81
+      },
+      "window": {
+        "start": 12.7,
+        "end": 12.799999999999999,
+        "rms_db": -8.844868489225728,
+        "energy_score": 25.0,
+        "spectral_centroid": 1029.1252394529308,
+        "spectral_rolloff": 1080.0,
+        "zero_crossing_rate": 0.061875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6246843929589698
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 12.75,
+      "strength": 62.468439295896985,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.062,
+        "centroid": 1029.0
+      },
+      "window": {
+        "start": 12.7,
+        "end": 12.799999999999999,
+        "rms_db": -8.844868489225728,
+        "energy_score": 25.0,
+        "spectral_centroid": 1029.1252394529308,
+        "spectral_rolloff": 1080.0,
+        "zero_crossing_rate": 0.061875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6246843929589698
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.8,
+      "strength": 40.5,
+      "details": {
+        "speech_windows": 162,
+        "density": 0.81
+      },
+      "window": {
+        "start": 12.8,
+        "end": 12.9,
+        "rms_db": -8.374350988787926,
+        "energy_score": 25.0,
+        "spectral_centroid": 1042.3580904042026,
+        "spectral_rolloff": 1170.0,
+        "zero_crossing_rate": 0.071875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6656768567803153
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 12.850000000000001,
+      "strength": 66.56768567803152,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.072,
+        "centroid": 1042.0
+      },
+      "window": {
+        "start": 12.8,
+        "end": 12.9,
+        "rms_db": -8.374350988787926,
+        "energy_score": 25.0,
+        "spectral_centroid": 1042.3580904042026,
+        "spectral_rolloff": 1170.0,
+        "zero_crossing_rate": 0.071875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6656768567803153
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 12.9,
+      "strength": 40.25,
+      "details": {
+        "speech_windows": 161,
+        "density": 0.81
+      },
+      "window": {
+        "start": 12.9,
+        "end": 13.0,
+        "rms_db": -9.371626338480377,
+        "energy_score": 25.0,
+        "spectral_centroid": 1320.8154715391706,
+        "spectral_rolloff": 2050.0,
+        "zero_crossing_rate": 0.078125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7115611603654377
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 12.95,
+      "strength": 71.15611603654376,
+      "details": {
+        "confidence": 0.71,
+        "zcr": 0.078,
+        "centroid": 1321.0
+      },
+      "window": {
+        "start": 12.9,
+        "end": 13.0,
+        "rms_db": -9.371626338480377,
+        "energy_score": 25.0,
+        "spectral_centroid": 1320.8154715391706,
+        "spectral_rolloff": 2050.0,
+        "zero_crossing_rate": 0.078125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7115611603654377
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.0,
+      "strength": 40.0,
+      "details": {
+        "speech_windows": 160,
+        "density": 0.8
+      },
+      "window": {
+        "start": 13.0,
+        "end": 13.1,
+        "rms_db": -8.441548107007858,
+        "energy_score": 25.0,
+        "spectral_centroid": 1547.2963986213817,
+        "spectral_rolloff": 3190.0,
+        "zero_crossing_rate": 0.075625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7185472298966036
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.05,
+      "strength": 71.85472298966036,
+      "details": {
+        "confidence": 0.72,
+        "zcr": 0.076,
+        "centroid": 1547.0
+      },
+      "window": {
+        "start": 13.0,
+        "end": 13.1,
+        "rms_db": -8.441548107007858,
+        "energy_score": 25.0,
+        "spectral_centroid": 1547.2963986213817,
+        "spectral_rolloff": 3190.0,
+        "zero_crossing_rate": 0.075625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7185472298966036
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.1,
+      "strength": 39.75,
+      "details": {
+        "speech_windows": 159,
+        "density": 0.8
+      },
+      "window": {
+        "start": 13.1,
+        "end": 13.2,
+        "rms_db": -10.163934358651261,
+        "energy_score": 25.0,
+        "spectral_centroid": 1715.2572284385733,
+        "spectral_rolloff": 3090.0,
+        "zero_crossing_rate": 0.08,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7486442921328931
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.149999999999999,
+      "strength": 74.86442921328931,
+      "details": {
+        "confidence": 0.75,
+        "zcr": 0.08,
+        "centroid": 1715.0
+      },
+      "window": {
+        "start": 13.1,
+        "end": 13.2,
+        "rms_db": -10.163934358651261,
+        "energy_score": 25.0,
+        "spectral_centroid": 1715.2572284385733,
+        "spectral_rolloff": 3090.0,
+        "zero_crossing_rate": 0.08,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7486442921328931
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.2,
+      "strength": 39.5,
+      "details": {
+        "speech_windows": 158,
+        "density": 0.79
+      },
+      "window": {
+        "start": 13.2,
+        "end": 13.299999999999999,
+        "rms_db": -11.557125133279438,
+        "energy_score": 25.0,
+        "spectral_centroid": 1885.0196947500206,
+        "spectral_rolloff": 2860.0,
+        "zero_crossing_rate": 0.116875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8413764771062515
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.25,
+      "strength": 84.13764771062515,
+      "details": {
+        "confidence": 0.84,
+        "zcr": 0.117,
+        "centroid": 1885.0
+      },
+      "window": {
+        "start": 13.2,
+        "end": 13.299999999999999,
+        "rms_db": -11.557125133279438,
+        "energy_score": 25.0,
+        "spectral_centroid": 1885.0196947500206,
+        "spectral_rolloff": 2860.0,
+        "zero_crossing_rate": 0.116875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8413764771062515
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.3,
+      "strength": 39.25,
+      "details": {
+        "speech_windows": 157,
+        "density": 0.79
+      },
+      "window": {
+        "start": 13.3,
+        "end": 13.4,
+        "rms_db": -10.526534623328265,
+        "energy_score": 25.0,
+        "spectral_centroid": 1753.9828766378707,
+        "spectral_rolloff": 2890.0,
+        "zero_crossing_rate": 0.096875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8190487157478403
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.350000000000001,
+      "strength": 81.90487157478404,
+      "details": {
+        "confidence": 0.82,
+        "zcr": 0.097,
+        "centroid": 1754.0
+      },
+      "window": {
+        "start": 13.3,
+        "end": 13.4,
+        "rms_db": -10.526534623328265,
+        "energy_score": 25.0,
+        "spectral_centroid": 1753.9828766378707,
+        "spectral_rolloff": 2890.0,
+        "zero_crossing_rate": 0.096875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8190487157478403
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.4,
+      "strength": 39.0,
+      "details": {
+        "speech_windows": 156,
+        "density": 0.78
+      },
+      "window": {
+        "start": 13.4,
+        "end": 13.5,
+        "rms_db": -11.478382475884262,
+        "energy_score": 25.0,
+        "spectral_centroid": 1716.7977580539557,
+        "spectral_rolloff": 2540.0,
+        "zero_crossing_rate": 0.185625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8287598318540468
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.45,
+      "strength": 82.87598318540468,
+      "details": {
+        "confidence": 0.83,
+        "zcr": 0.186,
+        "centroid": 1717.0
+      },
+      "window": {
+        "start": 13.4,
+        "end": 13.5,
+        "rms_db": -11.478382475884262,
+        "energy_score": 25.0,
+        "spectral_centroid": 1716.7977580539557,
+        "spectral_rolloff": 2540.0,
+        "zero_crossing_rate": 0.185625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8287598318540468
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.5,
+      "strength": 38.75,
+      "details": {
+        "speech_windows": 155,
+        "density": 0.78
+      },
+      "window": {
+        "start": 13.5,
+        "end": 13.6,
+        "rms_db": -13.398595735050645,
+        "energy_score": 25.0,
+        "spectral_centroid": 1563.5638811488654,
+        "spectral_rolloff": 2590.0,
+        "zero_crossing_rate": 0.10125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8172672910861649
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.55,
+      "strength": 81.7267291086165,
+      "details": {
+        "confidence": 0.82,
+        "zcr": 0.101,
+        "centroid": 1564.0
+      },
+      "window": {
+        "start": 13.5,
+        "end": 13.6,
+        "rms_db": -13.398595735050645,
+        "energy_score": 25.0,
+        "spectral_centroid": 1563.5638811488654,
+        "spectral_rolloff": 2590.0,
+        "zero_crossing_rate": 0.10125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8172672910861649
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.6,
+      "strength": 38.5,
+      "details": {
+        "speech_windows": 154,
+        "density": 0.77
+      },
+      "window": {
+        "start": 13.6,
+        "end": 13.7,
+        "rms_db": -16.920024844536428,
+        "energy_score": 16.646754250622724,
+        "spectral_centroid": 1415.490746113561,
+        "spectral_rolloff": 2730.0,
+        "zero_crossing_rate": 0.06375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.7,
+      "strength": 38.25,
+      "details": {
+        "speech_windows": 153,
+        "density": 0.77
+      },
+      "window": {
+        "start": 13.7,
+        "end": 13.799999999999999,
+        "rms_db": -11.346858282510233,
+        "energy_score": 25.0,
+        "spectral_centroid": 1511.5769462546546,
+        "spectral_rolloff": 2620.0,
+        "zero_crossing_rate": 0.10375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.813368270969099
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.75,
+      "strength": 81.3368270969099,
+      "details": {
+        "confidence": 0.81,
+        "zcr": 0.104,
+        "centroid": 1512.0
+      },
+      "window": {
+        "start": 13.7,
+        "end": 13.799999999999999,
+        "rms_db": -11.346858282510233,
+        "energy_score": 25.0,
+        "spectral_centroid": 1511.5769462546546,
+        "spectral_rolloff": 2620.0,
+        "zero_crossing_rate": 0.10375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.813368270969099
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.8,
+      "strength": 38.0,
+      "details": {
+        "speech_windows": 152,
+        "density": 0.76
+      },
+      "window": {
+        "start": 13.8,
+        "end": 13.9,
+        "rms_db": -10.750992349456718,
+        "energy_score": 25.0,
+        "spectral_centroid": 1588.4997553312305,
+        "spectral_rolloff": 2340.0,
+        "zero_crossing_rate": 0.1425,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8191374816498422
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.850000000000001,
+      "strength": 81.91374816498423,
+      "details": {
+        "confidence": 0.82,
+        "zcr": 0.142,
+        "centroid": 1588.0
+      },
+      "window": {
+        "start": 13.8,
+        "end": 13.9,
+        "rms_db": -10.750992349456718,
+        "energy_score": 25.0,
+        "spectral_centroid": 1588.4997553312305,
+        "spectral_rolloff": 2340.0,
+        "zero_crossing_rate": 0.1425,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8191374816498422
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 13.9,
+      "strength": 37.75,
+      "details": {
+        "speech_windows": 151,
+        "density": 0.76
+      },
+      "window": {
+        "start": 13.9,
+        "end": 14.0,
+        "rms_db": -14.092670632330943,
+        "energy_score": 25.0,
+        "spectral_centroid": 1897.5271721677998,
+        "spectral_rolloff": 2640.0,
+        "zero_crossing_rate": 0.15625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8423145379125849
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.95,
+      "strength": 84.23145379125849,
+      "details": {
+        "confidence": 0.84,
+        "zcr": 0.156,
+        "centroid": 1898.0
+      },
+      "window": {
+        "start": 13.9,
+        "end": 14.0,
+        "rms_db": -14.092670632330943,
+        "energy_score": 25.0,
+        "spectral_centroid": 1897.5271721677998,
+        "spectral_rolloff": 2640.0,
+        "zero_crossing_rate": 0.15625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8423145379125849
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.0,
+      "strength": 37.5,
+      "details": {
+        "speech_windows": 150,
+        "density": 0.75
+      },
+      "window": {
+        "start": 14.0,
+        "end": 14.1,
+        "rms_db": -12.887797617872907,
+        "energy_score": 25.0,
+        "spectral_centroid": 1521.0358991682745,
+        "spectral_rolloff": 2240.0,
+        "zero_crossing_rate": 0.109375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8140776924376205
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.05,
+      "strength": 81.40776924376205,
+      "details": {
+        "confidence": 0.81,
+        "zcr": 0.109,
+        "centroid": 1521.0
+      },
+      "window": {
+        "start": 14.0,
+        "end": 14.1,
+        "rms_db": -12.887797617872907,
+        "energy_score": 25.0,
+        "spectral_centroid": 1521.0358991682745,
+        "spectral_rolloff": 2240.0,
+        "zero_crossing_rate": 0.109375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8140776924376205
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.1,
+      "strength": 37.25,
+      "details": {
+        "speech_windows": 149,
+        "density": 0.74
+      },
+      "window": {
+        "start": 14.1,
+        "end": 14.2,
+        "rms_db": -11.348966661550078,
+        "energy_score": 25.0,
+        "spectral_centroid": 1448.2481927031008,
+        "spectral_rolloff": 1840.0,
+        "zero_crossing_rate": 0.155,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8086186144527325
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.149999999999999,
+      "strength": 80.86186144527325,
+      "details": {
+        "confidence": 0.81,
+        "zcr": 0.155,
+        "centroid": 1448.0
+      },
+      "window": {
+        "start": 14.1,
+        "end": 14.2,
+        "rms_db": -11.348966661550078,
+        "energy_score": 25.0,
+        "spectral_centroid": 1448.2481927031008,
+        "spectral_rolloff": 1840.0,
+        "zero_crossing_rate": 0.155,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8086186144527325
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.2,
+      "strength": 37.0,
+      "details": {
+        "speech_windows": 148,
+        "density": 0.74
+      },
+      "window": {
+        "start": 14.2,
+        "end": 14.299999999999999,
+        "rms_db": -11.379529500755968,
+        "energy_score": 25.0,
+        "spectral_centroid": 1459.8225095509285,
+        "spectral_rolloff": 2010.0,
+        "zero_crossing_rate": 0.128125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8094866882163196
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.25,
+      "strength": 80.94866882163197,
+      "details": {
+        "confidence": 0.81,
+        "zcr": 0.128,
+        "centroid": 1460.0
+      },
+      "window": {
+        "start": 14.2,
+        "end": 14.299999999999999,
+        "rms_db": -11.379529500755968,
+        "energy_score": 25.0,
+        "spectral_centroid": 1459.8225095509285,
+        "spectral_rolloff": 2010.0,
+        "zero_crossing_rate": 0.128125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8094866882163196
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.3,
+      "strength": 36.75,
+      "details": {
+        "speech_windows": 147,
+        "density": 0.73
+      },
+      "window": {
+        "start": 14.3,
+        "end": 14.4,
+        "rms_db": -12.485125615146366,
+        "energy_score": 25.0,
+        "spectral_centroid": 1713.096596000835,
+        "spectral_rolloff": 2380.0,
+        "zero_crossing_rate": 0.198125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8284822447000626
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.350000000000001,
+      "strength": 82.84822447000626,
+      "details": {
+        "confidence": 0.83,
+        "zcr": 0.198,
+        "centroid": 1713.0
+      },
+      "window": {
+        "start": 14.3,
+        "end": 14.4,
+        "rms_db": -12.485125615146366,
+        "energy_score": 25.0,
+        "spectral_centroid": 1713.096596000835,
+        "spectral_rolloff": 2380.0,
+        "zero_crossing_rate": 0.198125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8284822447000626
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.4,
+      "strength": 36.5,
+      "details": {
+        "speech_windows": 146,
+        "density": 0.73
+      },
+      "window": {
+        "start": 14.4,
+        "end": 14.5,
+        "rms_db": -11.369242963303257,
+        "energy_score": 25.0,
+        "spectral_centroid": 1720.5407260401005,
+        "spectral_rolloff": 2690.0,
+        "zero_crossing_rate": 0.115625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8290405544530075
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.45,
+      "strength": 82.90405544530076,
+      "details": {
+        "confidence": 0.83,
+        "zcr": 0.116,
+        "centroid": 1721.0
+      },
+      "window": {
+        "start": 14.4,
+        "end": 14.5,
+        "rms_db": -11.369242963303257,
+        "energy_score": 25.0,
+        "spectral_centroid": 1720.5407260401005,
+        "spectral_rolloff": 2690.0,
+        "zero_crossing_rate": 0.115625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8290405544530075
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.5,
+      "strength": 36.25,
+      "details": {
+        "speech_windows": 145,
+        "density": 0.72
+      },
+      "window": {
+        "start": 14.5,
+        "end": 14.6,
+        "rms_db": -17.28387306599157,
+        "energy_score": 15.555209586257295,
+        "spectral_centroid": 1445.4531421103766,
+        "spectral_rolloff": 2520.0,
+        "zero_crossing_rate": 0.09625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6800715006933659
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.55,
+      "strength": 68.00715006933659,
+      "details": {
+        "confidence": 0.68,
+        "zcr": 0.096,
+        "centroid": 1445.0
+      },
+      "window": {
+        "start": 14.5,
+        "end": 14.6,
+        "rms_db": -17.28387306599157,
+        "energy_score": 15.555209586257295,
+        "spectral_centroid": 1445.4531421103766,
+        "spectral_rolloff": 2520.0,
+        "zero_crossing_rate": 0.09625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6800715006933659
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.6,
+      "strength": 36.0,
+      "details": {
+        "speech_windows": 144,
+        "density": 0.72
+      },
+      "window": {
+        "start": 14.6,
+        "end": 14.7,
+        "rms_db": -22.718445972394242,
+        "energy_score": 0.0,
+        "spectral_centroid": 1351.0453757675211,
+        "spectral_rolloff": 2480.0,
+        "zero_crossing_rate": 0.08375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 14.649999999999999,
+      "strength": 18.666251503508754,
+      "details": {
+        "prev_energy": 15.6,
+        "curr_energy": 0.0,
+        "drop_magnitude": 15.6
+      },
+      "window": {
+        "start": 14.6,
+        "end": 14.7,
+        "rms_db": -22.718445972394242,
+        "energy_score": 0.0,
+        "spectral_centroid": 1351.0453757675211,
+        "spectral_rolloff": 2480.0,
+        "zero_crossing_rate": 0.08375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.7,
+      "strength": 35.75,
+      "details": {
+        "speech_windows": 143,
+        "density": 0.71
+      },
+      "window": {
+        "start": 14.7,
+        "end": 14.799999999999999,
+        "rms_db": -18.392399651115795,
+        "energy_score": 12.229629830884623,
+        "spectral_centroid": 1371.2873692517367,
+        "spectral_rolloff": 2190.0,
+        "zero_crossing_rate": 0.113125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6496021106644957
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 14.75,
+      "strength": 64.96021106644957,
+      "details": {
+        "confidence": 0.65,
+        "zcr": 0.113,
+        "centroid": 1371.0
+      },
+      "window": {
+        "start": 14.7,
+        "end": 14.799999999999999,
+        "rms_db": -18.392399651115795,
+        "energy_score": 12.229629830884623,
+        "spectral_centroid": 1371.2873692517367,
+        "spectral_rolloff": 2190.0,
+        "zero_crossing_rate": 0.113125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6496021106644957
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.8,
+      "strength": 35.5,
+      "details": {
+        "speech_windows": 142,
+        "density": 0.71
+      },
+      "window": {
+        "start": 14.8,
+        "end": 14.9,
+        "rms_db": -36.14632749025716,
+        "energy_score": 0.0,
+        "spectral_centroid": 1535.9793984387181,
+        "spectral_rolloff": 2800.0,
+        "zero_crossing_rate": 0.135,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "speech_burst",
+      "timestamp": 14.9,
+      "strength": 35.25,
+      "details": {
+        "speech_windows": 141,
+        "density": 0.7
+      },
+      "window": {
+        "start": 14.9,
+        "end": 15.0,
+        "rms_db": -37.21404773911371,
+        "energy_score": 0.0,
+        "spectral_centroid": 1613.0583158864295,
+        "spectral_rolloff": 3310.0,
+        "zero_crossing_rate": 0.111875,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 15.25,
+      "strength": 76.31578970001894,
+      "details": {
+        "confidence": 0.76,
+        "zcr": 0.139,
+        "centroid": 1542.0
+      },
+      "window": {
+        "start": 15.2,
+        "end": 15.299999999999999,
+        "rms_db": -15.593947611532018,
+        "energy_score": 20.624985949635956,
+        "spectral_centroid": 1542.1075413941064,
+        "spectral_rolloff": 2060.0,
+        "zero_crossing_rate": 0.139375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7631578970001894
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 15.350000000000001,
+      "strength": 44.62893613027699,
+      "details": {
+        "rms_db": -15.0,
+        "energy_score": 22.3,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1451.0
+      },
+      "window": {
+        "start": 15.3,
+        "end": 15.4,
+        "rms_db": -15.030786906364504,
+        "energy_score": 22.314468065138495,
+        "spectral_centroid": 1451.4550966302543,
+        "spectral_rolloff": 1930.0,
+        "zero_crossing_rate": 0.14125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7766327490289311
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 15.350000000000001,
+      "strength": 77.66327490289311,
+      "details": {
+        "confidence": 0.78,
+        "zcr": 0.141,
+        "centroid": 1451.0
+      },
+      "window": {
+        "start": 15.3,
+        "end": 15.4,
+        "rms_db": -15.030786906364504,
+        "energy_score": 22.314468065138495,
+        "spectral_centroid": 1451.4550966302543,
+        "spectral_rolloff": 1930.0,
+        "zero_crossing_rate": 0.14125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7766327490289311
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 15.45,
+      "strength": 26.777361678166194,
+      "details": {
+        "prev_energy": 22.3,
+        "curr_energy": 0.0,
+        "drop_magnitude": 22.3
+      },
+      "window": {
+        "start": 15.4,
+        "end": 15.5,
+        "rms_db": -26.112706955446157,
+        "energy_score": 0.0,
+        "spectral_centroid": 1373.8851650401937,
+        "spectral_rolloff": 2070.0,
+        "zero_crossing_rate": 0.110625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 15.649999999999999,
+      "strength": 67.06394403895864,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.096,
+        "centroid": 1186.0
+      },
+      "window": {
+        "start": 15.6,
+        "end": 15.7,
+        "rms_db": -17.005977596767284,
+        "energy_score": 16.388895993930156,
+        "spectral_centroid": 1186.302512832328,
+        "spectral_rolloff": 1920.0,
+        "zero_crossing_rate": 0.09625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6706394403895864
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 15.75,
+      "strength": 69.55944876426497,
+      "details": {
+        "confidence": 0.7,
+        "zcr": 0.142,
+        "centroid": 1267.0
+      },
+      "window": {
+        "start": 15.7,
+        "end": 15.799999999999999,
+        "rms_db": -16.897088415819525,
+        "energy_score": 16.715563536773434,
+        "spectral_centroid": 1266.7696693515798,
+        "spectral_rolloff": 1860.0,
+        "zero_crossing_rate": 0.1425,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6955944876426496
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 15.850000000000001,
+      "strength": 20.05867624412812,
+      "details": {
+        "prev_energy": 16.7,
+        "curr_energy": 2.1,
+        "drop_magnitude": 14.6
+      },
+      "window": {
+        "start": 15.8,
+        "end": 15.9,
+        "rms_db": -21.776532089804338,
+        "energy_score": 2.077232514818995,
+        "spectral_centroid": 1299.3104764456523,
+        "spectral_rolloff": 1920.0,
+        "zero_crossing_rate": 0.128125,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 16.05,
+      "strength": 62.18969826361436,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.072,
+        "centroid": 1315.0
+      },
+      "window": {
+        "start": 16.0,
+        "end": 16.1,
+        "rms_db": -15.989276137978617,
+        "energy_score": 19.439000370296156,
+        "spectral_centroid": 1315.0530425678626,
+        "spectral_rolloff": 2330.0,
+        "zero_crossing_rate": 0.0725,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6218969826361436
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 16.150000000000002,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -13.9,
+        "energy_score": 25.0,
+        "baseline_db": -22.5,
+        "spectral_centroid": 1360.0
+      },
+      "window": {
+        "start": 16.1,
+        "end": 16.200000000000003,
+        "rms_db": -13.939639170945611,
+        "energy_score": 25.0,
+        "spectral_centroid": 1359.89294558303,
+        "spectral_rolloff": 2100.0,
+        "zero_crossing_rate": 0.084375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7394919709187273
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 16.150000000000002,
+      "strength": 73.94919709187273,
+      "details": {
+        "confidence": 0.74,
+        "zcr": 0.084,
+        "centroid": 1360.0
+      },
+      "window": {
+        "start": 16.1,
+        "end": 16.200000000000003,
+        "rms_db": -13.939639170945611,
+        "energy_score": 25.0,
+        "spectral_centroid": 1359.89294558303,
+        "spectral_rolloff": 2100.0,
+        "zero_crossing_rate": 0.084375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7394919709187273
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 16.25,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 3.3,
+        "drop_magnitude": 21.7
+      },
+      "window": {
+        "start": 16.2,
+        "end": 16.3,
+        "rms_db": -21.35358053834162,
+        "energy_score": 3.346087169207145,
+        "spectral_centroid": 1173.512049099468,
+        "spectral_rolloff": 1770.0,
+        "zero_crossing_rate": 0.104375,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 17.55,
+      "strength": 63.14700779797885,
+      "details": {
+        "confidence": 0.63,
+        "zcr": 0.094,
+        "centroid": 1176.0
+      },
+      "window": {
+        "start": 17.5,
+        "end": 17.6,
+        "rms_db": -17.864443144872727,
+        "energy_score": 13.813499349613828,
+        "spectral_centroid": 1176.107810458968,
+        "spectral_rolloff": 2240.0,
+        "zero_crossing_rate": 0.094375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6314700779797885
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 19.650000000000002,
+      "strength": 67.24508477198489,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.076,
+        "centroid": 933.0
+      },
+      "window": {
+        "start": 19.6,
+        "end": 19.700000000000003,
+        "rms_db": -13.526170144499973,
+        "energy_score": 25.0,
+        "spectral_centroid": 932.6779695979864,
+        "spectral_rolloff": 1390.0,
+        "zero_crossing_rate": 0.075625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.672450847719849
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 19.75,
+      "strength": 69.13627733131091,
+      "details": {
+        "confidence": 0.69,
+        "zcr": 0.081,
+        "centroid": 885.0
+      },
+      "window": {
+        "start": 19.7,
+        "end": 19.8,
+        "rms_db": -14.102849046486233,
+        "energy_score": 25.0,
+        "spectral_centroid": 884.8369775081229,
+        "spectral_rolloff": 1220.0,
+        "zero_crossing_rate": 0.08125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6913627733131091
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 19.85,
+      "strength": 62.21318444308304,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.06,
+        "centroid": 1095.0
+      },
+      "window": {
+        "start": 19.8,
+        "end": 19.900000000000002,
+        "rms_db": -12.938985299821939,
+        "energy_score": 25.0,
+        "spectral_centroid": 1095.091259077738,
+        "spectral_rolloff": 2000.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6221318444308304
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 19.95,
+      "strength": 81.23517919625816,
+      "details": {
+        "confidence": 0.81,
+        "zcr": 0.122,
+        "centroid": 1498.0
+      },
+      "window": {
+        "start": 19.9,
+        "end": 20.0,
+        "rms_db": -12.476955412778864,
+        "energy_score": 25.0,
+        "spectral_centroid": 1498.0238928344213,
+        "spectral_rolloff": 2890.0,
+        "zero_crossing_rate": 0.121875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8123517919625816
+      }
+    }
+  ],
+  "chat_signals": [],
+  "moments": [
+    {
+      "original_start": 0,
+      "original_end": 18.0,
+      "expanded_start": 0,
+      "expanded_end": 20.020667,
+      "duration": 20.020667,
+      "context": {
+        "moment_start": 0,
+        "moment_end": 20.020667,
+        "pre_context_start": 0,
+        "pre_context_end": 0,
+        "post_context_start": 18.0,
+        "post_context_end": 20.020667,
+        "total_duration": 20.020667,
+        "context_quality": 30.0,
+        "necessary_pre_seconds": 8.0,
+        "necessary_post_seconds": 5.0,
+        "reasoning": "8.0s pre-context for setup: 'but I wrote pro chat....'; 5.0s post-context for payoff: 'That's not true....'"
+      },
+      "hook_text": "but I wrote pro chat.",
+      "context_text": " That's not true.",
+      "payoff_text": "Yeah, I would.",
+      "reaction_text": "",
+      "story_complete": false,
+      "dead_space_removed": [],
+      "edit_recommendations": {
+        "size": "9:16",
+        "zoom": true,
+        "mirror": false,
+        "blur": false,
+        "remove_silence": true,
+        "overlay": true,
+        "enhance": "Subtle",
+        "split_screen": false,
+        "auto_captions": true
+      }
+    }
+  ],
+  "scores": [
+    {
+      "moment_id": "moment_0.0_18.0",
+      "total_score": 10.13,
+      "components": {
+        "hook": 0.0,
+        "emotional_intensity": 0.9,
+        "reaction": 0.0,
+        "surprise": 0.3,
+        "humor": 0.84,
+        "story_value": 0.0,
+        "transcript_relevance": 0.0,
+        "chat_reaction": 0.0,
+        "novelty": 0.04,
+        "pacing": 0.05
+      },
+      "signals": [
+        {
+          "name": "audio_energy",
+          "raw": 50.0,
+          "weighted": 6.0,
+          "weight": 0.12
+        },
+        {
+          "name": "audio_laughter",
+          "raw": 84.23,
+          "weighted": 8.42,
+          "weight": 0.1
+        },
+        {
+          "name": "audio_energy_shift",
+          "raw": 37.5,
+          "weighted": 3.0,
+          "weight": 0.08
+        },
+        {
+          "name": "audio_speech_burst",
+          "raw": 46.0,
+          "weighted": 2.3,
+          "weight": 0.05
+        },
+        {
+          "name": "context_quality",
+          "raw": 30.0,
+          "weighted": 1.5,
+          "weight": 0.05
+        },
+        {
+          "name": "novelty",
+          "raw": 50.0,
+          "weighted": 1.5,
+          "weight": 0.03
+        },
+        {
+          "name": "pacing",
+          "raw": 100.0,
+          "weighted": 2.0,
+          "weight": 0.02
+        }
+      ],
+      "hook": 0.0,
+      "emotion": 0.9,
+      "reaction": 0.0,
+      "surprise": 0.3,
+      "humor": 0.84,
+      "story": 0.0,
+      "transcript": 0.0,
+      "chat": 0.0,
+      "novelty": 0.04,
+      "pacing": 0.05,
+      "context": 30.0,
+      "duration_bonus": 8.0,
+      "audio_energy": 50.0,
+      "explanation": "audio_laughter (84) | audio_energy (50) | audio_energy_shift (38) | Duration: 20.0s (+8.0) | Weak context (30)"
+    }
+  ],
+  "stories": [
+    {
+      "hook": {
+        "name": "hook",
+        "score": 33.66813011336521,
+        "evidence": "Direct address | Audio spike: 27",
+        "timestamp": 0,
+        "details": {
+          "hook_text": "but I wrote pro chat. Genuinely, if you think I would crack mysterious,",
+          "llm_hooks": 0
+        }
+      },
+      "context": {
+        "name": "context",
+        "score": 0,
+        "evidence": "No pre-context",
+        "timestamp": 0,
+        "details": {}
+      },
+      "payoff": {
+        "name": "payoff",
+        "score": 25.0,
+        "evidence": "Audio payoff: laughter",
+        "timestamp": 18.0,
+        "details": {
+          "payoff_text": "Yeah, I would.",
+          "llm_payoffs": 0
+        }
+      },
+      "reaction": {
+        "name": "reaction",
+        "score": 20.0,
+        "evidence": "Audio reaction",
+        "timestamp": 18.0,
+        "details": {
+          "reaction_text": "Yeah, I would."
+        }
+      },
+      "overall_score": 21.60043903400956,
+      "has_complete_arc": false,
+      "pacing_rating": "good",
+      "recommendations": [
+        "Consider starting clip earlier to include stronger hook",
+        "Add more pre-context for viewer understanding",
+        "Extend clip to capture payoff/reaction",
+        "Include post-moment reaction for emotional closure"
+      ]
+    }
+  ],
+  "ranking": {
+    "top_clips": [
+      {
+        "rank": 1,
+        "start_time": 0,
+        "end_time": 18.0,
+        "expanded_start": 0,
+        "expanded_end": 20.020667,
+        "duration": 20.020667,
+        "final_score": 35.15,
+        "moment_score": {
+          "moment_id": "moment_0.0_18.0",
+          "total_score": 10.13,
+          "components": {
+            "hook": 0.0,
+            "emotional_intensity": 0.9,
+            "reaction": 0.0,
+            "surprise": 0.3,
+            "humor": 0.84,
+            "story_value": 0.0,
+            "transcript_relevance": 0.0,
+            "chat_reaction": 0.0,
+            "novelty": 0.04,
+            "pacing": 0.05
+          },
+          "signals": [
+            {
+              "name": "audio_energy",
+              "raw": 50.0,
+              "weighted": 6.0,
+              "weight": 0.12
+            },
+            {
+              "name": "audio_laughter",
+              "raw": 84.23,
+              "weighted": 8.42,
+              "weight": 0.1
+            },
+            {
+              "name": "audio_energy_shift",
+              "raw": 37.5,
+              "weighted": 3.0,
+              "weight": 0.08
+            },
+            {
+              "name": "audio_speech_burst",
+              "raw": 46.0,
+              "weighted": 2.3,
+              "weight": 0.05
+            },
+            {
+              "name": "context_quality",
+              "raw": 30.0,
+              "weighted": 1.5,
+              "weight": 0.05
+            },
+            {
+              "name": "novelty",
+              "raw": 50.0,
+              "weighted": 1.5,
+              "weight": 0.03
+            },
+            {
+              "name": "pacing",
+              "raw": 100.0,
+              "weighted": 2.0,
+              "weight": 0.02
+            }
+          ],
+          "hook": 0.0,
+          "emotion": 0.9,
+          "reaction": 0.0,
+          "surprise": 0.3,
+          "humor": 0.84,
+          "story": 0.0,
+          "transcript": 0.0,
+          "chat": 0.0,
+          "novelty": 0.04,
+          "pacing": 0.05,
+          "context": 30.0,
+          "duration_bonus": 8.0,
+          "audio_energy": 50.0,
+          "explanation": "audio_laughter (84) | audio_energy (50) | audio_energy_shift (38) | Duration: 20.0s (+8.0) | Weak context (30)"
+        },
+        "story_score": 21.6,
+        "has_complete_arc": false,
+        "pacing": "good",
+        "hook_text": "but I wrote pro chat.",
+        "payoff_text": "Yeah, I would.",
+        "context_text": " That's not true.",
+        "reaction_text": "",
+        "review_priority": "low",
+        "tags": [
+          "medium",
+          "well-paced"
+        ],
+        "is_duplicate": false,
+        "duplicate_of": null,
+        "edit_recommendations": {
+          "size": "9:16",
+          "zoom": true,
+          "mirror": false,
+          "blur": false,
+          "remove_silence": true,
+          "overlay": true,
+          "enhance": "Subtle",
+          "split_screen": false,
+          "auto_captions": true
+        },
+        "story_recommendations": [
+          "Consider starting clip earlier to include stronger hook",
+          "Add more pre-context for viewer understanding",
+          "Extend clip to capture payoff/reaction",
+          "Include post-moment reaction for emotional closure"
+        ]
+      }
+    ],
+    "metadata": {
+      "rank_1": {
+        "title": "delarosachris - Reaction to being called out for pro chat preferences",
+        "description": "Delarosachris reacts to being called out for his pro chat preferences, denying the claim and expressing his true feelings.",
+        "on_screen_hook": "but I wrote pro chat.",
+        "search_phrases": [
+          "pro chat",
+          "delarosachris",
+          "reaction"
+        ],
+        "caption": "delarosachris reveals what happened during the stream.",
+        "hashtags": [
+          "#delarosachris",
+          "#streamer",
+          "#clips",
+          "#kick",
+          "#livestream",
+          "#gaming",
+          "#fyp"
+        ],
+        "streamer_name": "delarosachris",
+        "timestamp_display": "0:00",
+        "rank": 1,
+        "content_warnings": [],
+        "accuracy_score": 95.0,
+        "on_screen_captions": [
+          {
+            "start": 0.0,
+            "end": 1.02,
+            "text": "but I wrote pro chat.",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 1.8,
+            "end": 2.89,
+            "text": "Genuinely, if you think I would",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 2.89,
+            "end": 3.98,
+            "text": "crack mysterious,",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 4.54,
+            "end": 5.38,
+            "text": "you guys have something in your",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 5.38,
+            "end": 6.22,
+            "text": "head,",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 6.84,
+            "end": 9.42,
+            "text": "it's I would never crack that.",
+            "emphasis": [
+              "never"
+            ],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 9.5,
+            "end": 11.18,
+            "text": "Plus mysterious, I would black guys.",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 11.68,
+            "end": 14.5,
+            "text": "Oh, holy nice black guys.",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 15.12,
+            "end": 16.22,
+            "text": "That's not true.",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 19.24,
+            "end": 19.92,
+            "text": "I would.",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          }
+        ],
+        "post_caption_options": [
+          "delarosachris - but I wrote pro chat.",
+          "delarosachris reveals what happened during the stream.",
+          "delarosachris was reacting after but i wrote pro chat."
+        ],
+        "recommended_post_caption": "delarosachris reveals what happened during the stream.",
+        "search_terms": [
+          "delarosachris"
+        ],
+        "caption_style": "standard",
+        "confidence": 80.0
+      }
+    }
+  }
+}

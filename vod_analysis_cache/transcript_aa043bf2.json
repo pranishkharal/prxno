@@ -1,0 +1,121 @@
+{
+  "full_text": "Yeah, I have those there now also have these but that if it's my my toe hurts on this",
+  "duration": 10.72,
+  "word_count": 19,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "Yeah, I have those there now also have these but that if it's my my toe hurts on this",
+      "start": 0.0,
+      "end": 10.72,
+      "words": [
+        {
+          "word": "Yeah,",
+          "start": 0.0,
+          "end": 0.54
+        },
+        {
+          "word": "I",
+          "start": 0.56,
+          "end": 2.02
+        },
+        {
+          "word": "have",
+          "start": 2.02,
+          "end": 2.16
+        },
+        {
+          "word": "those",
+          "start": 2.16,
+          "end": 2.34
+        },
+        {
+          "word": "there",
+          "start": 2.34,
+          "end": 2.62
+        },
+        {
+          "word": "now",
+          "start": 2.62,
+          "end": 3.98
+        },
+        {
+          "word": "also",
+          "start": 3.98,
+          "end": 5.5
+        },
+        {
+          "word": "have",
+          "start": 5.5,
+          "end": 5.68
+        },
+        {
+          "word": "these",
+          "start": 5.68,
+          "end": 6.0
+        },
+        {
+          "word": "but",
+          "start": 6.0,
+          "end": 7.5
+        },
+        {
+          "word": "that",
+          "start": 7.5,
+          "end": 8.26
+        },
+        {
+          "word": "if",
+          "start": 8.26,
+          "end": 9.1
+        },
+        {
+          "word": "it's",
+          "start": 9.1,
+          "end": 9.38
+        },
+        {
+          "word": "my",
+          "start": 9.38,
+          "end": 9.54
+        },
+        {
+          "word": "my",
+          "start": 9.54,
+          "end": 9.9
+        },
+        {
+          "word": "toe",
+          "start": 9.9,
+          "end": 10.14
+        },
+        {
+          "word": "hurts",
+          "start": 10.14,
+          "end": 10.32
+        },
+        {
+          "word": "on",
+          "start": 10.32,
+          "end": 10.54
+        },
+        {
+          "word": "this",
+          "start": 10.54,
+          "end": 10.72
+        }
+      ]
+    }
+  ]
+}

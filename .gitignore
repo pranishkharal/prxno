@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Video / generated files
+uploads/
+output/
+temp/
+tmp/
+*.mp4
+*.mkv
+*.mov
+*.webm
+
+# FFmpeg binaries
+ffmpeg/
+ffmpeg.exe
+ffplay.exe
+ffprobe.exe
+
+# Cloudflare
+cloudflared-windows-amd64.exe
+cloudflared.exe
+
+# Archives / installers
+*.7z
+*.zip
+*.tar
+*.gz
+
+# Generated VOD/job data
+vod_jobs/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Local Python installation
+python/
+
+# Secret/token files
+DISCORD_BOT_TOKEN=*.txt

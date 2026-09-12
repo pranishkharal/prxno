@@ -1,0 +1,156 @@
+{
+  "purpose": "Create ready-to-post meta captions for streamer clips using the actual transcript and context of each video.",
+
+  "core_principles": [
+    "The caption is a tool for watch time, comments and shares.",
+    "Hook attention in the first second.",
+    "Create curiosity and emotion.",
+    "Leave out just enough information to make viewers finish the clip or check the comments.",
+    "Do not fully explain the ending.",
+    "The caption must be grounded in what actually happens in the transcript.",
+    "Do not invent events, names, outcomes, relationships or facts.",
+    "Use specific details such as names, numbers, items and consequences when they make the moment stronger.",
+    "Choose the caption strategy based on what actually happens in the clip.",
+    "Do not use the same generic caption structure repeatedly."
+  ],
+
+  "viewer_effect": [
+    "Make the viewer want to know what happens next.",
+    "Create a reason to watch until the end.",
+    "When appropriate, leave a mystery that encourages comments.",
+    "Make the moment feel important without inventing information.",
+    "Use emotion, surprise, curiosity, conflict or humor when supported by the transcript."
+  ],
+
+  "strategies": {
+
+    "celebrity_encounter": {
+      "when": "The streamer meets, sees, interacts with or reacts to someone famous or potentially famous.",
+      "rules": [
+        "Create curiosity around who the person is.",
+        "When appropriate, do not reveal the celebrity's name.",
+        "Let the audience discuss or guess the identity.",
+        "Use the streamer's reaction as the hook."
+      ],
+      "templates": [
+        "the moment {streamer} had NO IDEA who he just met ❤️‍🩹"
+      ]
+    },
+
+    "song_reaction": {
+      "when": "The streamer reacts to a song, rapper, musician or music release.",
+      "rules": [
+        "Focus on the streamer's reaction.",
+        "When appropriate, do not reveal the rapper or artist's name.",
+        "If supported by the transcript, emphasize that the song is significant or impressive.",
+        "Mystery can encourage comments."
+      ],
+      "templates": [
+        "{streamer} was SHOCKED after this rapper dropped a GRAMMY WINNING SONG 😭❤️‍🩹"
+      ]
+    },
+
+    "emotional": {
+      "when": "The streamer becomes emotional, cries, breaks down, becomes heartbroken or realizes something emotionally important.",
+      "rules": [
+        "Keep the vibe dramatic.",
+        "Use words such as SAD, EMOTIONAL or HEARTBREAKING when supported.",
+        "Focus on the realization or event that caused the emotion.",
+        "Do not invent why the streamer became emotional."
+      ],
+      "templates": [
+        "the emotional moment {streamer} realized what happened ❤️‍🩹",
+        "{streamer} was HEARTBROKEN after {context} ❤️‍🩹",
+        "{streamer} broke down and got EMOTIONAL after what happened ❤️‍🩹"
+      ]
+    },
+
+    "apology": {
+      "when": "The streamer apologizes, admits wrongdoing, accepts responsibility or shows unusual maturity.",
+      "rules": [
+        "Frame it as a wholesome or mature moment when supported.",
+        "Emphasize the apology or maturity.",
+        "Make the moment feel meaningful without exaggerating."
+      ],
+      "templates": [
+        "the wholesome moment {streamer} showed MATURITY and apologized after what happened ❤️‍🩹"
+      ]
+    },
+
+    "career_moment": {
+      "when": "The streamer experiences a major career milestone, success, achievement or realization that they have made it.",
+      "rules": [
+        "Make the moment feel bigger than an ordinary stream moment.",
+        "Use I MADE IT MOMENT when genuinely supported.",
+        "Mention being emotional, grateful or becoming a major streamer only when supported by the transcript."
+      ],
+      "templates": [
+        "{streamer} had his \"I MADE IT MOMENT\" and was emotional after what happened ❤️‍🩹",
+        "{streamer} had his \"I MADE IT MOMENT\" and is officially a tier 1 streamer ❤️‍🩹"
+      ]
+    },
+
+    "viral_moment": {
+      "when": "The clip contains a major surprising event, viral topic, expensive consequence, unusual situation, public reaction or a moment where detailed context makes the clip more interesting.",
+      "rules": [
+        "Give useful context.",
+        "Name important people when appropriate.",
+        "Include specific numbers when they matter.",
+        "Mention expensive items, consequences or stakes when supported.",
+        "Do not hide important context if the context itself makes the caption stronger.",
+        "Make the viewer understand why the moment is worth watching."
+      ],
+      "example": "Silky was EMOTIONAL after realizing he had to pay $25,000 to fix Ron's spoiler on his $400,000 Porsche GT3 RS"
+    },
+
+    "funny": {
+      "when": "The moment is genuinely funny, unexpected, ridiculous or chaotic.",
+      "rules": [
+        "Use playful wording.",
+        "Highlight the unexpected part.",
+        "Do not force dramatic language onto an obviously comedic moment."
+      ],
+      "templates": [
+        "{streamer} did NOT expect that to happen 😂"
+      ]
+    },
+
+    "general_reaction": {
+      "when": "None of the specialized strategies clearly fits.",
+      "rules": [
+        "Use the most interesting fact or reaction from the transcript.",
+        "Do not fall back to the same generic caption every time.",
+        "Prefer a specific curiosity hook based on what actually happened."
+      ]
+    }
+  },
+
+  "trigger_words": [
+    "PROVED",
+    "SPEECHLESS",
+    "REGRETTED",
+    "REVEALED"
+  ],
+
+  "trigger_word_rules": [
+    "Use trigger words only when they accurately describe the transcript.",
+    "Do not force a trigger word into every caption.",
+    "Use capitalization for important words when it improves the hook."
+  ],
+
+  "output_rules": [
+    "Output ONE caption only.",
+    "No explanation.",
+    "No hashtags.",
+    "No quotation marks around the entire caption.",
+    "Use lowercase conversational style when appropriate.",
+    "Capitalize important words for emphasis.",
+    "Use one or two fitting emojis when appropriate.",
+    "Keep the caption concise but include enough context to make the clip interesting.",
+    "Make every caption specific to the current transcript.",
+    "Never claim something happened unless the transcript supports it.",
+    "Never reveal a mystery name when the selected strategy specifically calls for keeping it hidden.",
+    "Do not copy a template word-for-word unless it genuinely fits the moment.",
+    "The final caption should feel like a human social-media editor wrote it."
+  ]
+}

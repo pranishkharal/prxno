@@ -1,0 +1,101 @@
+    async def silence_button(self, interaction, button):
+
+        self.options["remove_silence"] = not self.options["remove_silence"]
+
+        button.style = (
+            discord.ButtonStyle.success
+            if self.options["remove_silence"]
+            else discord.ButtonStyle.secondary
+        )
+
+        await interaction.response.edit_message(
+            content=(
+                "âœ‚ï¸ **AUTO EDIT OPTIONS**\n\n"
+                f"Selected: **{self.summary()}**"
+            ),
+            view=self
+        )
+
+    @discord.ui.button(
+        label="Split Screen",
+        emoji="SP",
+        style=discord.ButtonStyle.secondary,
+        row=4
+    )
+    async def split_screen_button(
+        self,
+        interaction: discord.Interaction,
+        button: discord.ui.Button
+    ):
+        bg_file = get_split_background()
+
+        if bg_file is None:
+            await interaction.response.send_message(
+                "No background video found in backgrounds/.",
+                ephemeral=True
+            )
+            return
+
+        self.split_photo_file = bg_file
+        self.options["split_screen"] = True
+
+        button.style = discord.ButtonStyle.success
+        button.label = "Split Screen ON"
+
+        await interaction.response.send_message(
+            f"Split Screen enabled! Background: {bg_file.name}",
+            ephemeral=True
+        )
+
+        await interaction.message.edit(view=self)
+
+    @discord.ui.button(
+        label="Split Screen",
+        emoji="???",
+        style=discord.ButtonStyle.secondary,
+        row=4
+    )
+    async def split_screen_button(
+        self,
+        interaction: discord.Interaction,
+        button: discord.ui.Button
+    ):
+        bg_file = get_split_background()
+
+        if bg_file is None:
+            await interaction.response.send_message(
+                "? No background video found in `backgrounds/`.",
+                ephemeral=True
+            )
+            return
+
+        self.split_photo_file = bg_file
+        self.options["split_screen"] = True
+
+        button.style = discord.ButtonStyle.success
+        button.label = "Split Screen ?"
+
+        await interaction.response.send_message(
+            f"??? **Split Screen enabled!**\\n"
+            f"Background: `{bg_file.name}`\\n"
+            "The background video will be used automatically in the bottom section.",
+            ephemeral=True
+        )
+
+        await interaction.message.edit(view=self)
+        def check(message):
+            return (
+                message.author.id == self.user.id
+                and message.channel.id == interaction.channel.id
+            )
+
+        try:
+            message = await client.wait_for(
+                "message",
+                timeout=120,
+                check=check
+            )
+
+            if not message.attachments:
+                await interaction.followup.send(
+                    "❌ Please upload an image attachment.",

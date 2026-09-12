@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .result { padding: 20px; background: #f0f0f0; border-radius: 5px; }
+        .error { color: red; }
+        .success { color: green; }
+        a { color: #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Upload Result</h1>
+
+    <div class="result">
+        <h2>Upload Complete!</h2>
+        <p><strong>File:</strong> {{ result.filename }}</p>
+        <p><strong>Size:</strong> {{ "%.1f"|format(result.size_mb) }} MB</p>
+        {% if result.download_url %}
+        <p class="success">Download link created!</p>
+        <p><a href="{{ result.download_url }}" target="_blank">{{ result.download_url }}</a></p>
+        <p><small>This link expires in 60 minutes.</small></p>
+        {% else %}
+        <p class="error">Could not create download link.</p>
+        {% endif %}
+    </div>
+
+    <p><a href="/">Upload another file</a></p>
+</body>
+</html>

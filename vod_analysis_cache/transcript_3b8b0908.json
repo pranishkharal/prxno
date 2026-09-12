@@ -1,0 +1,280 @@
+{
+  "full_text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't know well you should know me you want a better way I could do at least 10 out 20 places myself yeah a couple more whatever there's more",
+  "duration": 19.36,
+  "word_count": 48,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+      "start": 0.0,
+      "end": 8.42,
+      "words": [
+        {
+          "word": "who",
+          "start": 0.0,
+          "end": 0.54
+        },
+        {
+          "word": "did",
+          "start": 0.54,
+          "end": 0.66
+        },
+        {
+          "word": "me",
+          "start": 0.66,
+          "end": 1.08
+        },
+        {
+          "word": "you",
+          "start": 1.08,
+          "end": 1.4
+        },
+        {
+          "word": "yeah",
+          "start": 1.4,
+          "end": 1.98
+        },
+        {
+          "word": "let's",
+          "start": 1.98,
+          "end": 2.14
+        },
+        {
+          "word": "do",
+          "start": 2.14,
+          "end": 2.22
+        },
+        {
+          "word": "it",
+          "start": 2.22,
+          "end": 2.7
+        },
+        {
+          "word": "you",
+          "start": 2.7,
+          "end": 3.78
+        },
+        {
+          "word": "want",
+          "start": 3.78,
+          "end": 3.92
+        },
+        {
+          "word": "to",
+          "start": 3.92,
+          "end": 4.08
+        },
+        {
+          "word": "see",
+          "start": 4.08,
+          "end": 4.42
+        },
+        {
+          "word": "what",
+          "start": 4.42,
+          "end": 4.62
+        },
+        {
+          "word": "I'm",
+          "start": 4.62,
+          "end": 6.28
+        },
+        {
+          "word": "gonna",
+          "start": 6.28,
+          "end": 6.34
+        },
+        {
+          "word": "can",
+          "start": 6.34,
+          "end": 6.5
+        },
+        {
+          "word": "you",
+          "start": 6.5,
+          "end": 6.64
+        },
+        {
+          "word": "do",
+          "start": 6.64,
+          "end": 6.8
+        },
+        {
+          "word": "I",
+          "start": 6.8,
+          "end": 8.3
+        },
+        {
+          "word": "don't",
+          "start": 8.3,
+          "end": 8.42
+        }
+      ]
+    },
+    {
+      "text": "know well you should know me you want a better way I could do at least 10 out 20",
+      "start": 8.42,
+      "end": 12.72,
+      "words": [
+        {
+          "word": "know",
+          "start": 8.42,
+          "end": 8.58
+        },
+        {
+          "word": "well",
+          "start": 8.58,
+          "end": 9.02
+        },
+        {
+          "word": "you",
+          "start": 9.02,
+          "end": 9.14
+        },
+        {
+          "word": "should",
+          "start": 9.14,
+          "end": 9.34
+        },
+        {
+          "word": "know",
+          "start": 9.34,
+          "end": 9.54
+        },
+        {
+          "word": "me",
+          "start": 9.54,
+          "end": 9.8
+        },
+        {
+          "word": "you",
+          "start": 9.8,
+          "end": 10.3
+        },
+        {
+          "word": "want",
+          "start": 10.3,
+          "end": 10.4
+        },
+        {
+          "word": "a",
+          "start": 10.4,
+          "end": 10.52
+        },
+        {
+          "word": "better",
+          "start": 10.52,
+          "end": 10.74
+        },
+        {
+          "word": "way",
+          "start": 10.74,
+          "end": 10.9
+        },
+        {
+          "word": "I",
+          "start": 10.9,
+          "end": 11.04
+        },
+        {
+          "word": "could",
+          "start": 11.04,
+          "end": 11.42
+        },
+        {
+          "word": "do",
+          "start": 11.42,
+          "end": 11.56
+        },
+        {
+          "word": "at",
+          "start": 11.56,
+          "end": 11.64
+        },
+        {
+          "word": "least",
+          "start": 11.64,
+          "end": 11.74
+        },
+        {
+          "word": "10",
+          "start": 11.74,
+          "end": 12.08
+        },
+        {
+          "word": "out",
+          "start": 12.08,
+          "end": 12.36
+        },
+        {
+          "word": "20",
+          "start": 12.36,
+          "end": 12.72
+        }
+      ]
+    },
+    {
+      "text": "places myself yeah a couple more whatever there's more",
+      "start": 12.72,
+      "end": 19.36,
+      "words": [
+        {
+          "word": "places",
+          "start": 12.72,
+          "end": 13.02
+        },
+        {
+          "word": "myself",
+          "start": 13.02,
+          "end": 13.42
+        },
+        {
+          "word": "yeah",
+          "start": 13.42,
+          "end": 14.44
+        },
+        {
+          "word": "a",
+          "start": 17.32,
+          "end": 17.7
+        },
+        {
+          "word": "couple",
+          "start": 17.7,
+          "end": 17.88
+        },
+        {
+          "word": "more",
+          "start": 17.88,
+          "end": 18.06
+        },
+        {
+          "word": "whatever",
+          "start": 18.06,
+          "end": 18.8
+        },
+        {
+          "word": "there's",
+          "start": 18.8,
+          "end": 19.12
+        },
+        {
+          "word": "more",
+          "start": 19.12,
+          "end": 19.36
+        }
+      ]
+    }
+  ]
+}

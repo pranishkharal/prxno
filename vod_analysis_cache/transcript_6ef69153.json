@@ -1,0 +1,402 @@
+{
+  "full_text": "It came over like in my body, it's as enthusiastic as a lot of... When they say that they put you in the pink skin, you know what I mean? Like it's all goosebumps then shit. Yeah. Like a lot of chills. And I say, this is the one. This is the one. And that's their biggest part. Okay, wait, I have a question.",
+  "duration": 17.42,
+  "word_count": 64,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "It came over like in my body, it's as enthusiastic as a lot of...",
+      "start": 0.0,
+      "end": 4.5,
+      "words": [
+        {
+          "word": "It",
+          "start": 0.0,
+          "end": 0.08
+        },
+        {
+          "word": "came",
+          "start": 0.08,
+          "end": 0.26
+        },
+        {
+          "word": "over",
+          "start": 0.26,
+          "end": 0.54
+        },
+        {
+          "word": "like",
+          "start": 0.54,
+          "end": 0.86
+        },
+        {
+          "word": "in",
+          "start": 0.86,
+          "end": 1.38
+        },
+        {
+          "word": "my",
+          "start": 1.38,
+          "end": 1.52
+        },
+        {
+          "word": "body,",
+          "start": 1.52,
+          "end": 1.88
+        },
+        {
+          "word": "it's",
+          "start": 2.06,
+          "end": 2.12
+        },
+        {
+          "word": "as",
+          "start": 2.12,
+          "end": 2.18
+        },
+        {
+          "word": "enthusiastic",
+          "start": 2.18,
+          "end": 2.56
+        },
+        {
+          "word": "as",
+          "start": 2.56,
+          "end": 2.92
+        },
+        {
+          "word": "a",
+          "start": 2.92,
+          "end": 3.18
+        },
+        {
+          "word": "lot",
+          "start": 3.18,
+          "end": 3.32
+        },
+        {
+          "word": "of...",
+          "start": 3.32,
+          "end": 4.5
+        }
+      ]
+    },
+    {
+      "text": "When they say that they put you in the pink skin, you know what I mean?",
+      "start": 4.5,
+      "end": 7.36,
+      "words": [
+        {
+          "word": "When",
+          "start": 4.5,
+          "end": 4.78
+        },
+        {
+          "word": "they",
+          "start": 4.78,
+          "end": 4.9
+        },
+        {
+          "word": "say",
+          "start": 4.9,
+          "end": 4.98
+        },
+        {
+          "word": "that",
+          "start": 4.98,
+          "end": 5.08
+        },
+        {
+          "word": "they",
+          "start": 5.08,
+          "end": 5.26
+        },
+        {
+          "word": "put",
+          "start": 5.26,
+          "end": 5.4
+        },
+        {
+          "word": "you",
+          "start": 5.4,
+          "end": 5.56
+        },
+        {
+          "word": "in",
+          "start": 5.56,
+          "end": 5.8
+        },
+        {
+          "word": "the",
+          "start": 5.8,
+          "end": 5.8
+        },
+        {
+          "word": "pink",
+          "start": 5.8,
+          "end": 6.28
+        },
+        {
+          "word": "skin,",
+          "start": 6.28,
+          "end": 6.58
+        },
+        {
+          "word": "you",
+          "start": 6.66,
+          "end": 7.12
+        },
+        {
+          "word": "know",
+          "start": 7.12,
+          "end": 7.22
+        },
+        {
+          "word": "what",
+          "start": 7.22,
+          "end": 7.26
+        },
+        {
+          "word": "I",
+          "start": 7.26,
+          "end": 7.36
+        },
+        {
+          "word": "mean?",
+          "start": 7.36,
+          "end": 7.36
+        }
+      ]
+    },
+    {
+      "text": "Like it's all goosebumps then shit.",
+      "start": 7.6,
+      "end": 9.08,
+      "words": [
+        {
+          "word": "Like",
+          "start": 7.6,
+          "end": 7.6
+        },
+        {
+          "word": "it's",
+          "start": 7.6,
+          "end": 7.92
+        },
+        {
+          "word": "all",
+          "start": 7.92,
+          "end": 8.04
+        },
+        {
+          "word": "goosebumps",
+          "start": 8.04,
+          "end": 8.56
+        },
+        {
+          "word": "then",
+          "start": 8.56,
+          "end": 8.84
+        },
+        {
+          "word": "shit.",
+          "start": 8.84,
+          "end": 9.08
+        }
+      ]
+    },
+    {
+      "text": "Yeah.",
+      "start": 9.66,
+      "end": 9.88,
+      "words": [
+        {
+          "word": "Yeah.",
+          "start": 9.66,
+          "end": 9.88
+        }
+      ]
+    },
+    {
+      "text": "Like a lot of chills.",
+      "start": 10.18,
+      "end": 10.84,
+      "words": [
+        {
+          "word": "Like",
+          "start": 10.18,
+          "end": 10.36
+        },
+        {
+          "word": "a",
+          "start": 10.36,
+          "end": 10.38
+        },
+        {
+          "word": "lot",
+          "start": 10.38,
+          "end": 10.48
+        },
+        {
+          "word": "of",
+          "start": 10.48,
+          "end": 10.64
+        },
+        {
+          "word": "chills.",
+          "start": 10.64,
+          "end": 10.84
+        }
+      ]
+    },
+    {
+      "text": "And I say, this is the one.",
+      "start": 11.56,
+      "end": 12.6,
+      "words": [
+        {
+          "word": "And",
+          "start": 11.56,
+          "end": 11.8
+        },
+        {
+          "word": "I",
+          "start": 11.8,
+          "end": 11.88
+        },
+        {
+          "word": "say,",
+          "start": 11.88,
+          "end": 12.0
+        },
+        {
+          "word": "this",
+          "start": 12.04,
+          "end": 12.2
+        },
+        {
+          "word": "is",
+          "start": 12.2,
+          "end": 12.34
+        },
+        {
+          "word": "the",
+          "start": 12.34,
+          "end": 12.46
+        },
+        {
+          "word": "one.",
+          "start": 12.46,
+          "end": 12.6
+        }
+      ]
+    },
+    {
+      "text": "This is the one.",
+      "start": 12.74,
+      "end": 13.26,
+      "words": [
+        {
+          "word": "This",
+          "start": 12.74,
+          "end": 12.8
+        },
+        {
+          "word": "is",
+          "start": 12.8,
+          "end": 12.92
+        },
+        {
+          "word": "the",
+          "start": 12.92,
+          "end": 13.08
+        },
+        {
+          "word": "one.",
+          "start": 13.08,
+          "end": 13.26
+        }
+      ]
+    },
+    {
+      "text": "And that's their biggest part.",
+      "start": 14.1,
+      "end": 15.78,
+      "words": [
+        {
+          "word": "And",
+          "start": 14.1,
+          "end": 14.44
+        },
+        {
+          "word": "that's",
+          "start": 14.44,
+          "end": 14.78
+        },
+        {
+          "word": "their",
+          "start": 14.78,
+          "end": 15.32
+        },
+        {
+          "word": "biggest",
+          "start": 15.32,
+          "end": 15.64
+        },
+        {
+          "word": "part.",
+          "start": 15.64,
+          "end": 15.78
+        }
+      ]
+    },
+    {
+      "text": "Okay, wait, I have a question.",
+      "start": 15.8,
+      "end": 17.42,
+      "words": [
+        {
+          "word": "Okay,",
+          "start": 15.8,
+          "end": 16.0
+        },
+        {
+          "word": "wait,",
+          "start": 16.1,
+          "end": 16.18
+        },
+        {
+          "word": "I",
+          "start": 16.3,
+          "end": 16.34
+        },
+        {
+          "word": "have",
+          "start": 16.34,
+          "end": 16.48
+        },
+        {
+          "word": "a",
+          "start": 16.48,
+          "end": 16.6
+        },
+        {
+          "word": "question.",
+          "start": 16.6,
+          "end": 17.42
+        }
+      ]
+    }
+  ]
+}

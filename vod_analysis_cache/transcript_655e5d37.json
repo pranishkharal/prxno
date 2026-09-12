@@ -1,0 +1,159 @@
+{
+  "full_text": "It's possible that that's editions of Bangarator. That's you, that's shit. Oh shit, I've heard this all. Yeah. Be built, boom.",
+  "duration": 10.82,
+  "word_count": 21,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "It's possible that that's editions of Bangarator.",
+      "start": 0.0,
+      "end": 3.24,
+      "words": [
+        {
+          "word": "It's",
+          "start": 0.0,
+          "end": 0.12
+        },
+        {
+          "word": "possible",
+          "start": 0.12,
+          "end": 0.42
+        },
+        {
+          "word": "that",
+          "start": 0.42,
+          "end": 1.46
+        },
+        {
+          "word": "that's",
+          "start": 1.46,
+          "end": 1.72
+        },
+        {
+          "word": "editions",
+          "start": 1.72,
+          "end": 2.14
+        },
+        {
+          "word": "of",
+          "start": 2.14,
+          "end": 2.52
+        },
+        {
+          "word": "Bangarator.",
+          "start": 2.52,
+          "end": 3.24
+        }
+      ]
+    },
+    {
+      "text": "That's you, that's shit.",
+      "start": 3.66,
+      "end": 4.56,
+      "words": [
+        {
+          "word": "That's",
+          "start": 3.66,
+          "end": 4.1
+        },
+        {
+          "word": "you,",
+          "start": 4.1,
+          "end": 4.16
+        },
+        {
+          "word": "that's",
+          "start": 4.26,
+          "end": 4.44
+        },
+        {
+          "word": "shit.",
+          "start": 4.44,
+          "end": 4.56
+        }
+      ]
+    },
+    {
+      "text": "Oh shit, I've heard this all.",
+      "start": 7.5,
+      "end": 8.86,
+      "words": [
+        {
+          "word": "Oh",
+          "start": 7.5,
+          "end": 7.94
+        },
+        {
+          "word": "shit,",
+          "start": 7.94,
+          "end": 8.16
+        },
+        {
+          "word": "I've",
+          "start": 8.28,
+          "end": 8.36
+        },
+        {
+          "word": "heard",
+          "start": 8.36,
+          "end": 8.46
+        },
+        {
+          "word": "this",
+          "start": 8.46,
+          "end": 8.68
+        },
+        {
+          "word": "all.",
+          "start": 8.68,
+          "end": 8.86
+        }
+      ]
+    },
+    {
+      "text": "Yeah.",
+      "start": 9.22,
+      "end": 9.34,
+      "words": [
+        {
+          "word": "Yeah.",
+          "start": 9.22,
+          "end": 9.34
+        }
+      ]
+    },
+    {
+      "text": "Be built, boom.",
+      "start": 10.2,
+      "end": 10.82,
+      "words": [
+        {
+          "word": "Be",
+          "start": 10.2,
+          "end": 10.46
+        },
+        {
+          "word": "built,",
+          "start": 10.46,
+          "end": 10.64
+        },
+        {
+          "word": "boom.",
+          "start": 10.8,
+          "end": 10.82
+        }
+      ]
+    }
+  ]
+}

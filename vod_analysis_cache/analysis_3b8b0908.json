@@ -1,0 +1,1682 @@
+{
+  "transcript": {
+    "full_text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't know well you should know me you want a better way I could do at least 10 out 20 places myself yeah a couple more whatever there's more",
+    "segments": [
+      {
+        "text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+        "start": 0.0,
+        "end": 8.42,
+        "words": [
+          {
+            "word": "who",
+            "start": 0.0,
+            "end": 0.54,
+            "confidence": 0.011526412330567837
+          },
+          {
+            "word": "did",
+            "start": 0.54,
+            "end": 0.66,
+            "confidence": 0.6027887463569641
+          },
+          {
+            "word": "me",
+            "start": 0.66,
+            "end": 1.08,
+            "confidence": 0.6487414836883545
+          },
+          {
+            "word": "you",
+            "start": 1.08,
+            "end": 1.4,
+            "confidence": 0.9611774682998657
+          },
+          {
+            "word": "yeah",
+            "start": 1.4,
+            "end": 1.98,
+            "confidence": 0.601920485496521
+          },
+          {
+            "word": "let's",
+            "start": 1.98,
+            "end": 2.14,
+            "confidence": 0.9466377198696136
+          },
+          {
+            "word": "do",
+            "start": 2.14,
+            "end": 2.22,
+            "confidence": 0.982862114906311
+          },
+          {
+            "word": "it",
+            "start": 2.22,
+            "end": 2.7,
+            "confidence": 0.9976840019226074
+          },
+          {
+            "word": "you",
+            "start": 2.7,
+            "end": 3.78,
+            "confidence": 0.8124020099639893
+          },
+          {
+            "word": "want",
+            "start": 3.78,
+            "end": 3.92,
+            "confidence": 0.9913305044174194
+          },
+          {
+            "word": "to",
+            "start": 3.92,
+            "end": 4.08,
+            "confidence": 0.6744741201400757
+          },
+          {
+            "word": "see",
+            "start": 4.08,
+            "end": 4.42,
+            "confidence": 0.5703951716423035
+          },
+          {
+            "word": "what",
+            "start": 4.42,
+            "end": 4.62,
+            "confidence": 0.3643178641796112
+          },
+          {
+            "word": "I'm",
+            "start": 4.62,
+            "end": 6.28,
+            "confidence": 0.44544990360736847
+          },
+          {
+            "word": "gonna",
+            "start": 6.28,
+            "end": 6.34,
+            "confidence": 0.7417204976081848
+          },
+          {
+            "word": "can",
+            "start": 6.34,
+            "end": 6.5,
+            "confidence": 0.5347367525100708
+          },
+          {
+            "word": "you",
+            "start": 6.5,
+            "end": 6.64,
+            "confidence": 0.7163959741592407
+          },
+          {
+            "word": "do",
+            "start": 6.64,
+            "end": 6.8,
+            "confidence": 0.9872308373451233
+          },
+          {
+            "word": "I",
+            "start": 6.8,
+            "end": 8.3,
+            "confidence": 0.7235121130943298
+          },
+          {
+            "word": "don't",
+            "start": 8.3,
+            "end": 8.42,
+            "confidence": 0.9842188954353333
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "know well you should know me you want a better way I could do at least 10 out 20",
+        "start": 8.42,
+        "end": 12.72,
+        "words": [
+          {
+            "word": "know",
+            "start": 8.42,
+            "end": 8.58,
+            "confidence": 0.9982919096946716
+          },
+          {
+            "word": "well",
+            "start": 8.58,
+            "end": 9.02,
+            "confidence": 0.3720325231552124
+          },
+          {
+            "word": "you",
+            "start": 9.02,
+            "end": 9.14,
+            "confidence": 0.9573619961738586
+          },
+          {
+            "word": "should",
+            "start": 9.14,
+            "end": 9.34,
+            "confidence": 0.7754138708114624
+          },
+          {
+            "word": "know",
+            "start": 9.34,
+            "end": 9.54,
+            "confidence": 0.9408549070358276
+          },
+          {
+            "word": "me",
+            "start": 9.54,
+            "end": 9.8,
+            "confidence": 0.4636788070201874
+          },
+          {
+            "word": "you",
+            "start": 9.8,
+            "end": 10.3,
+            "confidence": 0.9775517582893372
+          },
+          {
+            "word": "want",
+            "start": 10.3,
+            "end": 10.4,
+            "confidence": 0.8101706504821777
+          },
+          {
+            "word": "a",
+            "start": 10.4,
+            "end": 10.52,
+            "confidence": 0.6206722855567932
+          },
+          {
+            "word": "better",
+            "start": 10.52,
+            "end": 10.74,
+            "confidence": 0.5496589541435242
+          },
+          {
+            "word": "way",
+            "start": 10.74,
+            "end": 10.9,
+            "confidence": 0.8331431746482849
+          },
+          {
+            "word": "I",
+            "start": 10.9,
+            "end": 11.04,
+            "confidence": 0.9102579951286316
+          },
+          {
+            "word": "could",
+            "start": 11.04,
+            "end": 11.42,
+            "confidence": 0.9081592559814453
+          },
+          {
+            "word": "do",
+            "start": 11.42,
+            "end": 11.56,
+            "confidence": 0.9796625971794128
+          },
+          {
+            "word": "at",
+            "start": 11.56,
+            "end": 11.64,
+            "confidence": 0.9686851501464844
+          },
+          {
+            "word": "least",
+            "start": 11.64,
+            "end": 11.74,
+            "confidence": 0.9988628625869751
+          },
+          {
+            "word": "10",
+            "start": 11.74,
+            "end": 12.08,
+            "confidence": 0.48699015378952026
+          },
+          {
+            "word": "out",
+            "start": 12.08,
+            "end": 12.36,
+            "confidence": 0.42112255096435547
+          },
+          {
+            "word": "20",
+            "start": 12.36,
+            "end": 12.72,
+            "confidence": 0.865584671497345
+          }
+        ],
+        "speaker": null
+      },
+      {
+        "text": "places myself yeah a couple more whatever there's more",
+        "start": 12.72,
+        "end": 19.36,
+        "words": [
+          {
+            "word": "places",
+            "start": 12.72,
+            "end": 13.02,
+            "confidence": 0.004277105443179607
+          },
+          {
+            "word": "myself",
+            "start": 13.02,
+            "end": 13.42,
+            "confidence": 0.3867735266685486
+          },
+          {
+            "word": "yeah",
+            "start": 13.42,
+            "end": 14.44,
+            "confidence": 0.1564689576625824
+          },
+          {
+            "word": "a",
+            "start": 17.32,
+            "end": 17.7,
+            "confidence": 0.5411220788955688
+          },
+          {
+            "word": "couple",
+            "start": 17.7,
+            "end": 17.88,
+            "confidence": 0.9841815233230591
+          },
+          {
+            "word": "more",
+            "start": 17.88,
+            "end": 18.06,
+            "confidence": 0.9735576510429382
+          },
+          {
+            "word": "whatever",
+            "start": 18.06,
+            "end": 18.8,
+            "confidence": 0.09197147935628891
+          },
+          {
+            "word": "there's",
+            "start": 18.8,
+            "end": 19.12,
+            "confidence": 0.8936503529548645
+          },
+          {
+            "word": "more",
+            "start": 19.12,
+            "end": 19.36,
+            "confidence": 0.9927970767021179
+          }
+        ],
+        "speaker": null
+      }
+    ],
+    "duration": 19.36,
+    "word_count": 48,
+    "language": "en",
+    "topics": [],
+    "emotions": [],
+    "storytelling_score": 0,
+    "hook_candidates": [],
+    "payoff_candidates": [],
+    "controversy_score": 0,
+    "surprise_score": 0,
+    "named_entities": [],
+    "questions": [],
+    "arguments": [],
+    "key_phrases": []
+  },
+  "audio_signals": [
+    {
+      "signal_type": "laughter",
+      "timestamp": 0.55,
+      "strength": 69.72297519838784,
+      "details": {
+        "confidence": 0.7,
+        "zcr": 0.076,
+        "centroid": 1263.0
+      },
+      "window": {
+        "start": 0.5,
+        "end": 0.6,
+        "rms_db": -37.89172633811583,
+        "energy_score": 25.0,
+        "spectral_centroid": 1263.0633597850444,
+        "spectral_rolloff": 2530.0,
+        "zero_crossing_rate": 0.075625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6972297519838784
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 0.75,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.8,
+        "drop_magnitude": 24.2
+      },
+      "window": {
+        "start": 0.7,
+        "end": 0.7999999999999999,
+        "rms_db": -46.45912090739769,
+        "energy_score": 0.8116659309432421,
+        "spectral_centroid": 1540.2303043583918,
+        "spectral_rolloff": 3580.0,
+        "zero_crossing_rate": 0.063125,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 1.45,
+      "strength": 19.399226322071456,
+      "details": {
+        "prev_energy": 16.2,
+        "curr_energy": 0.0,
+        "drop_magnitude": 16.2
+      },
+      "window": {
+        "start": 1.4,
+        "end": 1.5,
+        "rms_db": -51.87704673628144,
+        "energy_score": 0.0,
+        "spectral_centroid": 1482.1316751236807,
+        "spectral_rolloff": 3000.0,
+        "zero_crossing_rate": 0.10625,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 1.95,
+      "strength": 62.783990416976486,
+      "details": {
+        "confidence": 0.63,
+        "zcr": 0.059,
+        "centroid": 1205.0
+      },
+      "window": {
+        "start": 1.9,
+        "end": 2.0,
+        "rms_db": -32.87703878687264,
+        "energy_score": 25.0,
+        "spectral_centroid": 1204.5320555968653,
+        "spectral_rolloff": 2010.0,
+        "zero_crossing_rate": 0.059375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6278399041697649
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 2.05,
+      "strength": 72.14521139257413,
+      "details": {
+        "confidence": 0.72,
+        "zcr": 0.079,
+        "centroid": 1386.0
+      },
+      "window": {
+        "start": 2.0,
+        "end": 2.1,
+        "rms_db": -36.7411874036267,
+        "energy_score": 25.0,
+        "spectral_centroid": 1386.0281856765512,
+        "spectral_rolloff": 3420.0,
+        "zero_crossing_rate": 0.079375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7214521139257413
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 2.1500000000000004,
+      "strength": 82.5495473375143,
+      "details": {
+        "confidence": 0.83,
+        "zcr": 0.1,
+        "centroid": 1673.0
+      },
+      "window": {
+        "start": 2.1,
+        "end": 2.2,
+        "rms_db": -36.31478100412072,
+        "energy_score": 25.0,
+        "spectral_centroid": 1673.2729783352397,
+        "spectral_rolloff": 4420.0,
+        "zero_crossing_rate": 0.1,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.825495473375143
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 2.25,
+      "strength": 63.50107559603575,
+      "details": {
+        "confidence": 0.64,
+        "zcr": 0.066,
+        "centroid": 967.0
+      },
+      "window": {
+        "start": 2.2,
+        "end": 2.3000000000000003,
+        "rms_db": -33.705051144405815,
+        "energy_score": 25.0,
+        "spectral_centroid": 966.8100794714333,
+        "spectral_rolloff": 1510.0,
+        "zero_crossing_rate": 0.065625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6350107559603575
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 2.3499999999999996,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 25.0
+      },
+      "window": {
+        "start": 2.3,
+        "end": 2.4,
+        "rms_db": -52.056648935175225,
+        "energy_score": 0.0,
+        "spectral_centroid": 1566.7134851708247,
+        "spectral_rolloff": 3310.0,
+        "zero_crossing_rate": 0.094375,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 3.8499999999999996,
+      "strength": 61.5195818426719,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.061,
+        "centroid": 936.0
+      },
+      "window": {
+        "start": 3.8,
+        "end": 3.9,
+        "rms_db": -27.01261230971694,
+        "energy_score": 25.0,
+        "spectral_centroid": 935.9442456895855,
+        "spectral_rolloff": 1180.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.615195818426719
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 3.95,
+      "strength": 80.46590384463732,
+      "details": {
+        "confidence": 0.8,
+        "zcr": 0.102,
+        "centroid": 1395.0
+      },
+      "window": {
+        "start": 3.9,
+        "end": 4.0,
+        "rms_db": -32.80603310851618,
+        "energy_score": 25.0,
+        "spectral_centroid": 1395.453845951643,
+        "spectral_rolloff": 3260.0,
+        "zero_crossing_rate": 0.1025,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8046590384463732
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 4.1499999999999995,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 1.8,
+        "drop_magnitude": 23.2
+      },
+      "window": {
+        "start": 4.1,
+        "end": 4.199999999999999,
+        "rms_db": -46.142084274845374,
+        "energy_score": 1.7627758286001907,
+        "spectral_centroid": 1351.8851123050388,
+        "spectral_rolloff": 3240.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 4.85,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 2.2,
+        "drop_magnitude": 22.8
+      },
+      "window": {
+        "start": 4.8,
+        "end": 4.8999999999999995,
+        "rms_db": -46.003947862191325,
+        "energy_score": 2.1771850665623376,
+        "spectral_centroid": 1035.129940104437,
+        "spectral_rolloff": 1920.0,
+        "zero_crossing_rate": 0.0475,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 6.05,
+      "strength": 60.677047921376904,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.06,
+        "centroid": 890.0
+      },
+      "window": {
+        "start": 6.0,
+        "end": 6.1,
+        "rms_db": -29.370664652335186,
+        "energy_score": 25.0,
+        "spectral_centroid": 890.2730561835872,
+        "spectral_rolloff": 1100.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.606770479213769
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 6.1499999999999995,
+      "strength": 68.5384983125569,
+      "details": {
+        "confidence": 0.69,
+        "zcr": 0.079,
+        "centroid": 938.0
+      },
+      "window": {
+        "start": 6.1,
+        "end": 6.199999999999999,
+        "rms_db": -29.457534221044085,
+        "energy_score": 25.0,
+        "spectral_centroid": 938.4664416742532,
+        "spectral_rolloff": 1270.0,
+        "zero_crossing_rate": 0.07875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.685384983125569
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 6.45,
+      "strength": 76.23204531463847,
+      "details": {
+        "confidence": 0.76,
+        "zcr": 0.096,
+        "centroid": 1031.0
+      },
+      "window": {
+        "start": 6.4,
+        "end": 6.5,
+        "rms_db": -35.286040559462045,
+        "energy_score": 25.0,
+        "spectral_centroid": 1030.9393752851297,
+        "spectral_rolloff": 2010.0,
+        "zero_crossing_rate": 0.09625,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7623204531463847
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 6.85,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 3.3,
+        "drop_magnitude": 21.7
+      },
+      "window": {
+        "start": 6.8,
+        "end": 6.8999999999999995,
+        "rms_db": -45.628718041862165,
+        "energy_score": 3.302874527549818,
+        "spectral_centroid": 1291.6813423377919,
+        "spectral_rolloff": 3080.0,
+        "zero_crossing_rate": 0.0675,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.25,
+      "strength": 64.41152765306161,
+      "details": {
+        "confidence": 0.64,
+        "zcr": 0.075,
+        "centroid": 976.0
+      },
+      "window": {
+        "start": 8.2,
+        "end": 8.299999999999999,
+        "rms_db": -39.20441265220998,
+        "energy_score": 22.575790696506367,
+        "spectral_centroid": 976.0771756338639,
+        "spectral_rolloff": 1310.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6441152765306162
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.350000000000001,
+      "strength": 61.46957442739451,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.061,
+        "centroid": 929.0
+      },
+      "window": {
+        "start": 8.3,
+        "end": 8.4,
+        "rms_db": -35.63348204090042,
+        "energy_score": 25.0,
+        "spectral_centroid": 929.2765903192682,
+        "spectral_rolloff": 1400.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6146957442739451
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 8.55,
+      "strength": 61.2546353526793,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.062,
+        "centroid": 867.0
+      },
+      "window": {
+        "start": 8.5,
+        "end": 8.6,
+        "rms_db": -33.80912955238508,
+        "energy_score": 25.0,
+        "spectral_centroid": 867.2847136905718,
+        "spectral_rolloff": 1160.0,
+        "zero_crossing_rate": 0.061875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.612546353526793
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 9.149999999999999,
+      "strength": 83.69842817715806,
+      "details": {
+        "confidence": 0.84,
+        "zcr": 0.223,
+        "centroid": 2368.0
+      },
+      "window": {
+        "start": 9.1,
+        "end": 9.2,
+        "rms_db": -39.5249120802414,
+        "energy_score": 21.614292412412112,
+        "spectral_centroid": 2368.1703043018047,
+        "spectral_rolloff": 5020.0,
+        "zero_crossing_rate": 0.2225,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8369842817715807
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 9.25,
+      "strength": 84.30440907516432,
+      "details": {
+        "confidence": 0.84,
+        "zcr": 0.26,
+        "centroid": 1907.0
+      },
+      "window": {
+        "start": 9.2,
+        "end": 9.299999999999999,
+        "rms_db": -32.5801000445957,
+        "energy_score": 25.0,
+        "spectral_centroid": 1907.2545433552432,
+        "spectral_rolloff": 4380.0,
+        "zero_crossing_rate": 0.26,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.8430440907516432
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 9.850000000000001,
+      "strength": 27.377166950929954,
+      "details": {
+        "prev_energy": 22.8,
+        "curr_energy": 5.3,
+        "drop_magnitude": 17.5
+      },
+      "window": {
+        "start": 9.8,
+        "end": 9.9,
+        "rms_db": -44.96015436533917,
+        "energy_score": 5.308565557118797,
+        "spectral_centroid": 1213.8799687190792,
+        "spectral_rolloff": 3290.0,
+        "zero_crossing_rate": 0.064375,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 10.649999999999999,
+      "strength": 63.08103485218315,
+      "details": {
+        "confidence": 0.63,
+        "zcr": 0.064,
+        "centroid": 977.0
+      },
+      "window": {
+        "start": 10.6,
+        "end": 10.7,
+        "rms_db": -27.669163077734492,
+        "energy_score": 25.0,
+        "spectral_centroid": 977.4713136244202,
+        "spectral_rolloff": 1560.0,
+        "zero_crossing_rate": 0.064375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6308103485218315
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 10.75,
+      "strength": 63.753011539989515,
+      "details": {
+        "confidence": 0.64,
+        "zcr": 0.068,
+        "centroid": 900.0
+      },
+      "window": {
+        "start": 10.7,
+        "end": 10.799999999999999,
+        "rms_db": -32.530422194906954,
+        "energy_score": 25.0,
+        "spectral_centroid": 900.4015386652685,
+        "spectral_rolloff": 1420.0,
+        "zero_crossing_rate": 0.0675,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6375301153998951
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 10.95,
+      "strength": 66.20419275164888,
+      "details": {
+        "confidence": 0.66,
+        "zcr": 0.072,
+        "centroid": 994.0
+      },
+      "window": {
+        "start": 10.9,
+        "end": 11.0,
+        "rms_db": -29.2733510893029,
+        "energy_score": 25.0,
+        "spectral_centroid": 993.8923668865161,
+        "spectral_rolloff": 1430.0,
+        "zero_crossing_rate": 0.071875,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6620419275164887
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 11.05,
+      "strength": 65.69424860935652,
+      "details": {
+        "confidence": 0.66,
+        "zcr": 0.069,
+        "centroid": 1059.0
+      },
+      "window": {
+        "start": 11.0,
+        "end": 11.1,
+        "rms_db": -27.914073480340758,
+        "energy_score": 25.0,
+        "spectral_centroid": 1059.2331479142024,
+        "spectral_rolloff": 1830.0,
+        "zero_crossing_rate": 0.069375,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6569424860935652
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 11.149999999999999,
+      "strength": 61.199028837933,
+      "details": {
+        "confidence": 0.61,
+        "zcr": 0.06,
+        "centroid": 960.0
+      },
+      "window": {
+        "start": 11.1,
+        "end": 11.2,
+        "rms_db": -37.44247098357741,
+        "energy_score": 25.0,
+        "spectral_centroid": 959.8705117244008,
+        "spectral_rolloff": 1960.0,
+        "zero_crossing_rate": 0.06,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.61199028837933
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 11.25,
+      "strength": 67.11384096168462,
+      "details": {
+        "confidence": 0.67,
+        "zcr": 0.075,
+        "centroid": 949.0
+      },
+      "window": {
+        "start": 11.2,
+        "end": 11.299999999999999,
+        "rms_db": -36.57362072521607,
+        "energy_score": 25.0,
+        "spectral_centroid": 948.5121282246165,
+        "spectral_rolloff": 1750.0,
+        "zero_crossing_rate": 0.075,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6711384096168462
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 11.75,
+      "strength": 77.96257620364939,
+      "details": {
+        "confidence": 0.78,
+        "zcr": 0.123,
+        "centroid": 1680.0
+      },
+      "window": {
+        "start": 11.7,
+        "end": 11.799999999999999,
+        "rms_db": -39.68362492469368,
+        "energy_score": 21.138153879055267,
+        "spectral_centroid": 1679.5722065044095,
+        "spectral_rolloff": 5140.0,
+        "zero_crossing_rate": 0.123125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.7796257620364939
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 11.850000000000001,
+      "strength": 25.36578465486632,
+      "details": {
+        "prev_energy": 21.1,
+        "curr_energy": 0.0,
+        "drop_magnitude": 21.1
+      },
+      "window": {
+        "start": 11.8,
+        "end": 11.9,
+        "rms_db": -52.65416702743258,
+        "energy_score": 0.0,
+        "spectral_centroid": 2377.1074836662974,
+        "spectral_rolloff": 5940.0,
+        "zero_crossing_rate": 0.13625,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 12.05,
+      "strength": 46.36052046745333,
+      "details": {
+        "rms_db": -39.0,
+        "energy_score": 23.2,
+        "baseline_db": -46.7,
+        "spectral_centroid": 858.0
+      },
+      "window": {
+        "start": 12.0,
+        "end": 12.1,
+        "rms_db": -39.00292280646988,
+        "energy_score": 23.180260233726663,
+        "spectral_centroid": 857.6409442973558,
+        "spectral_rolloff": 1590.0,
+        "zero_crossing_rate": 0.050625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 12.05,
+      "strength": 34.77039035058999,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 23.2,
+        "next_energy": 0.8,
+        "shift_magnitude": 23.2
+      },
+      "window": {
+        "start": 12.0,
+        "end": 12.1,
+        "rms_db": -39.00292280646988,
+        "energy_score": 23.180260233726663,
+        "spectral_centroid": 857.6409442973558,
+        "spectral_rolloff": 1590.0,
+        "zero_crossing_rate": 0.050625,
+        "is_speech": true,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 12.149999999999999,
+      "strength": 27.816312280471994,
+      "details": {
+        "prev_energy": 23.2,
+        "curr_energy": 0.8,
+        "drop_magnitude": 22.4
+      },
+      "window": {
+        "start": 12.1,
+        "end": 12.2,
+        "rms_db": -46.47922843638384,
+        "energy_score": 0.7513433439847859,
+        "spectral_centroid": 1161.341912845305,
+        "spectral_rolloff": 2510.0,
+        "zero_crossing_rate": 0.07125,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 12.350000000000001,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -35.0,
+        "energy_score": 25.0,
+        "baseline_db": -46.7,
+        "spectral_centroid": 883.0
+      },
+      "window": {
+        "start": 12.3,
+        "end": 12.4,
+        "rms_db": -34.95461357514569,
+        "energy_score": 25.0,
+        "spectral_centroid": 882.6758686162875,
+        "spectral_rolloff": 1250.0,
+        "zero_crossing_rate": 0.0675,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6362006901462216
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 12.350000000000001,
+      "strength": 63.62006901462216,
+      "details": {
+        "confidence": 0.64,
+        "zcr": 0.068,
+        "centroid": 883.0
+      },
+      "window": {
+        "start": 12.3,
+        "end": 12.4,
+        "rms_db": -34.95461357514569,
+        "energy_score": 25.0,
+        "spectral_centroid": 882.6758686162875,
+        "spectral_rolloff": 1250.0,
+        "zero_crossing_rate": 0.0675,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6362006901462216
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 12.45,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 0.0,
+        "drop_magnitude": 25.0
+      },
+      "window": {
+        "start": 12.4,
+        "end": 12.5,
+        "rms_db": -49.33948058079033,
+        "energy_score": 0.0,
+        "spectral_centroid": 1775.661207115944,
+        "spectral_rolloff": 4780.0,
+        "zero_crossing_rate": 0.085625,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "energy_spike",
+      "timestamp": 13.350000000000001,
+      "strength": 50.0,
+      "details": {
+        "rms_db": -37.2,
+        "energy_score": 25.0,
+        "baseline_db": -46.7,
+        "spectral_centroid": 963.0
+      },
+      "window": {
+        "start": 13.3,
+        "end": 13.4,
+        "rms_db": -37.23616240304042,
+        "energy_score": 25.0,
+        "spectral_centroid": 962.7572788737402,
+        "spectral_rolloff": 1280.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6172067959155305
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 13.350000000000001,
+      "strength": 61.72067959155305,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.061,
+        "centroid": 963.0
+      },
+      "window": {
+        "start": 13.3,
+        "end": 13.4,
+        "rms_db": -37.23616240304042,
+        "energy_score": 25.0,
+        "spectral_centroid": 962.7572788737402,
+        "spectral_rolloff": 1280.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6172067959155305
+      }
+    },
+    {
+      "signal_type": "energy_shift_up",
+      "timestamp": 13.350000000000001,
+      "strength": 37.5,
+      "details": {
+        "prev_energy": 0.0,
+        "curr_energy": 25.0,
+        "next_energy": 15.3,
+        "shift_magnitude": 25.0
+      },
+      "window": {
+        "start": 13.3,
+        "end": 13.4,
+        "rms_db": -37.23616240304042,
+        "energy_score": 25.0,
+        "spectral_centroid": 962.7572788737402,
+        "spectral_rolloff": 1280.0,
+        "zero_crossing_rate": 0.06125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6172067959155305
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 13.55,
+      "strength": 18.411433295263766,
+      "details": {
+        "prev_energy": 15.3,
+        "curr_energy": 0.0,
+        "drop_magnitude": 15.3
+      },
+      "window": {
+        "start": 13.5,
+        "end": 13.6,
+        "rms_db": -54.75728005269804,
+        "energy_score": 0.0,
+        "spectral_centroid": 1742.8403064124773,
+        "spectral_rolloff": 3950.0,
+        "zero_crossing_rate": 0.1025,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 17.75,
+      "strength": 61.66393068258493,
+      "details": {
+        "confidence": 0.62,
+        "zcr": 0.084,
+        "centroid": 777.0
+      },
+      "window": {
+        "start": 17.7,
+        "end": 17.8,
+        "rms_db": -40.59495155526665,
+        "energy_score": 18.40417398733637,
+        "spectral_centroid": 777.1895863708394,
+        "spectral_rolloff": 1090.0,
+        "zero_crossing_rate": 0.084375,
+        "is_speech": false,
+        "is_laughter": true,
+        "laughter_confidence": 0.6166393068258493
+      }
+    },
+    {
+      "signal_type": "laughter",
+      "timestamp": 19.35,
+      "strength": 65.5630944826462,
+      "details": {
+        "confidence": 0.66,
+        "zcr": 0.071,
+        "centroid": 942.0
+      },
+      "window": {
+        "start": 19.3,
+        "end": 19.400000000000002,
+        "rms_db": -37.52179845228033,
+        "energy_score": 25.0,
+        "spectral_centroid": 941.7459310194956,
+        "spectral_rolloff": 1460.0,
+        "zero_crossing_rate": 0.07125,
+        "is_speech": true,
+        "is_laughter": true,
+        "laughter_confidence": 0.6556309448264621
+      }
+    },
+    {
+      "signal_type": "energy_shift_down",
+      "timestamp": 19.45,
+      "strength": 30.0,
+      "details": {
+        "prev_energy": 25.0,
+        "curr_energy": 8.9,
+        "drop_magnitude": 16.1
+      },
+      "window": {
+        "start": 19.4,
+        "end": 19.5,
+        "rms_db": -43.756028793111135,
+        "energy_score": 8.920942273802908,
+        "spectral_centroid": 1035.4302272231405,
+        "spectral_rolloff": 1490.0,
+        "zero_crossing_rate": 0.080625,
+        "is_speech": false,
+        "is_laughter": false,
+        "laughter_confidence": 0.0
+      }
+    }
+  ],
+  "chat_signals": [],
+  "moments": [
+    {
+      "original_start": 0,
+      "original_end": 8.0,
+      "expanded_start": 0,
+      "expanded_end": 20.004666,
+      "duration": 20.004666,
+      "context": {
+        "moment_start": 0,
+        "moment_end": 20.004666,
+        "pre_context_start": 0,
+        "pre_context_end": 0,
+        "post_context_start": 8.0,
+        "post_context_end": 9.850000000000001,
+        "total_duration": 20.004666,
+        "context_quality": 22.5,
+        "necessary_pre_seconds": 8.0,
+        "necessary_post_seconds": 1.8500000000000014,
+        "reasoning": "8.0s pre-context for setup: 'who did me you yeah let's do it you want to see wh...'; Short post-context (1.9s) - payoff is self-contained"
+      },
+      "hook_text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+      "context_text": " who did me you yeah let's do it you want to see what I'm gonna can you do I don't know well you should know me you want a better way I could do at least 10 out 20 who did me you yeah let's do it you want to see what I'm gonna can you do I don't places myself yeah a couple more whatever there's more",
+      "payoff_text": "places myself yeah a couple more whatever there's more",
+      "reaction_text": "",
+      "story_complete": true,
+      "dead_space_removed": [],
+      "edit_recommendations": {
+        "size": "9:16",
+        "zoom": false,
+        "mirror": false,
+        "blur": false,
+        "remove_silence": true,
+        "overlay": true,
+        "enhance": "Subtle",
+        "split_screen": false,
+        "auto_captions": true
+      }
+    }
+  ],
+  "scores": [
+    {
+      "moment_id": "moment_0.0_8.0",
+      "total_score": 10.1,
+      "components": {
+        "hook": 0.0,
+        "emotional_intensity": 0.9,
+        "reaction": 0.0,
+        "surprise": 0.3,
+        "humor": 0.84,
+        "story_value": 0.0,
+        "transcript_relevance": 0.0,
+        "chat_reaction": 0.0,
+        "novelty": 0.04,
+        "pacing": 0.02
+      },
+      "signals": [
+        {
+          "name": "audio_energy",
+          "raw": 50.0,
+          "weighted": 6.0,
+          "weight": 0.12
+        },
+        {
+          "name": "audio_laughter",
+          "raw": 84.3,
+          "weighted": 8.43,
+          "weight": 0.1
+        },
+        {
+          "name": "audio_energy_shift",
+          "raw": 37.5,
+          "weighted": 3.0,
+          "weight": 0.08
+        },
+        {
+          "name": "context_quality",
+          "raw": 22.5,
+          "weighted": 1.12,
+          "weight": 0.05
+        },
+        {
+          "name": "novelty",
+          "raw": 50.0,
+          "weighted": 1.5,
+          "weight": 0.03
+        },
+        {
+          "name": "pacing",
+          "raw": 40.0,
+          "weighted": 0.8,
+          "weight": 0.02
+        }
+      ],
+      "hook": 0.0,
+      "emotion": 0.9,
+      "reaction": 0.0,
+      "surprise": 0.3,
+      "humor": 0.84,
+      "story": 0.0,
+      "transcript": 0.0,
+      "chat": 0.0,
+      "novelty": 0.04,
+      "pacing": 0.02,
+      "context": 22.5,
+      "duration_bonus": 8.0,
+      "audio_energy": 50.0,
+      "explanation": "audio_laughter (84) | audio_energy (50) | audio_energy_shift (38) | Duration: 20.0s (+8.0) | Weak context (22)"
+    }
+  ],
+  "stories": [
+    {
+      "hook": {
+        "name": "hook",
+        "score": 25.0,
+        "evidence": "Question hook",
+        "timestamp": 0,
+        "details": {
+          "hook_text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+          "llm_hooks": 0
+        }
+      },
+      "context": {
+        "name": "context",
+        "score": 0,
+        "evidence": "No pre-context",
+        "timestamp": 0,
+        "details": {}
+      },
+      "payoff": {
+        "name": "payoff",
+        "score": 25.0,
+        "evidence": "Audio payoff: laughter",
+        "timestamp": 8.0,
+        "details": {
+          "payoff_text": "know well you should know me you want a better way I could do at least 10 out 20 places myself yeah ",
+          "llm_payoffs": 0
+        }
+      },
+      "reaction": {
+        "name": "reaction",
+        "score": 20.0,
+        "evidence": "Audio reaction",
+        "timestamp": 8.0,
+        "details": {
+          "reaction_text": "know well you should know me you want a better way I could do at least 10 out 20 places myself yeah "
+        }
+      },
+      "overall_score": 19.0,
+      "has_complete_arc": false,
+      "pacing_rating": "rushed",
+      "recommendations": [
+        "Consider starting clip earlier to include stronger hook",
+        "Add more pre-context for viewer understanding",
+        "Extend clip to capture payoff/reaction",
+        "Include post-moment reaction for emotional closure",
+        "Pacing is fast - consider keeping pauses for comedic timing"
+      ]
+    }
+  ],
+  "ranking": {
+    "top_clips": [
+      {
+        "rank": 1,
+        "start_time": 0,
+        "end_time": 8.0,
+        "expanded_start": 0,
+        "expanded_end": 20.004666,
+        "duration": 20.004666,
+        "final_score": 31.74,
+        "moment_score": {
+          "moment_id": "moment_0.0_8.0",
+          "total_score": 10.1,
+          "components": {
+            "hook": 0.0,
+            "emotional_intensity": 0.9,
+            "reaction": 0.0,
+            "surprise": 0.3,
+            "humor": 0.84,
+            "story_value": 0.0,
+            "transcript_relevance": 0.0,
+            "chat_reaction": 0.0,
+            "novelty": 0.04,
+            "pacing": 0.02
+          },
+          "signals": [
+            {
+              "name": "audio_energy",
+              "raw": 50.0,
+              "weighted": 6.0,
+              "weight": 0.12
+            },
+            {
+              "name": "audio_laughter",
+              "raw": 84.3,
+              "weighted": 8.43,
+              "weight": 0.1
+            },
+            {
+              "name": "audio_energy_shift",
+              "raw": 37.5,
+              "weighted": 3.0,
+              "weight": 0.08
+            },
+            {
+              "name": "context_quality",
+              "raw": 22.5,
+              "weighted": 1.12,
+              "weight": 0.05
+            },
+            {
+              "name": "novelty",
+              "raw": 50.0,
+              "weighted": 1.5,
+              "weight": 0.03
+            },
+            {
+              "name": "pacing",
+              "raw": 40.0,
+              "weighted": 0.8,
+              "weight": 0.02
+            }
+          ],
+          "hook": 0.0,
+          "emotion": 0.9,
+          "reaction": 0.0,
+          "surprise": 0.3,
+          "humor": 0.84,
+          "story": 0.0,
+          "transcript": 0.0,
+          "chat": 0.0,
+          "novelty": 0.04,
+          "pacing": 0.02,
+          "context": 22.5,
+          "duration_bonus": 8.0,
+          "audio_energy": 50.0,
+          "explanation": "audio_laughter (84) | audio_energy (50) | audio_energy_shift (38) | Duration: 20.0s (+8.0) | Weak context (22)"
+        },
+        "story_score": 19.0,
+        "has_complete_arc": false,
+        "pacing": "rushed",
+        "hook_text": "who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+        "payoff_text": "places myself yeah a couple more whatever there's more",
+        "context_text": " who did me you yeah let's do it you want to see what I'm gonna can you do I don't know well you should know me you want a better way I could do at least 10 out 20 who did me you yeah let's do it you ",
+        "reaction_text": "",
+        "review_priority": "low",
+        "tags": [
+          "medium",
+          "fast-paced"
+        ],
+        "is_duplicate": false,
+        "duplicate_of": null,
+        "edit_recommendations": {
+          "size": "9:16",
+          "zoom": false,
+          "mirror": false,
+          "blur": false,
+          "remove_silence": true,
+          "overlay": true,
+          "enhance": "Subtle",
+          "split_screen": false,
+          "auto_captions": true
+        },
+        "story_recommendations": [
+          "Consider starting clip earlier to include stronger hook",
+          "Add more pre-context for viewer understanding",
+          "Extend clip to capture payoff/reaction",
+          "Include post-moment reaction for emotional closure",
+          "Pacing is fast - consider keeping pauses for comedic timing"
+        ]
+      }
+    ],
+    "metadata": {
+      "rank_1": {
+        "title": "flaminhotmitts Reacts to Being Asked to Do 10+ Places by Himself",
+        "description": "flaminhotmitts is asked if he can do 10+ places by himself and his reaction is priceless.",
+        "on_screen_hook": "who did me you let's do",
+        "search_phrases": [
+          "flaminhotmitts",
+          "reacts to being asked",
+          "places by himself",
+          "funny reaction"
+        ],
+        "caption": "flaminhotmitts reveals what happened during the stream.",
+        "hashtags": [
+          "#flaminhotmitts",
+          "#streamer",
+          "#clips",
+          "#kick",
+          "#livestream",
+          "#gaming",
+          "#fyp"
+        ],
+        "streamer_name": "flaminhotmitts",
+        "timestamp_display": "0:00",
+        "rank": 1,
+        "content_warnings": [],
+        "accuracy_score": 95.0,
+        "on_screen_captions": [
+          {
+            "start": 0.0,
+            "end": 2.1,
+            "text": "who did me you let's do",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 2.1,
+            "end": 4.21,
+            "text": "it you want to see what",
+            "emphasis": [
+              "what"
+            ],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 4.21,
+            "end": 6.31,
+            "text": "I'm gonna can you do I",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 6.31,
+            "end": 8.42,
+            "text": "don't",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 8.42,
+            "end": 9.5,
+            "text": "know well you should know me",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 9.5,
+            "end": 10.57,
+            "text": "you want a better way I",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 10.57,
+            "end": 11.64,
+            "text": "could do at least 10 out",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 11.64,
+            "end": 12.72,
+            "text": "20",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 12.72,
+            "end": 16.04,
+            "text": "places myself a couple more whatever",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          },
+          {
+            "start": 16.04,
+            "end": 19.36,
+            "text": "there's more",
+            "emphasis": [],
+            "position": "bottom_center",
+            "style": "standard"
+          }
+        ],
+        "post_caption_options": [
+          "flaminhotmitts - who did me you yeah let's do it you want to see what I'm gonna can you do I don't",
+          "flaminhotmitts reveals what happened during the stream.",
+          "flaminhotmitts was reacting after who did me you yeah let's do it you want to see what i'm gonna can you do i don't"
+        ],
+        "recommended_post_caption": "flaminhotmitts reveals what happened during the stream.",
+        "search_terms": [
+          "flaminhotmitts"
+        ],
+        "caption_style": "standard",
+        "confidence": 80.0
+      }
+    }
+  }
+}

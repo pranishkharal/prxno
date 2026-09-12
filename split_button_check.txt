@@ -1,0 +1,46 @@
+          emoji="??",
+        style=discord.ButtonStyle.secondary,
+        row=4
+    )
+    @discord.ui.button(
+        label="Split Screen",
+        emoji="???",
+        style=discord.ButtonStyle.secondary,
+        row=4
+    )
+    async def split_screen_button(
+        self,
+        interaction: discord.Interaction,
+        button: discord.ui.Button
+    ):
+        bg_file = get_split_background()
+
+        if bg_file is None:
+            await interaction.response.send_message(
+                "? No background video found in `backgrounds/`.",
+                ephemeral=True
+            )
+            return
+
+        self.split_photo_file = bg_file
+        self.options["split_screen"] = True
+
+        button.style = discord.ButtonStyle.success
+        button.label = "Split Screen ?"
+
+        await interaction.response.send_message(
+            f"??? **Split Screen enabled!**\\n"
+            f"Background: `{bg_file.name}`\\n"
+            "The background video will be used automatically in the bottom section.",
+            ephemeral=True
+        )
+
+        await interaction.message.edit(view=self)
+        def check(message):
+            return (
+                message.author.id == self.user.id
+                and message.channel.id == interaction.channel.id
+            )
+
+        try:
+            message = await client.wait_for(

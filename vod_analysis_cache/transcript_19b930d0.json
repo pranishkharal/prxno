@@ -1,0 +1,1776 @@
+{
+  "full_text": "I just got an image from a rich nigga. I thought they're your phone. Why does that play into your phone all of a sudden? Okay. Okay. Wait. I like it. I like the beat. The part where she was like, and go to Mars. Mars. That was fire. That was clean. How it turned out robotic. Don't take me to a new Airbnb. Take me to Mars. Mars. Mars. That was good. I like that. Amex. And I like the cover of the... Can y'all see that? Or y'all can. Look at the cover of the song, too. A red Amex. What is that on the side? Is that supposed to be Mars in the back? Can I zoom in on this? I like it. Yara and Stana. That's insane. That's... That's fire. Okay. Well, y'all go listen to Amex by Stana and Yara on all platforms now. That's... And if you don't, you're lame. Oh my god. Can my discord open? Okay. What do y'all think? Out of 10 out of 10. Come on. What was your favorite part of the song? Don't be fucking lame. Y'all know it was good. Don't be haters. Y'all know the song was good. Mila. Wake up. What did you think? What did you think of Stana and Yara's song? Did you like? Do you want to be spoiled by an Amex? Hey, it's cameras right there, buddy. All right? Did you like it? Give me a kiss if you liked it.",
+  "duration": 180.75,
+  "word_count": 256,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [
+    {
+      "timestamp": 42.0,
+      "text": "Why does that play into your phone all of a sudden?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 71.9,
+      "text": "Can y'all see that?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 79.96,
+      "text": "What is that on the side?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 82.28,
+      "text": "Is that supposed to be Mars in the back?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 88.24,
+      "text": "Can I zoom in on this?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 117.15,
+      "text": "Can my discord open?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 119.99,
+      "text": "What do y'all think?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 126.04,
+      "text": "What was your favorite part of the song?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 140.79,
+      "text": "What did you think?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 144.78,
+      "text": "What did you think of Stana and Yara's song?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 147.94,
+      "text": "Did you like?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 151.84,
+      "text": "Do you want to be spoiled by an Amex?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 167.52,
+      "text": "All right?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 176.75,
+      "text": "Did you like it?",
+      "type": "direct_question"
+    }
+  ],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "I just got an image from a rich nigga.",
+      "start": 7.89,
+      "end": 10.47,
+      "words": [
+        {
+          "word": "I",
+          "start": 7.89,
+          "end": 8.37
+        },
+        {
+          "word": "just",
+          "start": 8.37,
+          "end": 8.53
+        },
+        {
+          "word": "got",
+          "start": 8.53,
+          "end": 8.83
+        },
+        {
+          "word": "an",
+          "start": 8.83,
+          "end": 9.01
+        },
+        {
+          "word": "image",
+          "start": 9.01,
+          "end": 9.31
+        },
+        {
+          "word": "from",
+          "start": 9.31,
+          "end": 9.55
+        },
+        {
+          "word": "a",
+          "start": 9.55,
+          "end": 9.75
+        },
+        {
+          "word": "rich",
+          "start": 9.75,
+          "end": 10.13
+        },
+        {
+          "word": "nigga.",
+          "start": 10.13,
+          "end": 10.47
+        }
+      ]
+    },
+    {
+      "text": "I thought they're your phone.",
+      "start": 10.71,
+      "end": 39.38,
+      "words": [
+        {
+          "word": "I",
+          "start": 10.71,
+          "end": 10.91
+        },
+        {
+          "word": "thought",
+          "start": 38.78,
+          "end": 38.84
+        },
+        {
+          "word": "they're",
+          "start": 38.84,
+          "end": 39.0
+        },
+        {
+          "word": "your",
+          "start": 39.0,
+          "end": 39.14
+        },
+        {
+          "word": "phone.",
+          "start": 39.14,
+          "end": 39.38
+        }
+      ]
+    },
+    {
+      "text": "Why does that play into your phone all of a sudden?",
+      "start": 42.0,
+      "end": 44.1,
+      "words": [
+        {
+          "word": "Why",
+          "start": 42.0,
+          "end": 42.48
+        },
+        {
+          "word": "does",
+          "start": 42.48,
+          "end": 42.66
+        },
+        {
+          "word": "that",
+          "start": 42.66,
+          "end": 42.76
+        },
+        {
+          "word": "play",
+          "start": 42.76,
+          "end": 42.98
+        },
+        {
+          "word": "into",
+          "start": 42.98,
+          "end": 43.14
+        },
+        {
+          "word": "your",
+          "start": 43.14,
+          "end": 43.28
+        },
+        {
+          "word": "phone",
+          "start": 43.28,
+          "end": 43.48
+        },
+        {
+          "word": "all",
+          "start": 43.48,
+          "end": 43.64
+        },
+        {
+          "word": "of",
+          "start": 43.64,
+          "end": 43.74
+        },
+        {
+          "word": "a",
+          "start": 43.74,
+          "end": 43.86
+        },
+        {
+          "word": "sudden?",
+          "start": 43.86,
+          "end": 44.1
+        }
+      ]
+    },
+    {
+      "text": "Okay.",
+      "start": 44.38,
+      "end": 44.54,
+      "words": [
+        {
+          "word": "Okay.",
+          "start": 44.38,
+          "end": 44.54
+        }
+      ]
+    },
+    {
+      "text": "Okay.",
+      "start": 45.7,
+      "end": 46.18,
+      "words": [
+        {
+          "word": "Okay.",
+          "start": 45.7,
+          "end": 46.18
+        }
+      ]
+    },
+    {
+      "text": "Wait.",
+      "start": 47.1,
+      "end": 47.58,
+      "words": [
+        {
+          "word": "Wait.",
+          "start": 47.1,
+          "end": 47.58
+        }
+      ]
+    },
+    {
+      "text": "I like it.",
+      "start": 48.0,
+      "end": 48.7,
+      "words": [
+        {
+          "word": "I",
+          "start": 48.0,
+          "end": 48.24
+        },
+        {
+          "word": "like",
+          "start": 48.24,
+          "end": 48.44
+        },
+        {
+          "word": "it.",
+          "start": 48.44,
+          "end": 48.7
+        }
+      ]
+    },
+    {
+      "text": "I like the beat.",
+      "start": 48.84,
+      "end": 49.4,
+      "words": [
+        {
+          "word": "I",
+          "start": 48.84,
+          "end": 48.84
+        },
+        {
+          "word": "like",
+          "start": 48.84,
+          "end": 48.96
+        },
+        {
+          "word": "the",
+          "start": 48.96,
+          "end": 49.1
+        },
+        {
+          "word": "beat.",
+          "start": 49.1,
+          "end": 49.4
+        }
+      ]
+    },
+    {
+      "text": "The part where she was like, and go to Mars.",
+      "start": 49.7,
+      "end": 51.8,
+      "words": [
+        {
+          "word": "The",
+          "start": 49.7,
+          "end": 49.78
+        },
+        {
+          "word": "part",
+          "start": 49.78,
+          "end": 49.92
+        },
+        {
+          "word": "where",
+          "start": 49.92,
+          "end": 50.02
+        },
+        {
+          "word": "she",
+          "start": 50.02,
+          "end": 50.12
+        },
+        {
+          "word": "was",
+          "start": 50.12,
+          "end": 50.24
+        },
+        {
+          "word": "like,",
+          "start": 50.24,
+          "end": 50.38
+        },
+        {
+          "word": "and",
+          "start": 50.66,
+          "end": 51.02
+        },
+        {
+          "word": "go",
+          "start": 51.02,
+          "end": 51.18
+        },
+        {
+          "word": "to",
+          "start": 51.18,
+          "end": 51.3
+        },
+        {
+          "word": "Mars.",
+          "start": 51.3,
+          "end": 51.8
+        }
+      ]
+    },
+    {
+      "text": "Mars.",
+      "start": 52.2,
+      "end": 52.6,
+      "words": [
+        {
+          "word": "Mars.",
+          "start": 52.2,
+          "end": 52.6
+        }
+      ]
+    },
+    {
+      "text": "That was fire.",
+      "start": 53.46,
+      "end": 54.4,
+      "words": [
+        {
+          "word": "That",
+          "start": 53.46,
+          "end": 53.76
+        },
+        {
+          "word": "was",
+          "start": 53.76,
+          "end": 54.08
+        },
+        {
+          "word": "fire.",
+          "start": 54.08,
+          "end": 54.4
+        }
+      ]
+    },
+    {
+      "text": "That was clean.",
+      "start": 55.42,
+      "end": 56.28,
+      "words": [
+        {
+          "word": "That",
+          "start": 55.42,
+          "end": 55.78
+        },
+        {
+          "word": "was",
+          "start": 55.78,
+          "end": 56.0
+        },
+        {
+          "word": "clean.",
+          "start": 56.0,
+          "end": 56.28
+        }
+      ]
+    },
+    {
+      "text": "How it turned out robotic.",
+      "start": 57.46,
+      "end": 58.78,
+      "words": [
+        {
+          "word": "How",
+          "start": 57.46,
+          "end": 57.94
+        },
+        {
+          "word": "it",
+          "start": 57.94,
+          "end": 58.08
+        },
+        {
+          "word": "turned",
+          "start": 58.08,
+          "end": 58.2
+        },
+        {
+          "word": "out",
+          "start": 58.2,
+          "end": 58.34
+        },
+        {
+          "word": "robotic.",
+          "start": 58.34,
+          "end": 58.78
+        }
+      ]
+    },
+    {
+      "text": "Don't take me to a new Airbnb.",
+      "start": 60.2,
+      "end": 61.84,
+      "words": [
+        {
+          "word": "Don't",
+          "start": 60.2,
+          "end": 60.6
+        },
+        {
+          "word": "take",
+          "start": 60.6,
+          "end": 60.76
+        },
+        {
+          "word": "me",
+          "start": 60.76,
+          "end": 60.94
+        },
+        {
+          "word": "to",
+          "start": 60.94,
+          "end": 61.12
+        },
+        {
+          "word": "a",
+          "start": 61.12,
+          "end": 61.28
+        },
+        {
+          "word": "new",
+          "start": 61.28,
+          "end": 61.3
+        },
+        {
+          "word": "Airbnb.",
+          "start": 61.3,
+          "end": 61.84
+        }
+      ]
+    },
+    {
+      "text": "Take me to Mars.",
+      "start": 62.18,
+      "end": 63.1,
+      "words": [
+        {
+          "word": "Take",
+          "start": 62.18,
+          "end": 62.26
+        },
+        {
+          "word": "me",
+          "start": 62.26,
+          "end": 62.44
+        },
+        {
+          "word": "to",
+          "start": 62.44,
+          "end": 62.56
+        },
+        {
+          "word": "Mars.",
+          "start": 62.56,
+          "end": 63.1
+        }
+      ]
+    },
+    {
+      "text": "Mars.",
+      "start": 63.26,
+      "end": 63.66,
+      "words": [
+        {
+          "word": "Mars.",
+          "start": 63.26,
+          "end": 63.66
+        }
+      ]
+    },
+    {
+      "text": "Mars.",
+      "start": 64.12,
+      "end": 64.52,
+      "words": [
+        {
+          "word": "Mars.",
+          "start": 64.12,
+          "end": 64.52
+        }
+      ]
+    },
+    {
+      "text": "That was good.",
+      "start": 66.02,
+      "end": 66.86,
+      "words": [
+        {
+          "word": "That",
+          "start": 66.02,
+          "end": 66.42
+        },
+        {
+          "word": "was",
+          "start": 66.42,
+          "end": 66.62
+        },
+        {
+          "word": "good.",
+          "start": 66.62,
+          "end": 66.86
+        }
+      ]
+    },
+    {
+      "text": "I like that.",
+      "start": 68.26,
+      "end": 69.06,
+      "words": [
+        {
+          "word": "I",
+          "start": 68.26,
+          "end": 68.58
+        },
+        {
+          "word": "like",
+          "start": 68.58,
+          "end": 68.78
+        },
+        {
+          "word": "that.",
+          "start": 68.78,
+          "end": 69.06
+        }
+      ]
+    },
+    {
+      "text": "Amex.",
+      "start": 69.52,
+      "end": 69.92,
+      "words": [
+        {
+          "word": "Amex.",
+          "start": 69.52,
+          "end": 69.92
+        }
+      ]
+    },
+    {
+      "text": "And I like the cover of the...",
+      "start": 70.1,
+      "end": 71.9,
+      "words": [
+        {
+          "word": "And",
+          "start": 70.1,
+          "end": 70.18
+        },
+        {
+          "word": "I",
+          "start": 70.18,
+          "end": 70.28
+        },
+        {
+          "word": "like",
+          "start": 70.28,
+          "end": 70.4
+        },
+        {
+          "word": "the",
+          "start": 70.4,
+          "end": 70.58
+        },
+        {
+          "word": "cover",
+          "start": 70.58,
+          "end": 70.88
+        },
+        {
+          "word": "of",
+          "start": 70.88,
+          "end": 71.1
+        },
+        {
+          "word": "the...",
+          "start": 71.1,
+          "end": 71.9
+        }
+      ]
+    },
+    {
+      "text": "Can y'all see that?",
+      "start": 71.9,
+      "end": 73.18,
+      "words": [
+        {
+          "word": "Can",
+          "start": 71.9,
+          "end": 72.66
+        },
+        {
+          "word": "y",
+          "start": 72.66,
+          "end": 72.8
+        },
+        {
+          "word": "'all",
+          "start": 72.8,
+          "end": 72.8
+        },
+        {
+          "word": "see",
+          "start": 72.8,
+          "end": 73.0
+        },
+        {
+          "word": "that?",
+          "start": 73.0,
+          "end": 73.18
+        }
+      ]
+    },
+    {
+      "text": "Or y'all can.",
+      "start": 73.32,
+      "end": 73.74,
+      "words": [
+        {
+          "word": "Or",
+          "start": 73.32,
+          "end": 73.4
+        },
+        {
+          "word": "y",
+          "start": 73.4,
+          "end": 73.54
+        },
+        {
+          "word": "'all",
+          "start": 73.54,
+          "end": 73.58
+        },
+        {
+          "word": "can.",
+          "start": 73.58,
+          "end": 73.74
+        }
+      ]
+    },
+    {
+      "text": "Look at the cover of the song, too.",
+      "start": 74.46,
+      "end": 76.92,
+      "words": [
+        {
+          "word": "Look",
+          "start": 74.46,
+          "end": 74.86
+        },
+        {
+          "word": "at",
+          "start": 74.86,
+          "end": 74.94
+        },
+        {
+          "word": "the",
+          "start": 74.94,
+          "end": 75.06
+        },
+        {
+          "word": "cover",
+          "start": 75.06,
+          "end": 75.3
+        },
+        {
+          "word": "of",
+          "start": 75.3,
+          "end": 75.52
+        },
+        {
+          "word": "the",
+          "start": 75.52,
+          "end": 75.76
+        },
+        {
+          "word": "song,",
+          "start": 75.76,
+          "end": 76.48
+        },
+        {
+          "word": "too.",
+          "start": 76.56,
+          "end": 76.92
+        }
+      ]
+    },
+    {
+      "text": "A red Amex.",
+      "start": 78.34,
+      "end": 78.92,
+      "words": [
+        {
+          "word": "A",
+          "start": 78.34,
+          "end": 78.44
+        },
+        {
+          "word": "red",
+          "start": 78.44,
+          "end": 78.72
+        },
+        {
+          "word": "Amex.",
+          "start": 78.72,
+          "end": 78.92
+        }
+      ]
+    },
+    {
+      "text": "What is that on the side?",
+      "start": 79.96,
+      "end": 80.96,
+      "words": [
+        {
+          "word": "What",
+          "start": 79.96,
+          "end": 80.14
+        },
+        {
+          "word": "is",
+          "start": 80.14,
+          "end": 80.3
+        },
+        {
+          "word": "that",
+          "start": 80.3,
+          "end": 80.38
+        },
+        {
+          "word": "on",
+          "start": 80.38,
+          "end": 80.52
+        },
+        {
+          "word": "the",
+          "start": 80.52,
+          "end": 80.64
+        },
+        {
+          "word": "side?",
+          "start": 80.64,
+          "end": 80.96
+        }
+      ]
+    },
+    {
+      "text": "Is that supposed to be Mars in the back?",
+      "start": 82.28,
+      "end": 84.06,
+      "words": [
+        {
+          "word": "Is",
+          "start": 82.28,
+          "end": 82.46
+        },
+        {
+          "word": "that",
+          "start": 82.46,
+          "end": 82.56
+        },
+        {
+          "word": "supposed",
+          "start": 82.56,
+          "end": 82.8
+        },
+        {
+          "word": "to",
+          "start": 82.8,
+          "end": 82.98
+        },
+        {
+          "word": "be",
+          "start": 82.98,
+          "end": 83.08
+        },
+        {
+          "word": "Mars",
+          "start": 83.08,
+          "end": 83.4
+        },
+        {
+          "word": "in",
+          "start": 83.4,
+          "end": 83.8
+        },
+        {
+          "word": "the",
+          "start": 83.8,
+          "end": 83.9
+        },
+        {
+          "word": "back?",
+          "start": 83.9,
+          "end": 84.06
+        }
+      ]
+    },
+    {
+      "text": "Can I zoom in on this?",
+      "start": 88.24,
+      "end": 89.14,
+      "words": [
+        {
+          "word": "Can",
+          "start": 88.24,
+          "end": 88.44
+        },
+        {
+          "word": "I",
+          "start": 88.44,
+          "end": 88.58
+        },
+        {
+          "word": "zoom",
+          "start": 88.58,
+          "end": 88.74
+        },
+        {
+          "word": "in",
+          "start": 88.74,
+          "end": 88.88
+        },
+        {
+          "word": "on",
+          "start": 88.88,
+          "end": 89.0
+        },
+        {
+          "word": "this?",
+          "start": 89.0,
+          "end": 89.14
+        }
+      ]
+    },
+    {
+      "text": "I like it.",
+      "start": 95.17,
+      "end": 95.99,
+      "words": [
+        {
+          "word": "I",
+          "start": 95.17,
+          "end": 95.57
+        },
+        {
+          "word": "like",
+          "start": 95.57,
+          "end": 95.77
+        },
+        {
+          "word": "it.",
+          "start": 95.77,
+          "end": 95.99
+        }
+      ]
+    },
+    {
+      "text": "Yara and Stana.",
+      "start": 98.38,
+      "end": 99.38,
+      "words": [
+        {
+          "word": "Yara",
+          "start": 98.38,
+          "end": 98.78
+        },
+        {
+          "word": "and",
+          "start": 98.78,
+          "end": 99.0
+        },
+        {
+          "word": "Stana.",
+          "start": 99.0,
+          "end": 99.38
+        }
+      ]
+    },
+    {
+      "text": "That's insane.",
+      "start": 99.52,
+      "end": 100.04,
+      "words": [
+        {
+          "word": "That's",
+          "start": 99.52,
+          "end": 99.74
+        },
+        {
+          "word": "insane.",
+          "start": 99.74,
+          "end": 100.04
+        }
+      ]
+    },
+    {
+      "text": "That's...",
+      "start": 100.94,
+      "end": 101.34,
+      "words": [
+        {
+          "word": "That's...",
+          "start": 100.94,
+          "end": 101.34
+        }
+      ]
+    },
+    {
+      "text": "That's fire.",
+      "start": 102.02,
+      "end": 102.66,
+      "words": [
+        {
+          "word": "That's",
+          "start": 102.02,
+          "end": 102.42
+        },
+        {
+          "word": "fire.",
+          "start": 102.42,
+          "end": 102.66
+        }
+      ]
+    },
+    {
+      "text": "Okay.",
+      "start": 104.38,
+      "end": 104.76,
+      "words": [
+        {
+          "word": "Okay.",
+          "start": 104.38,
+          "end": 104.76
+        }
+      ]
+    },
+    {
+      "text": "Well, y'all go listen to Amex by Stana and Yara on all platforms now.",
+      "start": 105.62,
+      "end": 110.52,
+      "words": [
+        {
+          "word": "Well,",
+          "start": 105.62,
+          "end": 105.98
+        },
+        {
+          "word": "y",
+          "start": 106.24,
+          "end": 106.32
+        },
+        {
+          "word": "'all",
+          "start": 106.32,
+          "end": 106.4
+        },
+        {
+          "word": "go",
+          "start": 106.4,
+          "end": 106.52
+        },
+        {
+          "word": "listen",
+          "start": 106.52,
+          "end": 106.76
+        },
+        {
+          "word": "to",
+          "start": 106.76,
+          "end": 107.06
+        },
+        {
+          "word": "Amex",
+          "start": 107.06,
+          "end": 107.62
+        },
+        {
+          "word": "by",
+          "start": 107.62,
+          "end": 107.82
+        },
+        {
+          "word": "Stana",
+          "start": 107.82,
+          "end": 108.2
+        },
+        {
+          "word": "and",
+          "start": 108.2,
+          "end": 108.36
+        },
+        {
+          "word": "Yara",
+          "start": 108.36,
+          "end": 108.64
+        },
+        {
+          "word": "on",
+          "start": 108.64,
+          "end": 109.64
+        },
+        {
+          "word": "all",
+          "start": 109.64,
+          "end": 109.76
+        },
+        {
+          "word": "platforms",
+          "start": 109.76,
+          "end": 110.16
+        },
+        {
+          "word": "now.",
+          "start": 110.16,
+          "end": 110.52
+        }
+      ]
+    },
+    {
+      "text": "That's...",
+      "start": 111.28,
+      "end": 111.68,
+      "words": [
+        {
+          "word": "That's...",
+          "start": 111.28,
+          "end": 111.68
+        }
+      ]
+    },
+    {
+      "text": "And if you don't, you're lame.",
+      "start": 111.68,
+      "end": 112.92,
+      "words": [
+        {
+          "word": "And",
+          "start": 111.68,
+          "end": 112.18
+        },
+        {
+          "word": "if",
+          "start": 112.18,
+          "end": 112.32
+        },
+        {
+          "word": "you",
+          "start": 112.32,
+          "end": 112.38
+        },
+        {
+          "word": "don't,",
+          "start": 112.38,
+          "end": 112.56
+        },
+        {
+          "word": "you're",
+          "start": 112.56,
+          "end": 112.72
+        },
+        {
+          "word": "lame.",
+          "start": 112.72,
+          "end": 112.92
+        }
+      ]
+    },
+    {
+      "text": "Oh my god.",
+      "start": 116.35,
+      "end": 116.85,
+      "words": [
+        {
+          "word": "Oh",
+          "start": 116.35,
+          "end": 116.55
+        },
+        {
+          "word": "my",
+          "start": 116.55,
+          "end": 116.67
+        },
+        {
+          "word": "god.",
+          "start": 116.67,
+          "end": 116.85
+        }
+      ]
+    },
+    {
+      "text": "Can my discord open?",
+      "start": 117.15,
+      "end": 117.87,
+      "words": [
+        {
+          "word": "Can",
+          "start": 117.15,
+          "end": 117.25
+        },
+        {
+          "word": "my",
+          "start": 117.25,
+          "end": 117.39
+        },
+        {
+          "word": "discord",
+          "start": 117.39,
+          "end": 117.59
+        },
+        {
+          "word": "open?",
+          "start": 117.59,
+          "end": 117.87
+        }
+      ]
+    },
+    {
+      "text": "Okay.",
+      "start": 118.75,
+      "end": 119.11,
+      "words": [
+        {
+          "word": "Okay.",
+          "start": 118.75,
+          "end": 119.11
+        }
+      ]
+    },
+    {
+      "text": "What do y'all think?",
+      "start": 119.99,
+      "end": 120.85,
+      "words": [
+        {
+          "word": "What",
+          "start": 119.99,
+          "end": 120.39
+        },
+        {
+          "word": "do",
+          "start": 120.39,
+          "end": 120.49
+        },
+        {
+          "word": "y",
+          "start": 120.49,
+          "end": 120.57
+        },
+        {
+          "word": "'all",
+          "start": 120.57,
+          "end": 120.61
+        },
+        {
+          "word": "think?",
+          "start": 120.61,
+          "end": 120.85
+        }
+      ]
+    },
+    {
+      "text": "Out of 10 out of 10.",
+      "start": 124.9,
+      "end": 125.64,
+      "words": [
+        {
+          "word": "Out",
+          "start": 124.9,
+          "end": 125.1
+        },
+        {
+          "word": "of",
+          "start": 125.1,
+          "end": 125.16
+        },
+        {
+          "word": "10",
+          "start": 125.16,
+          "end": 125.3
+        },
+        {
+          "word": "out",
+          "start": 125.3,
+          "end": 125.42
+        },
+        {
+          "word": "of",
+          "start": 125.42,
+          "end": 125.48
+        },
+        {
+          "word": "10.",
+          "start": 125.48,
+          "end": 125.64
+        }
+      ]
+    },
+    {
+      "text": "Come on.",
+      "start": 125.66,
+      "end": 125.96,
+      "words": [
+        {
+          "word": "Come",
+          "start": 125.66,
+          "end": 125.82
+        },
+        {
+          "word": "on.",
+          "start": 125.82,
+          "end": 125.96
+        }
+      ]
+    },
+    {
+      "text": "What was your favorite part of the song?",
+      "start": 126.04,
+      "end": 127.18,
+      "words": [
+        {
+          "word": "What",
+          "start": 126.04,
+          "end": 126.12
+        },
+        {
+          "word": "was",
+          "start": 126.12,
+          "end": 126.24
+        },
+        {
+          "word": "your",
+          "start": 126.24,
+          "end": 126.3
+        },
+        {
+          "word": "favorite",
+          "start": 126.3,
+          "end": 126.6
+        },
+        {
+          "word": "part",
+          "start": 126.6,
+          "end": 126.82
+        },
+        {
+          "word": "of",
+          "start": 126.82,
+          "end": 126.92
+        },
+        {
+          "word": "the",
+          "start": 126.92,
+          "end": 127.02
+        },
+        {
+          "word": "song?",
+          "start": 127.02,
+          "end": 127.18
+        }
+      ]
+    },
+    {
+      "text": "Don't be fucking lame.",
+      "start": 127.34,
+      "end": 128.06,
+      "words": [
+        {
+          "word": "Don't",
+          "start": 127.34,
+          "end": 127.46
+        },
+        {
+          "word": "be",
+          "start": 127.46,
+          "end": 127.58
+        },
+        {
+          "word": "fucking",
+          "start": 127.58,
+          "end": 127.86
+        },
+        {
+          "word": "lame.",
+          "start": 127.86,
+          "end": 128.06
+        }
+      ]
+    },
+    {
+      "text": "Y'all know it was good.",
+      "start": 129.8,
+      "end": 130.92,
+      "words": [
+        {
+          "word": "Y",
+          "start": 129.8,
+          "end": 130.2
+        },
+        {
+          "word": "'all",
+          "start": 130.2,
+          "end": 130.28
+        },
+        {
+          "word": "know",
+          "start": 130.28,
+          "end": 130.44
+        },
+        {
+          "word": "it",
+          "start": 130.44,
+          "end": 130.58
+        },
+        {
+          "word": "was",
+          "start": 130.58,
+          "end": 130.7
+        },
+        {
+          "word": "good.",
+          "start": 130.7,
+          "end": 130.92
+        }
+      ]
+    },
+    {
+      "text": "Don't be haters.",
+      "start": 131.5,
+      "end": 132.04,
+      "words": [
+        {
+          "word": "Don't",
+          "start": 131.5,
+          "end": 131.66
+        },
+        {
+          "word": "be",
+          "start": 131.66,
+          "end": 131.8
+        },
+        {
+          "word": "haters.",
+          "start": 131.8,
+          "end": 132.04
+        }
+      ]
+    },
+    {
+      "text": "Y'all know the song was good.",
+      "start": 132.04,
+      "end": 133.56,
+      "words": [
+        {
+          "word": "Y",
+          "start": 132.04,
+          "end": 132.42
+        },
+        {
+          "word": "'all",
+          "start": 132.42,
+          "end": 132.5
+        },
+        {
+          "word": "know",
+          "start": 132.5,
+          "end": 132.64
+        },
+        {
+          "word": "the",
+          "start": 132.64,
+          "end": 132.8
+        },
+        {
+          "word": "song",
+          "start": 132.8,
+          "end": 132.96
+        },
+        {
+          "word": "was",
+          "start": 132.96,
+          "end": 133.14
+        },
+        {
+          "word": "good.",
+          "start": 133.14,
+          "end": 133.56
+        }
+      ]
+    },
+    {
+      "text": "Mila.",
+      "start": 138.89,
+      "end": 139.31,
+      "words": [
+        {
+          "word": "Mila.",
+          "start": 138.89,
+          "end": 139.31
+        }
+      ]
+    },
+    {
+      "text": "Wake up.",
+      "start": 139.73,
+      "end": 140.39,
+      "words": [
+        {
+          "word": "Wake",
+          "start": 139.73,
+          "end": 140.13
+        },
+        {
+          "word": "up.",
+          "start": 140.13,
+          "end": 140.39
+        }
+      ]
+    },
+    {
+      "text": "What did you think?",
+      "start": 140.79,
+      "end": 141.69,
+      "words": [
+        {
+          "word": "What",
+          "start": 140.79,
+          "end": 141.17
+        },
+        {
+          "word": "did",
+          "start": 141.17,
+          "end": 141.31
+        },
+        {
+          "word": "you",
+          "start": 141.31,
+          "end": 141.45
+        },
+        {
+          "word": "think?",
+          "start": 141.45,
+          "end": 141.69
+        }
+      ]
+    },
+    {
+      "text": "What did you think of Stana and Yara's song?",
+      "start": 144.78,
+      "end": 146.78,
+      "words": [
+        {
+          "word": "What",
+          "start": 144.78,
+          "end": 145.08
+        },
+        {
+          "word": "did",
+          "start": 145.08,
+          "end": 145.2
+        },
+        {
+          "word": "you",
+          "start": 145.2,
+          "end": 145.32
+        },
+        {
+          "word": "think",
+          "start": 145.32,
+          "end": 145.56
+        },
+        {
+          "word": "of",
+          "start": 145.56,
+          "end": 145.76
+        },
+        {
+          "word": "Stana",
+          "start": 145.76,
+          "end": 146.08
+        },
+        {
+          "word": "and",
+          "start": 146.08,
+          "end": 146.24
+        },
+        {
+          "word": "Yara's",
+          "start": 146.24,
+          "end": 146.56
+        },
+        {
+          "word": "song?",
+          "start": 146.56,
+          "end": 146.78
+        }
+      ]
+    },
+    {
+      "text": "Did you like?",
+      "start": 147.94,
+      "end": 148.66,
+      "words": [
+        {
+          "word": "Did",
+          "start": 147.94,
+          "end": 148.3
+        },
+        {
+          "word": "you",
+          "start": 148.3,
+          "end": 148.44
+        },
+        {
+          "word": "like?",
+          "start": 148.44,
+          "end": 148.66
+        }
+      ]
+    },
+    {
+      "text": "Do you want to be spoiled by an Amex?",
+      "start": 151.84,
+      "end": 155.06,
+      "words": [
+        {
+          "word": "Do",
+          "start": 151.84,
+          "end": 152.16
+        },
+        {
+          "word": "you",
+          "start": 152.16,
+          "end": 152.34
+        },
+        {
+          "word": "want",
+          "start": 152.34,
+          "end": 152.6
+        },
+        {
+          "word": "to",
+          "start": 152.6,
+          "end": 152.72
+        },
+        {
+          "word": "be",
+          "start": 152.72,
+          "end": 152.96
+        },
+        {
+          "word": "spoiled",
+          "start": 152.96,
+          "end": 153.94
+        },
+        {
+          "word": "by",
+          "start": 153.94,
+          "end": 154.36
+        },
+        {
+          "word": "an",
+          "start": 154.36,
+          "end": 154.52
+        },
+        {
+          "word": "Amex?",
+          "start": 154.52,
+          "end": 155.06
+        }
+      ]
+    },
+    {
+      "text": "Hey, it's cameras right there, buddy.",
+      "start": 158.58,
+      "end": 160.1,
+      "words": [
+        {
+          "word": "Hey,",
+          "start": 158.58,
+          "end": 158.78
+        },
+        {
+          "word": "it's",
+          "start": 158.84,
+          "end": 159.18
+        },
+        {
+          "word": "cameras",
+          "start": 159.18,
+          "end": 159.54
+        },
+        {
+          "word": "right",
+          "start": 159.54,
+          "end": 159.72
+        },
+        {
+          "word": "there,",
+          "start": 159.72,
+          "end": 159.9
+        },
+        {
+          "word": "buddy.",
+          "start": 160.0,
+          "end": 160.1
+        }
+      ]
+    },
+    {
+      "text": "All right?",
+      "start": 167.52,
+      "end": 167.94,
+      "words": [
+        {
+          "word": "All",
+          "start": 167.52,
+          "end": 167.76
+        },
+        {
+          "word": "right?",
+          "start": 167.76,
+          "end": 167.94
+        }
+      ]
+    },
+    {
+      "text": "Did you like it?",
+      "start": 176.75,
+      "end": 177.61,
+      "words": [
+        {
+          "word": "Did",
+          "start": 176.75,
+          "end": 177.13
+        },
+        {
+          "word": "you",
+          "start": 177.13,
+          "end": 177.25
+        },
+        {
+          "word": "like",
+          "start": 177.25,
+          "end": 177.41
+        },
+        {
+          "word": "it?",
+          "start": 177.41,
+          "end": 177.61
+        }
+      ]
+    },
+    {
+      "text": "Give me a kiss if you liked it.",
+      "start": 179.79,
+      "end": 180.75,
+      "words": [
+        {
+          "word": "Give",
+          "start": 179.79,
+          "end": 180.01
+        },
+        {
+          "word": "me",
+          "start": 180.01,
+          "end": 180.11
+        },
+        {
+          "word": "a",
+          "start": 180.11,
+          "end": 180.19
+        },
+        {
+          "word": "kiss",
+          "start": 180.19,
+          "end": 180.27
+        },
+        {
+          "word": "if",
+          "start": 180.27,
+          "end": 180.39
+        },
+        {
+          "word": "you",
+          "start": 180.39,
+          "end": 180.43
+        },
+        {
+          "word": "liked",
+          "start": 180.43,
+          "end": 180.55
+        },
+        {
+          "word": "it.",
+          "start": 180.55,
+          "end": 180.75
+        }
+      ]
+    }
+  ]
+}

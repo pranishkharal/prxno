@@ -1,0 +1,56 @@
+    @discord.ui.button(
+        label="Split Screen",
+        style=discord.ButtonStyle.secondary,
+        row=4
+    )
+    async def split_screen_button(
+        self,
+        interaction: discord.Interaction,
+        button: discord.ui.Button
+    ):
+        bg_file = get_split_background()
+
+        if bg_file is None:
+            await interaction.response.send_message(
+                "No background video found in backgrounds/.",
+                ephemeral=True
+            )
+            return
+
+        self.split_photo_file = bg_file
+        self.options["split_screen"] = True
+
+        button.style = discord.ButtonStyle.success
+        button.label = "Split Screen ON"
+
+        await interaction.response.send_message(
+            f"Split Screen enabled! Background: {bg_file.name}",
+            ephemeral=True
+        )
+
+        await interaction.message.edit(view=self)
+
+    @discord.ui.button(
+        label="Start Edit",
+        style=discord.ButtonStyle.success,
+        row=3
+    )
+    async def start_edit(self, interaction, button):
+
+        if self.started:
+            await interaction.response.send_message(
+                "⏳ This edit has already started.",
+                ephemeral=True
+            )
+            return
+
+        self.started = True
+        button.disabled = True
+
+        await interaction.response.edit_message(view=self)
+
+        notify = (
+            self.channel.send
+            if self.channel
+            else interaction.followup.send
+        )

@@ -1,0 +1,113 @@
+async def start_kick_edit(message, kick_url):
+
+    user_id = message.author.id
+
+    if user_id in SESSIONS:
+
+        await message.channel.send(
+            "Ã¢ÂÂ³ You already have an edit running. "
+            "Please wait for it to finish."
+        )
+
+        return
+
+    status = await message.channel.send(
+        "Ã°Å¸â€œÂ¥ **Downloading your KICK Clip...**\n"
+        "The video is being downloaded directly to the USB.\n"
+        "You do not need to upload the video to Discord."
+    )
+
+    try:
+
+        file_path = await run_encode_job(
+            download_kick_clip,
+            kick_url,
+            user_id
+        )
+
+        duration = get_video_duration(file_path)
+
+        if duration <= 0:
+            raise RuntimeError(
+                "Downloaded KICK Clip has an invalid duration."
+            )
+
+        # KICK Clip URLs always contain the streamer's username as the
+        # first path segment (kick.com/<username>/clips/<clip_id>).
+        # We use this directly to select the overlay, which is faster
+        # and more reliable than reading it off the video with OCR.
+        streamer_hint = extract_streamer_from_url(kick_url)
+
+        if streamer_hint:
+            print(f"Streamer name from URL: {streamer_hint}")
+
+        creator_line = (
+            f"Creator detected from link: **{streamer_hint}**\n"
+            if streamer_hint
+            else ""
+        )
+
+        await status.edit(
+            content=(
+                "Ã¢Å“â€¦ **KICK Clip downloaded!**\n"
+                f"Duration: **{duration:.1f}s**\n"
+                f"{creator_line}\n"
+                "Ã°Å¸Å½Â¬ Choose your editing options below, then press "
+                "**Start Edit**."
+            )
+        )
+
+        view = EditView(
+            message.author,
+            file_path,
+            streamer_hint,
+            message.channel
+        )
+
+        SESSIONS[user_id] = view
+
+        await message.channel.send(
+            "Ã°Å¸Å½Â¬ **AUTO EDIT OPTIONS**\n\n"
+            "Choose everything you want, then press **Start Edit**.\n\n"
+            "Selected: **9:16 Ã¢â‚¬Â¢ Remove Non-Speech Ã¢â‚¬Â¢ Overlay**",
+            view=view
+        )
+
+    except Exception as e:
+
+        print("\nKICK DOWNLOAD ERROR:", e)
+
+        await status.edit(
+            content=(
+                "Ã¢ÂÅ’ **KICK CLIP DOWNLOAD FAILED**\n\n"
+                f"```{str(e)[:1800]}```"
+            )
+        )
+
+        # Make sure a failed job does not leave files behind.
+        cleanup_job_files(
+            UPLOAD_DIR / f"kick_{user_id}" / "kick_clip.mp4"
+        )
+
+        SESSIONS.pop(user_id, None)
+
+
+# ---------------------------------------------------------
+# Start
+# ---------------------------------------------------------
+
+client.run(TOKEN)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

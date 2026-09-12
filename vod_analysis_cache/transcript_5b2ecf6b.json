@@ -1,0 +1,177 @@
+{
+  "full_text": "I am doing it for you Yes, I am doing it for you You are doing it for me I am doing it for you too",
+  "duration": 18.96,
+  "word_count": 26,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "I am doing it for you",
+      "start": 9.87,
+      "end": 11.07,
+      "words": [
+        {
+          "word": "I",
+          "start": 9.87,
+          "end": 10.27
+        },
+        {
+          "word": "am",
+          "start": 10.27,
+          "end": 10.37
+        },
+        {
+          "word": "doing",
+          "start": 10.37,
+          "end": 10.47
+        },
+        {
+          "word": "it",
+          "start": 10.47,
+          "end": 10.47
+        },
+        {
+          "word": "for",
+          "start": 10.47,
+          "end": 10.85
+        },
+        {
+          "word": "you",
+          "start": 10.85,
+          "end": 11.07
+        }
+      ]
+    },
+    {
+      "text": "Yes, I am doing it for you",
+      "start": 12.03,
+      "end": 12.99,
+      "words": [
+        {
+          "word": "Yes,",
+          "start": 12.03,
+          "end": 12.47
+        },
+        {
+          "word": "I",
+          "start": 12.89,
+          "end": 12.91
+        },
+        {
+          "word": "am",
+          "start": 12.91,
+          "end": 12.91
+        },
+        {
+          "word": "doing",
+          "start": 12.91,
+          "end": 12.91
+        },
+        {
+          "word": "it",
+          "start": 12.91,
+          "end": 12.91
+        },
+        {
+          "word": "for",
+          "start": 12.91,
+          "end": 12.91
+        },
+        {
+          "word": "you",
+          "start": 12.91,
+          "end": 12.99
+        }
+      ]
+    },
+    {
+      "text": "You are doing it for me",
+      "start": 12.99,
+      "end": 13.87,
+      "words": [
+        {
+          "word": "You",
+          "start": 12.99,
+          "end": 13.07
+        },
+        {
+          "word": "are",
+          "start": 13.07,
+          "end": 13.07
+        },
+        {
+          "word": "doing",
+          "start": 13.07,
+          "end": 13.07
+        },
+        {
+          "word": "it",
+          "start": 13.07,
+          "end": 13.13
+        },
+        {
+          "word": "for",
+          "start": 13.13,
+          "end": 13.21
+        },
+        {
+          "word": "me",
+          "start": 13.21,
+          "end": 13.87
+        }
+      ]
+    },
+    {
+      "text": "I am doing it for you too",
+      "start": 13.87,
+      "end": 18.96,
+      "words": [
+        {
+          "word": "I",
+          "start": 13.87,
+          "end": 14.59
+        },
+        {
+          "word": "am",
+          "start": 14.59,
+          "end": 14.65
+        },
+        {
+          "word": "doing",
+          "start": 14.65,
+          "end": 14.65
+        },
+        {
+          "word": "it",
+          "start": 16.96,
+          "end": 17.92
+        },
+        {
+          "word": "for",
+          "start": 17.92,
+          "end": 18.34
+        },
+        {
+          "word": "you",
+          "start": 18.34,
+          "end": 18.54
+        },
+        {
+          "word": "too",
+          "start": 18.54,
+          "end": 18.96
+        }
+      ]
+    }
+  ]
+}

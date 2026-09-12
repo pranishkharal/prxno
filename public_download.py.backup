@@ -1,0 +1,88 @@
+﻿import os
+import re
+import time
+import asyncio
+import subprocess
+import threading
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+from pathlib import Path
+
+DOWNLOAD_PORT = 8765
+
+class DownloadHandler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, directory=None, **kwargs):
+        super().__init__(*args, directory=directory, **kwargs)
+    def log_message(self, format, *args):
+        pass
+
+def start_local_download_server(folder_path: str):
+    handler = lambda *args, **kwargs: DownloadHandler(*args, directory=folder_path, **kwargs)
+    server = HTTPServer(("127.0.0.1", DOWNLOAD_PORT), handler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    return server
+
+async def create_public_download_link(video_path: str) -> str | None:
+    video_path = Path(video_path)
+    if not video_path.exists():
+        print("Video file not found:", video_path)
+        return None
+
+    folder = str(video_path.parent)
+    filename = video_path.name
+
+    server = start_local_download_server(folder)
+    print("Local download server started on port", DOWNLOAD_PORT)
+
+    cloudflared_path = Path(__file__).parent / "cloudflared.exe"
+    if not cloudflared_path.exists():
+        print("ERROR: cloudflared.exe not found!")
+        server.shutdown()
+        return None
+
+    cmd = [
+        str(cloudflared_path),
+        "tunnel",
+        "--url", f"http://127.0.0.1:{DOWNLOAD_PORT}",
+        "--no-autoupdate"
+    ]
+
+    process = await asyncio.create_subprocess_exec(
+        *cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.STDOUT
+    )
+
+    public_url = None
+    start_time = time.time()
+
+    while time.time() - start_time < 25:
+        line = await process.stdout.readline()
+        if not line:
+            break
+        text = line.decode(errors="ignore").strip()
+        print(text)
+
+        match = re.search(r"https://[a-zA-Z0-9-]+\.trycloudflare\.com", text)
+        if match:
+            public_url = match.group(0)
+            break
+
+    if not public_url:
+        print("Failed to get Cloudflare public URL")
+        process.terminate()
+        server.shutdown()
+        return None
+
+    download_link = f"{public_url}/{filename}"
+    print("PUBLIC DOWNLOAD SERVER READY")
+    print(download_link)
+
+    async def cleanup():
+        await asyncio.sleep(30 * 60)
+        process.terminate()
+        server.shutdown()
+        print("Public download link expired")
+
+    asyncio.create_task(cleanup())
+    return download_link

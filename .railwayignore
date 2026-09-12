@@ -1,0 +1,19 @@
+# Ignore these files in Railway deployment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+.env
+uploads/
+output/
+overlays/
+temp/
+vod_jobs/
+vod_downloads/
+vod_analysis_cache/
+*.log
+.git/
+.gitignore

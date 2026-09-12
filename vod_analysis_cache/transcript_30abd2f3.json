@@ -1,0 +1,505 @@
+{
+  "full_text": "Hey you gotta go you gotta go Hey hey hey Bro you gotta go you gotta go If you don't wanna be here then go If you don't wanna be on the stream then go I don't know why you came Bro Bro you wanna talk to me? I didn't even invite you Bro Bro what the fuck? Hey no I'm dead I still called up Bro why you letting me run the pool? she was just talking shit",
+  "duration": 31.32,
+  "word_count": 79,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "Hey you gotta go you gotta go",
+      "start": 4.4,
+      "end": 5.92,
+      "words": [
+        {
+          "word": "Hey",
+          "start": 4.4,
+          "end": 4.74
+        },
+        {
+          "word": "you",
+          "start": 4.74,
+          "end": 5.06
+        },
+        {
+          "word": "gotta",
+          "start": 5.06,
+          "end": 5.22
+        },
+        {
+          "word": "go",
+          "start": 5.22,
+          "end": 5.36
+        },
+        {
+          "word": "you",
+          "start": 5.36,
+          "end": 5.46
+        },
+        {
+          "word": "gotta",
+          "start": 5.46,
+          "end": 5.58
+        },
+        {
+          "word": "go",
+          "start": 5.58,
+          "end": 5.92
+        }
+      ]
+    },
+    {
+      "text": "Hey hey hey",
+      "start": 9.54,
+      "end": 10.54,
+      "words": [
+        {
+          "word": "Hey",
+          "start": 9.54,
+          "end": 9.88
+        },
+        {
+          "word": "hey",
+          "start": 9.88,
+          "end": 10.22
+        },
+        {
+          "word": "hey",
+          "start": 10.22,
+          "end": 10.54
+        }
+      ]
+    },
+    {
+      "text": "Bro you gotta go you gotta go",
+      "start": 11.72,
+      "end": 13.04,
+      "words": [
+        {
+          "word": "Bro",
+          "start": 11.72,
+          "end": 12.06
+        },
+        {
+          "word": "you",
+          "start": 12.06,
+          "end": 12.24
+        },
+        {
+          "word": "gotta",
+          "start": 12.24,
+          "end": 12.38
+        },
+        {
+          "word": "go",
+          "start": 12.38,
+          "end": 12.56
+        },
+        {
+          "word": "you",
+          "start": 12.56,
+          "end": 12.68
+        },
+        {
+          "word": "gotta",
+          "start": 12.68,
+          "end": 12.82
+        },
+        {
+          "word": "go",
+          "start": 12.82,
+          "end": 13.04
+        }
+      ]
+    },
+    {
+      "text": "If you don't wanna be here then go",
+      "start": 13.04,
+      "end": 13.94,
+      "words": [
+        {
+          "word": "If",
+          "start": 13.04,
+          "end": 13.16
+        },
+        {
+          "word": "you",
+          "start": 13.16,
+          "end": 13.22
+        },
+        {
+          "word": "don't",
+          "start": 13.22,
+          "end": 13.3
+        },
+        {
+          "word": "wanna",
+          "start": 13.3,
+          "end": 13.44
+        },
+        {
+          "word": "be",
+          "start": 13.44,
+          "end": 13.56
+        },
+        {
+          "word": "here",
+          "start": 13.56,
+          "end": 13.68
+        },
+        {
+          "word": "then",
+          "start": 13.68,
+          "end": 13.76
+        },
+        {
+          "word": "go",
+          "start": 13.76,
+          "end": 13.94
+        }
+      ]
+    },
+    {
+      "text": "If you don't wanna be on the stream then go",
+      "start": 14.48,
+      "end": 15.96,
+      "words": [
+        {
+          "word": "If",
+          "start": 14.48,
+          "end": 14.82
+        },
+        {
+          "word": "you",
+          "start": 14.82,
+          "end": 14.9
+        },
+        {
+          "word": "don't",
+          "start": 14.9,
+          "end": 14.98
+        },
+        {
+          "word": "wanna",
+          "start": 14.98,
+          "end": 15.12
+        },
+        {
+          "word": "be",
+          "start": 15.12,
+          "end": 15.22
+        },
+        {
+          "word": "on",
+          "start": 15.22,
+          "end": 15.32
+        },
+        {
+          "word": "the",
+          "start": 15.32,
+          "end": 15.4
+        },
+        {
+          "word": "stream",
+          "start": 15.4,
+          "end": 15.56
+        },
+        {
+          "word": "then",
+          "start": 15.56,
+          "end": 15.78
+        },
+        {
+          "word": "go",
+          "start": 15.78,
+          "end": 15.96
+        }
+      ]
+    },
+    {
+      "text": "I don't know why you came",
+      "start": 15.96,
+      "end": 16.78,
+      "words": [
+        {
+          "word": "I",
+          "start": 15.96,
+          "end": 16.12
+        },
+        {
+          "word": "don't",
+          "start": 16.12,
+          "end": 16.2
+        },
+        {
+          "word": "know",
+          "start": 16.2,
+          "end": 16.34
+        },
+        {
+          "word": "why",
+          "start": 16.34,
+          "end": 16.46
+        },
+        {
+          "word": "you",
+          "start": 16.46,
+          "end": 16.58
+        },
+        {
+          "word": "came",
+          "start": 16.58,
+          "end": 16.78
+        }
+      ]
+    },
+    {
+      "text": "Bro",
+      "start": 17.64,
+      "end": 17.98,
+      "words": [
+        {
+          "word": "Bro",
+          "start": 17.64,
+          "end": 17.98
+        }
+      ]
+    },
+    {
+      "text": "Bro you wanna talk to me?",
+      "start": 20.22,
+      "end": 22.28,
+      "words": [
+        {
+          "word": "Bro",
+          "start": 20.22,
+          "end": 20.56
+        },
+        {
+          "word": "you",
+          "start": 20.56,
+          "end": 20.9
+        },
+        {
+          "word": "wanna",
+          "start": 20.9,
+          "end": 21.12
+        },
+        {
+          "word": "talk",
+          "start": 21.12,
+          "end": 21.46
+        },
+        {
+          "word": "to",
+          "start": 21.46,
+          "end": 21.66
+        },
+        {
+          "word": "me?",
+          "start": 21.66,
+          "end": 22.28
+        }
+      ]
+    },
+    {
+      "text": "I didn't even invite you",
+      "start": 22.46,
+      "end": 23.52,
+      "words": [
+        {
+          "word": "I",
+          "start": 22.46,
+          "end": 22.56
+        },
+        {
+          "word": "didn't",
+          "start": 22.56,
+          "end": 22.76
+        },
+        {
+          "word": "even",
+          "start": 22.76,
+          "end": 22.88
+        },
+        {
+          "word": "invite",
+          "start": 22.88,
+          "end": 23.1
+        },
+        {
+          "word": "you",
+          "start": 23.1,
+          "end": 23.52
+        }
+      ]
+    },
+    {
+      "text": "Bro Bro what the fuck?",
+      "start": 24.7,
+      "end": 26.28,
+      "words": [
+        {
+          "word": "Bro",
+          "start": 24.7,
+          "end": 25.04
+        },
+        {
+          "word": "Bro",
+          "start": 25.04,
+          "end": 25.38
+        },
+        {
+          "word": "what",
+          "start": 25.38,
+          "end": 25.9
+        },
+        {
+          "word": "the",
+          "start": 25.9,
+          "end": 26.02
+        },
+        {
+          "word": "fuck?",
+          "start": 26.02,
+          "end": 26.28
+        }
+      ]
+    },
+    {
+      "text": "Hey no I'm dead I still called up",
+      "start": 27.18,
+      "end": 28.64,
+      "words": [
+        {
+          "word": "Hey",
+          "start": 27.18,
+          "end": 27.52
+        },
+        {
+          "word": "no",
+          "start": 27.52,
+          "end": 27.74
+        },
+        {
+          "word": "I'm",
+          "start": 27.74,
+          "end": 28.0
+        },
+        {
+          "word": "dead",
+          "start": 28.0,
+          "end": 28.06
+        },
+        {
+          "word": "I",
+          "start": 28.06,
+          "end": 28.2
+        },
+        {
+          "word": "still",
+          "start": 28.2,
+          "end": 28.28
+        },
+        {
+          "word": "called",
+          "start": 28.28,
+          "end": 28.52
+        },
+        {
+          "word": "up",
+          "start": 28.52,
+          "end": 28.64
+        }
+      ]
+    },
+    {
+      "text": "Bro why you letting me run the pool?",
+      "start": 28.64,
+      "end": 29.98,
+      "words": [
+        {
+          "word": "Bro",
+          "start": 28.64,
+          "end": 28.88
+        },
+        {
+          "word": "why",
+          "start": 28.88,
+          "end": 29.28
+        },
+        {
+          "word": "you",
+          "start": 29.28,
+          "end": 29.4
+        },
+        {
+          "word": "letting",
+          "start": 29.4,
+          "end": 29.48
+        },
+        {
+          "word": "me",
+          "start": 29.48,
+          "end": 29.66
+        },
+        {
+          "word": "run",
+          "start": 29.66,
+          "end": 29.76
+        },
+        {
+          "word": "the",
+          "start": 29.76,
+          "end": 29.9
+        },
+        {
+          "word": "pool?",
+          "start": 29.9,
+          "end": 29.98
+        }
+      ]
+    },
+    {
+      "text": "she was just talking shit",
+      "start": 29.98,
+      "end": 31.32,
+      "words": [
+        {
+          "word": "she",
+          "start": 29.98,
+          "end": 30.48
+        },
+        {
+          "word": "was",
+          "start": 30.48,
+          "end": 30.58
+        },
+        {
+          "word": "just",
+          "start": 30.58,
+          "end": 30.74
+        },
+        {
+          "word": "talking",
+          "start": 30.74,
+          "end": 31.04
+        },
+        {
+          "word": "shit",
+          "start": 31.04,
+          "end": 31.32
+        }
+      ]
+    }
+  ]
+}

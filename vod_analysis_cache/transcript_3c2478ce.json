@@ -1,0 +1,322 @@
+{
+  "full_text": "Who's a bad guy? Who's a bad guy? Who's a bad guy? Somebody said kill everyone. Kill them all. Kill them all. Somebody said call the police. Somebody out of the hood. He's a bad guy. He's a bad guy. Trust me.",
+  "duration": 19.7,
+  "word_count": 42,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [
+    {
+      "timestamp": 1.46,
+      "text": "Who's a bad guy?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 3.0,
+      "text": "Who's a bad guy?",
+      "type": "direct_question"
+    },
+    {
+      "timestamp": 4.42,
+      "text": "Who's a bad guy?",
+      "type": "direct_question"
+    }
+  ],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "Who's a bad guy?",
+      "start": 1.46,
+      "end": 2.28,
+      "words": [
+        {
+          "word": "Who's",
+          "start": 1.46,
+          "end": 1.9
+        },
+        {
+          "word": "a",
+          "start": 1.9,
+          "end": 1.9
+        },
+        {
+          "word": "bad",
+          "start": 1.9,
+          "end": 2.08
+        },
+        {
+          "word": "guy?",
+          "start": 2.08,
+          "end": 2.28
+        }
+      ]
+    },
+    {
+      "text": "Who's a bad guy?",
+      "start": 3.0,
+      "end": 3.54,
+      "words": [
+        {
+          "word": "Who's",
+          "start": 3.0,
+          "end": 3.2
+        },
+        {
+          "word": "a",
+          "start": 3.2,
+          "end": 3.2
+        },
+        {
+          "word": "bad",
+          "start": 3.2,
+          "end": 3.4
+        },
+        {
+          "word": "guy?",
+          "start": 3.4,
+          "end": 3.54
+        }
+      ]
+    },
+    {
+      "text": "Who's a bad guy?",
+      "start": 4.42,
+      "end": 5.14,
+      "words": [
+        {
+          "word": "Who's",
+          "start": 4.42,
+          "end": 4.86
+        },
+        {
+          "word": "a",
+          "start": 4.86,
+          "end": 4.94
+        },
+        {
+          "word": "bad",
+          "start": 4.94,
+          "end": 4.94
+        },
+        {
+          "word": "guy?",
+          "start": 4.94,
+          "end": 5.14
+        }
+      ]
+    },
+    {
+      "text": "Somebody said kill everyone.",
+      "start": 6.84,
+      "end": 8.38,
+      "words": [
+        {
+          "word": "Somebody",
+          "start": 6.84,
+          "end": 7.28
+        },
+        {
+          "word": "said",
+          "start": 7.28,
+          "end": 7.64
+        },
+        {
+          "word": "kill",
+          "start": 7.64,
+          "end": 7.96
+        },
+        {
+          "word": "everyone.",
+          "start": 7.96,
+          "end": 8.38
+        }
+      ]
+    },
+    {
+      "text": "Kill them all.",
+      "start": 8.82,
+      "end": 9.26,
+      "words": [
+        {
+          "word": "Kill",
+          "start": 8.82,
+          "end": 8.94
+        },
+        {
+          "word": "them",
+          "start": 8.94,
+          "end": 9.1
+        },
+        {
+          "word": "all.",
+          "start": 9.1,
+          "end": 9.26
+        }
+      ]
+    },
+    {
+      "text": "Kill them all.",
+      "start": 9.72,
+      "end": 11.08,
+      "words": [
+        {
+          "word": "Kill",
+          "start": 9.72,
+          "end": 10.14
+        },
+        {
+          "word": "them",
+          "start": 10.14,
+          "end": 10.86
+        },
+        {
+          "word": "all.",
+          "start": 10.86,
+          "end": 11.08
+        }
+      ]
+    },
+    {
+      "text": "Somebody said call the police.",
+      "start": 11.54,
+      "end": 13.04,
+      "words": [
+        {
+          "word": "Somebody",
+          "start": 11.54,
+          "end": 11.98
+        },
+        {
+          "word": "said",
+          "start": 11.98,
+          "end": 12.2
+        },
+        {
+          "word": "call",
+          "start": 12.2,
+          "end": 12.46
+        },
+        {
+          "word": "the",
+          "start": 12.46,
+          "end": 12.62
+        },
+        {
+          "word": "police.",
+          "start": 12.62,
+          "end": 13.04
+        }
+      ]
+    },
+    {
+      "text": "Somebody out of the hood.",
+      "start": 16.24,
+      "end": 17.38,
+      "words": [
+        {
+          "word": "Somebody",
+          "start": 16.24,
+          "end": 16.68
+        },
+        {
+          "word": "out",
+          "start": 16.68,
+          "end": 17.04
+        },
+        {
+          "word": "of",
+          "start": 17.04,
+          "end": 17.18
+        },
+        {
+          "word": "the",
+          "start": 17.18,
+          "end": 17.3
+        },
+        {
+          "word": "hood.",
+          "start": 17.3,
+          "end": 17.38
+        }
+      ]
+    },
+    {
+      "text": "He's a bad guy.",
+      "start": 17.74,
+      "end": 18.12,
+      "words": [
+        {
+          "word": "He's",
+          "start": 17.74,
+          "end": 17.98
+        },
+        {
+          "word": "a",
+          "start": 17.98,
+          "end": 18.06
+        },
+        {
+          "word": "bad",
+          "start": 18.06,
+          "end": 18.12
+        },
+        {
+          "word": "guy.",
+          "start": 18.12,
+          "end": 18.12
+        }
+      ]
+    },
+    {
+      "text": "He's a bad guy.",
+      "start": 18.48,
+      "end": 19.02,
+      "words": [
+        {
+          "word": "He's",
+          "start": 18.48,
+          "end": 18.66
+        },
+        {
+          "word": "a",
+          "start": 18.66,
+          "end": 18.84
+        },
+        {
+          "word": "bad",
+          "start": 18.84,
+          "end": 18.86
+        },
+        {
+          "word": "guy.",
+          "start": 18.86,
+          "end": 19.02
+        }
+      ]
+    },
+    {
+      "text": "Trust me.",
+      "start": 19.2,
+      "end": 19.7,
+      "words": [
+        {
+          "word": "Trust",
+          "start": 19.2,
+          "end": 19.42
+        },
+        {
+          "word": "me.",
+          "start": 19.42,
+          "end": 19.7
+        }
+      ]
+    }
+  ]
+}

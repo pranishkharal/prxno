@@ -1,0 +1,101 @@
+﻿
+    output_template = str(
+        job_dir / "kick_clip_%(id)s.%(ext)s"
+    )
+
+    ydl_opts = {
+        "outtmpl": output_template,
+        "format": "best[ext=mp4]/best",
+        "merge_output_format": "mp4",
+        "noplaylist": True,
+        "quiet": False,
+        "no_warnings": False,
+        "retries": 3,
+        "fragment_retries": 3,
+        "socket_timeout": 60,
+    }
+
+    # Prefer curl_cffi impersonation when the installed yt-dlp version
+    # supports it. Newer yt-dlp versions require an ImpersonateTarget
+    # object here (not a plain string), or they raise an AssertionError.
+    # If anything about impersonation isn't available, fall back to
+    # yt-dlp's normal client instead of crashing.
+    try:
+        from yt_dlp.networking.impersonate import ImpersonateTarget
+        ydl_opts["impersonate"] = ImpersonateTarget.from_str("chrome")
+    except Exception as impersonate_error:
+        print(
+            f"Impersonation unavailable, continuing without it: "
+            f"{impersonate_error}"
+        )
+
+    print("")
+    print("========================================")
+    print(" DOWNLOADING KICK CLIP")
+    print("========================================")
+    print(url)
+
+    try:
+        print("CHECKPOINT: about to call yt_dlp.YoutubeDL(...)", flush=True)
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            print("CHECKPOINT: calling ydl.extract_info(...) now", flush=True)
+            info = ydl.extract_info(url, download=True)
+            print("CHECKPOINT: extract_info() returned", flush=True)
+
+        requested_path = None
+
+        if info:
+            requested_path = info.get("_filename")
+
+        candidates = list(job_dir.glob("*"))
+
+        video_candidates = [
+            p for p in candidates
+            if p.is_file()
+            and p.suffix.lower() in {
+                ".mp4", ".mov", ".mkv", ".webm"
+            }
+        ]
+
+        if requested_path:
+            requested = Path(requested_path)
+            if requested.exists():
+                video_candidates.insert(0, requested)
+
+        if not video_candidates:
+            raise RuntimeError(
+                "KICK download completed, but no video file was found."
+            )
+
+        # Prefer MP4.
+        video_candidates.sort(
+            key=lambda p: (
+                0 if p.suffix.lower() == ".mp4" else 1,
+                -p.stat().st_size
+            )
+        )
+
+        video_file = video_candidates[0]
+
+        if video_file.stat().st_size < 10_000:
+            raise RuntimeError(
+                "The downloaded KICK file is unexpectedly small."
+            )
+
+        print(f"KICK clip downloaded: {video_file}")
+
+        return video_file
+
+    except Exception as e:
+        shutil.rmtree(job_dir, ignore_errors=True)
+
+        print("\n========================================")
+        print(" KICK DOWNLOAD ERROR (FULL TRACEBACK)")
+        print("========================================")
+        traceback.print_exc()
+
+        message = str(e).strip() or f"{type(e).__name__} (no message)"
+
+        raise RuntimeError(
+            "Could not download the KICK Clip.\n"
+            f"{message}\n\n"

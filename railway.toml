@@ -1,0 +1,16 @@
+# Railway Deployment Config
+# Deploy with: railway login && railway deploy
+
+[build]
+builder = "nixpacks"
+buildCommand = "pip install -r requirements.txt"
+
+[deploy]
+startCommand = "python main.py"
+restartPolicy = "always"
+
+[environment]
+PYTHON_VERSION = "3.12"
+PYTHONUNBUFFERED = "1"
+DISCORD_BOT_TOKEN = "***"
+CLIP_CHANNEL_ID = "1547317591796748288"

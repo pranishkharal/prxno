@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video - KICK Clip Downloader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            background: #f8f9ff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            font-weight: 500;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .upload-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .file-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f2ff;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .file-info.show {
+            display: block;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .file-size {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .progress-bar.show {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f0f2ff;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result.success {
+            border-left-color: #28a745;
+            background: #f0fff4;
+        }
+
+        .result.error {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .result h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .result p {
+            margin-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .result a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .result a:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: #764ba2;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📤 Upload Video</h1>
+        <p class="subtitle">Upload a video file to get a download link</p>
+
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">🎬</div>
+            <div class="upload-text">Drag & drop your video here</div>
+            <div class="upload-hint">or click to browse</div>
+            <input type="file" id="fileInput" accept="video/*" required>
+            <button class="upload-btn" id="uploadBtn" disabled>Select File</button>
+        </div>
+
+        <div class="file-info" id="fileInfo">
+            <div class="file-name" id="fileName"></div>
+            <div class="file-size" id="fileSize"></div>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="result" id="result">
+            <h3 id="resultTitle"></h3>
+            <p id="resultMessage"></p>
+            <p id="resultLink"></p>
+        </div>
+
+        <a href="/" class="back-btn">← Upload another file</a>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const result = document.getElementById('result');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultMessage = document.getElementById('resultMessage');
+        const resultLink = document.getElementById('resultLink');
+
+        let selectedFile = null;
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        uploadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
+
+        function handleFile(file) {
+            selectedFile = file;
+            fileName.textContent = `📎 ${file.name}`;
+            fileSize.textContent = `Size: ${(file.size / (1024 * 1024)).toFixed(2)} MB`;
+            fileInfo.classList.add('show');
+            uploadBtn.textContent = 'Upload Now';
+            uploadBtn.disabled = false;
+            result.classList.remove('show');
+        }
+
+        uploadBtn.addEventListener('click', async (e) => {
+            if (!selectedFile) return;
+
+            e.stopPropagation();
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+            progressBar.classList.add('show');
+            result.classList.remove('show');
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/upload', true);
+
+                xhr.upload.addEventListener('progress', (e) => {
+                    if (e.lengthComputable) {
+                        const percent = (e.loaded / e.total) * 100;
+                        progressFill.style.width = percent + '%';
+                    }
+                });
+
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const response = xhr.responseText;
+                        console.log('Upload successful:', response);
+                        resultTitle.textContent = '✅ Upload Complete!';
+                        resultMessage.innerHTML = `
+                            <strong>File:</strong> ${selectedFile.name}<br>
+                            <strong>Size:</strong> ${(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                        `;
+                        resultLink.innerHTML = `
+                            <strong>Download link:</strong><br>
+                            <a href="${xhr.responseText}" target="_blank">${xhr.responseText}</a>
+                            <button class="copy-btn" onclick="copyToClipboard('${xhr.responseText}')">Copy</button>
+                            <br><small>This link expires in 60 minutes.</small>
+                        `;
+                        result.classList.add('show', 'success');
+                    } else {
+                        throw new Error(`Upload failed with status ${xhr.status}`);
+                    }
+                };
+
+                xhr.onerror = () => {
+                    throw new Error('Upload failed');
+                };
+
+                xhr.send(formData);
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                resultTitle.textContent = '❌ Upload Failed';
+                resultMessage.textContent = error.message || 'Something went wrong. Please try again.';
+                result.classList.add('show', 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Again';
+                progressFill.style.width = '0%';
+            }
+        });
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

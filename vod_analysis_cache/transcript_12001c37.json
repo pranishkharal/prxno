@@ -1,0 +1,405 @@
+{
+  "full_text": "It went decent y'all should do that again Hey get off the phone with your eggs Wait I'm on the phone Hey, sorry, but it is me No Get off the phone What the heck? Hello? Hello? Yeah, he says that you're over here I can like, you're my boyfriend or what? I like But you guys are",
+  "duration": 23.94,
+  "word_count": 59,
+  "language": "en",
+  "topics": [],
+  "emotions": [],
+  "storytelling_score": 0,
+  "hook_candidates": [],
+  "payoff_candidates": [],
+  "controversy_score": 0,
+  "surprise_score": 0,
+  "named_entities": [],
+  "questions": [],
+  "arguments": [],
+  "key_phrases": [],
+  "segments": [
+    {
+      "text": "It went decent y'all should do that again",
+      "start": 0.0,
+      "end": 2.28,
+      "words": [
+        {
+          "word": "It",
+          "start": 0.0,
+          "end": 0.08
+        },
+        {
+          "word": "went",
+          "start": 0.08,
+          "end": 0.74
+        },
+        {
+          "word": "decent",
+          "start": 0.74,
+          "end": 1.14
+        },
+        {
+          "word": "y",
+          "start": 1.14,
+          "end": 1.42
+        },
+        {
+          "word": "'all",
+          "start": 1.42,
+          "end": 1.44
+        },
+        {
+          "word": "should",
+          "start": 1.44,
+          "end": 1.58
+        },
+        {
+          "word": "do",
+          "start": 1.58,
+          "end": 1.76
+        },
+        {
+          "word": "that",
+          "start": 1.76,
+          "end": 1.9
+        },
+        {
+          "word": "again",
+          "start": 1.9,
+          "end": 2.28
+        }
+      ]
+    },
+    {
+      "text": "Hey get off the phone with your eggs",
+      "start": 4.24,
+      "end": 6.54,
+      "words": [
+        {
+          "word": "Hey",
+          "start": 4.24,
+          "end": 4.68
+        },
+        {
+          "word": "get",
+          "start": 4.68,
+          "end": 4.9
+        },
+        {
+          "word": "off",
+          "start": 4.9,
+          "end": 5.1
+        },
+        {
+          "word": "the",
+          "start": 5.1,
+          "end": 5.22
+        },
+        {
+          "word": "phone",
+          "start": 5.22,
+          "end": 5.94
+        },
+        {
+          "word": "with",
+          "start": 5.94,
+          "end": 6.1
+        },
+        {
+          "word": "your",
+          "start": 6.1,
+          "end": 6.22
+        },
+        {
+          "word": "eggs",
+          "start": 6.22,
+          "end": 6.54
+        }
+      ]
+    },
+    {
+      "text": "Wait I'm on the phone",
+      "start": 6.54,
+      "end": 7.74,
+      "words": [
+        {
+          "word": "Wait",
+          "start": 6.54,
+          "end": 6.9
+        },
+        {
+          "word": "I'm",
+          "start": 6.9,
+          "end": 7.34
+        },
+        {
+          "word": "on",
+          "start": 7.34,
+          "end": 7.4
+        },
+        {
+          "word": "the",
+          "start": 7.4,
+          "end": 7.56
+        },
+        {
+          "word": "phone",
+          "start": 7.56,
+          "end": 7.74
+        }
+      ]
+    },
+    {
+      "text": "Hey, sorry, but it is me",
+      "start": 8.26,
+      "end": 10.76,
+      "words": [
+        {
+          "word": "Hey,",
+          "start": 8.26,
+          "end": 8.54
+        },
+        {
+          "word": "sorry,",
+          "start": 8.56,
+          "end": 9.5
+        },
+        {
+          "word": "but",
+          "start": 9.8,
+          "end": 9.94
+        },
+        {
+          "word": "it",
+          "start": 9.94,
+          "end": 10.18
+        },
+        {
+          "word": "is",
+          "start": 10.18,
+          "end": 10.56
+        },
+        {
+          "word": "me",
+          "start": 10.56,
+          "end": 10.76
+        }
+      ]
+    },
+    {
+      "text": "No",
+      "start": 11.24,
+      "end": 11.68,
+      "words": [
+        {
+          "word": "No",
+          "start": 11.24,
+          "end": 11.68
+        }
+      ]
+    },
+    {
+      "text": "Get off the phone",
+      "start": 11.68,
+      "end": 12.78,
+      "words": [
+        {
+          "word": "Get",
+          "start": 11.68,
+          "end": 12.28
+        },
+        {
+          "word": "off",
+          "start": 12.28,
+          "end": 12.48
+        },
+        {
+          "word": "the",
+          "start": 12.48,
+          "end": 12.58
+        },
+        {
+          "word": "phone",
+          "start": 12.58,
+          "end": 12.78
+        }
+      ]
+    },
+    {
+      "text": "What the heck?",
+      "start": 12.78,
+      "end": 13.72,
+      "words": [
+        {
+          "word": "What",
+          "start": 12.78,
+          "end": 13.0
+        },
+        {
+          "word": "the",
+          "start": 13.0,
+          "end": 13.34
+        },
+        {
+          "word": "heck?",
+          "start": 13.34,
+          "end": 13.72
+        }
+      ]
+    },
+    {
+      "text": "Hello?",
+      "start": 13.92,
+      "end": 14.34,
+      "words": [
+        {
+          "word": "Hello?",
+          "start": 13.92,
+          "end": 14.34
+        }
+      ]
+    },
+    {
+      "text": "Hello?",
+      "start": 15.1,
+      "end": 15.34,
+      "words": [
+        {
+          "word": "Hello?",
+          "start": 15.1,
+          "end": 15.34
+        }
+      ]
+    },
+    {
+      "text": "Yeah, he says that you're over here",
+      "start": 17.84,
+      "end": 19.64,
+      "words": [
+        {
+          "word": "Yeah,",
+          "start": 17.84,
+          "end": 18.28
+        },
+        {
+          "word": "he",
+          "start": 18.52,
+          "end": 18.76
+        },
+        {
+          "word": "says",
+          "start": 18.76,
+          "end": 18.98
+        },
+        {
+          "word": "that",
+          "start": 18.98,
+          "end": 19.14
+        },
+        {
+          "word": "you're",
+          "start": 19.14,
+          "end": 19.4
+        },
+        {
+          "word": "over",
+          "start": 19.4,
+          "end": 19.5
+        },
+        {
+          "word": "here",
+          "start": 19.5,
+          "end": 19.64
+        }
+      ]
+    },
+    {
+      "text": "I can like, you're my boyfriend or what?",
+      "start": 19.64,
+      "end": 21.04,
+      "words": [
+        {
+          "word": "I",
+          "start": 19.64,
+          "end": 19.76
+        },
+        {
+          "word": "can",
+          "start": 19.76,
+          "end": 19.86
+        },
+        {
+          "word": "like,",
+          "start": 19.86,
+          "end": 20.0
+        },
+        {
+          "word": "you're",
+          "start": 20.04,
+          "end": 20.16
+        },
+        {
+          "word": "my",
+          "start": 20.16,
+          "end": 20.24
+        },
+        {
+          "word": "boyfriend",
+          "start": 20.24,
+          "end": 20.62
+        },
+        {
+          "word": "or",
+          "start": 20.62,
+          "end": 20.84
+        },
+        {
+          "word": "what?",
+          "start": 20.84,
+          "end": 21.04
+        }
+      ]
+    },
+    {
+      "text": "I like",
+      "start": 21.32,
+      "end": 22.0,
+      "words": [
+        {
+          "word": "I",
+          "start": 21.32,
+          "end": 21.32
+        },
+        {
+          "word": "like",
+          "start": 21.32,
+          "end": 22.0
+        }
+      ]
+    },
+    {
+      "text": "But you guys are",
+      "start": 22.82,
+      "end": 23.94,
+      "words": [
+        {
+          "word": "But",
+          "start": 22.82,
+          "end": 23.26
+        },
+        {
+          "word": "you",
+          "start": 23.26,
+          "end": 23.6
+        },
+        {
+          "word": "guys",
+          "start": 23.6,
+          "end": 23.78
+        },
+        {
+          "word": "are",
+          "start": 23.78,
+          "end": 23.94
+        }
+      ]
+    }
+  ]
+}

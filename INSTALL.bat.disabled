@@ -1,0 +1,68 @@
+@echo off
+setlocal EnableExtensions
+cd /d "%~dp0"
+
+echo.
+echo ==========================================
+echo   AUTO CLIPS FOR KICK - USB INSTALLER
+echo ==========================================
+echo.
+
+if not exist "%~dp0python" mkdir "%~dp0python"
+if not exist "%~dp0ffmpeg" mkdir "%~dp0ffmpeg"
+
+echo [1/5] Downloading portable Python...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://www.python.org/ftp/python/3.13.15/python-3.13.15-embed-amd64.zip'; Invoke-WebRequest -Uri $u -OutFile '%TEMP%\python_embed.zip'"
+if errorlevel 1 goto FAIL
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -Force '%TEMP%\python_embed.zip' '%~dp0python'"
+del "%TEMP%\python_embed.zip" >nul 2>&1
+
+echo [2/5] Enabling Python site-packages...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$p=Get-ChildItem '%~dp0python\*._pth' | Select-Object -First 1; if($p){$c=Get-Content $p.FullName; if($c -notcontains 'import site'){$c += 'import site'}; Set-Content -Encoding ASCII $p.FullName $c}"
+if errorlevel 1 goto FAIL
+
+echo [3/5] Installing pip...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri 'https://bootstrap.pypa.io/get-pip.py' -OutFile '%~dp0python\get-pip.py'"
+if errorlevel 1 goto FAIL
+
+"%~dp0python\python.exe" "%~dp0python\get-pip.py"
+if errorlevel 1 goto FAIL
+
+echo [4/5] Installing bot packages...
+"%~dp0python\python.exe" -m pip install --upgrade pip
+"%~dp0python\python.exe" -m pip install discord.py python-dotenv rapidocr onnxruntime webrtcvad-wheels
+if errorlevel 1 goto FAIL
+
+echo [5/5] Downloading portable FFmpeg...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip'; Invoke-WebRequest -Uri $u -OutFile '%TEMP%\ffmpeg.zip'"
+if errorlevel 1 goto FAIL
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Expand-Archive -Force '%TEMP%\ffmpeg.zip' '%TEMP%\ffmpeg_extract'"
+if errorlevel 1 goto FAIL
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$d=Get-ChildItem '%TEMP%\ffmpeg_extract' -Directory | Select-Object -First 1; Copy-Item -Recurse -Force ($d.FullName+'\*') '%~dp0ffmpeg'"
+if errorlevel 1 goto FAIL
+
+del "%TEMP%\ffmpeg.zip" >nul 2>&1
+rmdir /s /q "%TEMP%\ffmpeg_extract" >nul 2>&1
+
+echo.
+echo ==========================================
+echo   INSTALLATION COMPLETE
+echo ==========================================
+echo.
+echo You can now double-click RUN.bat
+echo.
+pause
+exit /b 0
+
+:FAIL
+echo.
+echo ==========================================
+echo   INSTALLATION FAILED
+echo ==========================================
+echo.
+echo Check the error above.
+pause
+exit /b 1

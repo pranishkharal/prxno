@@ -1,0 +1,100 @@
+            "-loop",
+            "1",
+            "-i",
+            str(overlay_file),
+            "-filter_complex",
+            filter_complex,
+            "-map",
+            map_video,
+            "-map",
+            "0:a?",
+            "-c:v",
+            "libx264",
+            "-preset",
+            "medium",
+            "-crf",
+            "20",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "192k",
+            "-shortest",
+            str(output_file)
+        ]
+
+    else:
+
+        command = [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(input_file),
+            "-filter_complex",
+            filter_complex,
+            "-map",
+            f"[{base_name}]",
+            "-map",
+            "0:a?",
+            "-c:v",
+            "libx264",
+            "-preset",
+            "medium",
+            "-crf",
+            "20",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "192k",
+            str(output_file)
+        ]
+
+    run_ffmpeg(command)
+
+
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+# SPLIT SCREEN BACKGROUND VIDEO
+# ---------------------------------------------------------
+
+BACKGROUND_DIR = Path("backgrounds")
+
+def get_split_background():
+    """Return a random background video from backgrounds/."""
+    BACKGROUND_DIR.mkdir(parents=True, exist_ok=True)
+    files = []
+    for ext in ("*.mp4", "*.mov", "*.webm", "*.mkv"):
+        files.extend(BACKGROUND_DIR.glob(ext))
+    if not files:
+        return None
+    return random.choice(files)
+
+# UI
+# ---------------------------------------------------------
+
+class EditView(discord.ui.View):
+
+    def __init__(self, user, file_path, url_streamer_hint=None, channel=None):
+
+        super().__init__(timeout=900)
+
+        self.user = user
+        self.file_path = Path(file_path)
+        self.channel = channel
+
+        self.options = {
+            "size": "9:16",
+            "zoom": False,
+            "mirror": False,
+            "blur": False,
+            "remove_silence": True,
+            "overlay": True,
+            "enhance": "Off",
+            "split_screen": False
+        }
+
+        self.overlay_file = None

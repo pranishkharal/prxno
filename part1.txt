@@ -1,0 +1,151 @@
+﻿import random
+import os
+import re
+import difflib
+import subprocess
+import tempfile
+import asyncio
+from captioning import transcribe_and_caption
+from smart_cut import smart_cut
+from word_caption import burn_word_captions
+from clip_intelligence import build_moment_score
+from clip_history import record_clip, is_duplicate, search_similar_transcript
+from smart_presets import get_preset, list_presets
+import shutil
+import traceback
+from pathlib import Path
+from urllib.parse import urlparse
+import sys
+
+import webrtcvad
+import discord
+from public_download import create_public_download_link, start_cleanup_task
+from dotenv import load_dotenv
+from rapidocr_onnxruntime import RapidOCR
+
+# yt-dlp is used to download KICK Clips from their public Clip URL.
+# Install it with:
+#   python -m pip install -U yt-dlp curl_cffi
+import yt_dlp
+
+
+load_dotenv()
+
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+
+if not TOKEN:
+    raise RuntimeError(
+        "DISCORD_BOT_TOKEN is not set. Put it in .env or set it in PowerShell."
+    )
+
+UPLOAD_DIR = Path("uploads")
+OUTPUT_DIR = Path("output")
+OVERLAY_DIR = Path("overlays")
+
+UPLOAD_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR.mkdir(exist_ok=True)
+OVERLAY_DIR.mkdir(exist_ok=True)
+
+# Maximum time allowed for FFmpeg jobs.
+FFMPEG_TIMEOUT = 1800
+
+# KICK Clips are currently documented by KICK as 10-180 seconds.
+# We trim the final 4 seconds as requested, but never allow the result
+# to become shorter than 1 second.
+
+
+# ---------------------------------------------------------
+# OCR ENGINE
+# ---------------------------------------------------------
+
+OCR_ENGINE = RapidOCR()
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
+
+# Active editing sessions
+SESSIONS = {}
+
+
+# ---------------------------------------------------------
+# FFmpeg helpers
+# ---------------------------------------------------------
+
+# Limits how many ffmpeg/edit jobs run at the same time.
+# Extra jobs beyond this wait automatically instead of overloading the CPU.
+MAX_CONCURRENT_EDITS = 5
+EDIT_SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT_EDITS)
+
+async def run_encode_job(func, *args):
+    async with EDIT_SEMAPHORE:
+        return await asyncio.to_thread(func, *args)
+
+def run_ffmpeg(command, timeout=FFMPEG_TIMEOUT):
+    print("\n========================================")
+    print("RUNNING FFMPEG")
+    print("========================================")
+    print(" ".join(str(x) for x in command))
+    print("")
+
+    process = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1
+    )
+
+    output_lines = []
+
+    try:
+        for line in process.stdout:
+            line = line.rstrip()
+
+            if line:
+                print(line)
+                output_lines.append(line)
+
+                if len(output_lines) > 1000:
+                    output_lines.pop(0)
+
+        return_code = process.wait(timeout=timeout)
+
+    except subprocess.TimeoutExpired:
+        process.kill()
+
+        try:
+            process.wait(timeout=10)
+        except Exception:
+            pass
+
+        print("\nFFMPEG TIMEOUT")
+        raise RuntimeError(
+            f"FFmpeg timed out after {timeout} seconds."
+        )
+
+    except KeyboardInterrupt:
+        process.kill()
+
+        try:
+            process.wait(timeout=10)
+        except Exception:
+            pass
+
+        print("\nFFMPEG INTERRUPTED BY USER")
+        raise
+
+    if return_code != 0:
+        print("\n========================================")
+        print("FFMPEG ERROR")
+        print("========================================")
+
+        if output_lines:
+            print("\n".join(output_lines[-200:]))
+
+        raise RuntimeError(
+            f"FFmpeg failed with exit code {return_code}"
+        )
+
+    print("\nFFmpeg finished successfully.")

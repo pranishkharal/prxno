@@ -1,0 +1,322 @@
+def edit_video(input_file, output_file, options, overlay_file=None, url_streamer_hint=None, split_photo_file=None):
+
+    size = options["size"]
+
+    if options.get("overlay", True) and overlay_file is None:
+        overlay_file = get_overlay_file(
+            size,
+            input_file,
+            url_streamer_hint
+        )
+
+    zoom = options["zoom"]
+    mirror = options["mirror"]
+    blur = options["blur"]
+
+    print(
+        f"Editing {input_file} with "
+        f"{options}"
+    )
+
+    dimensions = {
+        "9:16": (1080, 1920),
+        "1:1": (1080, 1080),
+        "4:5": (1080, 1350),
+        "4:3": (1440, 1080),
+        "Original": None
+    }
+
+    target = dimensions.get(size)
+
+    filters = []
+
+    if target is None:
+
+        width, height = get_video_size(input_file)
+
+        out_w = width
+        out_h = height
+
+        if mirror:
+            filters.append("hflip")
+
+        if zoom:
+            filters.append(
+                "scale=iw*1.08:ih*1.08,"
+                "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+            )
+
+        enhance_filter = ENHANCE_PRESETS.get(
+            options.get("enhance", "Off")
+        )
+
+        if enhance_filter:
+            filters.append(enhance_filter)
+
+        video_filter = ",".join(filters) if filters else "null"
+
+        if overlay_file:
+            command = [
+                "ffmpeg",
+                "-y",
+                "-i",
+                str(input_file),
+                "-loop",
+                "1",
+                "-i",
+                str(overlay_file),
+                "-filter_complex",
+                (
+                    f"[0:v]{video_filter}[v];"
+                    f"[1:v]format=rgba,"
+                    f"scale={out_w}:-1[ov];"
+                    f"[v][ov]overlay="
+                    f"(W-w)/2:H-h-(H*0.25):format=auto[out]"
+                ),
+                "-map",
+                "[out]",
+                "-map",
+                "0:a?",
+                "-c:v",
+                "libx264",
+                "-preset",
+                "medium",
+                "-crf",
+                "20",
+                "-c:a",
+                "aac",
+                "-b:a",
+                "192k",
+                "-shortest",
+                str(output_file)
+            ]
+
+        else:
+            command = [
+                "ffmpeg",
+                "-y",
+                "-i",
+                str(input_file),
+                "-vf",
+                video_filter,
+                "-c:v",
+                "libx264",
+                "-preset",
+                "medium",
+                "-crf",
+                "20",
+                "-c:a",
+                "aac",
+                "-b:a",
+                "192k",
+                str(output_file)
+            ]
+
+        run_ffmpeg(command)
+        return
+
+    out_w, out_h = target
+
+    # When blur mode is on, there's a real boundary line between the
+    # sharp foreground video and the blurred padding around it. We
+    # calculate exactly where that line sits (in pixels) so the
+    # overlay can be placed precisely at that transition, instead of
+    # a fixed percentage of the whole canvas.
+    fg_line_y = None
+
+    if blur:
+
+        src_w, src_h = get_video_size(input_file)
+
+        fit_scale = min(out_w / src_w, out_h / src_h)
+        fg_scaled_h = src_h * fit_scale
+
+        # Distance from the top of the canvas to the bottom edge of
+        # the sharp (non-blurred) foreground content.
+        fg_line_y = (out_h + fg_scaled_h) / 2
+
+        if zoom:
+            # The zoom effect scales the whole composed frame up by
+            # 8% and crops back to the original canvas size from the
+            # center. Apply that same transform to the boundary line
+            # so it still lines up with the zoomed footage.
+            zoom_scale = 1.08
+            fg_line_y = (
+                (fg_line_y * zoom_scale)
+                - (out_h * (zoom_scale - 1) / 2)
+            )
+
+        print(
+            f"Blur boundary line at y={fg_line_y:.1f}px "
+            f"(canvas height={out_h}px, "
+            f"foreground height={fg_scaled_h:.1f}px)"
+        )
+
+    if blur:
+
+        foreground_scale = (
+            f"scale={out_w}:{out_h}:"
+            f"force_original_aspect_ratio=decrease"
+        )
+
+        filter_complex = (
+            f"[0:v]split=2[bg][fg];"
+
+            f"[bg]"
+            f"scale={out_w}:{out_h}:"
+            f"force_original_aspect_ratio=increase,"
+            f"crop={out_w}:{out_h},"
+            f"boxblur=25:12,"
+            f"setsar=1"
+            f"[bgblur];"
+
+            f"[fg]"
+            f"{foreground_scale},"
+            f"setsar=1"
+            f"[fgscaled];"
+
+            f"[bgblur][fgscaled]"
+            f"overlay=(W-w)/2:(H-h)/2"
+            f"[base]"
+        )
+
+    else:
+
+        filter_complex = (
+            f"[0:v]"
+            f"scale={out_w}:{out_h}:"
+            f"force_original_aspect_ratio=increase,"
+            f"crop={out_w}:{out_h},"
+            f"setsar=1"
+            f"[base]"
+        )
+
+    if zoom:
+
+        filter_complex += (
+            ";[base]"
+            "scale=iw*1.08:ih*1.08,"
+            "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+            "[zoomed]"
+        )
+
+        base_name = "zoomed"
+
+    else:
+        base_name = "base"
+
+    if mirror:
+
+        filter_complex += (
+            f";[{base_name}]hflip[mirrored]"
+        )
+
+        base_name = "mirrored"
+
+    enhance_filter = ENHANCE_PRESETS.get(
+        options.get("enhance", "Off")
+    )
+
+    if enhance_filter:
+
+        filter_complex += (
+            f";[{base_name}]{enhance_filter}[enhanced]"
+        )
+
+        base_name = "enhanced"
+
+    if overlay_file:
+
+        # Place the overlay exactly at the sharp/blur boundary line
+        # when blur mode is on. Otherwise fall back to the fixed
+        # percentage-based position, since there's no natural boundary
+        # to anchor to in flat crop-fill mode.
+        overlay_y_expr = (
+            f"{fg_line_y:.1f}"
+            if fg_line_y is not None
+            else overlay_position(size)
+        )
+
+        filter_complex += (
+            f";[1:v]"
+            f"format=rgba,"
+            f"scale={out_w}:-1:"
+            f"force_original_aspect_ratio=decrease"
+            f"[overlay];"
+
+            f"[{base_name}][overlay]"
+            f"overlay="
+            f"(W-w)/2:"
+            f"{overlay_y_expr}:"
+            f"format=auto"
+            f"[final]"
+        )
+
+        map_video = "[final]"
+
+        command = [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(input_file),
+            "-loop",
+            "1",
+            "-i",
+            str(overlay_file),
+            "-filter_complex",
+            filter_complex,
+            "-map",
+            map_video,
+            "-map",
+            "0:a?",
+            "-c:v",
+            "libx264",
+            "-preset",
+            "medium",
+            "-crf",
+            "20",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "192k",
+            "-shortest",
+            str(output_file)
+        ]
+
+    else:
+
+        command = [
+            "ffmpeg",
+            "-y",
+            "-i",
+            str(input_file),
+            "-filter_complex",
+            filter_complex,
+            "-map",
+            f"[{base_name}]",
+            "-map",
+            "0:a?",
+            "-c:v",
+            "libx264",
+            "-preset",
+            "medium",
+            "-crf",
+            "20",
+            "-pix_fmt",
+            "yuv420p",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "192k",
+            str(output_file)
+        ]
+
+    run_ffmpeg(command)
+
+
+# ---------------------------------------------------------
+# UI
+# ---------------------------------------------------------
+

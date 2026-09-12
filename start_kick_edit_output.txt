@@ -1,0 +1,2933 @@
+﻿async def start_kick_edit(message, kick_url):
+
+
+            )
+                "Sorry, caption generation failed for this clip."
+            await interaction.followup.send(
+            print("Caption generation failed:", caption_error)
+        except Exception as caption_error:
+            await interaction.followup.send(f"**Caption:**\n{caption_text}")
+            )
+                self.streamer_hint
+                self.output_file,
+                transcribe_and_caption,
+            caption_text = await run_encode_job(
+        try:
+
+        await interaction.followup.send("Generating caption, this may take a minute...")
+
+        await interaction.response.edit_message(view=self)
+        button.disabled = True
+        self.used = True
+
+            return
+            )
+                ephemeral=True
+                "This caption has already been generated.",
+            await interaction.response.send_message(
+        if self.used:
+    async def generate_caption_button(self, interaction, button):
+    @discord.ui.button(label="Generate Caption", emoji="\U0001F4DD", style=discord.ButtonStyle.primary)
+
+        self.used = False
+        self.streamer_hint = streamer_hint
+        self.output_file = output_file
+        super().__init__(timeout=None)
+    def __init__(self, output_file, streamer_hint):
+
+    """
+    affects video delivery.
+    the user clicks the button, so a captioning failure never
+    Shown alongside a finished edited clip. Nothing here runs until
+    """
+class CaptionView(discord.ui.View):
+
+
+
+    )
+        kick_url
+        message,
+    await start_kick_edit(
+
+        return
+
+        )
+            "Run `!edit` again and paste the KICK Clip URL."
+            "Ã¢ÂÅ’ That isn't a valid KICK Clip link.\n\n"
+        await message.channel.send(
+
+    if not kick_url or not is_kick_clip_url(kick_url):
+
+    )
+        reply.content
+    kick_url = clean_url_from_message(
+
+        return
+
+        )
+            "Ã¢Å’â€º Timed out. Run `!edit` again when you have a KICK Clip link."
+        await message.channel.send(
+
+    except asyncio.TimeoutError:
+        )
+            check=check
+            timeout=180,
+            "message",
+        reply = await client.wait_for(
+    try:
+
+        )
+            and reply.channel.id == message.channel.id
+            reply.author.id == message.author.id
+        return (
+    def check(reply):
+
+    )
+        "You no longer need to upload the video to Discord."
+        "`https://kick.com/.../clip/...`\n\n"
+        "Example:\n"
+        "Paste your **KICK Clip link** here.\n\n"
+        "Ã°Å¸Å½Â¬ **KICK AUTO EDIT**\n\n"
+    await message.channel.send(
+    # If there is no URL after !edit, ask the user for one.
+
+        return
+
+        )
+            "`!edit https://kick.com/.../clip/...`"
+            "Use:\n"
+            "Ã¢ÂÅ’ I found a URL, but it does not look like a KICK Clip URL.\n\n"
+        await message.channel.send(
+
+    if kick_url and not is_kick_clip_url(kick_url):
+
+        return
+
+        )
+            kick_url
+            message,
+        await start_kick_edit(
+
+    if kick_url and is_kick_clip_url(kick_url):
+    # followed by a URL in the next Discord message.
+    # !edit
+    # Also support:
+    #
+    # !edit https://kick.com/.../clip/...
+    # Support:
+
+    kick_url = clean_url_from_message(content)
+
+    # -----------------------------------------------------
+    # uploading a large video file to Discord.
+    # The user now supplies a KICK Clip URL instead of
+    #
+    # !edit
+    # -----------------------------------------------------
+
+        return
+    if not content.lower().startswith("!edits"):
+
+    content = message.content.strip()
+
+        return
+    if message.author == client.user:
+
+async def on_message(message):
+@client.event
+
+# ---------------------------------------------------------
+# Messages
+# ---------------------------------------------------------
+
+
+    print("----------------------------------")
+
+        )
+            "WARNING: No named overlays found in overlays folder."
+        print(
+    else:
+        )
+            )
+                sorted(named_overlays.keys())
+            ", ".join(
+            "Named overlays detected:",
+        print(
+    if named_overlays:
+
+    named_overlays = get_overlay_library()
+
+    print("----------------------------------")
+    print("Auto Edit Bot is ready!")
+    print(f"Logged in as {client.user}")
+    print("----------------------------------")
+
+async def on_ready():
+@client.event
+
+            # ---------------------------------------------------------
+            # Bot ready
+            # ---------------------------------------------------------
+
+
+            )
+                None
+                self.user.id,
+            SESSIONS.pop(
+
+            # Remove active session.
+
+            )
+                self.file_path
+            cleanup_job_files(
+
+            # Delete downloaded KICK source and job directory.
+
+                    pass
+                except Exception:
+
+                    )
+                        missing_ok=True
+                    ).unlink(
+                        self.split_photo_file
+                    Path(
+                try:
+
+            if self.split_photo_file:
+
+            # Delete uploaded Split Screen photo.
+
+                    pass
+                except Exception:
+
+                    )
+                        missing_ok=True
+                    Path(temp_file).unlink(
+                try:
+
+            for temp_file in temp_files:
+
+            # Delete temporary intermediate files.
+
+        finally:
+
+                )
+                    notify_error
+                    "Also failed to notify the channel:",
+                print(
+
+            except Exception as notify_error:
+
+                )
+                    f"âŒ **EDIT FAILED**\n```{str(e)[:1500]}```"
+                await notify(
+
+            try:
+
+            traceback.print_exc()
+            print("\nEDIT ERROR:", e)
+
+        except Exception as e:
+
+                    )
+                        "be created."
+                        "the Cloudflare download link could not "
+                        "Discord rejected the direct upload and "
+                        f"Final file size: **{output_size_mb:.1f} MB**\n\n"
+                        "deliver the video.**\n\n"
+                        "âŒ **The edit finished, but I couldn't "
+                    await notify(
+
+                else:
+
+                        )
+                            f"ðŸ”— {download_url}"
+                            "link, but I couldn't send you a DM.\n\n"
+                            "âš ï¸ I created the Cloudflare download "
+                        await notify(
+
+                        )
+                            dm_error
+                            "Could not DM Cloudflare link:",
+                        print(
+
+                    except discord.HTTPException as dm_error:
+
+                        )
+                            "â³ It expires in 60 minutes."
+                            "to your DM.\n\n"
+                            "**Cloudflare download link** "
+                            "âœ… Done! I sent the temporary "
+                        await notify(
+
+                        )
+                            "â³ **This link expires in 60 minutes.**"
+                            f"{download_url}\n\n"
+                            "ðŸ”— **Download your original edited video:**\n"
+                            "directly because it is too large.\n\n"
+                            "Discord could not send the video "
+                            "âœ… **Your edited KICK clip is ready!**\n\n"
+                        await self.user.send(
+
+                    try:
+
+                if download_url:
+
+                )
+                    str(final_delivery_file)
+                download_url = await create_public_download_link(
+
+                )
+                    "download link..."
+                    "Creating your temporary Cloudflare "
+                    "ðŸŒ Discord cannot send this video directly. "
+                await notify(
+
+                )
+                    upload_error
+                    "Discord direct upload failed:",
+                print(
+
+            except discord.HTTPException as upload_error:
+
+                )
+                    "to your **DM**."
+                    "âœ… Done! I sent the edited KICK clip "
+                await notify(
+
+                )
+                    )
+                        self.url_streamer_hint
+                        final_delivery_file,
+                    view=CaptionView(
+                    ),
+                        filename="edited_kick_clip.mp4"
+                        str(final_delivery_file),
+                    file=discord.File(
+                    "âœ… **Your edited KICK clip is ready!**",
+                await self.user.send(
+
+            try:
+
+            )
+                f"Final output size: {output_size_mb:.2f} MB"
+            print(
+
+            )
+                / (1024 * 1024)
+                final_delivery_file.stat().st_size
+            output_size_mb = (
+
+
+            # -------------------------------------------------
+            # DISCORD DELIVERY
+            # -------------------------------------------------
+
+                    )
+                        "the normal edited video instead."
+                        "Auto captioning failed, so I will deliver "
+                    await notify(
+
+                    final_delivery_file = output_file
+
+                        pass
+                    except Exception:
+                        captioned_file.unlink(missing_ok=True)
+                    try:
+
+                    traceback.print_exc()
+
+                    )
+                        caption_error
+                        "Automatic captioning failed:",
+                    print(
+
+                except Exception as caption_error:
+
+                    )
+                        "Auto captions finished successfully."
+                    await notify(
+
+                    )
+                        f"{caption_size_mb:.2f} MB"
+                        f"Captioned output size: "
+                    print(
+
+                    )
+                        / (1024 * 1024)
+                        final_delivery_file.stat().st_size
+                    caption_size_mb = (
+
+                        pass
+                    except Exception:
+                        output_file.unlink(missing_ok=True)
+                    try:
+
+                    final_delivery_file = captioned_file
+
+                        )
+                            "video was not created."
+                            "Caption process finished but the captioned "
+                        raise RuntimeError(
+                    if not captioned_file.exists():
+
+                    )
+                        captioned_file
+                        output_file,
+                        burn_word_captions,
+                    await run_encode_job(
+
+                try:
+
+                )
+                    "Whisper is transcribing the edited video."
+                    "Adding automatic word-by-word captions...\n"
+                await notify(
+
+                )
+                    f"captioned_{self.user.id}_{self.file_path.stem}.mp4"
+                captioned_file = OUTPUT_DIR / (
+
+            if self.options.get("auto_captions", False):
+
+            final_delivery_file = output_file
+
+            # -------------------------------------------------
+            # OPTIONAL AUTOMATIC WORD-BY-WORD CAPTIONS
+            # -------------------------------------------------
+
+                )
+                    "FFmpeg finished but output file was not created."
+                raise RuntimeError(
+            if not output_file.exists():
+
+            )
+                self.split_photo_file
+                self.url_streamer_hint,
+                self.overlay_file,
+                self.options,
+                output_file,
+                working_file,
+                edit_video,
+            await run_encode_job(
+
+            )
+                f"**{self.summary()}**"
+                "ðŸŽ¬ Editing video...\n"
+            await notify(
+
+            # -------------------------------------------------
+            # -------------------------------------------------
+            # Final video editing.
+            # -------------------------------------------------
+
+                temp_files.append(silence_file)
+                working_file = silence_file
+
+                )
+                    silence_file
+                    working_file,
+                    remove_silence,
+                await run_encode_job(
+
+                )
+                    "Removing silent/non-speaking sections..."
+                await notify(
+
+                )
+                    f"silence_removed_{self.user.id}_{self.file_path.stem}.mp4"
+                silence_file = OUTPUT_DIR / (
+
+            if self.options["remove_silence"]:
+
+            # -------------------------------------------------
+            # Remove non-speech only when enabled.
+            # -------------------------------------------------
+
+            working_file = self.file_path
+
+            # -------------------------------------------------
+            # Keep the original full-length video by default.
+            # -------------------------------------------------
+
+        try:
+
+        temp_files = []
+
+        )
+            f"edited_{self.user.id}_{self.file_path.stem}.mp4"
+        output_file = OUTPUT_DIR / (
+
+            return
+            SESSIONS.pop(self.user.id, None)
+
+            )
+                "Please run `!edit` again with your clip link."
+                "no longer on disk.\n\n"
+                "The downloaded source clip for this session is "
+                "âŒ **This edit panel has expired.**\n\n"
+            await notify(
+
+        if not self.file_path.exists():
+
+        )
+            else interaction.followup.send
+            if self.channel
+            self.channel.send
+        notify = (
+
+        await interaction.response.edit_message(view=self)
+
+        button.disabled = True
+        self.started = True
+
+            return
+            )
+                ephemeral=True
+                "â³ This edit has already started.",
+            await interaction.response.send_message(
+        if self.started:
+
+    async def start_edit(self, interaction, button):
+    )
+        row=3
+        style=discord.ButtonStyle.success,
+        label="Start Edit",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "AUTO EDIT OPTIONS\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+            button.label = "Auto Captions"
+            button.style = discord.ButtonStyle.secondary
+        else:
+            button.label = "Auto Captions ON"
+            button.style = discord.ButtonStyle.success
+        if self.options["auto_captions"]:
+
+        self.options["auto_captions"] = not self.options["auto_captions"]
+
+    ):
+        button: discord.ui.Button
+        interaction: discord.Interaction,
+        self,
+    async def captions_button(
+    )
+        row=4
+        style=discord.ButtonStyle.secondary,
+        label="Auto Captions",
+    @discord.ui.button(
+
+            pass
+        except Exception:
+            await interaction.message.edit(view=self)
+        try:
+
+        )
+            f"Split Screen background selected: {attachment.filename}"
+        await interaction.user.send(
+
+        button.label = "Split Screen ON"
+        button.style = discord.ButtonStyle.success
+
+        self.options["split_screen"] = True
+        self.split_photo_file = saved_file
+
+            return
+            )
+                "I could not save that file. Please try again."
+            await interaction.user.send(
+            print(f"Split Screen upload error: {e}")
+        except Exception as e:
+            await attachment.save(saved_file)
+        try:
+
+        )
+            f"split_{interaction.user.id}_{attachment.id}{suffix}"
+        saved_file = split_dir / (
+
+        split_dir.mkdir(parents=True, exist_ok=True)
+        split_dir = OUTPUT_DIR / "split_backgrounds"
+
+            return
+            )
+                "Unsupported file. Please upload an image or video."
+            await interaction.user.send(
+        if suffix not in allowed_extensions:
+
+        }
+            ".mp4", ".mov", ".webm", ".mkv", ".avi", ".m4v"
+            ".jpg", ".jpeg", ".png", ".webp", ".gif",
+        allowed_extensions = {
+
+        suffix = Path(attachment.filename).suffix.lower()
+        attachment = reply.attachments[0]
+
+            return
+            )
+                "Split Screen upload timed out. Press the button again."
+            await interaction.user.send(
+        except asyncio.TimeoutError:
+            )
+                check=split_check
+                timeout=300,
+                "message",
+            reply = await client.wait_for(
+        try:
+
+            )
+                and len(message.attachments) > 0
+                and isinstance(message.channel, discord.DMChannel)
+                message.author.id == interaction.user.id
+            return (
+        def split_check(message):
+
+        )
+            ephemeral=True
+            "Check your DMs and upload the Split Screen image or video.",
+        await interaction.response.send_message(
+
+            return
+            )
+                ephemeral=True
+                "I cannot DM you. Enable DMs from this server and try again.",
+            await interaction.response.send_message(
+        except discord.Forbidden:
+            )
+                "You have 5 minutes."
+                "WEBM, MKV, AVI, M4V\n\n"
+                "Accepted: JPG, JPEG, PNG, WEBP, GIF, MP4, MOV, "
+                "for the bottom half of your edit.\n\n"
+                "Upload the IMAGE or VIDEO you want to use "
+                "Split Screen Background\n\n"
+            await interaction.user.send(
+        try:
+    ):
+        button: discord.ui.Button
+        interaction: discord.Interaction,
+        self,
+    async def split_screen_button(
+    )
+        row=4
+        style=discord.ButtonStyle.secondary,
+        label="Split Screen",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        )
+            else discord.ButtonStyle.secondary
+            if self.options["remove_silence"]
+            discord.ButtonStyle.success
+        button.style = (
+
+        self.options["remove_silence"] = not self.options["remove_silence"]
+
+    async def silence_button(self, interaction, button):
+    )
+        style=discord.ButtonStyle.secondary
+        label="Remove Non-Speech",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        )
+            else discord.ButtonStyle.secondary
+            if self.options["blur"]
+            discord.ButtonStyle.success
+        button.style = (
+
+        self.options["blur"] = not self.options["blur"]
+
+    async def blur_button(self, interaction, button):
+    )
+        style=discord.ButtonStyle.secondary
+        label="Background Blur",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        )
+            else discord.ButtonStyle.secondary
+            if self.options["mirror"]
+            discord.ButtonStyle.success
+        button.style = (
+
+        self.options["mirror"] = not self.options["mirror"]
+
+    async def mirror_button(self, interaction, button):
+    )
+        style=discord.ButtonStyle.secondary
+        label="Mirror",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        )
+            else discord.ButtonStyle.secondary
+            if self.options["zoom"]
+            discord.ButtonStyle.success
+        button.style = (
+
+        self.options["zoom"] = not self.options["zoom"]
+
+    async def zoom_button(self, interaction, button):
+    )
+        style=discord.ButtonStyle.secondary
+        label="Slightly Zoomed",
+    @discord.ui.button(
+
+
+            )
+                ephemeral=True
+                "Unable to apply Smart Edit.",
+            await interaction.response.send_message(
+        else:
+            )
+                ephemeral=True
+                "TikTok quality preset applied.",
+                "🧠 Smart Edit enabled. "
+            await interaction.response.send_message(
+        if self.apply_smart_preset("TikTok"):
+    async def smart_edit_button(self, interaction, button):
+    )
+        row=4
+        style=discord.ButtonStyle.success,
+        emoji="🧠",
+        label="Smart Edit",
+    @discord.ui.button(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        self.options["enhance"] = select.values[0]
+
+    async def enhance_select(self, interaction, select):
+    )
+        ]
+            ),
+                description="Stronger, more punchy look"
+                value="Vivid",
+                label="Vivid Enhance",
+            discord.SelectOption(
+            ),
+                description="Slight sharpness/contrast/saturation boost"
+                value="Subtle",
+                label="Subtle Enhance",
+            discord.SelectOption(
+            ),
+                default=True
+                description="No picture adjustment",
+                value="Off",
+                label="Off",
+            discord.SelectOption(
+        options=[
+        placeholder="Ã°Å¸Å½Â¨ Sharpness / Contrast / Saturation",
+    @discord.ui.select(
+
+        )
+            view=self
+            ),
+                f"Selected: **{self.summary()}**"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+            content=(
+        await interaction.response.edit_message(
+
+        self.options["size"] = select.values[0]
+
+    async def size_select(self, interaction, select):
+    )
+        ]
+            discord.SelectOption(label="Original", value="Original"),
+            discord.SelectOption(label="4:3", value="4:3"),
+            discord.SelectOption(label="4:5 Portrait", value="4:5"),
+            discord.SelectOption(label="1:1 Square", value="1:1"),
+            discord.SelectOption(label="9:16 Vertical", value="9:16"),
+        options=[
+        placeholder="Ã°Å¸â€œÂ Choose video size",
+    @discord.ui.select(
+
+        return " â€¢ ".join(enabled)
+
+            enabled.append("Auto Captions")
+        if self.options.get("auto_captions", False):
+
+            enabled.append("Split Screen")
+        if self.options.get("split_screen", False):
+
+            enabled.append(f"{self.options['enhance']} Enhance")
+        if self.options.get("enhance", "Off") != "Off":
+
+            enabled.append("Overlay")
+        if self.options["overlay"]:
+
+            enabled.append("Remove Non-Speech")
+        if self.options["remove_silence"]:
+
+            enabled.append("Background Blur")
+        if self.options["blur"]:
+
+            enabled.append("Mirror")
+        if self.options["mirror"]:
+
+            enabled.append("Zoom")
+        if self.options["zoom"]:
+
+        enabled.append(self.options["size"])
+
+        enabled = []
+
+    def summary(self):
+
+
+        return True
+
+        self.options["smart_preset"] = preset_name
+
+            self.options[key] = value
+        for key, value in preset.items():
+
+            return False
+        if not preset:
+
+        preset = get_preset(preset_name)
+    def apply_smart_preset(self, preset_name="TikTok"):
+
+        return True
+
+            return False
+
+            )
+                ephemeral=True
+                "Ã¢ÂÅ’ This edit panel belongs to someone else.",
+            await interaction.response.send_message(
+
+        if interaction.user.id != self.user.id:
+
+    async def interaction_check(self, interaction):
+
+        self.started = False
+        self.url_streamer_hint = url_streamer_hint
+        self.split_photo_file = None
+        self.overlay_file = None
+
+        }
+            "auto_captions": False
+            "split_screen": False,
+            "enhance": "Off",
+            "overlay": True,
+            "remove_silence": True,
+            "blur": False,
+            "mirror": False,
+            "zoom": False,
+            "size": "9:16",
+        self.options = {
+
+        self.channel = channel
+        self.file_path = Path(file_path)
+        self.user = user
+
+        super().__init__(timeout=900)
+
+    def __init__(self, user, file_path, url_streamer_hint=None, channel=None):
+
+class EditView(discord.ui.View):
+
+# ---------------------------------------------------------
+# UI
+
+    return random.choice(files)
+        return None
+    if not files:
+        files.extend(BACKGROUND_DIR.glob(ext))
+    for ext in ("*.mp4", "*.mov", "*.webm", "*.mkv"):
+    files = []
+    BACKGROUND_DIR.mkdir(parents=True, exist_ok=True)
+    """Return a random background video from backgrounds/."""
+def get_split_background():
+
+BACKGROUND_DIR = Path("backgrounds")
+
+# ---------------------------------------------------------
+# SPLIT SCREEN BACKGROUND VIDEO
+# ---------------------------------------------------------
+
+# ---------------------------------------------------------
+
+
+    run_ffmpeg(command)
+
+        ]
+            str(output_file)
+            "192k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            "yuv420p",
+            "-pix_fmt",
+            "20",
+            "-crf",
+            "medium",
+            "-preset",
+            "libx264",
+            "-c:v",
+            "0:a?",
+            "-map",
+            f"[{base_name}]",
+            "-map",
+            filter_complex,
+            "-filter_complex",
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        command = [
+
+    else:
+
+        ]
+            str(output_file)
+            "-shortest",
+            "192k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            "yuv420p",
+            "-pix_fmt",
+            "20",
+            "-crf",
+            "medium",
+            "-preset",
+            "libx264",
+            "-c:v",
+            "0:a?",
+            "-map",
+            map_video,
+            "-map",
+            filter_complex,
+            "-filter_complex",
+            str(overlay_file),
+            "-i",
+            "1",
+            "-loop",
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        command = [
+
+        map_video = "[final]"
+
+        )
+            f"[final]"
+            f"format=auto"
+            f"{overlay_y_expr}:"
+            f"(W-w)/2:"
+            f"overlay="
+            f"[{base_name}][overlay]"
+
+            f"[overlay];"
+            f"force_original_aspect_ratio=decrease"
+            f"scale={out_w}:-1:"
+            f"format=rgba,"
+            f";[1:v]"
+        filter_complex += (
+
+        )
+            else overlay_position(size)
+            if fg_line_y is not None
+            f"{fg_line_y:.1f}"
+        overlay_y_expr = (
+        # to anchor to in flat crop-fill mode.
+        # percentage-based position, since there's no natural boundary
+        # when blur mode is on. Otherwise fall back to the fixed
+        # Place the overlay exactly at the sharp/blur boundary line
+
+    if overlay_file:
+
+        base_name = "enhanced"
+
+        )
+            f";[{base_name}]{enhance_filter}[enhanced]"
+        filter_complex += (
+
+    if enhance_filter:
+
+    )
+        options.get("enhance", "Off")
+    enhance_filter = ENHANCE_PRESETS.get(
+
+        base_name = "mirrored"
+
+        )
+            f";[{base_name}]hflip[mirrored]"
+        filter_complex += (
+
+    if mirror:
+
+        base_name = "base"
+    else:
+
+        base_name = "zoomed"
+
+        )
+            "[zoomed]"
+            "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+            "scale=iw*1.08:ih*1.08,"
+            ";[base]"
+        filter_complex += (
+
+    if zoom:
+
+        )
+            f"[base]"
+            f"setsar=1"
+            f"crop={out_w}:{out_h},"
+            f"force_original_aspect_ratio=increase,"
+            f"scale={out_w}:{out_h}:"
+            f"[0:v]"
+        filter_complex = (
+
+    else:
+
+        )
+            f"[base]"
+            f"overlay=(W-w)/2:(H-h)/2"
+            f"[bgblur][fgscaled]"
+
+            f"[fgscaled];"
+            f"setsar=1"
+            f"{foreground_scale},"
+            f"[fg]"
+
+            f"[bgblur];"
+            f"setsar=1"
+            f"boxblur=25:12,"
+            f"crop={out_w}:{out_h},"
+            f"force_original_aspect_ratio=increase,"
+            f"scale={out_w}:{out_h}:"
+            f"[bg]"
+
+            f"[0:v]split=2[bg][fg];"
+        filter_complex = (
+
+        )
+            f"force_original_aspect_ratio=decrease"
+            f"scale={out_w}:{out_h}:"
+        foreground_scale = (
+
+    if blur:
+
+        )
+            f"foreground height={fg_scaled_h:.1f}px)"
+            f"(canvas height={out_h}px, "
+            f"Blur boundary line at y={fg_line_y:.1f}px "
+        print(
+
+            )
+                - (out_h * (zoom_scale - 1) / 2)
+                (fg_line_y * zoom_scale)
+            fg_line_y = (
+            zoom_scale = 1.08
+            # so it still lines up with the zoomed footage.
+            # center. Apply that same transform to the boundary line
+            # 8% and crops back to the original canvas size from the
+            # The zoom effect scales the whole composed frame up by
+        if zoom:
+
+        fg_line_y = (out_h + fg_scaled_h) / 2
+        # the sharp (non-blurred) foreground content.
+        # Distance from the top of the canvas to the bottom edge of
+
+        fg_scaled_h = src_h * fit_scale
+        fit_scale = min(out_w / src_w, out_h / src_h)
+
+        src_w, src_h = get_video_size(input_file)
+
+    if blur:
+
+    fg_line_y = None
+    # a fixed percentage of the whole canvas.
+    # overlay can be placed precisely at that transition, instead of
+    # calculate exactly where that line sits (in pixels) so the
+    # sharp foreground video and the blurred padding around it. We
+    # When blur mode is on, there's a real boundary line between the
+
+    out_w, out_h = target
+
+            )
+                f"Split Screen file does not exist: {split_file}"
+            print(
+        else:
+
+            return
+            run_ffmpeg(command)
+
+            )
+                f"({'image' if is_image else 'video'})"
+                f"Split Screen ACTIVE: {split_file.name} "
+            print(
+
+            ]
+                str(output_file)
+                "-shortest",
+                "192k",
+                "-b:a",
+                "aac",
+                "-c:a",
+                "yuv420p",
+                "-pix_fmt",
+                "20",
+                "-crf",
+                "medium",
+                "-preset",
+                "libx264",
+                "-c:v",
+                "0:a?",
+                "-map",
+                map_video,
+                "-map",
+                filter_complex,
+                "-filter_complex",
+            command += [
+
+                ]
+                    str(overlay_file)
+                    "-i",
+                    "1",
+                    "-loop",
+                command += [
+            if overlay_file:
+
+            ]
+                *background_input
+                str(input_file),
+                "-i",
+                "-y",
+                "ffmpeg",
+            command = [
+
+                ]
+                    str(split_file)
+                    "-i",
+                    "-1",
+                    "-stream_loop",
+                background_input = [
+
+            else:
+
+                ]
+                    str(split_file)
+                    "-i",
+                    "1",
+                    "-loop",
+                background_input = [
+
+            if is_image:
+
+                map_video = "[stacked]"
+            else:
+
+                map_video = "[final]"
+
+                )
+                    "[final]"
+                    "format=auto"
+                    "(H-h)/2:"
+                    "(W-w)/2:"
+                    "overlay="
+                    "[stacked][branding]"
+                    "[branding];"
+                    "force_original_aspect_ratio=decrease"
+                    f"scale={out_w}:-1:"
+                    "format=rgba,"
+                    ";[2:v]"
+                filter_complex += (
+                # Existing KICK branding remains over the split layout.
+
+            if overlay_file:
+
+            )
+                "[stacked]"
+                "vstack=inputs=2"
+                ";[topfinal][bottom]"
+            filter_complex += (
+            # Combine top and bottom.
+
+            )
+                "[bottom]"
+                "setpts=PTS-STARTPTS"
+                "setsar=1,"
+                f"crop={out_w}:{half_h},"
+                "force_original_aspect_ratio=increase,"
+                f"scale={out_w}:{half_h}:"
+                ";[1:v]"
+            filter_complex += (
+            # BOTTOM: uploaded image/video
+
+            )
+                "[topfinal]"
+                "setpts=PTS-STARTPTS"
+                f";[{top_name}]"
+            filter_complex += (
+
+                top_name = "topenhanced"
+                )
+                    "[topenhanced]"
+                    f"{enhance_filter}"
+                    f";[{top_name}]"
+                filter_complex += (
+            if enhance_filter:
+
+            )
+                options.get("enhance", "Off")
+            enhance_filter = ENHANCE_PRESETS.get(
+
+                top_name = "topzoom"
+                )
+                    "[topzoom]"
+                    f"crop={out_w}:{half_h}"
+                    f"scale={int(out_w * 1.08)}:{int(half_h * 1.08)},"
+                    f";[{top_name}]"
+                filter_complex += (
+            if zoom:
+
+                top_name = "topmirror"
+                )
+                    "[topmirror]"
+                    "hflip"
+                    f";[{top_name}]"
+                filter_complex += (
+            if mirror:
+
+            top_name = "top"
+
+            )
+                f"[top]"
+                f"setsar=1"
+                f"crop={out_w}:{half_h},"
+                f"force_original_aspect_ratio=increase,"
+                f"scale={out_w}:{half_h}:"
+                f"[0:v]"
+            filter_complex = (
+            # TOP: original KICK clip
+
+            is_image = split_file.suffix.lower() in image_extensions
+
+            }
+                ".gif"
+                ".webp",
+                ".png",
+                ".jpeg",
+                ".jpg",
+            image_extensions = {
+
+            half_h = out_h // 2
+            out_w, out_h = target
+
+        if split_file.exists():
+
+        split_file = Path(split_photo_file)
+
+    if options.get("split_screen") and split_photo_file and target is not None:
+    # ---------------------------------------------------------
+    # SPLIT SCREEN - USER UPLOADED IMAGE OR VIDEO
+    # ---------------------------------------------------------
+
+        return
+        run_ffmpeg(command)
+
+            ]
+                str(output_file)
+                "192k",
+                "-b:a",
+                "aac",
+                "-c:a",
+                "20",
+                "-crf",
+                "medium",
+                "-preset",
+                "libx264",
+                "-c:v",
+                video_filter,
+                "-vf",
+                str(input_file),
+                "-i",
+                "-y",
+                "ffmpeg",
+            command = [
+        else:
+
+            ]
+                str(output_file)
+                "-shortest",
+                "192k",
+                "-b:a",
+                "aac",
+                "-c:a",
+                "20",
+                "-crf",
+                "medium",
+                "-preset",
+                "libx264",
+                "-c:v",
+                "0:a?",
+                "-map",
+                "[out]",
+                "-map",
+                ),
+                    f"(W-w)/2:H-h-(H*0.25):format=auto[out]"
+                    f"[v][ov]overlay="
+                    f"scale={out_w}:-1[ov];"
+                    f"[1:v]format=rgba,"
+                    f"[0:v]{video_filter}[v];"
+                (
+                "-filter_complex",
+                str(overlay_file),
+                "-i",
+                "1",
+                "-loop",
+                str(input_file),
+                "-i",
+                "-y",
+                "ffmpeg",
+            command = [
+        if overlay_file:
+
+        video_filter = ",".join(filters) if filters else "null"
+
+            filters.append(enhance_filter)
+        if enhance_filter:
+
+        )
+            options.get("enhance", "Off")
+        enhance_filter = ENHANCE_PRESETS.get(
+
+            )
+                "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+                "scale=iw*1.08:ih*1.08,"
+            filters.append(
+        if zoom:
+
+            filters.append("hflip")
+        if mirror:
+
+        out_h = height
+        out_w = width
+
+        width, height = get_video_size(input_file)
+
+    if target is None:
+
+    filters = []
+
+    target = dimensions.get(size)
+
+    }
+        "Original": None
+        "4:3": (1440, 1080),
+        "4:5": (1080, 1350),
+        "1:1": (1080, 1080),
+        "9:16": (1080, 1920),
+    dimensions = {
+
+    )
+        f"{options}"
+        f"Editing {input_file} with "
+    print(
+
+    blur = options["blur"]
+    mirror = options["mirror"]
+    zoom = options["zoom"]
+
+        )
+            url_streamer_hint
+            input_file,
+            size,
+        overlay_file = get_overlay_file(
+    if options.get("overlay", True) and overlay_file is None:
+
+    size = options["size"]
+
+def edit_video(input_file, output_file, options, overlay_file=None, url_streamer_hint=None, split_photo_file=None):
+
+# ---------------------------------------------------------
+# Video editing
+# ---------------------------------------------------------
+
+
+}
+    ),
+        "unsharp=5:5:2.0:5:5:0.8"
+        "eq=contrast=1.35:saturation=1.60:brightness=0.03:gamma=1.05,"
+    "Vivid": (
+    ),
+        "unsharp=5:5:1.2:5:5:0.5"
+        "eq=contrast=1.20:saturation=1.35:brightness=0.02:gamma=1.03,"
+    "Subtle": (
+    "Off": None,
+ENHANCE_PRESETS = {
+
+# These are combined into a single FFmpeg filter string per level.
+# "eq" adjusts contrast and saturation, "unsharp" adjusts sharpness.
+# ---------------------------------------------------------
+# Picture enhancement presets (sharpness / contrast / saturation)
+# ---------------------------------------------------------
+
+
+    )
+        size
+        streamer,
+    return find_overlay_for_streamer(
+
+        return None
+    if not streamer:
+
+    )
+        input_file
+    streamer = detect_streamer_name(
+
+        return None
+        )
+            "Overlay detection requires the input video."
+        print(
+    if input_file is None:
+
+    # -------------------------------------------------------
+    # 2) Fall back to OCR-based detection from the video itself.
+    # -------------------------------------------------------
+
+        )
+            f"'{url_streamer_hint}'. Falling back to OCR."
+            f"No overlay found for URL streamer name "
+        print(
+
+            return overlay
+
+            )
+                f"Overlay matched from URL: {url_streamer_hint}"
+            print(
+
+        if overlay:
+
+        )
+            size
+            url_streamer_hint,
+        overlay = find_overlay_for_streamer(
+
+        )
+            f"{url_streamer_hint}"
+            f"Checking for overlay matching URL streamer name: "
+        print(
+
+    if url_streamer_hint:
+
+    # -------------------------------------------------------
+    #    comes directly from KICK rather than being read off-screen.
+    #    This is instant and far more reliable than OCR, since it
+    # 1) Try the streamer name straight from the KICK URL first.
+    # -------------------------------------------------------
+):
+    url_streamer_hint=None
+    input_file=None,
+    size,
+def get_overlay_file(
+
+
+    return "H-h-(H*0.08)"
+
+        return "H-h-(H*0.08)"
+    if size == "4:3":
+
+        return "H-h-(H*0.10)"
+    if size == "4:5":
+
+        return "H-h-(H*0.06)"
+    if size == "1:1":
+
+        return "H-h-(H*0.25)"
+    if size == "9:16":
+def overlay_position(size):
+
+
+    return selected
+
+    )
+        f"Automatic overlay selected: {selected}"
+    print(
+
+    )
+        else pool[0]
+        if webp
+        webp[0]
+    selected = (
+
+    ]
+        if path.suffix.lower() == ".webp"
+        for path in pool
+        path
+    webp = [
+
+    )
+        else files
+        if preferred
+        preferred
+    pool = (
+
+        ]
+            )
+                path.stem.lower()
+                r"_(916|11|45|43)$",
+            if not re.search(
+            for path in files
+            path
+        preferred = [
+
+    else:
+
+        ]
+            )
+                preferred_suffix
+            if path.stem.lower().endswith(
+            for path in files
+            path
+        preferred = [
+
+    if preferred_suffix:
+
+    )
+        )
+            ""
+            size,
+        suffix_map.get(
+    preferred_suffix = (
+
+    }
+        "Original": "",
+        "4:3": "_43",
+        "4:5": "_45",
+        "1:1": "_11",
+        "9:16": "_916",
+    suffix_map = {
+
+        return None
+
+        )
+            f"{streamer_name}"
+            f"No overlay found for streamer: "
+        print(
+
+    if not files:
+
+    )
+        []
+        normalized_name,
+    files = library.get(
+
+    )
+        )
+            streamer_name
+        normalize_streamer_text(
+    normalized_name = (
+
+    library = get_overlay_library()
+):
+    size
+    streamer_name,
+def find_overlay_for_streamer(
+
+
+    return streamer
+
+    print("")
+    print("========================================")
+
+    )
+        f"OCR: confidence score = {best_score:.2f}"
+    print(
+
+    )
+        f"OCR: Detected streamer = {streamer}"
+    print(
+
+    best_score, top_score, streamer = ranked[0]
+
+    )
+        reverse=True
+    ranked.sort(
+
+        return None
+
+        )
+            "OCR: No streamer overlay will be applied."
+        print(
+
+        )
+            "OCR: Could not confidently identify streamer."
+        print(
+
+    if not ranked:
+
+            )
+                )
+                    overlay_name
+                    scores[0],
+                    combined_score,
+                (
+            ranked.append(
+        ):
+            or scores[0] >= 0.90
+            or strong_matches >= 2
+            exact_matches >= 1
+        if (
+
+        )
+            )
+                0.50
+                sum(scores[1:3]),
+            + min(
+            scores[0]
+        combined_score = (
+
+        )
+            if score >= 0.82
+            for score in scores
+            1
+        strong_matches = sum(
+
+        )
+            if score >= 0.99
+            for score in scores
+            1
+        exact_matches = sum(
+
+        )
+            reverse=True
+            scores,
+        scores = sorted(
+
+            continue
+        if not scores:
+
+    for overlay_name, scores in matches.items():
+
+    ranked = []
+
+                            ].append(score)
+                                overlay_name
+                            matches[
+                        if score >= 0.72:
+
+                            )
+                                ).ratio()
+                                    normalized_text
+                                    candidate,
+                                    None,
+                                difflib.SequenceMatcher(
+                            score = (
+                        else:
+
+                            score = 0.90
+                        ):
+                            and len(normalized_text) >= 4
+                            normalized_text in candidate
+                        elif (
+
+                            score = 1.0
+                        if candidate in normalized_text:
+
+                            continue
+                        if len(candidate) < 3:
+
+                        )
+                            )
+                                overlay_name
+                            normalize_streamer_text(
+                        candidate = (
+
+                    for overlay_name in library:
+
+                        continue
+                    if len(normalized_text) < 3:
+
+                    )
+                        )
+                            text
+                        normalize_streamer_text(
+                    normalized_text = (
+
+                for text in texts:
+
+                    )
+                        f"{texts}"
+                        f"({variant_name}): "
+                        f"OCR frame {frame_index + 1} "
+                    print(
+                if texts:
+
+                    continue
+                    )
+                        ocr_error
+                        "OCR frame error:",
+                    print(
+                except Exception as ocr_error:
+                    texts = _ocr_texts(frame)
+                try:
+
+                    continue
+                ):
+                    or not frame.exists()
+                    result.returncode != 0
+                if (
+
+                    continue
+                    )
+                        f"({variant_name}) timed out."
+                        f"OCR frame {frame_index + 1} "
+                    print(
+                except subprocess.TimeoutExpired:
+                    )
+                        timeout=30
+                        text=True,
+                        stderr=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        command,
+                    result = subprocess.run(
+                try:
+
+                ]
+                    str(frame)
+                    "-y",
+                    "2",
+                    "-q:v",
+                    video_filter,
+                    "-vf",
+                    "1",
+                    "-frames:v",
+                    "1",
+                    "-threads",
+                    "-an",
+                    str(input_file),
+                    "-i",
+                    str(second),
+                    "-ss",
+                    "error",
+                    "-loglevel",
+                    "-hide_banner",
+                    "ffmpeg",
+                command = [
+
+                )
+                    / f"frame_{frame_index}_{variant_index}.jpg"
+                    temp_dir
+                frame = (
+
+            ) in enumerate(variants):
+                video_filter
+                variant_name,
+            for variant_index, (
+
+            ]
+                ),
+                    "scale=1600:-2"
+                    "crop=iw*0.9:ih*0.65:iw*0.05:0,"
+                    "name_area",
+                (
+                ),
+                    "scale=1600:-2"
+                    "full",
+                (
+            variants = [
+
+            )
+                )
+                    0.1
+                    duration - 0.1,
+                max(
+                ),
+                    0.1
+                    duration * ratio,
+                max(
+            second = min(
+
+        ):
+            sample_ratios
+        for frame_index, ratio in enumerate(
+
+        )
+            temp_dir
+        temp_dir = Path(
+
+    ) as temp_dir:
+        prefix="cfa_ocr_"
+    with tempfile.TemporaryDirectory(
+
+    }
+        for name in library
+        name: []
+    matches = {
+
+    ]
+        0.95,
+        0.80,
+        0.60,
+        0.40,
+        0.20,
+        0.05,
+    sample_ratios = [
+
+    )
+        1.0
+        get_video_duration(input_file),
+    duration = max(
+
+    )
+        )
+            sorted(library.keys())
+        ", ".join(
+        "Available streamer overlays:",
+    print(
+
+    print("========================================")
+    print(" OCR STREAMER DETECTION")
+    print("========================================")
+    print("")
+
+        return None
+        )
+            "OCR: No named overlays found in overlays folder."
+        print(
+    if not library:
+
+    library = get_overlay_library()
+def detect_streamer_name(input_file):
+
+
+    return []
+
+            return output
+
+                        output.append(text)
+                    if text.strip():
+
+                    )
+                        row[1]
+                    text = str(
+
+                if len(row) > 1:
+
+            for row in rows:
+
+            output = []
+
+        if rows:
+
+        rows = result[0]
+
+    if isinstance(result, tuple) and result:
+
+        ]
+            if str(text).strip()
+            for text in texts
+            str(text)
+        return [
+    if texts:
+
+    )
+        None
+        "txts",
+        result,
+    texts = getattr(
+
+    )
+        str(image_path)
+    result = OCR_ENGINE(
+def _ocr_texts(image_path):
+
+
+    return library
+
+        ).append(path)
+            []
+            base,
+        library.setdefault(
+
+            continue
+        if not base or base == "kick":
+
+        base = overlay_base_name(path)
+
+            continue
+        if path.suffix.lower() not in OVERLAY_EXTENSIONS:
+
+            continue
+        if not path.is_file():
+
+    for path in OVERLAY_DIR.iterdir():
+
+    library = {}
+def get_overlay_library():
+
+
+    return normalize_streamer_text(stem)
+
+    )
+        stem
+        "",
+        r"_(916|11|45|43)$",
+    stem = re.sub(
+
+    )
+        stem
+        "",
+        r"\s*\(\d+\)\s*$",
+    stem = re.sub(
+
+    stem = path.stem.lower().strip()
+def overlay_base_name(path):
+
+
+    )
+        str(value).lower()
+        "",
+        r"[^a-z0-9]+",
+    return re.sub(
+def normalize_streamer_text(value):
+
+
+}
+    ".jpeg",
+    ".jpg",
+    ".png",
+    ".webp",
+OVERLAY_EXTENSIONS = {
+
+# ---------------------------------------------------------
+# AUTOMATIC OCR OVERLAY SYSTEM
+# ---------------------------------------------------------
+
+
+    print("========================================")
+    print(" SPEECH TRIM COMPLETE")
+    print("========================================")
+    print("")
+
+    run_ffmpeg(command)
+
+    ]
+        str(output_file)
+        "+faststart",
+        "-movflags",
+        "192k",
+        "-b:a",
+        "aac",
+        "-c:a",
+        "yuv420p",
+        "-pix_fmt",
+        "20",
+        "-crf",
+        "medium",
+        "-preset",
+        "libx264",
+        "-c:v",
+        "[a]",
+        "-map",
+        "[v]",
+        "-map",
+        filter_complex,
+        "-filter_complex",
+        str(input_file),
+        "-i",
+        "-y",
+        "ffmpeg",
+    command = [
+
+    filter_complex = ";".join(filters)
+
+    )
+        + f"concat=n={len(final_intervals)}:v=1:a=1[v][a]"
+        concat_inputs
+    filters.append(
+
+        )
+            f"[v{index}][a{index}]"
+        concat_inputs += (
+    for index in range(len(final_intervals)):
+
+    concat_inputs = ""
+
+        )
+            f"[a{index}]"
+            f"asetpts=PTS-STARTPTS"
+            f"atrim=start={start_time}:end={end_time},"
+            f"[0:a]"
+        filters.append(
+
+        )
+            f"[v{index}]"
+            f"setpts=PTS-STARTPTS"
+            f"trim=start={start_time}:end={end_time},"
+            f"[0:v]"
+        filters.append(
+
+    ):
+        final_intervals
+    for index, (start_time, end_time) in enumerate(
+
+    filters = []
+
+        return
+
+        ])
+            str(output_file)
+            "192k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            "20",
+            "-crf",
+            "medium",
+            "-preset",
+            "libx264",
+            "-c:v",
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        run_ffmpeg([
+
+        print("Keeping complete video.")
+        print("No meaningful pauses found.")
+
+    ):
+        and final_intervals[0][1] >= original_duration - 0.05
+        and final_intervals[0][0] <= 0.01
+        len(final_intervals) == 1
+    if (
+
+    )
+        f"{removed_duration:.2f}s"
+        f"Non-speaking removed: "
+    print(
+    )
+        f"Speech kept: {kept_duration:.2f}s"
+    print(
+    )
+        f"Original duration: {original_duration:.2f}s"
+    print(
+
+    )
+        original_duration - kept_duration
+        0.0,
+    removed_duration = max(
+
+    )
+        for start_time, end_time in final_intervals
+        end_time - start_time
+    kept_duration = sum(
+
+    original_duration = duration
+
+        )
+            f"{start_time:.2f}s -> {end_time:.2f}s"
+            f"Speech {index}: "
+        print(
+    ):
+        start=1
+        final_intervals,
+    for index, (start_time, end_time) in enumerate(
+
+    )
+        f"Detected {len(final_intervals)} speech sections."
+    print(
+
+            )
+                [start_time, end_time]
+            final_intervals.append(
+        else:
+            )
+                end_time
+                previous_end,
+            final_intervals[-1][1] = max(
+        if start_time <= previous_end:
+
+        previous_start, previous_end = final_intervals[-1]
+
+            continue
+            )
+                [start_time, end_time]
+            final_intervals.append(
+        if not final_intervals:
+
+    for start_time, end_time in intervals:
+
+    final_intervals = []
+
+            )
+                (start_time, end_time)
+            intervals.append(
+        if end_time - start_time >= 0.20:
+
+        )
+            end_time + padding_after
+            duration,
+        end_time = min(
+
+        )
+            start_time - padding_before
+            0.0,
+        start_time = max(
+
+    for start_time, end_time in merged:
+
+    intervals = []
+
+    duration = get_video_duration(input_file)
+
+    padding_after = 0.35
+    padding_before = 0.25
+
+            )
+                [start_time, end_time]
+            merged.append(
+        else:
+            merged[-1][1] = end_time
+        if gap <= 0.75:
+
+        gap = start_time - previous_end
+
+        previous_start, previous_end = merged[-1]
+
+            continue
+            )
+                [start_time, end_time]
+            merged.append(
+        if not merged:
+
+    for start_time, end_time in raw_intervals:
+
+    merged = []
+
+    )
+        )
+            (previous + 1) * frame_ms / 1000
+            interval_start * frame_ms / 1000,
+        (
+    raw_intervals.append(
+
+        previous = frame_index
+
+            interval_start = frame_index
+
+            )
+                (start_time, end_time)
+            raw_intervals.append(
+
+            )
+                / 1000
+                * frame_ms
+                (previous + 1)
+            end_time = (
+
+            )
+                / 1000
+                * frame_ms
+                interval_start
+            start_time = (
+        if frame_index - previous > 10:
+
+    for frame_index in speech_frames[1:]:
+
+    previous = speech_frames[0]
+    interval_start = speech_frames[0]
+
+    raw_intervals = []
+
+        return
+
+        ])
+            str(output_file)
+            "192k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            "20",
+            "-crf",
+            "medium",
+            "-preset",
+            "libx264",
+            "-c:v",
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        run_ffmpeg([
+
+        print("Keeping original video.")
+        print("No speech detected.")
+    if not speech_frames:
+
+            speech_frames.append(index)
+        if is_speech:
+
+            is_speech = False
+        except Exception:
+            )
+                sample_rate
+                frame,
+            is_speech = vad.is_speech(
+        try:
+
+        frame = pcm[start_byte:end_byte]
+
+        end_byte = start_byte + bytes_per_frame
+        start_byte = index * bytes_per_frame
+
+    for index in range(total_frames):
+
+    total_frames = len(pcm) // bytes_per_frame
+
+    speech_frames = []
+
+    bytes_per_frame = samples_per_frame * 2
+    )
+        sample_rate * frame_ms / 1000
+    samples_per_frame = int(
+    frame_ms = 30
+    sample_rate = 16000
+
+    vad = webrtcvad.Vad(2)
+
+        return
+
+        ])
+            str(output_file)
+            "192k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            "20",
+            "-crf",
+            "medium",
+            "-preset",
+            "libx264",
+            "-c:v",
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        run_ffmpeg([
+
+        print("Keeping original video.")
+        print("No audio detected.")
+    if not pcm:
+
+    pcm = result.stdout
+
+        )
+            "Could not extract audio for speech detection."
+        raise RuntimeError(
+    if result.returncode != 0:
+
+        )
+            "Audio extraction timed out while detecting speech."
+        raise RuntimeError(
+    except subprocess.TimeoutExpired:
+        )
+            timeout=600
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            command,
+        result = subprocess.run(
+    try:
+
+    ]
+        "-"
+        "s16le",
+        "-f",
+        "16000",
+        "-ar",
+        "1",
+        "-ac",
+        "-vn",
+        str(input_file),
+        "-i",
+        "error",
+        "-loglevel",
+        "-hide_banner",
+        "ffmpeg",
+    command = [
+
+    output_file = Path(output_file)
+    input_file = Path(input_file)
+
+    print("Detecting actual speech...")
+    print("========================================")
+    print(" VOICE ACTIVITY DETECTION")
+    print("========================================")
+    print("")
+def remove_silence(input_file, output_file):
+
+# ---------------------------------------------------------
+# Remove final 4 seconds
+# ---------------------------------------------------------
+
+
+    run_ffmpeg(command)
+
+    ]
+        str(output_file)
+        "copy",
+        "-c",
+        f"{target_duration:.3f}",
+        "-t",
+        str(input_file),
+        "-i",
+        "-y",
+        "ffmpeg",
+    command = [
+
+    )
+        f"(aiming for under {target_mb:.1f} MB)"
+        f"Target: {target_duration:.2f}s "
+    print(
+    )
+        f"{size_bytes / (1024 * 1024):.2f} MB"
+        f"Original: {duration:.2f}s / "
+    print(
+    print("========================================")
+    print(" TRIMMING TO FIT SIZE LIMIT (same bitrate)")
+    print("========================================")
+    print("")
+
+        return
+        shutil.copy2(input_file, output_file)
+    if target_duration >= duration - 0.05:
+
+    target_duration = max(1.0, min(target_duration, duration))
+    # Never go below 1 second, and never "extend" past the original.
+
+    target_duration = target_bytes / bytes_per_second
+    target_bytes = target_mb * 1024 * 1024 * safety_margin
+    bytes_per_second = size_bytes / duration
+
+        return
+        shutil.copy2(input_file, output_file)
+    if duration <= 0 or size_bytes <= 0:
+
+    size_bytes = input_file.stat().st_size
+    duration = get_video_duration(input_file)
+
+    output_file = Path(output_file)
+    input_file = Path(input_file)
+
+    """
+    keyframe rather than an exact byte count.
+    margin is applied since stream-copy cuts snap to the nearest
+    is untouched -- only its length is shortened. A small safety
+    This uses "-c copy" (stream copy), so the video/audio data itself
+
+    target_mb, WITHOUT re-encoding or lowering bitrate/quality at all.
+    Trim the END off an already-encoded video so the file fits under
+    """
+def trim_to_target_size(input_file, output_file, target_mb, safety_margin=0.95):
+
+# ---------------------------------------------------------
+# Trim a finished video down to fit under a size limit
+# ---------------------------------------------------------
+
+
+        print("Cleanup warning:", e)
+    except Exception as e:
+
+            shutil.rmtree(parent, ignore_errors=True)
+        ):
+            and parent.name.startswith("kick_")
+            parent.parent.resolve() == UPLOAD_DIR.resolve()
+        if (
+
+        parent = path.parent
+        # The source lives in uploads/kick_USER_ID/.
+
+            path.unlink()
+        if path.exists():
+
+        path = Path(path)
+    try:
+
+    """
+    Delete a downloaded KICK source and its temporary job directory.
+    """
+def cleanup_job_files(path):
+
+
+        )
+            "that yt-dlp/curl_cffi are installed."
+            "Make sure the Clip opens normally in your browser and "
+            f"{message}\n\n"
+            "Could not download the KICK Clip.\n"
+        raise RuntimeError(
+
+        message = str(e).strip() or f"{type(e).__name__} (no message)"
+
+        traceback.print_exc()
+        print("========================================")
+        print(" KICK DOWNLOAD ERROR (FULL TRACEBACK)")
+        print("\n========================================")
+
+        shutil.rmtree(job_dir, ignore_errors=True)
+    except Exception as e:
+
+        return video_file
+
+        print(f"KICK clip downloaded: {video_file}")
+
+            )
+                "The downloaded KICK file is unexpectedly small."
+            raise RuntimeError(
+        if video_file.stat().st_size < 10_000:
+
+        video_file = video_candidates[0]
+
+        )
+            )
+                -p.stat().st_size
+                0 if p.suffix.lower() == ".mp4" else 1,
+            key=lambda p: (
+        video_candidates.sort(
+        # Prefer MP4.
+
+            )
+                "KICK download completed, but no video file was found."
+            raise RuntimeError(
+        if not video_candidates:
+
+                video_candidates.insert(0, requested)
+            if requested.exists():
+            requested = Path(requested_path)
+        if requested_path:
+
+        ]
+            }
+                ".mp4", ".mov", ".mkv", ".webm"
+            and p.suffix.lower() in {
+            if p.is_file()
+            p for p in candidates
+        video_candidates = [
+
+        candidates = list(job_dir.glob("*"))
+
+            requested_path = info.get("_filename")
+        if info:
+
+        requested_path = None
+
+            print("CHECKPOINT: extract_info() returned", flush=True)
+            info = ydl.extract_info(url, download=True)
+            print("CHECKPOINT: calling ydl.extract_info(...) now", flush=True)
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        print("CHECKPOINT: about to call yt_dlp.YoutubeDL(...)", flush=True)
+    try:
+
+    print(url)
+    print("========================================")
+    print(" DOWNLOADING KICK CLIP")
+    print("========================================")
+    print("")
+
+        )
+            f"{impersonate_error}"
+            f"Impersonation unavailable, continuing without it: "
+        print(
+    except Exception as impersonate_error:
+        ydl_opts["impersonate"] = ImpersonateTarget.from_str("chrome")
+        from yt_dlp.networking.impersonate import ImpersonateTarget
+    try:
+    # yt-dlp's normal client instead of crashing.
+    # If anything about impersonation isn't available, fall back to
+    # object here (not a plain string), or they raise an AssertionError.
+    # supports it. Newer yt-dlp versions require an ImpersonateTarget
+    # Prefer curl_cffi impersonation when the installed yt-dlp version
+
+    }
+        "socket_timeout": 60,
+        "fragment_retries": 3,
+        "retries": 3,
+        "no_warnings": False,
+        "quiet": False,
+        "noplaylist": True,
+        "merge_output_format": "mp4",
+        "format": "best[ext=mp4]/best",
+        "outtmpl": output_template,
+    ydl_opts = {
+
+    )
+        job_dir / "kick_clip_%(id)s.%(ext)s"
+    output_template = str(
+
+    job_dir.mkdir(parents=True, exist_ok=True)
+
+        shutil.rmtree(job_dir, ignore_errors=True)
+    if job_dir.exists():
+
+    job_dir = UPLOAD_DIR / f"kick_{user_id}"
+    # accidentally overwriting each other's source file.
+    # Unique temporary working directory prevents two users from
+
+        )
+            "Please paste a link such as https://kick.com/.../clip/..."
+            "That does not look like a KICK Clip URL.\n"
+        raise RuntimeError(
+    if not is_kick_clip_url(url):
+
+    """
+    ordinary HTTP clients.
+    curl_cffi is recommended because some KICK endpoints can reject
+
+    temporary and is deleted after editing finishes.
+    yt-dlp currently has a KICK Clips extractor. The download is
+
+    Download a KICK Clip to the local USB uploads directory.
+    """
+def download_kick_clip(url, user_id):
+
+
+    return url
+
+    url = match.group(0).rstrip(".,)>]}")
+
+        return None
+    if not match:
+
+    )
+        text.strip()
+        r"https?://[^\s<>]+",
+    match = re.search(
+
+    """
+    Extract the first HTTP(S) URL from a Discord message.
+    """
+def clean_url_from_message(text):
+
+
+    return None
+
+        pass
+    except Exception:
+
+            return segments[0]
+        if segments:
+
+        segments = [segment for segment in path.split("/") if segment]
+        path = (parsed.path or "").strip("/")
+        parsed = urlparse(url.strip())
+    try:
+
+    """
+    username doesn't match any overlay filename we have on file.
+    needing OCR at all. OCR is kept as a fallback in case the
+    is a fast and reliable way to identify the streamer without
+    The first path segment is always the streamer's username, so this
+
+        https://kick.com/<username>/clips/<clip_id>
+    KICK Clip URLs follow the pattern:
+
+    Extract the creator/streamer username directly from a KICK Clip URL.
+    """
+def extract_streamer_from_url(url):
+
+
+    )
+        or "/clips/" in path
+        "/clip/" in path
+    return (
+
+    path = (parsed.path or "").lower()
+
+        return False
+    if host not in {"kick.com", "www.kick.com"}:
+
+    host = (parsed.hostname or "").lower()
+
+        return False
+    except Exception:
+        parsed = urlparse(url.strip())
+    try:
+
+    """
+    clip-like path.
+    intentionally based on the hostname plus the presence of a
+    KICK URLs can change their exact path format, so validation is
+
+    Accept normal KICK Clip URLs while rejecting arbitrary URLs.
+    """
+def is_kick_clip_url(url):
+
+# ---------------------------------------------------------
+# KICK URL validation + downloader
+# ---------------------------------------------------------
+
+
+    return None
+
+            continue
+            print("Re-encode attempt failed:", e)
+        except Exception as e:
+
+                # but continue trying other presets
+                # keep candidate as potential smaller intermediate
+
+                    return candidate
+                if size_mb <= target_mb:
+                print(f"Compressed attempt: {size_mb:.2f} MB ({candidate})")
+                size_mb = candidate.stat().st_size / (1024 * 1024)
+            if candidate.exists():
+
+            run_ffmpeg(cmd, timeout=timeout)
+        try:
+
+        ]
+            str(candidate)
+            "96k",
+            "-b:a",
+            "aac",
+            "-c:a",
+            str(crf),
+            "-crf",
+            "slow",
+            "-preset",
+            "libx264",
+            "-c:v",
+        cmd += [
+
+            cmd += ["-vf", vf]
+        if vf:
+
+        ]
+            str(input_file),
+            "-i",
+            "-y",
+            "ffmpeg",
+        cmd = [
+
+        )
+            f"{output_file.stem.rsplit('.',1)[0]}_{out_name}"
+        candidate = output_file.parent / (
+
+            out_name = f"compressed_crf{crf}.mp4"
+            vf = None
+        else:
+            out_name = f"compressed_{scale_w}_crf{crf}.mp4"
+            vf = f"scale='min({scale_w},iw)':-2"
+        if scale_w:
+
+    for scale_w, crf in presets:
+
+        ]
+            (None, 32),
+            (720, 30),
+            (720, 28),
+            (960, 30),
+            (960, 28),
+            (1280, 30),
+            (1280, 28),
+            # (scale_width, crf)
+        presets = [
+    if presets is None:
+
+    output_file = Path(output_file)
+    input_file = Path(input_file)
+    """
+    on success or None on failure.
+    over a small set of scale and CRF presets. Returns the output_path
+    Try re-encoding the input_file to fit under target_mb by iterating
+    """
+def reencode_to_target_size(input_file, output_file, target_mb, presets=None, timeout=1800):
+
+
+    return None
+
+        print("transfer.sh upload error:", e)
+    except Exception as e:
+
+            return url
+        if url.startswith("http"):
+
+        url = result.stdout.strip()
+
+            return None
+            print("transfer.sh upload failed:", result.stderr.strip())
+        if result.returncode != 0:
+
+        )
+            timeout=timeout
+            text=True,
+            stderr=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            cmd,
+        result = subprocess.run(
+
+        ]
+            f"https://transfer.sh/{file_path.name}"
+            str(file_path),
+            "--upload-file",
+            "-s",
+            curl_cmd,
+        cmd = [
+
+            curl_cmd = str(curl_exe)
+        else:
+            curl_cmd = "curl"
+        if not curl_exe.exists():
+
+        curl_exe = scripts_dir / "curl-cffi.exe"
+        scripts_dir = Path(sys.executable).parent / "Scripts"
+    try:
+
+    file_path = Path(file_path)
+    """
+    Returns the public URL on success or None on failure.
+    Upload a file to transfer.sh using the bundled curl-cffi.exe if available.
+    """
+def upload_to_transfersh(file_path, timeout=120):
+
+
+        return 60.0
+    except Exception:
+        return float(result.stdout.strip())
+    try:
+
+    )
+        text=True
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        command,
+    result = subprocess.run(
+
+    ]
+        str(input_file)
+        "default=noprint_wrappers=1:nokey=1",
+        "-of",
+        "format=duration",
+        "-show_entries",
+        "error",
+        "-v",
+        "ffprobe",
+    command = [
+def get_video_duration(input_file):
+
+
+        return 1920, 1080
+    except Exception:
+        return int(width), int(height)
+        width, height = value.split("x")
+    try:
+
+    value = result.stdout.strip()
+
+    )
+        text=True
+        stderr=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        command,
+    result = subprocess.run(
+
+    ]
+        str(input_file)
+        "-of", "csv=s=x:p=0",
+        "-show_entries", "stream=width,height",
+        "-select_streams", "v:0",
+        "-v", "error",
+        "ffprobe",
+    command = [
+def get_video_size(input_file):
+
+
+    return return_code
+    print("\nFFmpeg finished successfully.")
+
+        )
+            f"FFmpeg failed with exit code {return_code}"
+        raise RuntimeError(
+
+            print("\n".join(output_lines[-200:]))
+        if output_lines:
+
+        print("========================================")
+        print("FFMPEG ERROR")
+        print("\n========================================")
+    if return_code != 0:
+
+        raise
+        print("\nFFMPEG INTERRUPTED BY USER")
+
+            pass
+        except Exception:
+            process.wait(timeout=10)
+        try:
+
+        process.kill()
+    except KeyboardInterrupt:
+
+        )
+            f"FFmpeg timed out after {timeout} seconds."
+        raise RuntimeError(
+        print("\nFFMPEG TIMEOUT")
+
+            pass
+        except Exception:
+            process.wait(timeout=10)
+        try:
+
+        process.kill()
+    except subprocess.TimeoutExpired:
+
+        return_code = process.wait(timeout=timeout)
+
+                    output_lines.pop(0)
+                if len(output_lines) > 1000:
+
+                output_lines.append(line)
+                print(line)
+            if line:
+
+            line = line.rstrip()
+        for line in process.stdout:
+    try:
+
+    output_lines = []
+
+    )
+        bufsize=1
+        text=True,
+        stderr=subprocess.STDOUT,
+        stdout=subprocess.PIPE,
+        command,
+    process = subprocess.Popen(
+
+    print("")
+    print(" ".join(str(x) for x in command))
+    print("========================================")
+    print("RUNNING FFMPEG")
+    print("\n========================================")
+def run_ffmpeg(command, timeout=FFMPEG_TIMEOUT):
+
+        return await asyncio.to_thread(func, *args)
+    async with EDIT_SEMAPHORE:
+async def run_encode_job(func, *args):
+
+EDIT_SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT_EDITS)
+MAX_CONCURRENT_EDITS = 5
+# Extra jobs beyond this wait automatically instead of overloading the CPU.
+# Limits how many ffmpeg/edit jobs run at the same time.
+
+# ---------------------------------------------------------
+# FFmpeg helpers
+# ---------------------------------------------------------
+
+
+SESSIONS = {}
+# Active editing sessions
+
+client = discord.Client(intents=intents)
+
+intents.message_content = True
+intents = discord.Intents.default()
+
+OCR_ENGINE = RapidOCR()
+
+# ---------------------------------------------------------
+# OCR ENGINE
+# ---------------------------------------------------------
+
+
+# to become shorter than 1 second.
+# We trim the final 4 seconds as requested, but never allow the result
+# KICK Clips are currently documented by KICK as 10-180 seconds.
+
+FFMPEG_TIMEOUT = 1800
+# Maximum time allowed for FFmpeg jobs.
+
+OVERLAY_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR.mkdir(exist_ok=True)
+UPLOAD_DIR.mkdir(exist_ok=True)
+
+OVERLAY_DIR = Path("overlays")
+OUTPUT_DIR = Path("output")
+UPLOAD_DIR = Path("uploads")
+
+    )
+        "DISCORD_BOT_TOKEN is not set. Put it in .env or set it in PowerShell."
+    raise RuntimeError(
+if not TOKEN:
+
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+
+load_dotenv()
+
+
+import yt_dlp
+#   python -m pip install -U yt-dlp curl_cffi
+# Install it with:
+# yt-dlp is used to download KICK Clips from their public Clip URL.
+
+from rapidocr_onnxruntime import RapidOCR
+from dotenv import load_dotenv
+from public_download import create_public_download_link, start_cleanup_task
+import discord
+import webrtcvad
+
+import sys
+from urllib.parse import urlparse
+from pathlib import Path
+import traceback
+import shutil
+from smart_presets import get_preset, list_presets
+from clip_history import record_clip, is_duplicate, search_similar_transcript
+from clip_intelligence import build_moment_score
+from word_caption import burn_word_captions
+from smart_cut import smart_cut
+from captioning import transcribe_and_caption
+import asyncio
+import tempfile
+import subprocess
+import difflib
+import re
+import os
+import random
+
+

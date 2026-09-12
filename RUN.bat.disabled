@@ -1,0 +1,18 @@
+@echo off
+setlocal
+cd /d "%~dp0"
+if not exist "%~dp0python\python.exe" (
+    echo Portable Python is not installed yet.
+    echo Please run INSTALL.bat first.
+    pause
+    exit /b 1
+)
+if not exist "%~dp0ffmpeg\bin\ffmpeg.exe" (
+    echo Portable FFmpeg is not installed yet.
+    echo Please run INSTALL.bat first.
+    pause
+    exit /b 1
+)
+set "PATH=%~dp0ffmpeg\bin;%PATH%"
+"%~dp0python\python.exe" "%~dp0main.py"
+pause
