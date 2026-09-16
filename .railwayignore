@@ -9,11 +9,14 @@ env/
 .env
 uploads/
 output/
-overlays/
 temp/
 vod_jobs/
 vod_downloads/
 vod_analysis_cache/
+cache/
+logs/
 *.log
 .git/
 .gitignore
+*.mp4
+*.bak

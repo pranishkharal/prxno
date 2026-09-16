@@ -1,1 +1,1 @@
-{"schema": "1.0", "build": {"builder": "nixpacks", "buildCommand": "pip install -r requirements.txt"}, "deploy": {"startCommand": "python main.py", "restartPolicy": "always", "environment": {"PYTHON_VERSION": "3.12", "PYTHONUNBUFFERED": "1"}}}
+{"schema": "1.0", "deploy": {"restartPolicy": "always"}}
