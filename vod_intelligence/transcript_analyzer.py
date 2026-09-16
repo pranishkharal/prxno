@@ -66,6 +66,81 @@ class TranscriptAnalysis:
     key_phrases: List[str]
 
 
+def transcript_to_dict(analysis: TranscriptAnalysis) -> Dict[str, Any]:
+    """Convert a TranscriptAnalysis into a JSON-serialisable dict.
+
+    This is the canonical shape used both for the per-job transcript file and
+    for the shared analysis cache, so the two can never drift apart.
+    """
+    return {
+        "full_text": analysis.full_text,
+        "duration": analysis.duration,
+        "word_count": analysis.word_count,
+        "language": analysis.language,
+        "topics": analysis.topics,
+        "emotions": analysis.emotions,
+        "storytelling_score": analysis.storytelling_score,
+        "hook_candidates": analysis.hook_candidates,
+        "payoff_candidates": analysis.payoff_candidates,
+        "controversy_score": analysis.controversy_score,
+        "surprise_score": analysis.surprise_score,
+        "named_entities": analysis.named_entities,
+        "questions": analysis.questions,
+        "arguments": analysis.arguments,
+        "key_phrases": analysis.key_phrases,
+        "segments": [
+            {
+                "text": segment.text,
+                "start": segment.start,
+                "end": segment.end,
+                "words": [
+                    {"word": word.word, "start": word.start, "end": word.end}
+                    for word in segment.words
+                ],
+            }
+            for segment in analysis.segments
+        ],
+    }
+
+
+def transcript_from_dict(data: Dict[str, Any]) -> TranscriptAnalysis:
+    """Rebuild a TranscriptAnalysis from its dict form."""
+    segments = [
+        TranscriptSegment(
+            text=segment.get("text", ""),
+            start=segment.get("start", 0.0),
+            end=segment.get("end", 0.0),
+            words=[
+                TranscriptWord(
+                    word=word.get("word", ""),
+                    start=word.get("start", 0.0),
+                    end=word.get("end", 0.0),
+                )
+                for word in segment.get("words", [])
+            ],
+        )
+        for segment in data.get("segments", [])
+    ]
+    return TranscriptAnalysis(
+        full_text=data.get("full_text", ""),
+        segments=segments,
+        duration=data.get("duration", 0),
+        word_count=data.get("word_count", 0),
+        language=data.get("language", "en"),
+        topics=data.get("topics", []),
+        emotions=data.get("emotions", []),
+        storytelling_score=data.get("storytelling_score", 0),
+        hook_candidates=data.get("hook_candidates", []),
+        payoff_candidates=data.get("payoff_candidates", []),
+        controversy_score=data.get("controversy_score", 0),
+        surprise_score=data.get("surprise_score", 0),
+        named_entities=data.get("named_entities", []),
+        questions=data.get("questions", []),
+        arguments=data.get("arguments", []),
+        key_phrases=data.get("key_phrases", []),
+    )
+
+
 class TranscriptAnalyzer:
     """
     Transcribes and semantically analyzes video content.
@@ -438,62 +513,11 @@ Transcript:
 
     def save_analysis(self, analysis: TranscriptAnalysis, output_path: Path):
         """Save analysis to JSON file."""
-        import dataclasses
-        data = {
-            "full_text": analysis.full_text,
-            "duration": analysis.duration,
-            "word_count": analysis.word_count,
-            "language": analysis.language,
-            "topics": analysis.topics,
-            "emotions": analysis.emotions,
-            "storytelling_score": analysis.storytelling_score,
-            "hook_candidates": analysis.hook_candidates,
-            "payoff_candidates": analysis.payoff_candidates,
-            "controversy_score": analysis.controversy_score,
-            "surprise_score": analysis.surprise_score,
-            "named_entities": analysis.named_entities,
-            "questions": analysis.questions,
-            "arguments": analysis.arguments,
-            "key_phrases": analysis.key_phrases,
-            "segments": [
-                {
-                    "text": s.text,
-                    "start": s.start,
-                    "end": s.end,
-                    "words": [{"word": w.word, "start": w.start, "end": w.end} for w in s.words]
-                }
-                for s in analysis.segments
-            ]
-        }
-        output_path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+        output_path.write_text(
+            json.dumps(transcript_to_dict(analysis), indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
 
     def load_analysis(self, path: Path) -> TranscriptAnalysis:
         """Load analysis from JSON file."""
-        data = json.loads(path.read_text(encoding='utf-8'))
-        segments = [
-            TranscriptSegment(
-                text=s["text"],
-                start=s["start"],
-                end=s["end"],
-                words=[TranscriptWord(**w) for w in s.get("words", [])]
-            )
-            for s in data.get("segments", [])
-        ]
-        return TranscriptAnalysis(
-            full_text=data["full_text"],
-            segments=segments,
-            duration=data["duration"],
-            word_count=data["word_count"],
-            language=data["language"],
-            topics=data.get("topics", []),
-            emotions=data.get("emotions", []),
-            storytelling_score=data.get("storytelling_score", 0),
-            hook_candidates=data.get("hook_candidates", []),
-            payoff_candidates=data.get("payoff_candidates", []),
-            controversy_score=data.get("controversy_score", 0),
-            surprise_score=data.get("surprise_score", 0),
-            named_entities=data.get("named_entities", []),
-            questions=data.get("questions", []),
-            arguments=data.get("arguments", []),
-            key_phrases=data.get("key_phrases", []),
-        )
+        return transcript_from_dict(json.loads(path.read_text(encoding="utf-8")))

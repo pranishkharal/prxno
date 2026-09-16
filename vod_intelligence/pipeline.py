@@ -29,7 +29,12 @@ from .job_manager import JobManager, VODJob, JobState, JobErrorType, ClipCandida
 from .vod_downloader import download_kick_vod, probe_media, cleanup_download
 from .chat_analyzer import ChatAnalyzer, fetch_kick_chat_replay, create_mock_chat
 from .audio_analyzer import AudioAnalyzer
-from .transcript_analyzer import TranscriptAnalyzer
+from .transcript_analyzer import (
+    TranscriptAnalyzer,
+    TranscriptAnalysis,
+    transcript_from_dict,
+    transcript_to_dict,
+)
 from .context_analyzer import ContextAnalyzer, merge_overlapping_moments, ExpandedMoment
 from .moment_scorer import score_all_moments
 from .story_analyzer import analyze_all_stories
@@ -58,6 +63,83 @@ class PipelineOrchestrator:
         self.clip_ranker = ClipRanker()
         self.edit_planner = EditPlanner()
         self.metadata_generator = MetadataGenerator()
+
+    async def _transcribe_shared(
+        self,
+        vod_path: Path,
+        job_id: str,
+        source_url: str,
+        fast_mode: bool = False,
+    ) -> TranscriptAnalysis:
+        """Transcribe once per source and let other jobs reuse the result.
+
+        The old cache was keyed by the random job id, so twenty jobs on one VOD
+        transcribed twenty times. The key is now the source identity plus the
+        model and analysis configuration, which means every job after the first
+        reuses the stored transcript instead of paying for Whisper again.
+
+        Falls back to a plain transcription when the infrastructure layer is
+        unavailable, so this pipeline still runs standalone.
+        """
+        analyzer = self.transcript_analyzer
+
+        async def _transcribe_and_serialise():
+            analysis = await analyzer.transcribe(
+                vod_path, job_id, self.job_manager, fast_mode=fast_mode
+            )
+            return transcript_to_dict(analysis)
+
+        async def _uncached():
+            return await analyzer.transcribe(
+                vod_path, job_id, self.job_manager, fast_mode=fast_mode
+            )
+
+        try:
+            from infra.analysis_cache import KIND_TRANSCRIPT, get_analysis_cache
+            from infra.source_cache import canonical_source_id
+        except Exception as cache_import_error:
+            print(
+                "Analysis cache unavailable, transcribing directly:",
+                cache_import_error,
+            )
+            return await _uncached()
+
+        try:
+            source_id = canonical_source_id(source_url)
+        except Exception:
+            return await _uncached()
+
+        # fast_mode produces a shallower analysis, so it must not share an entry
+        # with a full analysis of the same source.
+        analysis_config = {
+            "model_size": getattr(analyzer.config, "model_size", None),
+            "device": getattr(analyzer.config, "device", None),
+            "compute_type": getattr(analyzer.config, "compute_type", None),
+            "language": getattr(analyzer.config, "language", None),
+            "beam_size": getattr(analyzer.config, "beam_size", None),
+            "vad_filter": getattr(analyzer.config, "vad_filter", None),
+            "fast_mode": bool(fast_mode),
+        }
+
+        payload, cache_hit = await get_analysis_cache().get_or_compute_async(
+            source_id,
+            KIND_TRANSCRIPT,
+            _transcribe_and_serialise,
+            model=str(getattr(analyzer.config, "model_size", "unknown")),
+            config=analysis_config,
+            job_id=job_id,
+        )
+
+        if cache_hit:
+            try:
+                self.job_manager.update_state(
+                    job_id, JobState.TRANSCRIBING, 100,
+                    "Reused cached transcription for this source",
+                )
+            except Exception:
+                pass
+
+        return transcript_from_dict(payload)
 
     async def run_full_pipeline(
         self,
@@ -112,10 +194,10 @@ class PipelineOrchestrator:
             await self._report(job_id, "Probing media...", 8)
             media_info = await probe_media(vod_path, job_id, self.job_manager)
 
-            # Step 3: Transcribe
+            # Step 3: Transcribe (deduplicated per source)
             await self._report(job_id, "Transcribing audio...", 15)
-            transcript = await self.transcript_analyzer.transcribe(
-                vod_path, job_id, self.job_manager
+            transcript = await self._transcribe_shared(
+                vod_path, job_id, job.vod_url
             )
 
             # Save transcript
@@ -244,11 +326,10 @@ class PipelineOrchestrator:
             await self._report(job_id, "Probing clip media...", 5)
             media_info = await probe_media(vod_path, job_id, self.job_manager)
 
-            # Step 2: Transcribe (fast mode for clips - skip Ollama LLM)
+            # Step 2: Transcribe (fast mode for clips, deduplicated per source)
             await self._report(job_id, "Transcribing clip audio...", 20)
-            transcript = await self.transcript_analyzer.transcribe(
-                vod_path, job_id, self.job_manager,
-                fast_mode=True
+            transcript = await self._transcribe_shared(
+                vod_path, job_id, job.vod_url, fast_mode=True
             )
 
             # Save transcript

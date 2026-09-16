@@ -39,6 +39,17 @@ cloudflared.exe
 
 # Generated VOD/job data
 vod_jobs/
+vod_downloads/
+vod_analysis_cache/
+vod_cache/
+cache/
+logs/
+detected_moments/
+transcripts/
+clip_history.json
+auto_clip_seen.json
+user_process_channels.json
+*.bak
 
 # Logs
 *.log

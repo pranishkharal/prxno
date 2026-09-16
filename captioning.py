@@ -28,17 +28,31 @@ CAPTION_GUIDE_PATH = Path(__file__).resolve().parent / "caption_guide.json"
 def get_whisper_model():
     """
     Lazily load Whisper once and reuse it.
+
+    Delegates to the shared, thread-safe WhisperManager in ``infra`` so that
+    concurrent jobs cannot load a second copy of the model, which previously
+    doubled RAM usage. Falls back to loading directly when the infrastructure
+    package is unavailable, so this module still works standalone.
     """
     global _WHISPER_MODEL
 
     if _WHISPER_MODEL is None:
-        print(
-            "Loading local Whisper model "
-            "(first run may take a moment)...",
-            flush=True
-        )
+        try:
+            from infra.whisper_manager import get_shared_model
 
-        _WHISPER_MODEL = whisper.load_model("base")
+            _WHISPER_MODEL = get_shared_model()
+        except Exception as manager_error:
+            print(
+                "Whisper manager unavailable, loading directly:",
+                manager_error,
+                flush=True,
+            )
+            print(
+                "Loading local Whisper model "
+                "(first run may take a moment)...",
+                flush=True
+            )
+            _WHISPER_MODEL = whisper.load_model("base")
 
     return _WHISPER_MODEL
 
@@ -46,12 +60,22 @@ def get_whisper_model():
 def transcribe_video(video_path):
     """
     Transcribe the actual audio from the video.
-    """
-    model = get_whisper_model()
 
-    result = model.transcribe(
-        str(video_path)
-    )
+    Inference is serialised through the shared Whisper manager when available,
+    because a single Whisper model object is not safe for concurrent calls.
+    """
+    try:
+        from infra.whisper_manager import get_whisper_manager
+
+        result = get_whisper_manager().transcribe(video_path)
+    except Exception as manager_error:
+        print(
+            "Whisper manager unavailable, transcribing directly:",
+            manager_error,
+            flush=True,
+        )
+        model = get_whisper_model()
+        result = model.transcribe(str(video_path))
 
     transcript = result.get(
         "text",
