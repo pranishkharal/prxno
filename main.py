@@ -5,13 +5,11 @@ import difflib
 import subprocess
 import tempfile
 import asyncio
-import time
-import threading
 import json
-from types import SimpleNamespace
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
 from captioning import transcribe_and_caption
 from smart_cut import smart_cut
+from word_caption import burn_word_captions
 from clip_intelligence import build_moment_score
 from clip_history import record_clip, is_duplicate, search_similar_transcript
 from smart_presets import get_preset, list_presets
@@ -20,13 +18,11 @@ import traceback
 from pathlib import Path
 from urllib.parse import urlparse
 import sys
-import uuid
-import contextvars
 
-import webrtcvad
 import discord
 import aiohttp
-from public_download import create_public_download_link, start_cleanup_task, ensure_upload_tunnel, get_upload_public_url
+from types import SimpleNamespace
+from public_download import create_public_download_link, start_cleanup_task
 from dotenv import load_dotenv
 from rapidocr_onnxruntime import RapidOCR
 
@@ -35,77 +31,32 @@ from rapidocr_onnxruntime import RapidOCR
 #   python -m pip install -U yt-dlp curl_cffi
 import yt_dlp
 
-# VOD Intelligence Pipeline
-from vod_intelligence import (
-    get_job_manager,
-    run_clip_pipeline,
-    start_review_session,
-    VODJob,
-    JobState,
-    ContentType,
-    ClipCandidate,
-    is_kick_vod_url,
-    extract_streamer_from_vod_url,
-    generate_metadata_for_all_clips,
-)
-
 
 load_dotenv()
 
-print("MAIN: before upload tunnel thread")
-def _start_upload_tunnel_background():
-    try:
-        print("UPLOAD TUNNEL: starting...")
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-        url = loop.run_until_complete(ensure_upload_tunnel())
-        if url:
-            print("UPLOAD TUNNEL: ready:", url)
-        else:
-            print("UPLOAD TUNNEL: could not start")
-    except Exception as e:
-        print("UPLOAD TUNNEL: error:", e)
-
-threading.Thread(target=_start_upload_tunnel_background, daemon=True).start()
-print("UPLOAD TUNNEL: thread started")
-
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
-if not TOKEN:
-    raise RuntimeError(
-        "DISCORD_BOT_TOKEN is not set. Put it in .env or set it in PowerShell."
-    )
+STREAMER_CHANNELS = os.getenv("STREAMER_CHANNELS", "")
 
-UPLOAD_DIR = Path("uploads")
-OUTPUT_DIR = Path("output")
-OVERLAY_DIR = Path("overlays")
+def get_streamer_channel():
+    """Get the Discord channel ID for a streamer."""
+    if not STREAMER_CHANNELS:
+        return {}
+    mappings = {}
+    for item in STREAMER_CHANNELS.split(","):
+        parts = item.strip().split(":")
+        if len(parts) == 2:
+            streamer, channel_id = parts
+            if channel_id.isdigit():
+                mappings[streamer.lower()] = int(channel_id)
+    return mappings
 
-UPLOAD_DIR.mkdir(exist_ok=True)
-OUTPUT_DIR.mkdir(exist_ok=True)
-OVERLAY_DIR.mkdir(exist_ok=True)
-
-# Maximum time allowed for FFmpeg jobs.
-FFMPEG_TIMEOUT = 1800
-
-# KICK Clips are currently documented by KICK as 10-180 seconds.
-# We trim the final 4 seconds as requested, but never allow the result
-# to become shorter than 1 second.
+STREAMER_CHANNEL_MAP = get_streamer_channel()
 
 
 # ---------------------------------------------------------
-# OCR ENGINE
-# ---------------------------------------------------------
-
-OCR_ENGINE = RapidOCR()
-
-intents = discord.Intents.default()
-intents.message_content = True
-
-client = discord.Client(intents=intents)
-
-
-# ---------------------------------------------------------
-# Automatic KICK clip notifications
+# Automatic Clip Monitoring
+# Polls Kick's clips API and announces new clips to Discord.
 # ---------------------------------------------------------
 
 AUTO_CLIP_SEEN_FILE = Path("auto_clip_seen.json")
@@ -113,7 +64,7 @@ USER_PROCESS_CHANNELS_FILE = Path("user_process_channels.json")
 LEGACY_PROCESS_CHANNELS_FILE = Path("streamer_process_channels.json")
 AUTO_CLIP_POLL_SECONDS = max(
     5,
-    int(os.getenv("AUTO_CLIP_POLL_SECONDS", "5"))
+    int(os.getenv("AUTO_CLIP_POLL_SECONDS", "30"))
 )
 AUTO_CLIP_ANNOUNCE_EXISTING = (
     os.getenv("AUTO_CLIP_ANNOUNCE_EXISTING", "false").lower()
@@ -121,9 +72,12 @@ AUTO_CLIP_ANNOUNCE_EXISTING = (
 )
 AUTO_CLIP_MONITOR_TASK = None
 
-
 def get_streamer_channel_map():
-    """Parse STREAMER_CHANNELS as streamer slug -> Discord channel ID."""
+    """Parse STREAMER_CHANNELS as streamer slug -> Discord channel ID.
+
+    Reads the environment variable every call so that changes take
+    effect without a restart.
+    """
     mappings = {}
 
     for item in (os.getenv("STREAMER_CHANNELS", "") or "").split(","):
@@ -135,7 +89,6 @@ def get_streamer_channel_map():
         mappings[streamer.lower()] = int(channel_id)
 
     return mappings
-
 
 def load_seen_auto_clip_ids():
     if not AUTO_CLIP_SEEN_FILE.exists():
@@ -150,13 +103,11 @@ def load_seen_auto_clip_ids():
         print("AUTO CLIPS: could not read seen-clip file:", error)
         return set()
 
-
 def save_seen_auto_clip_ids(clip_ids):
     AUTO_CLIP_SEEN_FILE.write_text(
         json.dumps(sorted(clip_ids)[-5000:], indent=2),
         encoding="utf-8"
     )
-
 
 def load_user_process_channels():
     if not USER_PROCESS_CHANNELS_FILE.exists():
@@ -171,13 +122,11 @@ def load_user_process_channels():
         print("AUTO CLIPS: could not read user-channel file:", error)
         return {}
 
-
 def save_user_process_channels(channels):
     USER_PROCESS_CHANNELS_FILE.write_text(
         json.dumps(channels, indent=2),
         encoding="utf-8"
     )
-
 
 async def remove_legacy_process_channels():
     if not LEGACY_PROCESS_CHANNELS_FILE.exists():
@@ -223,424 +172,123 @@ async def remove_legacy_process_channels():
         print(f"AUTO CLIPS: removed {removed} legacy streamer channel(s).")
 
 
-async def get_or_create_user_process_channel(announcement_channel, user):
-    guild = getattr(announcement_channel, "guild", None)
-    if guild is None:
-        return announcement_channel
-
-    key = f"{guild.id}:{user.id}"
-    channels = load_user_process_channels()
-    saved_channel_id = channels.get(key)
-
-    bot_member = guild.me
-    private_overwrites = {
-        role: discord.PermissionOverwrite(view_channel=False)
-        for role in guild.roles
-    }
-    private_overwrites[user] = discord.PermissionOverwrite(
-        view_channel=True,
-        send_messages=True,
-        read_message_history=True
-    )
-    if bot_member is not None:
-        private_overwrites[bot_member] = discord.PermissionOverwrite(
-            view_channel=True,
-            send_messages=True,
-            read_message_history=True,
-            manage_channels=True,
-            manage_messages=True
-        )
-
-    if saved_channel_id:
-        saved_channel = guild.get_channel(int(saved_channel_id))
-        if saved_channel is not None:
-            await saved_channel.edit(overwrites=private_overwrites)
-            return saved_channel
-
-    existing_name = user.name.lower()
-    existing_channel = discord.utils.get(
-        guild.text_channels,
-        name=existing_name
+if not TOKEN:
+    raise RuntimeError(
+        "DISCORD_BOT_TOKEN is not set. Put it in .env or set it in PowerShell."
     )
 
-    if existing_channel is not None:
-        process_channel = existing_channel
-        await process_channel.edit(overwrites=private_overwrites)
-    else:
-        category = getattr(announcement_channel, "category", None)
-        process_channel = await guild.create_text_channel(
-            existing_name,
-            category=category,
-            topic=(
-                f"Permanent clip processing channel for {user.name}."
-            ),
-            overwrites=private_overwrites
-        )
+UPLOAD_DIR = Path("uploads")
+OUTPUT_DIR = Path("output")
+OVERLAY_DIR = Path("overlays")
 
-    channels[key] = process_channel.id
-    save_user_process_channels(channels)
-    return process_channel
+UPLOAD_DIR.mkdir(exist_ok=True)
+OUTPUT_DIR.mkdir(exist_ok=True)
+OVERLAY_DIR.mkdir(exist_ok=True)
+
+# Maximum time allowed for FFmpeg jobs.
+FFMPEG_TIMEOUT = 1800
+
+# KICK Clips are currently documented by KICK as 10-180 seconds.
+# We trim the final 4 seconds as requested, but never allow the result
+# to become shorter than 1 second.
 
 
-async def fetch_streamer_clips(session, streamer):
-    endpoint = f"https://kick.com/api/v2/channels/{streamer}/clips"
+# ---------------------------------------------------------
+# OCR ENGINE
+# ---------------------------------------------------------
 
-    try:
-        async with session.get(endpoint) as response:
-            if response.status != 200:
-                print(
-                    f"AUTO CLIPS: {streamer} returned HTTP {response.status}"
-                )
-                return []
+OCR_ENGINE = RapidOCR()
 
-            payload = await response.json(content_type=None)
-            clips = payload.get("clips", []) if isinstance(payload, dict) else []
-            return clips if isinstance(clips, list) else []
+intents = discord.Intents.default()
+intents.message_content = True
 
-    except Exception as error:
-        print(f"AUTO CLIPS: failed to fetch {streamer}: {error}")
-        return []
-
-
-def auto_clip_url(streamer, clip):
-    clip_id = str(clip.get("id") or "").strip()
-    if not clip_id:
-        return None
-    return f"https://kick.com/{streamer}/clips/{clip_id}"
-
-
-class AutoClipActionsView(discord.ui.View):
-    def __init__(self, clip_url, streamer):
-        super().__init__(timeout=3600)
-        self.clip_url = clip_url
-        self.streamer = streamer
-
-        watch_button = discord.ui.Button(
-            label="Watch on KICK",
-            style=discord.ButtonStyle.link,
-            url=clip_url
-        )
-        self.add_item(watch_button)
-
-    @discord.ui.button(
-        label="Edit Clip",
-        emoji="✂️",
-        style=discord.ButtonStyle.primary
-    )
-    async def edit_clip(self, interaction, button):
-        await interaction.response.defer(ephemeral=True)
-
-        process_channel = await get_or_create_user_process_channel(
-            interaction.channel,
-            interaction.user
-        )
-        message = SimpleNamespace(
-            author=interaction.user,
-            channel=process_channel
-        )
-        await start_kick_edit(
-            message,
-            self.clip_url,
-            deliver_to_channel=True
-        )
-        await interaction.followup.send(
-            f"Edit options opened in {process_channel.mention}.",
-            ephemeral=True
-        )
-
-    @discord.ui.button(
-        label="Download Clip",
-        emoji="⬇️",
-        style=discord.ButtonStyle.secondary
-    )
-    async def download_clip(self, interaction, button):
-        await interaction.response.defer(ephemeral=True)
-
-        process_channel = await get_or_create_user_process_channel(
-            interaction.channel,
-            interaction.user
-        )
-        message = SimpleNamespace(
-            author=interaction.user,
-            channel=process_channel
-        )
-        await handle_download_command(
-            message,
-            f"!download {self.clip_url}",
-            deliver_to_channel=True
-        )
-        await interaction.followup.send(
-            f"Download request started in {process_channel.mention}. Check your DMs.",
-            ephemeral=True
-        )
-
-
-async def announce_auto_clip(channel_id, streamer, clip):
-    channel = client.get_channel(channel_id)
-
-    if channel is None:
-        try:
-            channel = await client.fetch_channel(channel_id)
-        except Exception as error:
-            print(
-                f"AUTO CLIPS: could not access Discord channel "
-                f"{channel_id} for {streamer}: {error}"
-            )
-            return False
-
-    clip_url = auto_clip_url(streamer, clip)
-    if not clip_url:
-        return False
-
-    title = str(clip.get("title") or "Untitled clip").strip()
-    creator = (clip.get("creator") or {}).get("username")
-    duration = clip.get("duration")
-    creator_text = f" by **{creator}**" if creator else ""
-    duration_text = f" | {duration}s" if duration else ""
-
-    try:
-        await channel.send(
-            f"🎬 **New clip from {streamer}**{creator_text}{duration_text}\n"
-            f"**{title}**\n{clip_url}",
-            view=AutoClipActionsView(clip_url, streamer)
-        )
-        return True
-    except Exception as error:
-        print(
-            f"AUTO CLIPS: could not post {streamer} clip to "
-            f"{channel_id}: {error}"
-        )
-        return False
-
-
-async def monitor_auto_clips():
-    seen_ids = load_seen_auto_clip_ids()
-    first_poll = not AUTO_CLIP_SEEN_FILE.exists()
-    mappings = get_streamer_channel_map()
-
-    if not mappings:
-        print("AUTO CLIPS: no STREAMER_CHANNELS mappings configured.")
-        return
-
-    print(
-        f"AUTO CLIPS: monitoring {len(mappings)} streamers every "
-        f"{AUTO_CLIP_POLL_SECONDS}s."
-    )
-
-    timeout = aiohttp.ClientTimeout(total=30)
-    headers = {"User-Agent": "Mozilla/5.0 (KICK clip monitor)"}
-
-    async with aiohttp.ClientSession(timeout=timeout, headers=headers) as session:
-        while True:
-            pass_started = time.monotonic()
-            try:
-                mappings = get_streamer_channel_map()
-
-                for streamer, channel_id in mappings.items():
-                    clips = await fetch_streamer_clips(session, streamer)
-                    clips.sort(key=lambda clip: clip.get("created_at") or "")
-
-                    if first_poll and not AUTO_CLIP_ANNOUNCE_EXISTING:
-                        seen_ids.update(
-                            str(clip.get("id"))
-                            for clip in clips
-                            if clip.get("id")
-                        )
-                        continue
-
-                    for clip in clips:
-                        clip_id = str(clip.get("id") or "").strip()
-                        if not clip_id or clip_id in seen_ids:
-                            continue
-
-                        if await announce_auto_clip(channel_id, streamer, clip):
-                            seen_ids.add(clip_id)
-                            save_seen_auto_clip_ids(seen_ids)
-
-                if first_poll:
-                    save_seen_auto_clip_ids(seen_ids)
-                    first_poll = False
-
-            except asyncio.CancelledError:
-                raise
-            except Exception as error:
-                print("AUTO CLIPS: monitor loop error:", error)
-
-            # Fixed-rate schedule: every pass starts every
-            # AUTO_CLIP_POLL_SECONDS regardless of how long the sequential
-            # per-streamer fetches took, so each streamer is checked on a
-            # steady interval instead of (interval + pass duration).
-            elapsed = time.monotonic() - pass_started
-            await asyncio.sleep(max(5.0, AUTO_CLIP_POLL_SECONDS - elapsed))
-
-class RenderHealthHandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        if self.path == "/healthz":
-            self.send_response(200)
-            self.send_header("Content-Type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"OK")
-        else:
-            self.send_response(404)
-            self.end_headers()
-
-    def log_message(self, format, *args):
-        pass
-
-
-def start_render_health_server():
-    port = int(os.getenv("PORT", "10000"))
-    server = HTTPServer(("0.0.0.0", port), RenderHealthHandler)
-    print(f"RENDER HEALTH SERVER: listening on 0.0.0.0:{port}", flush=True)
-    server.serve_forever()
-
-
+client = discord.Client(intents=intents)
 
 # Active editing sessions
 SESSIONS = {}
 
 
 # ---------------------------------------------------------
-# Resource-aware concurrency
+# FFmpeg helpers
 # ---------------------------------------------------------
-# Limits are derived from the machine that is actually running the bot
-# (CPU cores, RAM, GPU and *verified* hardware encoders) rather than being
-# hardcoded. Override any of them in the environment:
-#
-#     MAX_CONCURRENT_EDITS, MAX_CONCURRENT_DOWNLOADS, MAX_CONCURRENT_ANALYSIS
-#
-# The names below are kept for backward compatibility, but the governor owns
-# the real limits now. See infra/concurrency.py for the sizing rules.
-MAX_CONCURRENT_EDITS = None
-MAX_CONCURRENT_DOWNLOADS = None
 
-# NOTE: these imports intentionally sit below load_dotenv() (see the top of
-# this file) because infra.config reads the environment when it is imported.
-from infra.concurrency import (  # noqa: E402
-    CLASS_ANALYSIS,
-    CLASS_DOWNLOAD,
-    CLASS_ENCODE,
-    CLASS_JOB,
-    get_governor,
-)
-from infra.ffmpeg_runner import get_ffmpeg_runner  # noqa: E402
-from infra.jobs import get_job_queue  # noqa: E402
-from infra.source_cache import canonical_source_id, get_source_cache  # noqa: E402
-
+# Limits how many ffmpeg/edit jobs run at the same time.
+# Extra jobs beyond this wait automatically instead of overloading the CPU.
+MAX_CONCURRENT_EDITS = 5
+EDIT_SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT_EDITS)
 
 async def run_encode_job(func, *args):
-    """Run a video/FFmpeg job under the adaptive encode budget."""
-    async with get_governor().semaphore(CLASS_ENCODE):
+    async with EDIT_SEMAPHORE:
         return await asyncio.to_thread(func, *args)
-
-
-async def run_download_job(func, *args):
-    """Run a network download under the adaptive download budget.
-
-    Downloads run on their own thread pool so a CPU-heavy edit cannot starve
-    a concurrent ``!download``.
-    """
-    return await get_governor().run_in_class(CLASS_DOWNLOAD, func, *args)
-
-
-async def run_analysis_job(func, *args):
-    """Run transcription / AI analysis under its own separate budget.
-
-    Whisper is CPU and RAM hungry, so it must not compete with FFmpeg for the
-    same slots the way it used to.
-    """
-    async with get_governor().semaphore(CLASS_ANALYSIS):
-        return await asyncio.to_thread(func, *args)
-
-
-
-# Tracks which durable job the current async context belongs to.
-# ``asyncio.to_thread`` copies the context, so an FFmpeg process started by a
-# job's worker thread can see it and register itself under that job id. This is
-# what lets !cancel actually terminate a running encode.
-_CURRENT_JOB_ID = contextvars.ContextVar("current_job_id", default=None)
-
-
-def current_job_id():
-    """Return the durable job id for the current async context, if any."""
-    return _CURRENT_JOB_ID.get()
-
-
-def spawn_tracked_job(kind, run_pipeline, job_id=None, **record_kwargs):
-    """Schedule a pipeline as a durable, cancellable, resource-aware job.
-
-    Returns ``(record, task)``.
-
-    ``max_attempts`` defaults to 1 deliberately: these pipelines talk to Discord
-    and already retry internally, so replaying one automatically could double-post
-    messages or repeat a half-finished edit. Durability, status tracking,
-    cancellation and restart repair all still apply.
-    """
-    queue = get_job_queue()
-    record_kwargs.setdefault("max_attempts", 1)
-    record = queue.create(kind, job_id=job_id, **record_kwargs)
-
-    token = _CURRENT_JOB_ID.set(record.job_id)
-    try:
-        task = queue.spawn(record, CLASS_JOB, run_pipeline)
-    finally:
-        _CURRENT_JOB_ID.reset(token)
-
-    def _report_outcome(finished):
-        # Consume the exception so a failing job cannot surface as an
-        # "exception was never retrieved" warning.
-        try:
-            if finished.cancelled():
-                print(f"JOB {record.job_id} cancelled.")
-                return
-            error = finished.exception()
-            if error is not None:
-                print(f"JOB {record.job_id} failed: {type(error).__name__}: {error}")
-        except Exception:
-            pass
-
-    task.add_done_callback(_report_outcome)
-    return record, task
-
-
-def cancel_tracked_job(job_id):
-    """Cancel a durable job: its record, its task, and any live FFmpeg process."""
-    try:
-        return get_job_queue().cancel(job_id)
-    except Exception as cancel_error:
-        print(f"CANCEL: could not cancel {job_id}: {cancel_error}")
-        return False
-
 
 def run_ffmpeg(command, timeout=FFMPEG_TIMEOUT):
-    """Run FFmpeg through the shared, cancellable execution layer.
-
-    Callers see unchanged behaviour: the same banner is printed, encoder output
-    is echoed live, and failures raise a RuntimeError subclass. On top of that
-    the runner registers the live process so a job can be cancelled
-    deterministically, closes its pipes, and can validate outputs.
-    """
     print("\n========================================")
     print("RUNNING FFMPEG")
     print("========================================")
     print(" ".join(str(x) for x in command))
     print("")
 
-    job_id = current_job_id()
+    process = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1
+    )
+
+    output_lines = []
+
     try:
-        result = get_ffmpeg_runner().run(
-            command,
-            timeout=timeout,
-            job_id=job_id,
-            cancel_token=job_id,
-            echo=True,
+        for line in process.stdout:
+            line = line.rstrip()
+
+            if line:
+                print(line)
+                output_lines.append(line)
+
+                if len(output_lines) > 1000:
+                    output_lines.pop(0)
+
+        return_code = process.wait(timeout=timeout)
+
+    except subprocess.TimeoutExpired:
+        process.kill()
+
+        try:
+            process.wait(timeout=10)
+        except Exception:
+            pass
+
+        print("\nFFMPEG TIMEOUT")
+        raise RuntimeError(
+            f"FFmpeg timed out after {timeout} seconds."
         )
+
     except KeyboardInterrupt:
+        process.kill()
+
+        try:
+            process.wait(timeout=10)
+        except Exception:
+            pass
+
         print("\nFFMPEG INTERRUPTED BY USER")
         raise
 
+    if return_code != 0:
+        print("\n========================================")
+        print("FFMPEG ERROR")
+        print("========================================")
+
+        if output_lines:
+            print("\n".join(output_lines[-200:]))
+
+        raise RuntimeError(
+            f"FFmpeg failed with exit code {return_code}"
+        )
+
     print("\nFFmpeg finished successfully.")
-    return result.returncode
+    return return_code
 
 
 def get_video_size(input_file):
@@ -894,190 +542,103 @@ def clean_url_from_message(text):
     return url
 
 
-def _kick_download_error_message(error):
-    """Build the user-facing text for a failed KICK download."""
-    if error is None:
-        return "Could not download the KICK Clip."
+# ---------------------------------------------------------
+# Download progress bar state
+# ---------------------------------------------------------
 
-    message = str(error).strip() or f"{type(error).__name__} (no message)"
-
-    if (
-        "WinError 5" in message
-        or "Access is denied" in message
-        or "WinError 32" in message
-    ):
-        return (
-            "Windows file lock error during download.\n\n"
-            "This happens when another process still has the file open.\n\n"
-            "Solutions:\n"
-            "1. Close any file explorer windows showing the uploads folder\n"
-            "2. Disable antivirus real-time scanning for the project folder\n"
-            "3. Restart the bot to release file locks\n"
-            "4. Run: PowerShell as Admin, then: "
-            "icacls uploads /grant Everyone:(OI)(CI)F"
-        )
-
-    return (
-        "Could not download the KICK Clip.\n"
-        f"{message}\n\n"
-        "Make sure the Clip opens normally in your browser and "
-        "that yt-dlp/curl_cffi are installed."
-    )
+# {user_id: {"percent": float, "status": str}}
+PROGRESS_STATE = {}
 
 
-def cleanup_stale_kick_uploads(max_age_seconds=21600):
-    """Delete abandoned per-job upload folders left by a crash or failure.
+def render_progress_bar(percent, width=14):
+    """Render a [▓▓▓░░░] style progress bar with a percentage."""
+    percent = max(0.0, min(100.0, percent))
+    filled = int(round(width * percent / 100.0))
+    bar = "▓" * filled + "░" * (width - filled)
+    return f"[{bar}] {percent:5.1f}%"
 
-    Only folders older than ``max_age_seconds`` are removed, so a running job
-    can never have its working files deleted by this helper.
-    """
-    removed = 0
-    now = time.time()
 
-    try:
-        entries = list(UPLOAD_DIR.glob("kick_*"))
-    except Exception:
-        return 0
+def yt_dlp_progress_hook(user_id):
+    """Build a yt-dlp progress hook that records download progress."""
 
-    for entry in entries:
-        try:
-            if not entry.is_dir():
-                continue
-            if (now - entry.stat().st_mtime) < max_age_seconds:
-                continue
-            _safe_remove(entry)
-            removed += 1
-        except Exception:
-            continue
+    def hook(data):
+        state = PROGRESS_STATE.setdefault(user_id, {})
+        status = data.get("status")
 
-    if removed:
-        print(f"CLEANUP: removed {removed} stale upload folder(s).")
-    return removed
+        if status == "downloading":
+            total = data.get("total_bytes") or data.get(
+                "total_bytes_estimate"
+            )
+            downloaded = data.get("downloaded_bytes", 0)
+            if total:
+                state["percent"] = min(
+                    99.9, downloaded / total * 100.0
+                )
+            state["status"] = "downloading"
+
+        elif status == "finished":
+            state["percent"] = 99.9
+            state["status"] = "processing"
+
+    return hook
 
 
 def download_kick_clip(url, user_id):
-    """Download a KICK Clip, deduplicated through the shared source cache.
-
-    The cache identity is the KICK clip id, never the requesting user. Twenty
-    users asking for one clip therefore cause exactly one download. Each job
-    then receives its own hard link to the cached file inside a unique per-job
-    folder, so per-job cleanup can never damage the shared cache or another
-    job's files.
     """
+    Download a KICK Clip to the local USB uploads directory.
+
+    yt-dlp currently has a KICK Clips extractor. The download is
+    temporary and is deleted after editing finishes.
+
+    curl_cffi is recommended because some KICK endpoints can reject
+    ordinary HTTP clients.
+    """
+
     if not is_kick_clip_url(url):
         raise RuntimeError(
             "That does not look like a KICK Clip URL.\n"
             "Please paste a link such as https://kick.com/.../clip/..."
         )
 
-    job_dir = UPLOAD_DIR / f"kick_{user_id}_{uuid.uuid4().hex[:8]}"
+    # Unique temporary working directory prevents two users from
+    # accidentally overwriting each other's source file.
+    job_dir = UPLOAD_DIR / f"kick_{user_id}"
+
+    if job_dir.exists():
+        shutil.rmtree(job_dir, ignore_errors=True)
+
     job_dir.mkdir(parents=True, exist_ok=True)
-    job_file = job_dir / "kick_clip.mp4"
 
-    max_download_attempts = 3
+    output_template = str(
+        job_dir / "kick_clip_%(id)s.%(ext)s"
+    )
 
-    def _download_to(staged_path):
-        """Download the clip beside ``staged_path`` and return the file."""
-        output_template = str(staged_path.parent / "kick_clip_%(id)s.%(ext)s")
+    ydl_opts = {
+        "outtmpl": output_template,
+        "format": "best[ext=mp4]/best",
+        "merge_output_format": "mp4",
+        "noplaylist": True,
+        "quiet": False,
+        "no_warnings": False,
+        "retries": 3,
+        "fragment_retries": 3,
+        "socket_timeout": 60,
+        "progress_hooks": [yt_dlp_progress_hook(user_id)],
+    }
 
-        ydl_opts = {
-            "outtmpl": output_template,
-            "format": "best[ext=mp4]/best",
-            "merge_output_format": "mp4",
-            "noplaylist": True,
-            "quiet": False,
-            "no_warnings": False,
-            "retries": 5,
-            "fragment_retries": 5,
-            "socket_timeout": 120,
-            "continuedl": False,
-            # Keep the ".part" mechanism ENABLED: writing straight to the
-            # final name let a truncated download look complete.
-            "nopart": False,
-        }
-
-        try:
-            from yt_dlp.networking.impersonate import ImpersonateTarget
-            ydl_opts["impersonate"] = ImpersonateTarget.from_str("chrome")
-        except Exception as impersonate_error:
-            print(
-                f"Impersonation unavailable, continuing without it: "
-                f"{impersonate_error}"
-            )
-
-        last_error = None
-
-        for attempt in range(max_download_attempts):
-            try:
-                print(
-                    f"CHECKPOINT: download attempt "
-                    f"{attempt + 1}/{max_download_attempts}",
-                    flush=True,
-                )
-
-                if attempt > 0:
-                    time.sleep(2.0)
-
-                for stale in staged_path.parent.glob("kick_clip_*"):
-                    _safe_remove(stale)
-
-                print("CHECKPOINT: about to call yt_dlp.YoutubeDL(...)", flush=True)
-                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                    print("CHECKPOINT: calling ydl.extract_info(...) now", flush=True)
-                    info = ydl.extract_info(url, download=True)
-                    print("CHECKPOINT: extract_info() returned", flush=True)
-
-                requested_path = None
-                if info:
-                    requested_path = info.get("_filename")
-
-                video_candidates = [
-                    p
-                    for p in staged_path.parent.glob("kick_clip_*")
-                    if p.is_file()
-                    and p.suffix.lower() in {".mp4", ".mov", ".mkv", ".webm"}
-                ]
-
-                if requested_path:
-                    requested = Path(requested_path)
-                    if requested.exists() and requested.is_file():
-                        video_candidates.insert(0, requested)
-
-                if not video_candidates:
-                    raise RuntimeError(
-                        "KICK download completed, but no video file was found."
-                    )
-
-                video_candidates.sort(
-                    key=lambda p: (
-                        0 if p.suffix.lower() == ".mp4" else 1,
-                        -p.stat().st_size,
-                    )
-                )
-                video_file = video_candidates[0]
-
-                if video_file.stat().st_size < 10_000:
-                    raise RuntimeError(
-                        "The downloaded KICK file is unexpectedly small."
-                    )
-
-                print(f"KICK clip downloaded: {video_file}")
-                return video_file
-
-            except Exception as e:
-                last_error = e
-                print(f"Download attempt {attempt + 1} failed: {e}")
-                traceback.print_exc()
-
-                for temp_file in staged_path.parent.glob("kick_clip_*"):
-                    _safe_remove(temp_file)
-
-                if attempt < max_download_attempts - 1:
-                    print("Retrying download in 2 seconds...")
-                    continue
-                break
-
-        raise RuntimeError(_kick_download_error_message(last_error))
+    # Prefer curl_cffi impersonation when the installed yt-dlp version
+    # supports it. Newer yt-dlp versions require an ImpersonateTarget
+    # object here (not a plain string), or they raise an AssertionError.
+    # If anything about impersonation isn't available, fall back to
+    # yt-dlp's normal client instead of crashing.
+    try:
+        from yt_dlp.networking.impersonate import ImpersonateTarget
+        ydl_opts["impersonate"] = ImpersonateTarget.from_str("chrome")
+    except Exception as impersonate_error:
+        print(
+            f"Impersonation unavailable, continuing without it: "
+            f"{impersonate_error}"
+        )
 
     print("")
     print("========================================")
@@ -1086,65 +647,496 @@ def download_kick_clip(url, user_id):
     print(url)
 
     try:
-        file_path, source_id = get_source_cache().get_for_job(
-            url,
-            _download_to,
-            job_file,
-            suffix=".mp4",
+        print("CHECKPOINT: about to call yt_dlp.YoutubeDL(...)", flush=True)
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            print("CHECKPOINT: calling ydl.extract_info(...) now", flush=True)
+            info = ydl.extract_info(url, download=True)
+            print("CHECKPOINT: extract_info() returned", flush=True)
+
+        requested_path = None
+
+        if info:
+            requested_path = info.get("_filename")
+
+        candidates = list(job_dir.glob("*"))
+
+        video_candidates = [
+            p for p in candidates
+            if p.is_file()
+            and p.suffix.lower() in {
+                ".mp4", ".mov", ".mkv", ".webm"
+            }
+        ]
+
+        if requested_path:
+            requested = Path(requested_path)
+            if requested.exists():
+                video_candidates.insert(0, requested)
+
+        if not video_candidates:
+            raise RuntimeError(
+                "KICK download completed, but no video file was found."
+            )
+
+        # Prefer MP4.
+        video_candidates.sort(
+            key=lambda p: (
+                0 if p.suffix.lower() == ".mp4" else 1,
+                -p.stat().st_size
+            )
         )
-    except Exception as error:
-        # This folder holds at most a link (or nothing yet). Drop it so a
-        # failed job leaves nothing behind.
-        _safe_remove(job_dir)
-        raise RuntimeError(_kick_download_error_message(error))
 
-    print(f"KICK clip ready: {file_path} (source {source_id})")
-    return file_path
+        video_file = video_candidates[0]
 
+        if video_file.stat().st_size < 10_000:
+            raise RuntimeError(
+                "The downloaded KICK file is unexpectedly small."
+            )
 
-def _safe_remove(path: Path, retries: int = 5, delay: float = 0.5):
-    if not path.exists():
-        return True
-    for attempt in range(retries):
-        try:
-            if path.is_file() or path.is_symlink():
-                path.unlink()
-                return True
-            elif path.is_dir():
-                shutil.rmtree(path, ignore_errors=False)
-                return True
-        except PermissionError:
-            if attempt < retries - 1:
-                time.sleep(delay)
-            else:
-                shutil.rmtree(path, ignore_errors=True)
-        except Exception:
-            return False
-    return False
+        print(f"KICK clip downloaded: {video_file}")
+
+        return video_file
+
+    except Exception as e:
+        shutil.rmtree(job_dir, ignore_errors=True)
+
+        print("\n========================================")
+        print(" KICK DOWNLOAD ERROR (FULL TRACEBACK)")
+        print("========================================")
+        traceback.print_exc()
+
+        message = str(e).strip() or f"{type(e).__name__} (no message)"
+
+        raise RuntimeError(
+            "Could not download the KICK Clip.\n"
+            f"{message}\n\n"
+            "Make sure the Clip opens normally in your browser and "
+            "that yt-dlp/curl_cffi are installed."
+        )
 
 
 def cleanup_job_files(path):
     """
     Delete a downloaded KICK source and its temporary job directory.
-    Uses retry logic to handle Windows file locks.
     """
 
     try:
         path = Path(path)
 
         if path.exists():
-            _safe_remove(path)
+            path.unlink()
 
+        # The source lives in uploads/kick_USER_ID/.
         parent = path.parent
 
         if (
             parent.parent.resolve() == UPLOAD_DIR.resolve()
             and parent.name.startswith("kick_")
         ):
-            _safe_remove(parent)
+            shutil.rmtree(parent, ignore_errors=True)
 
     except Exception as e:
         print("Cleanup warning:", e)
+
+
+# ---------------------------------------------------------
+# Automatic Clip Monitoring
+# Polls Kick's clips API and announces new clips to Discord.
+# ---------------------------------------------------------
+
+async def get_or_create_user_process_channel(announcement_channel, user):
+    """Create (or reuse) a private text channel for a user's clip
+    processing, so edit interfaces are not visible to the whole
+    announcement channel.
+    """
+    guild = getattr(announcement_channel, "guild", None)
+    if guild is None:
+        return announcement_channel
+
+    key = f"{guild.id}:{user.id}"
+    channels = load_user_process_channels()
+    saved_channel_id = channels.get(key)
+
+    bot_member = guild.me
+    private_overwrites = {
+        role: discord.PermissionOverwrite(view_channel=False)
+        for role in guild.roles
+    }
+    private_overwrites[user] = discord.PermissionOverwrite(
+        view_channel=True,
+        send_messages=True,
+        read_message_history=True
+    )
+    if bot_member is not None:
+        private_overwrites[bot_member] = discord.PermissionOverwrite(
+            view_channel=True,
+            send_messages=True,
+            read_message_history=True,
+            manage_channels=True,
+            manage_messages=True
+        )
+
+    if saved_channel_id:
+        saved_channel = guild.get_channel(int(saved_channel_id))
+        if saved_channel is not None:
+            await saved_channel.edit(overwrites=private_overwrites)
+            return saved_channel
+
+    existing_name = user.name.lower()
+    existing_channel = discord.utils.get(
+        guild.text_channels,
+        name=existing_name
+    )
+
+    if existing_channel is not None:
+        process_channel = existing_channel
+        await process_channel.edit(overwrites=private_overwrites)
+    else:
+        category = getattr(announcement_channel, "category", None)
+        process_channel = await guild.create_text_channel(
+            existing_name,
+            category=category,
+            topic=(
+                f"Permanent clip processing channel for {user.name}."
+            ),
+            overwrites=private_overwrites
+        )
+
+        channels[key] = process_channel.id
+    save_user_process_channels(channels)
+    return process_channel
+
+
+async def fetch_streamer_clips(session, streamer):
+    endpoint = f"https://kick.com/api/v2/channels/{streamer}/clips"
+
+    try:
+        async with session.get(endpoint) as response:
+            if response.status != 200:
+                print(
+                    f"AUTO CLIPS: {streamer} returned HTTP {response.status}"
+                )
+                return []
+
+            payload = await response.json(content_type=None)
+            clips = (
+                payload.get("clips", [])
+                if isinstance(payload, dict) else []
+            )
+            return clips if isinstance(clips, list) else []
+
+    except Exception as error:
+        print(f"AUTO CLIPS: failed to fetch {streamer}: {error}")
+        return []
+
+
+def auto_clip_url(streamer, clip):
+    clip_id = str(clip.get("id") or "").strip()
+    if not clip_id:
+        return None
+    return f"https://kick.com/{streamer}/clips/{clip_id}"
+
+
+async def announce_auto_clip(channel_id, streamer, clip):
+    channel = client.get_channel(channel_id)
+
+    if channel is None:
+        try:
+            channel = await client.fetch_channel(channel_id)
+        except Exception as error:
+            print(
+                f"AUTO CLIPS: could not access Discord channel "
+                f"{channel_id} for {streamer}: {error}"
+            )
+            return False
+
+    clip_url = auto_clip_url(streamer, clip)
+    if not clip_url:
+        return False
+
+    title = str(clip.get("title") or "Untitled clip").strip()
+    creator = (clip.get("creator") or {}).get("username")
+    duration = clip.get("duration")
+    creator_text = f" by **{creator}**" if creator else ""
+    duration_text = f" | {duration}s" if duration else ""
+
+    try:
+        await channel.send(
+            f"🎬 **New clip from {streamer}**{creator_text}{duration_text}\n"
+            f"**{title}**\n{clip_url}",
+            view=AutoClipActionsView(clip_url, streamer)
+        )
+        return True
+    except Exception as error:
+        print(
+            f"AUTO CLIPS: could not post {streamer} clip to "
+            f"{channel_id}: {error}"
+        )
+        return False
+
+
+async def monitor_auto_clips():
+    seen_ids = load_seen_auto_clip_ids()
+    first_poll = not AUTO_CLIP_SEEN_FILE.exists()
+    mappings = get_streamer_channel_map()
+
+    if not mappings:
+        print("AUTO CLIPS: no STREAMER_CHANNELS mappings configured.")
+        return
+
+    print(
+        f"AUTO CLIPS: monitoring {len(mappings)} streamers every "
+        f"{AUTO_CLIP_POLL_SECONDS}s."
+    )
+
+    timeout = aiohttp.ClientTimeout(total=30)
+    headers = {"User-Agent": "Mozilla/5.0 (KICK clip monitor)"}
+
+    async with aiohttp.ClientSession(timeout=timeout, headers=headers) as session:
+        while True:
+            pass_started = time.monotonic()
+            try:
+                mappings = get_streamer_channel_map()
+
+                for streamer, channel_id in mappings.items():
+                    clips = await fetch_streamer_clips(session, streamer)
+                    clips.sort(key=lambda clip: clip.get("created_at") or "")
+
+                    if first_poll and not AUTO_CLIP_ANNOUNCE_EXISTING:
+                        seen_ids.update(
+                            str(clip.get("id"))
+                            for clip in clips
+                            if clip.get("id")
+                        )
+                        continue
+
+                    for clip in clips:
+                        clip_id = str(clip.get("id") or "").strip()
+                        if not clip_id or clip_id in seen_ids:
+                            continue
+
+                        if await announce_auto_clip(channel_id, streamer, clip):
+                            seen_ids.add(clip_id)
+                            save_seen_auto_clip_ids(seen_ids)
+
+                if first_poll:
+                    save_seen_auto_clip_ids(seen_ids)
+                    first_poll = False
+
+            except asyncio.CancelledError:
+                raise
+            except Exception as error:
+                print("AUTO CLIPS: monitor loop error:", error)
+
+            # Fixed-rate schedule: every pass starts every
+            # AUTO_CLIP_POLL_SECONDS regardless of how long the sequential
+            # per-streamer fetches took, so each streamer is checked on a
+            # steady interval instead of (interval + pass duration).
+            elapsed = time.monotonic() - pass_started
+            await asyncio.sleep(max(5.0, AUTO_CLIP_POLL_SECONDS - elapsed))
+
+
+class AutoClipActionsView(discord.ui.View):
+    def __init__(self, clip_url, streamer):
+        super().__init__(timeout=3600)
+        self.clip_url = clip_url
+        self.streamer = streamer
+
+        watch_button = discord.ui.Button(
+            label="Watch on KICK",
+            style=discord.ButtonStyle.link,
+            url=clip_url
+        )
+        self.add_item(watch_button)
+
+    @discord.ui.button(
+        label="Edit Clip",
+        emoji="✂️",
+        style=discord.ButtonStyle.primary
+    )
+    async def edit_clip(self, interaction, button):
+        await interaction.response.defer(ephemeral=True)
+
+        process_channel = await get_or_create_user_process_channel(
+            interaction.channel,
+            interaction.user
+        )
+        message = SimpleNamespace(
+            author=interaction.user,
+            channel=process_channel
+        )
+        await start_kick_edit(message, self.clip_url)
+        await interaction.followup.send(
+            f"Edit options opened in {process_channel.mention}.",
+            ephemeral=True
+        )
+
+    @discord.ui.button(
+        label="Download Clip",
+        emoji="⬇️",
+        style=discord.ButtonStyle.secondary
+    )
+    async def download_clip(self, interaction, button):
+        await interaction.response.defer(ephemeral=True)
+
+        process_channel = await get_or_create_user_process_channel(
+            interaction.channel,
+            interaction.user
+        )
+        message = SimpleNamespace(
+            author=interaction.user,
+            channel=process_channel
+        )
+        await handle_download_command(
+            message,
+            f"!download {self.clip_url}"
+        )
+        await interaction.followup.send(
+            f"Download request started in {process_channel.mention}. "
+            "Check your DMs.",
+            ephemeral=True
+        )
+
+
+async def handle_download_command(message, command_text):
+    """
+    Handle a `!download <kick_clip_url>` request.
+
+    Downloads the KICK clip and sends the video file to the
+    requester's DMs. Falls back to a temporary Cloudflare download
+    link when Discord cannot deliver the file directly.
+    """
+
+    user = message.author
+    notify = message.channel.send
+
+    # Extract the URL from the command text.
+    parts = command_text.split()
+    kick_url = parts[1] if len(parts) > 1 else ""
+
+    status = await notify(
+        "📥 **Downloading your KICK Clip...**\n"
+        "⏳ The video is in under process — please wait."
+    )
+
+    try:
+        file_path = await run_encode_job(
+            download_kick_clip,
+            kick_url,
+            user.id
+        )
+
+        duration = get_video_duration(file_path)
+
+        try:
+            await status.edit(
+                content=(
+                    "✅ **KICK Clip downloaded!**\n"
+                    f"Duration: **{duration:.1f}s**\n"
+                    "📤 Sending the video to your DMs..."
+                )
+            )
+        except Exception:
+            pass
+
+        try:
+            await user.send(
+                "✅ **Your KICK clip download is ready!**",
+                file=discord.File(
+                    str(file_path),
+                    filename="kick_clip.mp4"
+                )
+            )
+
+            try:
+                await status.edit(
+                    content=(
+                        "✅ **Done!** I sent the KICK clip "
+                        "to your **DMs**."
+                    )
+                )
+            except Exception:
+                pass
+
+        except discord.HTTPException as upload_error:
+
+            print("Discord direct upload failed:", upload_error)
+
+            download_url = await create_public_download_link(
+                str(file_path)
+            )
+
+            if download_url:
+
+                try:
+                    await user.send(
+                        "✅ **Your KICK clip is ready!**\n\n"
+                        "Discord could not send the video directly "
+                        "because it is too large.\n\n"
+                        "🔗 **Download link:**\n"
+                        f"{download_url}\n\n"
+                        "⏳ **This link expires in 60 minutes.**"
+                    )
+
+                    try:
+                        await status.edit(
+                            content=(
+                                "✅ **Done!** I sent the temporary "
+                                "**Cloudflare download link** "
+                                "to your DMs."
+                            )
+                        )
+                    except Exception:
+                        pass
+
+                except discord.HTTPException:
+
+                    try:
+                        await status.edit(
+                            content=(
+                                "⚠️ I created the download link, "
+                                "but I couldn't send you a DM.\n\n"
+                                f"🔗 {download_url}"
+                            )
+                        )
+                    except Exception:
+                        pass
+
+            else:
+
+                try:
+                    await status.edit(
+                        content=(
+                            "❌ **The download finished, but I couldn't "
+                            "deliver the video.**\n\n"
+                            "Discord rejected the direct upload and the "
+                            "Cloudflare download link could not be created."
+                        )
+                    )
+                except Exception:
+                    pass
+
+    except Exception as e:
+
+        print("\nDOWNLOAD COMMAND ERROR:", e)
+        traceback.print_exc()
+
+        try:
+            await status.edit(
+                content=(
+                    "❌ **KICK CLIP DOWNLOAD FAILED**\n\n"
+                    f"```{str(e)[:1500]}```"
+                )
+            )
+        except Exception:
+            pass
+
+        try:
+            cleanup_job_files(
+                UPLOAD_DIR / f"kick_{user.id}" / "kick_clip.mp4"
+            )
+        except Exception:
+            pass
 
 
 # ---------------------------------------------------------
@@ -1214,368 +1206,6 @@ def trim_to_target_size(input_file, output_file, target_mb, safety_margin=0.95):
 # ---------------------------------------------------------
 # Remove final 4 seconds
 # ---------------------------------------------------------
-
-def remove_silence(input_file, output_file):
-    print("")
-    print("========================================")
-    print(" VOICE ACTIVITY DETECTION")
-    print("========================================")
-    print("Detecting actual speech...")
-
-    input_file = Path(input_file)
-    output_file = Path(output_file)
-
-    command = [
-        "ffmpeg",
-        "-hide_banner",
-        "-loglevel",
-        "error",
-        "-i",
-        str(input_file),
-        "-vn",
-        "-ac",
-        "1",
-        "-ar",
-        "16000",
-        "-f",
-        "s16le",
-        "-"
-    ]
-
-    try:
-        result = subprocess.run(
-            command,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            timeout=600
-        )
-    except subprocess.TimeoutExpired:
-        raise RuntimeError(
-            "Audio extraction timed out while detecting speech."
-        )
-
-    if result.returncode != 0:
-        raise RuntimeError(
-            "Could not extract audio for speech detection."
-        )
-
-    pcm = result.stdout
-
-    if not pcm:
-        print("No audio detected.")
-        print("Keeping original video.")
-
-        run_ffmpeg([
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(input_file),
-            "-c:v",
-            "libx264",
-            "-preset",
-            "medium",
-            "-crf",
-            "20",
-            "-c:a",
-            "aac",
-            "-b:a",
-            "192k",
-            str(output_file)
-        ])
-
-        return
-
-    vad = webrtcvad.Vad(2)
-
-    sample_rate = 16000
-    frame_ms = 30
-    samples_per_frame = int(
-        sample_rate * frame_ms / 1000
-    )
-    bytes_per_frame = samples_per_frame * 2
-
-    speech_frames = []
-
-    total_frames = len(pcm) // bytes_per_frame
-
-    for index in range(total_frames):
-
-        start_byte = index * bytes_per_frame
-        end_byte = start_byte + bytes_per_frame
-
-        frame = pcm[start_byte:end_byte]
-
-        try:
-            is_speech = vad.is_speech(
-                frame,
-                sample_rate
-            )
-        except Exception:
-            is_speech = False
-
-        if is_speech:
-            speech_frames.append(index)
-
-    if not speech_frames:
-        print("No speech detected.")
-        print("Keeping original video.")
-
-        run_ffmpeg([
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(input_file),
-            "-c:v",
-            "libx264",
-            "-preset",
-            "medium",
-            "-crf",
-            "20",
-            "-c:a",
-            "aac",
-            "-b:a",
-            "192k",
-            str(output_file)
-        ])
-
-        return
-
-    raw_intervals = []
-
-    interval_start = speech_frames[0]
-    previous = speech_frames[0]
-
-    for frame_index in speech_frames[1:]:
-
-        if frame_index - previous > 10:
-            start_time = (
-                interval_start
-                * frame_ms
-                / 1000
-            )
-
-            end_time = (
-                (previous + 1)
-                * frame_ms
-                / 1000
-            )
-
-            raw_intervals.append(
-                (start_time, end_time)
-            )
-
-            interval_start = frame_index
-
-        previous = frame_index
-
-    raw_intervals.append(
-        (
-            interval_start * frame_ms / 1000,
-            (previous + 1) * frame_ms / 1000
-        )
-    )
-
-    merged = []
-
-    for start_time, end_time in raw_intervals:
-
-        if not merged:
-            merged.append(
-                [start_time, end_time]
-            )
-            continue
-
-        previous_start, previous_end = merged[-1]
-
-        gap = start_time - previous_end
-
-        if gap <= 0.75:
-            merged[-1][1] = end_time
-        else:
-            merged.append(
-                [start_time, end_time]
-            )
-
-    padding_before = 0.25
-    padding_after = 0.35
-
-    duration = get_video_duration(input_file)
-
-    intervals = []
-
-    for start_time, end_time in merged:
-
-        start_time = max(
-            0.0,
-            start_time - padding_before
-        )
-
-        end_time = min(
-            duration,
-            end_time + padding_after
-        )
-
-        if end_time - start_time >= 0.20:
-            intervals.append(
-                (start_time, end_time)
-            )
-
-    final_intervals = []
-
-    for start_time, end_time in intervals:
-
-        if not final_intervals:
-            final_intervals.append(
-                [start_time, end_time]
-            )
-            continue
-
-        previous_start, previous_end = final_intervals[-1]
-
-        if start_time <= previous_end:
-            final_intervals[-1][1] = max(
-                previous_end,
-                end_time
-            )
-        else:
-            final_intervals.append(
-                [start_time, end_time]
-            )
-
-    print(
-        f"Detected {len(final_intervals)} speech sections."
-    )
-
-    for index, (start_time, end_time) in enumerate(
-        final_intervals,
-        start=1
-    ):
-        print(
-            f"Speech {index}: "
-            f"{start_time:.2f}s -> {end_time:.2f}s"
-        )
-
-    original_duration = duration
-
-    kept_duration = sum(
-        end_time - start_time
-        for start_time, end_time in final_intervals
-    )
-
-    removed_duration = max(
-        0.0,
-        original_duration - kept_duration
-    )
-
-    print(
-        f"Original duration: {original_duration:.2f}s"
-    )
-    print(
-        f"Speech kept: {kept_duration:.2f}s"
-    )
-    print(
-        f"Non-speaking removed: "
-        f"{removed_duration:.2f}s"
-    )
-
-    if (
-        len(final_intervals) == 1
-        and final_intervals[0][0] <= 0.01
-        and final_intervals[0][1] >= original_duration - 0.05
-    ):
-
-        print("No meaningful pauses found.")
-        print("Keeping complete video.")
-
-        run_ffmpeg([
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(input_file),
-            "-c:v",
-            "libx264",
-            "-preset",
-            "medium",
-            "-crf",
-            "20",
-            "-c:a",
-            "aac",
-            "-b:a",
-            "192k",
-            str(output_file)
-        ])
-
-        return
-
-    filters = []
-
-    for index, (start_time, end_time) in enumerate(
-        final_intervals
-    ):
-
-        filters.append(
-            f"[0:v]"
-            f"trim=start={start_time}:end={end_time},"
-            f"setpts=PTS-STARTPTS"
-            f"[v{index}]"
-        )
-
-        filters.append(
-            f"[0:a]"
-            f"atrim=start={start_time}:end={end_time},"
-            f"asetpts=PTS-STARTPTS"
-            f"[a{index}]"
-        )
-
-    concat_inputs = ""
-
-    for index in range(len(final_intervals)):
-        concat_inputs += (
-            f"[v{index}][a{index}]"
-        )
-
-    filters.append(
-        concat_inputs
-        + f"concat=n={len(final_intervals)}:v=1:a=1[v][a]"
-    )
-
-    filter_complex = ";".join(filters)
-
-    command = [
-        "ffmpeg",
-        "-y",
-        "-i",
-        str(input_file),
-        "-filter_complex",
-        filter_complex,
-        "-map",
-        "[v]",
-        "-map",
-        "[a]",
-        "-c:v",
-        "libx264",
-        "-preset",
-        "medium",
-        "-crf",
-        "20",
-        "-pix_fmt",
-        "yuv420p",
-        "-c:a",
-        "aac",
-        "-b:a",
-        "192k",
-        "-movflags",
-        "+faststart",
-        str(output_file)
-    ]
-
-    run_ffmpeg(command)
-
-    print("")
-    print("========================================")
-    print(" SPEECH TRIM COMPLETE")
-    print("========================================")
-
 
 # ---------------------------------------------------------
 # AUTOMATIC OCR OVERLAY SYSTEM
@@ -2143,9 +1773,9 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
             url_streamer_hint
         )
 
-    zoom = options["zoom"]
     mirror = options["mirror"]
     blur = options["blur"]
+    zoom = options.get("zoom", False)
 
     print(
         f"Editing {input_file} with "
@@ -2243,39 +1873,10 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
                 "aac",
                 "-b:a",
                 "192k",
-                "-shortest",
                 str(output_file)
             ]
 
         run_ffmpeg(command)
-
-        if size != "9:16":
-            temp = output_file.parent / f".{output_file.name}.temp_916.mp4"
-            print(f"Padding final output to 9:16 canvas for size={size}")
-            run_ffmpeg([
-                "ffmpeg",
-                "-y",
-                "-i",
-                str(output_file),
-                "-vf",
-                "scale=1080:1920:force_original_aspect_ratio=decrease,"
-                "pad=1080:1920:(1080-iw)/2:(1920-ih)/2:color=black,"
-                "setsar=1",
-                "-c:v",
-                "libx264",
-                "-preset",
-                "medium",
-                "-crf",
-                "20",
-                "-pix_fmt",
-                "yuv420p",
-                "-c:a",
-                "aac",
-                "-b:a",
-                "192k",
-                str(temp)
-            ])
-            temp.replace(output_file)
         return
 
     # ---------------------------------------------------------
@@ -2450,34 +2051,6 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
             )
 
             run_ffmpeg(command)
-
-            if size != "9:16":
-                temp = output_file.parent / f".{output_file.name}.temp_916.mp4"
-                print(f"Padding split-screen output to 9:16 canvas for size={size}")
-                run_ffmpeg([
-                    "ffmpeg",
-                    "-y",
-                    "-i",
-                    str(output_file),
-                    "-vf",
-                    "scale=1080:1920:force_original_aspect_ratio=decrease,"
-                    "pad=1080:1920:(1080-iw)/2:(1920-ih)/2:color=black,"
-                    "setsar=1",
-                    "-c:v",
-                    "libx264",
-                    "-preset",
-                    "medium",
-                    "-crf",
-                    "20",
-                    "-pix_fmt",
-                    "yuv420p",
-                    "-c:a",
-                    "aac",
-                    "-b:a",
-                    "192k",
-                    str(temp)
-                ])
-                temp.replace(output_file)
             return
 
         else:
@@ -2680,40 +2253,13 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
             "aac",
             "-b:a",
             "192k",
-            "-shortest",
             str(output_file)
         ]
 
     run_ffmpeg(command)
 
-    if size != "9:16":
-        temp = output_file.parent / f".{output_file.name}.temp_916.mp4"
-        print(f"Padding final output to 9:16 canvas for size={size}")
-        run_ffmpeg([
-            "ffmpeg",
-            "-y",
-            "-i",
-            str(output_file),
-            "-vf",
-            "scale=1080:1920:force_original_aspect_ratio=decrease,"
-            "pad=1080:1920:(1080-iw)/2:(1920-ih)/2:color=black,"
-            "setsar=1",
-            "-c:v",
-            "libx264",
-            "-preset",
-            "medium",
-            "-crf",
-            "20",
-            "-pix_fmt",
-            "yuv420p",
-            "-c:a",
-            "aac",
-            "-b:a",
-            "192k",
-            str(temp)
-        ])
-        temp.replace(output_file)
 
+# ---------------------------------------------------------
 
 # ---------------------------------------------------------
 # SPLIT SCREEN BACKGROUND VIDEO
@@ -2736,21 +2282,18 @@ def get_split_background():
 
 class EditView(discord.ui.View):
 
-    def __init__(self, user, file_path, url_streamer_hint=None, channel=None, deliver_to_channel=False):
+    def __init__(self, user, file_path, url_streamer_hint=None, channel=None):
 
         super().__init__(timeout=900)
 
         self.user = user
         self.file_path = Path(file_path)
         self.channel = channel
-        self.deliver_to_channel = deliver_to_channel
 
         self.options = {
             "size": "9:16",
-            "zoom": False,
             "mirror": False,
             "blur": False,
-            "remove_silence": True,
             "overlay": True,
             "enhance": "Off",
             "split_screen": False
@@ -2780,8 +2323,6 @@ class EditView(discord.ui.View):
 
         enabled.append(self.options["size"])
 
-        if self.options["zoom"]:
-            enabled.append("Zoom")
 
         if self.options["mirror"]:
             enabled.append("Mirror")
@@ -2789,8 +2330,6 @@ class EditView(discord.ui.View):
         if self.options["blur"]:
             enabled.append("Background Blur")
 
-        if self.options["remove_silence"]:
-            enabled.append("Remove Non-Speech")
 
         if self.options["overlay"]:
             enabled.append("Overlay")
@@ -2819,7 +2358,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "**AUTO EDIT OPTIONS**\n\n"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2852,29 +2391,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "**AUTO EDIT OPTIONS**\n\n"
-                f"Selected: **{self.summary()}**"
-            ),
-            view=self
-        )
-
-    @discord.ui.button(
-        label="Slightly Zoomed",
-        style=discord.ButtonStyle.secondary
-    )
-    async def zoom_button(self, interaction, button):
-
-        self.options["zoom"] = not self.options["zoom"]
-
-        button.style = (
-            discord.ButtonStyle.success
-            if self.options["zoom"]
-            else discord.ButtonStyle.secondary
-        )
-
-        await interaction.response.edit_message(
-            content=(
-                "**AUTO EDIT OPTIONS**\n\n"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2896,7 +2413,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "**AUTO EDIT OPTIONS**\n\n"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2918,29 +2435,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "**AUTO EDIT OPTIONS**\n\n"
-                f"Selected: **{self.summary()}**"
-            ),
-            view=self
-        )
-
-    @discord.ui.button(
-        label="Remove Non-Speech",
-        style=discord.ButtonStyle.secondary
-    )
-    async def silence_button(self, interaction, button):
-
-        self.options["remove_silence"] = not self.options["remove_silence"]
-
-        button.style = (
-            discord.ButtonStyle.success
-            if self.options["remove_silence"]
-            else discord.ButtonStyle.secondary
-        )
-
-        await interaction.response.edit_message(
-            content=(
-                "**AUTO EDIT OPTIONS**\n\n"
+                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -3093,36 +2588,47 @@ class EditView(discord.ui.View):
             working_file = self.file_path
 
             # -------------------------------------------------
-            # Remove non-speech only when enabled.
-            # -------------------------------------------------
-
-            if self.options["remove_silence"]:
-
-                silence_file = OUTPUT_DIR / (
-                    f"silence_removed_{self.user.id}_{self.file_path.stem}.mp4"
-                )
-
-                await notify(
-                    "Removing silent/non-speaking sections..."
-                )
-
-                await run_encode_job(
-                    remove_silence,
-                    working_file,
-                    silence_file
-                )
-
-                working_file = silence_file
-                temp_files.append(silence_file)
-
-            # -------------------------------------------------
-            # Final video editing.
             # -------------------------------------------------
             # -------------------------------------------------
 
-            await notify(
-                "ðŸŽ¬ Editing video...\n"
-                f"**{self.summary()}**"
+            progress_msg = await notify(
+                "⏳ **Under process...**\n"
+                f"[░░░░░░░░░░░░░░]   0.0%"
+            )
+
+            stop_edit_progress = asyncio.Event()
+
+            async def update_edit_progress():
+                src_size = max(self.file_path.stat().st_size, 1)
+                while not stop_edit_progress.is_set():
+                    percent = 0.0
+                    try:
+                        if output_file.exists():
+                            ratio = (
+                                output_file.stat().st_size
+                                / src_size
+                            )
+                            percent = min(95.0, ratio * 90.0)
+                    except Exception:
+                        pass
+                    try:
+                        await progress_msg.edit(
+                            content=(
+                                "⏳ **Under process...**\n"
+                                f"{render_progress_bar(percent)}"
+                            )
+                        )
+                    except Exception:
+                        pass
+                    try:
+                        await asyncio.wait_for(
+                            stop_edit_progress.wait(), timeout=3
+                        )
+                    except asyncio.TimeoutError:
+                        pass
+
+            progress_task = asyncio.create_task(
+                update_edit_progress()
             )
 
             await run_encode_job(
@@ -3134,6 +2640,22 @@ class EditView(discord.ui.View):
                 self.url_streamer_hint,
                 self.split_photo_file
             )
+
+            stop_edit_progress.set()
+            try:
+                await progress_task
+            except Exception:
+                pass
+
+            try:
+                await progress_msg.edit(
+                    content=(
+                        "⏳ **Under process...**\n"
+                        f"{render_progress_bar(100.0)}"
+                    )
+                )
+            except Exception:
+                pass
 
             if not output_file.exists():
                 raise RuntimeError(
@@ -3157,38 +2679,18 @@ class EditView(discord.ui.View):
             )
 
             try:
-                final_size = final_delivery_file.stat().st_size if Path(final_delivery_file).exists() else 0
-                if final_size > 25 * 1024 * 1024:
-                    raise discord.HTTPException(
-                        response=None,
-                        data={'code': 40005, 'message': 'Request entity too large'}
-                    )
 
-                delivery_target = (
-                    self.channel
-                    if self.deliver_to_channel
-                    else self.user
-                )
-
-                await delivery_target.send(
+                await self.user.send(
                     "✅ **Your edited KICK clip is ready!**",
                     file=discord.File(
                         str(final_delivery_file),
                         filename="edited_kick_clip.mp4"
-                    ),
-                    view=CaptionView(
-                        final_delivery_file,
-                        self.url_streamer_hint
                     )
                 )
 
                 await notify(
-                    (
-                        "✅ Done! I sent the edited KICK clip to this "
-                        "processing channel."
-                        if self.deliver_to_channel
-                        else "✅ Done! I sent the edited KICK clip to your **DM**."
-                    )
+                    "âœ… Done! I sent the edited KICK clip "
+                    "to your **DM**."
                 )
 
             except discord.HTTPException as upload_error:
@@ -3212,13 +2714,7 @@ class EditView(discord.ui.View):
 
                     try:
 
-                        delivery_target = (
-                            self.channel
-                            if self.deliver_to_channel
-                            else self.user
-                        )
-
-                        await delivery_target.send(
+                        await self.user.send(
                             "âœ… **Your edited KICK clip is ready!**\n\n"
                             "Discord could not send the video "
                             "directly because it is too large.\n\n"
@@ -3228,15 +2724,10 @@ class EditView(discord.ui.View):
                         )
 
                         await notify(
-                            (
-                                "✅ Done! I sent the temporary **Cloudflare "
-                                "download link** to this processing channel.\n\n"
-                                "⏳ It expires in 60 minutes."
-                                if self.deliver_to_channel
-                                else "✅ Done! I sent the temporary **Cloudflare "
-                                "download link** to your DM.\n\n"
-                                "⏳ It expires in 60 minutes."
-                            )
+                            "âœ… Done! I sent the temporary "
+                            "**Cloudflare download link** "
+                            "to your DM.\n\n"
+                            "â³ It expires in 60 minutes."
                         )
 
                     except discord.HTTPException as dm_error:
@@ -3363,527 +2854,6 @@ async def on_ready():
 
 
 # ---------------------------------------------------------
-# VOD Intelligence Pipeline Handler
-# ---------------------------------------------------------
-
-async def handle_vod_command(message, content):
-    """Handle !vod command for full VOD analysis."""
-    job_manager = get_job_manager()
-
-    # Parse command: !vod <url> or !vod
-    parts = content.strip().split(maxsplit=1)
-
-    if len(parts) < 2:
-        await message.channel.send(
-            "**VOD Intelligence Pipeline**\n\n"
-            "Usage: `!vod <KICK VOD URL>`\n\n"
-            "Example:\n"
-            "`!vod https://kick.com/username/videos/12345678`\n\n"
-            "This will:\n"
-            "1. Download the full VOD\n"
-            "2. Analyze audio, transcript, and chat\n"
-            "3. Find viral-worthy moments with context\n"
-            "4. Rank and deduplicate clips\n"
-            "5. Present top clips for review/edit"
-        )
-        return
-
-    vod_url = parts[1].strip()
-
-    # Validate VOD URL
-    if not is_kick_vod_url(vod_url):
-        await message.channel.send(
-            "❌ That doesn't look like a KICK VOD URL.\n\n"
-            "VOD URLs look like: `https://kick.com/username/videos/12345678`\n"
-            "(Not clip URLs which are `/clip/` or `/clips/`)"
-        )
-        return
-
-    user_id = message.author.id
-
-    # Check for existing job
-    existing_jobs = job_manager.get_user_jobs(user_id)
-    active_jobs = [j for j in existing_jobs if j.state not in (JobState.COMPLETE, JobState.FAILED, JobState.CANCELLED)]
-    if active_jobs:
-        await message.channel.send(
-            f"⏳ You already have an active VOD job ({active_jobs[0].id}). "
-            "Please wait for it to complete or cancel it first."
-        )
-        return
-
-    # Create job
-    job = job_manager.create_job(vod_url, user_id, message.channel.id)
-
-    status_msg = await message.channel.send(
-        f"🚀 **Starting VOD Analysis**\n"
-        f"Job ID: `{job.id}`\n"
-        f"URL: {vod_url}\n\n"
-        f"📥 Downloading VOD..."
-    )
-
-    # Run pipeline in background
-    async def run_pipeline():
-        try:
-            ranking_result = await run_vod_pipeline(job.id, job_manager)
-
-            # Get metadata
-            from vod_intelligence import MetadataGenerator
-            metadata_gen = MetadataGenerator()
-
-            # Load transcript for metadata
-            from vod_intelligence.transcript_analyzer import TranscriptAnalyzer
-            transcript_analyzer = TranscriptAnalyzer()
-            transcript = transcript_analyzer.load_analysis(
-                Path(job_manager.get_job(job.id).transcript_path or job_manager.get_job(job.id).analysis_path)
-            )
-
-            metadata_list = await generate_metadata_for_all_clips(
-                ranking_result.top_clips, transcript, job.streamer_name, job.vod_title, vod_url
-            )
-            metadata_map = {f"rank_{m.rank}": m for m in metadata_list}
-
-            # Update status
-            await status_msg.edit(
-                content=(
-                    f"✅ **VOD Analysis Complete!**\n"
-                    f"Job: `{job.id}` | Streamer: **{job.streamer_name}**\n"
-                    f"Duration: {job.vod_duration/3600:.1f}h\n"
-                    f"Candidates: {ranking_result.total_candidates} | Top: {len(ranking_result.top_clips)} | Dupes: {ranking_result.duplicates_removed}\n\n"
-                    f"🎬 **Top Clips Ready for Review**"
-                )
-            )
-
-            if not ranking_result.top_clips:
-                await message.channel.send(
-                    "⚠️ No reviewable clips were found after ranking. "
-                    "Try a different VOD or check back later."
-                )
-                return
-
-            # Start review session
-            async def edit_callback(interaction, job, clip, options):
-                await process_vod_clip_edit(interaction, job, clip, options, metadata_map)
-
-            await start_review_session(
-                interaction=None,  # We'll send new message
-                job=job,
-                ranking_result=ranking_result,
-                metadata_map=metadata_map,
-                job_manager=job_manager,
-                edit_callback=edit_callback
-            )
-
-            # Send review interface
-            from vod_intelligence.review_interface import build_review_list_embed, ClipReviewView
-
-            async def on_edit(interaction, job, clip, options):
-                await process_vod_clip_edit(interaction, job, clip, options, metadata_map)
-
-            async def on_reject(interaction, clip):
-                job.deselect_clip(f"rank_{clip.rank}")
-                await interaction.followup.send(f"❌ Rejected clip #{clip.rank}", ephemeral=True)
-
-            async def on_edit_all(interaction, clips):
-                for c in clips:
-                    job.select_clip(f"rank_{c.rank}")
-                await process_vod_clip_edit(interaction, job, clips, {}, metadata_map)
-
-            view = ClipReviewView(
-                job=job,
-                ranking_result=ranking_result,
-                metadata_map=metadata_map,
-                job_manager=job_manager,
-                on_edit=on_edit,
-                on_reject=on_reject,
-                on_edit_all=on_edit_all
-            )
-
-            embed = build_review_list_embed(job, ranking_result)
-
-            review_msg = await message.channel.send(
-                content=(
-                    f"🎬 **Edit Options for Job `{job.id}`**\n"
-                    f"Use the buttons below to review, edit, or reject clips.\n"
-                    f"Top clips: **{len(ranking_result.top_clips)}**"
-                ),
-                embed=embed,
-                view=view
-            )
-
-            await message.channel.send(
-                "👇 **Select a clip above, then choose an edit option.**\n"
-                "• Click a clip number to open its edit menu\n"
-                "• Use **Edit All** to process all top clips\n"
-                "• Results will be sent to your DM."
-            )
-
-        except Exception as e:
-            traceback.print_exc()
-            await status_msg.edit(
-                content=f"❌ **VOD Analysis Failed**\nJob: `{job.id}`\nError: {str(e)[:1800]}"
-            )
-
-    # Start the pipeline as a durable, cancellable job.
-    spawn_tracked_job(
-        "vod_analysis",
-        run_pipeline,
-        job_id=job.id,
-        user_id=job.user_id,
-        channel_id=job.channel_id,
-        source_id=job.vod_url,
-        source_url=job.vod_url,
-    )
-
-
-async def process_vod_clip_edit(interaction, job, clip_or_clips, options, metadata_map):
-    """Process editing of selected VOD clip(s)."""
-    from vod_intelligence.edit_planner import EditPlanner
-    from vod_intelligence.clip_ranker import RankedClip
-    from vod_intelligence.transcript_analyzer import TranscriptAnalyzer
-
-    try:
-        await interaction.response.defer()
-    except Exception:
-        pass
-
-    clips = clip_or_clips if isinstance(clip_or_clips, list) else [clip_or_clips]
-
-    # Load transcript from job analysis
-    transcript = None
-    if job.transcript_path:
-        try:
-            transcript = TranscriptAnalyzer().load_analysis(Path(job.transcript_path))
-        except Exception:
-            pass
-
-    for clip in clips:
-        metadata = metadata_map.get(f"rank_{clip.rank}")
-
-        if metadata is None:
-            try:
-                from vod_intelligence.metadata_generator import MetadataGenerator, ClipMetadata
-                key_info = {
-                    "streamer": job.streamer_name or "Streamer",
-                    "start_time": clip.moment.expanded_start,
-                    "entities": [],
-                    "topics": [],
-                    "key_phrases": [],
-                    "emotions": [],
-                }
-                metadata = MetadataGenerator()._generate_template_fallback(key_info)
-                metadata.rank = clip.rank
-            except Exception:
-                metadata = None
-
-        # Create edit plan
-        planner = EditPlanner()
-        plan = planner.create_plan(
-            clip.moment, clip.moment_score, clip.story_analysis,
-            transcript, job.streamer_name, job.vod_title
-        )
-
-        # Apply user customizations
-        for key, value in options.items():
-            if hasattr(plan, key):
-                setattr(plan, key, value)
-
-        edit_options = plan.to_options_dict()
-
-        # Run edit using existing edit_video function
-        output_file = Path("output") / f"vod_{job.id}_clip{clip.rank}_{clip.moment.expanded_start:.0f}.mp4"
-
-        try:
-            await run_encode_job(
-                edit_video,
-                Path(job.vod_path),
-                output_file,
-                edit_options,
-                None,  # overlay_file - will auto-detect
-                job.streamer_name,
-                None  # split_photo_file
-            )
-
-            # Send to user
-            file_size = output_file.stat().st_size if Path(output_file).exists() else 0
-            if file_size > 25 * 1024 * 1024:
-                download_url = await create_public_download_link(
-                    str(output_file)
-                )
-                if download_url:
-                    caption_display = metadata.recommended_post_caption if metadata and metadata.recommended_post_caption else (metadata.caption if metadata else 'N/A')
-                    await interaction.user.send(
-                        f"✅ **Clip #{clip.rank} Ready!**\n"
-                        f"Title: {metadata.title if metadata else 'Untitled'}\n"
-                        f"Caption: {caption_display}\n"
-                        f"Hashtags: {' '.join(metadata.hashtags[:10]) if metadata else 'N/A'}\n\n"
-                        "Discord could not send the video directly because it is too large.\n\n"
-                        f"🔗 **Download link:**\n{download_url}\n\n"
-                        "⏳ **This link expires in 60 minutes.**"
-                    )
-                else:
-                    caption_display = metadata.recommended_post_caption if metadata and metadata.recommended_post_caption else (metadata.caption if metadata else 'N/A')
-                    await interaction.user.send(
-                        f"✅ **Clip #{clip.rank} Ready!**\n"
-                        f"Title: {metadata.title if metadata else 'Untitled'}\n"
-                        f"Caption: {caption_display}\n"
-                        f"Hashtags: {' '.join(metadata.hashtags[:10]) if metadata else 'N/A'}"
-                    )
-            else:
-                try:
-                    caption_display = metadata.recommended_post_caption if metadata and metadata.recommended_post_caption else (metadata.caption if metadata else 'N/A')
-                    await interaction.user.send(
-                        f"✅ **Clip #{clip.rank} Ready!**\n"
-                        f"Title: {metadata.title if metadata else 'Untitled'}\n"
-                        f"Caption: {caption_display}\n"
-                        f"Hashtags: {' '.join(metadata.hashtags[:10]) if metadata else 'N/A'}",
-                        file=discord.File(str(output_file), filename=f"clip_{clip.rank}.mp4")
-                    )
-                except discord.HTTPException as send_error:
-                    if send_error.status == 413:
-                        download_url = await create_public_download_link(str(output_file))
-                        if download_url:
-                            caption_display = metadata.recommended_post_caption if metadata and metadata.recommended_post_caption else (metadata.caption if metadata else 'N/A')
-                            await interaction.user.send(
-                                f"✅ **Clip #{clip.rank} Ready!**\n"
-                                f"Title: {metadata.title if metadata else 'Untitled'}\n"
-                                f"Caption: {caption_display}\n"
-                                f"Hashtags: {' '.join(metadata.hashtags[:10]) if metadata else 'N/A'}\n\n"
-                                "Discord could not send the video directly because it is too large.\n\n"
-                                f"🔗 **Download link:**\n{download_url}\n\n"
-                                "⏳ **This link expires in 60 minutes.**"
-                            )
-                        else:
-                            caption_display = metadata.recommended_post_caption if metadata and metadata.recommended_post_caption else (metadata.caption if metadata else 'N/A')
-                            await interaction.user.send(
-                                f"✅ **Clip #{clip.rank} Ready!**\n"
-                                f"Title: {metadata.title if metadata else 'Untitled'}\n"
-                                f"Caption: {caption_display}\n"
-                                f"Hashtags: {' '.join(metadata.hashtags[:10]) if metadata else 'N/A'}"
-                            )
-                    else:
-                        raise
-
-            # Record in history
-            record_clip(
-                output_file,
-                streamer=job.streamer_name,
-                source_url=job.vod_url,
-                start_time=clip.moment.expanded_start,
-                end_time=clip.moment.expanded_end,
-                transcript=clip.moment.hook_text + " " + clip.moment.payoff_text,
-                score=clip.final_score
-            )
-
-            await interaction.followup.send(f"✅ Clip #{clip.rank} sent to your DM!")
-
-        except Exception as e:
-            traceback.print_exc()
-            await interaction.followup.send(f"❌ Failed to edit clip #{clip.rank}: {str(e)[:500]}")
-
-
-# ---------------------------------------------------------
-# Clip URL Modal - Opens a modal for pasting KICK clip URLs
-# ---------------------------------------------------------
-
-class ClipURLModal(discord.ui.Modal, title="KICK Clip Editor"):
-    """Modal that opens when user clicks the button - paste URL and edit options."""
-
-    def __init__(self):
-        super().__init__()
-        self.url_input = discord.ui.TextInput(
-            label="KICK Clip URL",
-            placeholder="https://kick.com/username/clips/12345678",
-            style=discord.InputStyle.short,
-            required=True,
-            min_length=10,
-        )
-        self.add_item(self.url_input)
-
-        self.size_input = discord.ui.TextInput(
-            label="Output format (9:16 / 1:1 / 4:5 / Original)",
-            placeholder="9:16",
-            style=discord.InputStyle.short,
-            required=False,
-            default="9:16",
-        )
-        self.add_item(self.size_input)
-
-        self.captions_input = discord.ui.TextInput(
-            label="Captions? (yes/no)",
-            placeholder="yes",
-            style=discord.InputStyle.short,
-            required=False,
-            default="yes",
-        )
-        self.add_item(self.captions_input)
-
-    async def callback(self, interaction: discord.Interaction):
-        clip_url = self.url_input.value.strip()
-
-        if not is_kick_clip_url(clip_url):
-            await interaction.response.send_message(
-                "❌ That doesn't look like a KICK Clip URL.",
-                ephemeral=True
-            )
-            return
-
-        user_id = interaction.user.id
-        job_manager = get_job_manager()
-
-        # Check for existing job
-        existing_jobs = job_manager.get_user_jobs(user_id)
-        active_jobs = [j for j in existing_jobs if j.state not in (JobState.COMPLETE, JobState.FAILED, JobState.CANCELLED)]
-        if active_jobs:
-            await interaction.response.send_message(
-                f"⏳ You already have an active job ({active_jobs[0].id}).",
-                ephemeral=True
-            )
-            return
-
-        # Create job
-        job = job_manager.create_job(clip_url, user_id, interaction.channel.id, ContentType.CLIP)
-
-        await interaction.response.send_message(
-            f"🚀 **Starting Clip Analysis**\n"
-            f"Job ID: `{job.id}`\n"
-            f"URL: {clip_url}\n\n"
-            f"📥 Downloading clip...",
-            ephemeral=True
-        )
-
-        status_msg = await interaction.channel.send(
-            f"🚀 **Starting Clip Analysis**\n"
-            f"Job ID: `{job.id}`\n"
-            f"URL: {clip_url}\n\n"
-            f"📥 Downloading clip..."
-        )
-
-        async def run_pipeline():
-            try:
-                file_path = await run_download_job(
-                    download_kick_clip,
-                    clip_url,
-                    user_id
-                )
-                duration = get_video_duration(file_path)
-                streamer = extract_streamer_from_url(clip_url) or "unknown"
-
-                job.vod_path = str(file_path)
-                job.vod_duration = duration
-                job.streamer_name = streamer
-                job.vod_title = f"Clip from {streamer}"
-                job_manager.set_vod_info(job.id, str(file_path), duration, f"Clip from {streamer}", streamer)
-
-                ranking_result = await run_clip_pipeline(job.id, job_manager)
-
-                from vod_intelligence.review_interface import build_review_list_embed, ClipReviewView
-                from vod_intelligence.transcript_analyzer import TranscriptAnalyzer
-                transcript_analyzer = TranscriptAnalyzer()
-                transcript = transcript_analyzer.load_analysis(
-                    Path(job_manager.get_job(job.id).transcript_path or job_manager.get_job(job.id).analysis_path)
-                )
-
-                metadata_list = await generate_metadata_for_all_clips(
-                    ranking_result.top_clips, transcript, streamer, job.vod_title, clip_url
-                )
-                metadata_map = {f"rank_{m.rank}": m for m in metadata_list}
-
-                await status_msg.edit(
-                    content=(
-                        f"✅ **Clip Analysis Complete!**\n"
-                        f"Job: `{job.id}` | Streamer: **{streamer}**\n"
-                        f"Duration: {duration:.1f}s\n\n"
-                        f"🎬 **Review Edit Recommendations**"
-                    )
-                )
-
-                if not ranking_result.top_clips:
-                    await interaction.channel.send(
-                        "⚠️ No reviewable clips were found after ranking. "
-                        "Try a different clip or check back later."
-                    )
-                    return
-
-                async def on_edit(interaction, job, clip, options):
-                    await process_vod_clip_edit(interaction, job, clip, options, metadata_map)
-
-                async def on_reject(interaction, clip):
-                    job.deselect_clip(f"rank_{clip.rank}")
-                    await interaction.followup.send(f"❌ Rejected clip #{clip.rank}", ephemeral=True)
-
-                async def on_edit_all(interaction, clips):
-                    for c in clips:
-                        job.select_clip(f"rank_{c.rank}")
-                    await process_vod_clip_edit(interaction, job, clips, {}, metadata_map)
-
-                view = ClipReviewView(
-                    job=job,
-                    ranking_result=ranking_result,
-                    metadata_map=metadata_map,
-                    job_manager=job_manager,
-                    on_edit=on_edit,
-                    on_reject=on_reject,
-                    on_edit_all=on_edit_all
-                )
-
-                embed = build_review_list_embed(job, ranking_result)
-
-                review_msg = await interaction.channel.send(
-                    content=(
-                        f"🎬 **Edit Options for Job `{job.id}`**\n"
-                        f"Use the buttons below to review, edit, or reject clips.\n"
-                        f"Top clips: **{len(ranking_result.top_clips)}**"
-                    ),
-                    embed=embed,
-                    view=view
-                )
-
-                await interaction.channel.send(
-                    "👇 **Select a clip above, then choose an edit option.**\n"
-                    "• Click a clip number to open its edit menu\n"
-                    "• Use **Edit All** to process all top clips\n"
-                    "• Results will be sent to your DM."
-                )
-
-            except Exception as e:
-                traceback.print_exc()
-                await status_msg.edit(
-                    content=f"❌ **Clip Analysis Failed**\nJob: `{job.id}`\nError: {str(e)[:1800]}"
-                )
-
-        spawn_tracked_job(
-            "clip_analysis",
-            run_pipeline,
-            job_id=job.id,
-            user_id=job.user_id,
-            channel_id=job.channel_id,
-            source_id=job.vod_url,
-            source_url=job.vod_url,
-        )
-
-
-class ClipURLModalView(discord.ui.View):
-    """Persistent view with a button to open the clip URL modal."""
-
-    def __init__(self):
-        super().__init__(timeout=None)
-
-    @discord.ui.button(label="🔗 Paste KICK Clip URL", style=discord.ButtonStyle.primary, custom_id="kick_clip_url")
-    async def open_modal(self, interaction: discord.Interaction, button: discord.ui.Button):
-        try:
-            modal = ClipURLModal()
-            await interaction.response.send_modal(modal)
-        except Exception as e:
-            print(f"Modal error: {e}")
-            if not interaction.response.is_done():
-                await interaction.response.send_message(f"Error: {e}", ephemeral=True)
-
-
-# Register persistent view so buttons work even after restart
-client.add_view(ClipURLModalView())
-
-
-# ---------------------------------------------------------
 # Messages
 # ---------------------------------------------------------
 
@@ -3894,68 +2864,6 @@ async def on_message(message):
         return
 
     content = message.content.strip()
-
-    # Help command - show available channels
-    if content.lower() == "!channels":
-        guild = message.guild
-        if guild:
-            text_channels = [c for c in guild.text_channels]
-            for ch in text_channels[:20]:
-                await message.channel.send(f"**{ch.name}** — ID: `{ch.id}`")
-        else:
-            await message.channel.send("Run this in a server, not DMs.")
-        return
-
-    # Restrict !clip command to a specific channel only
-    CLIP_CHANNEL_ID = os.getenv("CLIP_CHANNEL_ID")
-    if CLIP_CHANNEL_ID and message.channel.id != int(CLIP_CHANNEL_ID):
-        return
-
-    # Handle !clip command - paste URL directly in command
-    if content.lower().startswith("!clip"):
-        await handle_clip_command(message, content)
-        return
-
-    # Handle !upload command - upload a video file
-    if content.lower().startswith("!upload"):
-        await handle_upload_command(message, content)
-        return
-
-    # Handle !download command - download only, no analysis
-    if content.lower().startswith("!download"):
-        await handle_download_command(message, content)
-        return
-
-    # Cancel command
-    if content.lower() == "!cancel":
-        job_manager = get_job_manager()
-        user_jobs = job_manager.get_user_jobs(message.author.id)
-        active = [j for j in user_jobs if j.state not in (JobState.COMPLETE, JobState.FAILED, JobState.CANCELLED)]
-        for j in active:
-            # Best effort on the pipeline's own bookkeeping...
-            try:
-                job_manager.cancel_job(j.id)
-            except Exception as cancel_error:
-                print(f"CANCEL: pipeline cancel failed for {j.id}: {cancel_error}")
-            # ...then actually stop the work: the durable record, the queued
-            # task, and any FFmpeg process this job is currently running.
-            cancel_tracked_job(j.id)
-            await message.channel.send(f"❌ Cancelled job `{j.id}`")
-        if not active:
-            await message.channel.send("No active jobs to cancel.")
-        return
-
-    # Jobs command
-    if content.lower() == "!jobs":
-        job_manager = get_job_manager()
-        user_jobs = job_manager.get_user_jobs(message.author.id)
-        if not user_jobs:
-            await message.channel.send("No jobs found.")
-            return
-        for j in user_jobs[:10]:
-            emoji = {"COMPLETE": "✅", "FAILED": "❌", "CANCELLED": "❌", "CREATED": "🟡", "DOWNLOADING": "📥", "ANALYZING": "🔍", "CANDIDATES_FOUND": "🎬", "READY": "✅"}.get(j.state.value, "⏳")
-            await message.channel.send(f"{emoji} `{j.id}` — {j.state.value} — {j.vod_title or 'Untitled'}")
-        return
 
     if not content.lower().startswith("!edits"):
         return
@@ -3987,7 +2895,7 @@ async def on_message(message):
     if kick_url and not is_kick_clip_url(kick_url):
 
         await message.channel.send(
-            "❌ I found a URL, but it does not look like a KICK Clip URL.\n\n"
+            "Ã¢ÂÅ’ I found a URL, but it does not look like a KICK Clip URL.\n\n"
             "Use:\n"
             "`!edit https://kick.com/.../clip/...`"
         )
@@ -3996,9 +2904,11 @@ async def on_message(message):
 
     # If there is no URL after !edit, ask the user for one.
     await message.channel.send(
+        "Ã°Å¸Å½Â¬ **KICK AUTO EDIT**\n\n"
         "Paste your **KICK Clip link** here.\n\n"
         "Example:\n"
         "`https://kick.com/.../clip/...`\n\n"
+        "You no longer need to upload the video to Discord."
     )
 
     def check(reply):
@@ -4041,145 +2951,7 @@ async def on_message(message):
 
 
 
-class CaptionButtonView(discord.ui.View):
-    """
-    Shown alongside a finished edited clip. Generates a separate
-    caption text file rather than burning captions into the video.
-    """
-
-    def __init__(self, output_file, streamer_hint):
-        super().__init__(timeout=None)
-        self.output_file = output_file
-        self.streamer_hint = streamer_hint
-        self.used = False
-        self.caption_text = None
-        self.caption_file = None
-
-    @discord.ui.button(label="Generate Caption", emoji="📝", style=discord.ButtonStyle.primary)
-    async def generate_caption_button(self, interaction, button):
-        if self.used:
-            await interaction.response.send_message(
-                "This caption has already been generated.",
-                ephemeral=True
-            )
-            return
-
-        self.used = True
-        button.disabled = True
-        await interaction.response.edit_message(view=self)
-
-        await interaction.followup.send("Generating caption, this may take a minute...")
-
-        try:
-            caption_file, caption_text = await run_analysis_job(
-                generate_caption_file,
-                self.output_file,
-                self.streamer_hint
-            )
-
-            self.caption_file = caption_file
-            self.caption_text = caption_text
-
-            await interaction.followup.send(
-                f"**Caption:**\n{caption_text}"
-            )
-
-            # Send the caption file
-            if caption_file and Path(caption_file).exists():
-                await interaction.followup.send(
-                    "📄 Caption file:",
-                    file=discord.File(
-                        caption_file,
-                        filename=f"caption_{Path(self.output_file).stem}.txt"
-                    )
-                )
-
-        except Exception as caption_error:
-            print("Caption generation failed:", caption_error)
-            await interaction.followup.send(
-                "Sorry, caption generation failed for this clip."
-            )
-
-
-# Alias for backward compatibility
-CaptionView = CaptionButtonView
-
-
-async def generate_caption_file(video_path, streamer_name=None):
-    """
-    Generate a separate caption text file (not burnt into video).
-    Returns the path to the caption file.
-    """
-    from captioning import transcribe_and_caption
-
-    caption_text = await run_analysis_job(
-        transcribe_and_caption,
-        video_path,
-        streamer_name
-    )
-
-    caption_file = OUTPUT_DIR / f"caption_{Path(video_path).stem}.txt"
-    caption_file.write_text(caption_text or "", encoding="utf-8")
-
-    return str(caption_file), caption_text
-
-
-class CaptionButtonView(discord.ui.View):
-    """View with a Caption button that generates a separate caption file."""
-
-    def __init__(self, output_file, streamer_hint=None, channel=None):
-        super().__init__(timeout=3600)
-        self.output_file = output_file
-        self.streamer_hint = streamer_hint
-        self.channel = channel
-        self.used = False
-        self.caption_text = None
-        self.caption_file = None
-
-    @discord.ui.button(label="Generate Caption", emoji="📝", style=discord.ButtonStyle.primary)
-    async def generate_caption_button(self, interaction, button):
-        if self.used:
-            await interaction.response.send_message(
-                "This caption has already been generated.",
-                ephemeral=True
-            )
-            return
-
-        self.used = True
-        button.disabled = True
-        await interaction.response.edit_message(view=self)
-
-        await interaction.followup.send("Generating caption, this may take a minute...")
-
-        try:
-            caption_file, caption_text = await run_analysis_job(
-                generate_caption_file,
-                self.output_file,
-                self.streamer_hint
-            )
-
-            self.caption_file = caption_file
-            self.caption_text = caption_text
-
-            await interaction.followup.send(
-                f"**Caption:**\n{caption_text}"
-            )
-
-            # Also send the caption file
-            if Path(caption_file).exists():
-                await interaction.followup.send(
-                    f"📄 Caption file:",
-                    file=discord.File(caption_file, filename=f"caption_{Path(self.output_file).stem}.txt")
-                )
-
-        except Exception as caption_error:
-            print("Caption generation failed:", caption_error)
-            await interaction.followup.send(
-                "Sorry, caption generation failed for this clip."
-            )
-
-
-async def start_kick_edit(message, kick_url, deliver_to_channel=False):
+async def start_kick_edit(message, kick_url):
 
     user_id = message.author.id
 
@@ -4193,16 +2965,56 @@ async def start_kick_edit(message, kick_url, deliver_to_channel=False):
         return
 
     status = await message.channel.send(
-        "Ã°Å¸â€œÂ¥ **Downloading your KICK Clip...**\n"
+        "🔄 **Step 1/2: Downloading your KICK Clip...**\n"
+        "⏳ The video is in under process — please wait.\n"
+        "[░░░░░░░░░░░░░░]   0.0%"
     )
+
+    # Live progress bar while downloading.
+    stop_progress = asyncio.Event()
+
+    async def update_progress_status():
+        while not stop_progress.is_set():
+            state = PROGRESS_STATE.get(user_id) or {}
+            percent = state.get("percent", 0.0)
+            phase = state.get("status", "downloading")
+            phrase = (
+                "Downloading"
+                if phase == "downloading"
+                else "Processing downloaded file"
+            )
+            try:
+                await status.edit(
+                    content=(
+                        "🔄 **Step 1/2: Downloading your KICK Clip...**\n"
+                        "⏳ The video is in under process — please wait.\n"
+                        f"{render_progress_bar(percent)}  {phrase}"
+                    )
+                )
+            except Exception:
+                pass
+            try:
+                await asyncio.wait_for(
+                    stop_progress.wait(), timeout=3
+                )
+            except asyncio.TimeoutError:
+                pass
+
+    progress_task = asyncio.create_task(update_progress_status())
 
     try:
 
-        file_path = await run_download_job(
+        file_path = await run_encode_job(
             download_kick_clip,
             kick_url,
             user_id
         )
+
+        stop_progress.set()
+        try:
+            await progress_task
+        except Exception:
+            pass
 
         duration = get_video_duration(file_path)
 
@@ -4228,10 +3040,10 @@ async def start_kick_edit(message, kick_url, deliver_to_channel=False):
 
         await status.edit(
             content=(
-                "**KICK Clip downloaded!**\n"
+                "✅ **Step 1/2 complete: KICK Clip downloaded!**\n"
                 f"Duration: **{duration:.1f}s**\n"
                 f"{creator_line}\n"
-                "Choose your editing options below, then press "
+                "🎬 **Step 2/2: Editing** — choose your options below, then press "
                 "**Start Edit**."
             )
         )
@@ -4240,20 +3052,25 @@ async def start_kick_edit(message, kick_url, deliver_to_channel=False):
             message.author,
             file_path,
             streamer_hint,
-            message.channel,
-            deliver_to_channel
+            message.channel
         )
 
         SESSIONS[user_id] = view
 
         await message.channel.send(
-            "**AUTO EDIT OPTIONS**\n\n"
+            "Ã°Å¸Å½Â¬ **AUTO EDIT OPTIONS**\n\n"
             "Choose everything you want, then press **Start Edit**.\n\n"
-            "Selected: **9:16 • Remove Non-Speech • Overlay**",
+            "Selected: **9:16 Ã¢â‚¬Â¢ Remove Non-Speech Ã¢â‚¬Â¢ Overlay**",
             view=view
         )
 
     except Exception as e:
+
+        stop_progress.set()
+        try:
+            await progress_task
+        except Exception:
+            pass
 
         print("\nKICK DOWNLOAD ERROR:", e)
 
@@ -4265,7 +3082,9 @@ async def start_kick_edit(message, kick_url, deliver_to_channel=False):
         )
 
         # Make sure a failed job does not leave files behind.
-        cleanup_stale_kick_uploads()
+        cleanup_job_files(
+            UPLOAD_DIR / f"kick_{user_id}" / "kick_clip.mp4"
+        )
 
         SESSIONS.pop(user_id, None)
 
@@ -4274,524 +3093,7 @@ async def start_kick_edit(message, kick_url, deliver_to_channel=False):
 # Start
 # ---------------------------------------------------------
 
-async def handle_clip_command(message, content):
-    """Handle !clip command for short clip analysis."""
-    job_manager = get_job_manager()
-
-    parts = content.strip().split(maxsplit=1)
-
-    if len(parts) < 2:
-        await message.channel.send(
-            "**Clip Intelligence**\n\n"
-            "Usage: `!clip <KICK Clip URL>`\n\n"
-            "Example:\n"
-            "`!clip https://kick.com/username/clips/12345678`\n\n"
-            "This analyzes the clip with the intelligence pipeline and "
-            "presents edit recommendations."
-        )
-        return
-
-    clip_url = parts[1].strip()
-
-    # Validate clip URL
-    if not is_kick_clip_url(clip_url):
-        await message.channel.send(
-            "❌ That doesn't look like a KICK Clip URL.\n\n"
-            "Clip URLs look like: `https://kick.com/username/clips/12345678`"
-        )
-        return
-
-    user_id = message.author.id
-
-    # Check for existing job
-    existing_jobs = job_manager.get_user_jobs(user_id)
-    active_jobs = [j for j in existing_jobs if j.state not in (JobState.COMPLETE, JobState.FAILED, JobState.CANCELLED)]
-    if active_jobs:
-        await message.channel.send(
-            f"⏳ You already have an active job ({active_jobs[0].id}). "
-            "Please wait for it to complete or cancel it first."
-        )
-        return
-
-    # Create job
-    job = job_manager.create_job(clip_url, user_id, message.channel.id, ContentType.CLIP)
-
-    status_msg = await message.channel.send(
-        f"🚀 **Starting Clip Analysis**\n"
-        f"Job ID: `{job.id}`\n"
-        f"URL: {clip_url}\n\n"
-        f"📥 Downloading clip..."
-    )
-
-    async def run_pipeline():
-        try:
-            from vod_intelligence.review_interface import build_review_list_embed, ClipReviewView
-
-            # Download clip first
-            file_path = await run_download_job(
-                download_kick_clip,
-                clip_url,
-                user_id
-            )
-            duration = get_video_duration(file_path)
-            streamer = extract_streamer_from_url(clip_url) or "unknown"
-
-            job.vod_path = str(file_path)
-            job.vod_duration = duration
-            job.streamer_name = streamer
-            job.vod_title = f"Clip from {streamer}"
-            job_manager.set_vod_info(job.id, str(file_path), duration, f"Clip from {streamer}", streamer)
-
-            # Run clip pipeline
-            ranking_result = await run_clip_pipeline(job.id, job_manager)
-
-            # Load transcript for metadata
-            from vod_intelligence.transcript_analyzer import TranscriptAnalyzer
-            transcript_analyzer = TranscriptAnalyzer()
-            transcript = transcript_analyzer.load_analysis(
-                Path(job_manager.get_job(job.id).transcript_path or job_manager.get_job(job.id).analysis_path)
-            )
-
-            metadata_list = await generate_metadata_for_all_clips(
-                ranking_result.top_clips, transcript, streamer, job.vod_title, clip_url
-            )
-            metadata_map = {f"rank_{m.rank}": m for m in metadata_list}
-
-            await status_msg.edit(
-                content=(
-                    f"✅ **Clip Analysis Complete!**\n"
-                    f"Job: `{job.id}` | Streamer: **{streamer}**\n"
-                    f"Duration: {duration:.1f}s\n\n"
-                    f"🎬 **Review Edit Recommendations**"
-                )
-            )
-
-            if not ranking_result.top_clips:
-                await message.channel.send(
-                    "⚠️ No reviewable clips were found after ranking. "
-                    "Try a different clip or check back later."
-                )
-                return
-
-            async def on_edit(interaction, job, clip, options):
-                await process_vod_clip_edit(interaction, job, clip, options, metadata_map)
-
-            async def on_reject(interaction, clip):
-                job.deselect_clip(f"rank_{clip.rank}")
-                await interaction.followup.send(f"❌ Rejected clip #{clip.rank}", ephemeral=True)
-
-            async def on_edit_all(interaction, clips):
-                for c in clips:
-                    job.select_clip(f"rank_{c.rank}")
-                await process_vod_clip_edit(interaction, job, clips, {}, metadata_map)
-
-            view = ClipReviewView(
-                job=job,
-                ranking_result=ranking_result,
-                metadata_map=metadata_map,
-                job_manager=job_manager,
-                on_edit=on_edit,
-                on_reject=on_reject,
-                on_edit_all=on_edit_all
-            )
-
-            embed = build_review_list_embed(job, ranking_result)
-
-            review_msg = await message.channel.send(
-                content=(
-                    f"🎬 **Edit Options for Job `{job.id}`**\n"
-                    f"Use the buttons below to review, edit, or reject clips.\n"
-                    f"Top clips: **{len(ranking_result.top_clips)}**"
-                ),
-                embed=embed,
-                view=view
-            )
-
-            await message.channel.send(
-                "👇 **Select a clip above, then choose an edit option.**\n"
-                "• Click a clip number to open its edit menu\n"
-                "• Use **Edit All** to process all top clips\n"
-                "• Results will be sent to your DM."
-            )
-
-        except Exception as e:
-            traceback.print_exc()
-            await status_msg.edit(
-                content=f"❌ **Clip Analysis Failed**\nJob: `{job.id}`\nError: {str(e)[:1800]}"
-            )
-
-    spawn_tracked_job(
-        "clip_analysis",
-        run_pipeline,
-        job_id=job.id,
-        user_id=job.user_id,
-        channel_id=job.channel_id,
-        source_id=job.vod_url,
-        source_url=job.vod_url,
-    )
-
-
-async def handle_download_command(message, content, deliver_to_channel=False):
-    """Handle !download command - download only, no analysis."""
-    parts = content.strip().split(maxsplit=1)
-
-    if len(parts) < 2:
-        await message.channel.send(
-            "**Download Clip**\n\n"
-            "Usage: `!download <KICK Clip URL>`\n\n"
-            "Example:\n"
-            "`!download https://kick.com/username/clips/12345678`\n\n"
-            "This downloads the clip and sends it to your DM.\n"
-            "Large clips will get a temporary download link."
-        )
-        return
-
-    clip_url = parts[1].strip()
-
-    if not is_kick_clip_url(clip_url):
-        await message.channel.send(
-            "❌ That doesn't look like a KICK Clip URL.\n\n"
-            "Clip URLs look like: `https://kick.com/username/clips/12345678`"
-        )
-        return
-
-    status = await message.channel.send(
-        "📥 **Downloading your KICK Clip...**\n"
-    )
-
-    try:
-        file_path = await run_download_job(
-            download_kick_clip,
-            clip_url,
-            message.author.id
-        )
-
-        duration = get_video_duration(file_path)
-        if duration <= 0:
-            raise RuntimeError("Downloaded clip has an invalid duration.")
-
-        file_size = Path(file_path).stat().st_size
-        size_mb = file_size / (1024 * 1024)
-
-        delivery_destination = (
-            "the processing channel"
-            if deliver_to_channel
-            else "your DM"
-        )
-        await status.edit(
-            content=(
-                f"✅ **Clip downloaded!**\n"
-                f"Duration: **{duration:.1f}s**\n"
-                f"Size: **{size_mb:.1f}MB**\n\n"
-                f"Sending to {delivery_destination}..."
-            )
-        )
-
-        # Always try direct send first, fall back to Cloudflare on 413
-        try:
-            delivery_target = (
-                message.channel
-                if deliver_to_channel
-                else message.author
-            )
-
-            await delivery_target.send(
-                f"✅ **Your KICK Clip is ready!**\n"
-                f"Duration: {duration:.1f}s\n"
-                f"Size: {size_mb:.1f}MB",
-                file=discord.File(file_path, filename=f"kick_clip_{Path(file_path).stem}.mp4")
-            )
-        except discord.HTTPException as dm_error:
-            if dm_error.status == 413:
-                download_url = await create_public_download_link(file_path)
-                if download_url:
-                    delivery_target = (
-                        message.channel
-                        if deliver_to_channel
-                        else message.author
-                    )
-                    await delivery_target.send(
-                        f"✅ **Your KICK Clip is ready!**\n"
-                        f"Duration: {duration:.1f}s\n"
-                        f"Size: {size_mb:.1f}MB\n\n"
-                        "Discord could not send the video directly because it is too large.\n\n"
-                        f"🔗 **Download link:**\n{download_url}\n\n"
-                        "⏳ **This link expires in 60 minutes.**"
-                    )
-                else:
-                    delivery_target = (
-                        message.channel
-                        if deliver_to_channel
-                        else message.author
-                    )
-                    await delivery_target.send(
-                        f"✅ **Your KICK Clip is ready!**\n"
-                        f"Duration: {duration:.1f}s\n"
-                        f"Size: {size_mb:.1f}MB\n\n"
-                        "Could not create a download link. "
-                        "Try downloading the clip directly from KICK."
-                    )
-            else:
-                raise
-
-        delivery_label = (
-            "processing channel"
-            if deliver_to_channel
-            else "DM"
-        )
-        await status.edit(
-            content=(
-                f"✅ **Clip sent to your {delivery_label}!**\n"
-                f"Duration: **{duration:.1f}s**\n"
-                f"Size: **{size_mb:.1f}MB**"
-            )
-        )
-
-    except Exception as e:
-        print("\nDOWNLOAD ERROR:", e)
-        await status.edit(
-            content=(
-                "❌ **DOWNLOAD FAILED**\n\n"
-                f"```{str(e)[:1800]}```\n\n"
-                "Make sure the Clip opens normally in your browser and "
-                "that yt-dlp/curl_cffi are installed."
-            )
-        )
-        cleanup_stale_kick_uploads()
-
-
-async def handle_upload_command(message, content):
-    """Handle !upload command - upload a video file via web."""
-    UPLOAD_CHANNEL_ID = int(os.getenv("UPLOAD_CHANNEL_ID", "1547844146822127626"))
-    if message.channel.id != UPLOAD_CHANNEL_ID:
-        await message.channel.send(
-            f"❌ This command only works in the upload channel.\n"
-            f"Channel ID: `{UPLOAD_CHANNEL_ID}`"
-        )
-        return
-
-    await message.channel.send(
-        "📤 **Upload your video**\n\n"
-        "Click the button below to open the upload page.\n\n"
-        "After uploading, you'll get a download link here.",
-        view=UploadView()
-    )
-
-
-class UploadView(discord.ui.View):
-    def __init__(self):
-        super().__init__(timeout=None)
-
-    @discord.ui.button(
-        label="📤 Open Upload Page",
-        style=discord.ButtonStyle.primary,
-        custom_id="open_upload_page"
-    )
-    async def open_upload(self, interaction: discord.Interaction, button: discord.ui.Button):
-        upload_url = get_upload_public_url() or os.getenv("UPLOAD_SERVER_URL", "http://localhost:8766")
-        await interaction.response.send_message(
-            f"📤 **Upload your video here:**\n{upload_url}\n\n"
-            "After uploading, the download link will appear here automatically.",
-            ephemeral=True
-        )
-
-
-async def handle_live_command(message, content):
-    """Handle !live command for live stream analysis."""
-    job_manager = get_job_manager()
-
-    parts = content.strip().split(maxsplit=1)
-
-    if len(parts) < 2:
-        await message.channel.send(
-            "**Live Stream Intelligence**\n\n"
-            "Usage: `!live <KICK Stream URL>`\n\n"
-            "Example:\n"
-            "`!live https://kick.com/username`\n\n"
-            "This buffers the live stream and analyzes it for viral moments."
-        )
-        return
-
-    stream_url = parts[1].strip()
-
-    # Validate stream URL
-    try:
-        from urllib.parse import urlparse
-        parsed = urlparse(stream_url.strip())
-        host = (parsed.hostname or "").lower()
-        if host not in {"kick.com", "www.kick.com"}:
-            await message.channel.send(
-                "❌ That doesn't look like a KICK stream URL.\n\n"
-                "Stream URLs look like: `https://kick.com/username`"
-            )
-            return
-    except Exception:
-        await message.channel.send("❌ Invalid URL format.")
-        return
-
-    user_id = message.author.id
-
-    # Check for existing job
-    existing_jobs = job_manager.get_user_jobs(user_id)
-    active_jobs = [j for j in existing_jobs if j.state not in (JobState.COMPLETE, JobState.FAILED, JobState.CANCELLED)]
-    if active_jobs:
-        await message.channel.send(
-            f"⏳ You already have an active job ({active_jobs[0].id}). "
-            "Please wait for it to complete or cancel it first."
-        )
-        return
-
-    # Create job
-    job = job_manager.create_job(stream_url, user_id, message.channel.id, ContentType.LIVE)
-
-    status_msg = await message.channel.send(
-        f"🚀 **Starting Live Stream Analysis**\n"
-        f"Job ID: `{job.id}`\n"
-        f"Stream: {stream_url}\n\n"
-        f"📥 Buffering live stream..."
-    )
-
-    async def run_pipeline():
-        try:
-            from vod_intelligence.review_interface import build_review_list_embed, ClipReviewView
-
-            ranking_result = await run_live_pipeline(job.id, job_manager)
-
-            # Load transcript for metadata
-            from vod_intelligence.transcript_analyzer import TranscriptAnalyzer
-            transcript_analyzer = TranscriptAnalyzer()
-            transcript = transcript_analyzer.load_analysis(
-                Path(job_manager.get_job(job.id).transcript_path or job_manager.get_job(job.id).analysis_path)
-            )
-
-            metadata_list = await generate_metadata_for_all_clips(
-                ranking_result.top_clips, transcript, job.streamer_name, job.vod_title, stream_url
-            )
-            metadata_map = {f"rank_{m.rank}": m for m in metadata_list}
-
-            await status_msg.edit(
-                content=(
-                    f"✅ **Live Stream Analysis Complete!**\n"
-                    f"Job: `{job.id}` | Streamer: **{job.streamer_name}**\n"
-                    f"Duration: {job.vod_duration/3600:.1f}h\n\n"
-                    f"🎬 **Review Top Clips**"
-                )
-            )
-
-            if not ranking_result.top_clips:
-                await message.channel.send(
-                    "⚠️ No reviewable clips were found after ranking. "
-                    "Try a different stream or check back later."
-                )
-                return
-
-            async def on_edit(interaction, job, clip, options):
-                await process_vod_clip_edit(interaction, job, clip, options, metadata_map)
-
-            async def on_reject(interaction, clip):
-                job.deselect_clip(f"rank_{clip.rank}")
-                await interaction.followup.send(f"❌ Rejected clip #{clip.rank}", ephemeral=True)
-
-            async def on_edit_all(interaction, clips):
-                for c in clips:
-                    job.select_clip(f"rank_{c.rank}")
-                await process_vod_clip_edit(interaction, job, clips, {}, metadata_map)
-
-            view = ClipReviewView(
-                job=job,
-                ranking_result=ranking_result,
-                metadata_map=metadata_map,
-                job_manager=job_manager,
-                on_edit=on_edit,
-                on_reject=on_reject,
-                on_edit_all=on_edit_all
-            )
-
-            embed = build_review_list_embed(job, ranking_result)
-
-            review_msg = await message.channel.send(
-                content=(
-                    f"🎬 **Edit Options for Job `{job.id}`**\n"
-                    f"Use the buttons below to review, edit, or reject clips.\n"
-                    f"Top clips: **{len(ranking_result.top_clips)}**"
-                ),
-                embed=embed,
-                view=view
-            )
-
-            await message.channel.send(
-                "👇 **Select a clip above, then choose an edit option.**\n"
-                "• Click a clip number to open its edit menu\n"
-                "• Use **Edit All** to process all top clips\n"
-                "• Results will be sent to your DM."
-            )
-
-        except Exception as e:
-            traceback.print_exc()
-            await status_msg.edit(
-                content=f"❌ **Live Stream Analysis Failed**\nJob: `{job.id}`\nError: {str(e)[:1800]}"
-            )
-
-    spawn_tracked_job(
-        "live_analysis",
-        run_pipeline,
-        job_id=job.id,
-        user_id=job.user_id,
-        channel_id=job.channel_id,
-        source_id=job.vod_url,
-        source_url=job.vod_url,
-    )
-
-
-def _prime_infrastructure():
-    """Detect hardware once, cache it, and run safe maintenance sweeps.
-
-    Runs in a background thread so bot startup is not delayed. Detection
-    includes verifying hardware encoders with a real test encode, so the
-    result is cached to disk and reused on later starts.
-    """
-    try:
-        from infra.hardware import HardwareProfile
-        from infra.concurrency import get_governor, reset_governor
-        from infra.workspace import sweep_stale_workspaces
-        from infra.jobs import get_job_store
-
-        HardwareProfile.detect(probe_encoders=True, force=True)
-        reset_governor()
-        get_governor().log_summary()
-
-        cache = get_source_cache()
-        cache.sweep_expired()
-        print("INFRA: source cache:", cache.stats())
-
-        removed = sweep_stale_workspaces()
-        if removed:
-            print(f"INFRA: removed {len(removed)} stale job workspace(s).")
-
-        # Reconcile jobs a crash left RUNNING, and drop finished records
-        # once they pass the retention window.
-        job_store = get_job_store()
-        recovered = job_store.repair_orphans()
-        if recovered["requeued"] or recovered["failed"]:
-            print(
-                "INFRA: restart recovery:",
-                len(recovered["requeued"]), "requeued,",
-                len(recovered["failed"]), "failed",
-            )
-        expired = job_store.sweep_terminal()
-        if expired:
-            print(f"INFRA: removed {expired} expired job record(s).")
-    except Exception as error:
-        print("INFRA: startup checks failed, continuing with defaults:", error)
-
-
-threading.Thread(target=_prime_infrastructure, daemon=True).start()
-
-threading.Thread(target=start_render_health_server, daemon=True).start()
-
 client.run(TOKEN)
-
-
 
 
 
