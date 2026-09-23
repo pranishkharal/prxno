@@ -11,7 +11,7 @@ DOWNLOAD_PORT = 8765
 LINK_LIFETIME_SECONDS = 60 * 60
 
 BASE_DIR = Path(__file__).resolve().parent
-CLOUDFLARED_PATH = BASE_DIR / "cloudflared.exe"
+CLOUDFLARED_PATH = BASE_DIR / "cloudflared"
 
 _lock = threading.Lock()
 _files = {}
@@ -190,7 +190,7 @@ async def _start_cloudflared():
 
         if not CLOUDFLARED_PATH.exists():
             print(
-                "ERROR: cloudflared.exe not found:"
+                "ERROR: cloudflared not found:"
                 f" {CLOUDFLARED_PATH}"
             )
             return None
@@ -314,7 +314,7 @@ async def _start_upload_cloudflared():
             return _upload_public_url
 
         if not CLOUDFLARED_PATH.exists():
-            print("ERROR: cloudflared.exe not found:", CLOUDFLARED_PATH)
+            print("ERROR: cloudflared not found:", CLOUDFLARED_PATH)
             return None
 
         command = [
