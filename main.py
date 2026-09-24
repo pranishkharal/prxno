@@ -1,4 +1,4 @@
-﻿import random
+import random
 import os
 import re
 import difflib
@@ -2309,7 +2309,7 @@ class EditView(discord.ui.View):
         if interaction.user.id != self.user.id:
 
             await interaction.response.send_message(
-                "Ã¢ÂÅ’ This edit panel belongs to someone else.",
+                "❌ This edit panel belongs to someone else.",
                 ephemeral=True
             )
 
@@ -2340,10 +2340,10 @@ class EditView(discord.ui.View):
         if self.options.get("split_screen", False):
             enabled.append("Split Screen")
 
-        return " â€¢ ".join(enabled)
+        return " • ".join(enabled)
 
     @discord.ui.select(
-        placeholder="Ã°Å¸â€œÂ Choose video size",
+        placeholder="📐 Choose video size",
         options=[
             discord.SelectOption(label="9:16 Vertical", value="9:16"),
             discord.SelectOption(label="1:1 Square", value="1:1"),
@@ -2358,14 +2358,14 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+                "✂️ **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
         )
 
     @discord.ui.select(
-        placeholder="Ã°Å¸Å½Â¨ Sharpness / Contrast / Saturation",
+        placeholder="🎨 Sharpness / Contrast / Saturation",
         options=[
             discord.SelectOption(
                 label="Off",
@@ -2391,7 +2391,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+                "✂️ **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2413,7 +2413,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+                "✂️ **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2435,7 +2435,7 @@ class EditView(discord.ui.View):
 
         await interaction.response.edit_message(
             content=(
-                "Ã¢Å“â€šÃ¯Â¸Â **AUTO EDIT OPTIONS**\n\n"
+                "✂️ **AUTO EDIT OPTIONS**\n\n"
                 f"Selected: **{self.summary()}**"
             ),
             view=self
@@ -2545,7 +2545,7 @@ class EditView(discord.ui.View):
 
         if self.started:
             await interaction.response.send_message(
-                "â³ This edit has already started.",
+                "⏳ This edit has already started.",
                 ephemeral=True
             )
             return
@@ -2564,7 +2564,7 @@ class EditView(discord.ui.View):
         if not self.file_path.exists():
 
             await notify(
-                "âŒ **This edit panel has expired.**\n\n"
+                "❌ **This edit panel has expired.**\n\n"
                 "The downloaded source clip for this session is "
                 "no longer on disk.\n\n"
                 "Please run `!edit` again with your clip link."
@@ -2689,7 +2689,7 @@ class EditView(discord.ui.View):
                 )
 
                 await notify(
-                    "âœ… Done! I sent the edited KICK clip "
+                    "✅ Done! I sent the edited KICK clip "
                     "to your **DM**."
                 )
 
@@ -2701,7 +2701,7 @@ class EditView(discord.ui.View):
                 )
 
                 await notify(
-                    "ðŸŒ Discord cannot send this video directly. "
+                    "🌐 Discord cannot send this video directly. "
                     "Creating your temporary Cloudflare "
                     "download link..."
                 )
@@ -2715,19 +2715,19 @@ class EditView(discord.ui.View):
                     try:
 
                         await self.user.send(
-                            "âœ… **Your edited KICK clip is ready!**\n\n"
+                            "✅ **Your edited KICK clip is ready!**\n\n"
                             "Discord could not send the video "
                             "directly because it is too large.\n\n"
-                            "ðŸ”— **Download your original edited video:**\n"
+                            "🔗 **Download your original edited video:**\n"
                             f"{download_url}\n\n"
-                            "â³ **This link expires in 60 minutes.**"
+                            "⏳ **This link expires in 60 minutes.**"
                         )
 
                         await notify(
-                            "âœ… Done! I sent the temporary "
+                            "✅ Done! I sent the temporary "
                             "**Cloudflare download link** "
                             "to your DM.\n\n"
-                            "â³ It expires in 60 minutes."
+                            "⏳ It expires in 60 minutes."
                         )
 
                     except discord.HTTPException as dm_error:
@@ -2738,15 +2738,15 @@ class EditView(discord.ui.View):
                         )
 
                         await notify(
-                            "âš ï¸ I created the Cloudflare download "
+                            "⚠️ I created the Cloudflare download "
                             "link, but I couldn't send you a DM.\n\n"
-                            f"ðŸ”— {download_url}"
+                            f"🔗 {download_url}"
                         )
 
                 else:
 
                     await notify(
-                        "âŒ **The edit finished, but I couldn't "
+                        "❌ **The edit finished, but I couldn't "
                         "deliver the video.**\n\n"
                         f"Final file size: **{output_size_mb:.1f} MB**\n\n"
                         "Discord rejected the direct upload and "
@@ -2762,7 +2762,7 @@ class EditView(discord.ui.View):
             try:
 
                 await notify(
-                    f"âŒ **EDIT FAILED**\n```{str(e)[:1500]}```"
+                    f"❌ **EDIT FAILED**\n```{str(e)[:1500]}```"
                 )
 
             except Exception as notify_error:
@@ -2895,7 +2895,7 @@ async def on_message(message):
     if kick_url and not is_kick_clip_url(kick_url):
 
         await message.channel.send(
-            "Ã¢ÂÅ’ I found a URL, but it does not look like a KICK Clip URL.\n\n"
+            "❌ I found a URL, but it does not look like a KICK Clip URL.\n\n"
             "Use:\n"
             "`!edit https://kick.com/.../clip/...`"
         )
@@ -2904,7 +2904,7 @@ async def on_message(message):
 
     # If there is no URL after !edit, ask the user for one.
     await message.channel.send(
-        "Ã°Å¸Å½Â¬ **KICK AUTO EDIT**\n\n"
+        "🎬 **KICK AUTO EDIT**\n\n"
         "Paste your **KICK Clip link** here.\n\n"
         "Example:\n"
         "`https://kick.com/.../clip/...`\n\n"
@@ -2926,7 +2926,7 @@ async def on_message(message):
     except asyncio.TimeoutError:
 
         await message.channel.send(
-            "Ã¢Å’â€º Timed out. Run `!edit` again when you have a KICK Clip link."
+            "⌛ Timed out. Run `!edit` again when you have a KICK Clip link."
         )
 
         return
@@ -2938,7 +2938,7 @@ async def on_message(message):
     if not kick_url or not is_kick_clip_url(kick_url):
 
         await message.channel.send(
-            "Ã¢ÂÅ’ That isn't a valid KICK Clip link.\n\n"
+            "❌ That isn't a valid KICK Clip link.\n\n"
             "Run `!edit` again and paste the KICK Clip URL."
         )
 
@@ -2958,7 +2958,7 @@ async def start_kick_edit(message, kick_url):
     if user_id in SESSIONS:
 
         await message.channel.send(
-            "Ã¢ÂÂ³ You already have an edit running. "
+            "⏳ You already have an edit running. "
             "Please wait for it to finish."
         )
 
@@ -3058,9 +3058,9 @@ async def start_kick_edit(message, kick_url):
         SESSIONS[user_id] = view
 
         await message.channel.send(
-            "Ã°Å¸Å½Â¬ **AUTO EDIT OPTIONS**\n\n"
+            "🎬 **AUTO EDIT OPTIONS**\n\n"
             "Choose everything you want, then press **Start Edit**.\n\n"
-            "Selected: **9:16 Ã¢â‚¬Â¢ Remove Non-Speech Ã¢â‚¬Â¢ Overlay**",
+            "Selected: **9:16 • Remove Non-Speech • Overlay**",
             view=view
         )
 
@@ -3076,7 +3076,7 @@ async def start_kick_edit(message, kick_url):
 
         await status.edit(
             content=(
-                "Ã¢ÂÅ’ **KICK CLIP DOWNLOAD FAILED**\n\n"
+                "❌ **KICK CLIP DOWNLOAD FAILED**\n\n"
                 f"```{str(e)[:1800]}```"
             )
         )
