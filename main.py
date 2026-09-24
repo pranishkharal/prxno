@@ -1665,19 +1665,8 @@ def find_overlay_for_streamer(
 
 
 def overlay_position(size):
-    if size == "9:16":
-        return "H-h-(H*0.25)"
-
-    if size == "1:1":
-        return "H-h-(H*0.06)"
-
-    if size == "4:5":
-        return "H-h-(H*0.10)"
-
-    if size == "4:3":
-        return "H-h-(H*0.08)"
-
-    return "H-h-(H*0.08)"
+    # Flush with the bottom video edge, no gap.
+    return "H-h"
 
 
 def get_overlay_file(
@@ -1806,8 +1795,8 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
 
         if zoom:
             filters.append(
-                "scale=iw*1.08:ih*1.08,"
-                "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+                "scale=iw*1.3:ih*1.3,"
+                "crop=floor(iw/1.3/2)*2:floor(ih/1.3/2)*2"
             )
 
         enhance_filter = ENHANCE_PRESETS.get(
@@ -1924,7 +1913,7 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
             if zoom:
                 filter_complex += (
                     f";[{top_name}]"
-                    f"scale={int(out_w * 1.08)}:{int(half_h * 1.08)},"
+                    f"scale={int(out_w * 1.3)}:{int(half_h * 1.3)},"
                     f"crop={out_w}:{half_h}"
                     "[topzoom]"
                 )
@@ -2083,7 +2072,7 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
             # 8% and crops back to the original canvas size from the
             # center. Apply that same transform to the boundary line
             # so it still lines up with the zoomed footage.
-            zoom_scale = 1.08
+            zoom_scale = 1.3
             fg_line_y = (
                 (fg_line_y * zoom_scale)
                 - (out_h * (zoom_scale - 1) / 2)
@@ -2138,8 +2127,8 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
 
         filter_complex += (
             ";[base]"
-            "scale=iw*1.08:ih*1.08,"
-            "crop=floor(iw/1.08/2)*2:floor(ih/1.08/2)*2"
+            "scale=iw*1.3:ih*1.3,"
+            "crop=floor(iw/1.3/2)*2:floor(ih/1.3/2)*2"
             "[zoomed]"
         )
 
