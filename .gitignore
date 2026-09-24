@@ -63,3 +63,9 @@ python/
 
 # Secret/token files
 DISCORD_BOT_TOKEN=*.txt
+
+# Linux cloudflared binary
+cloudflared
+
+# Local backup snapshots (kept locally only)
+main_backup_*.py

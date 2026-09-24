@@ -14,6 +14,7 @@ from clip_intelligence import build_moment_score
 from clip_history import record_clip, is_duplicate, search_similar_transcript
 from smart_presets import get_preset, list_presets
 import shutil
+import uuid
 import traceback
 from pathlib import Path
 from urllib.parse import urlparse
@@ -214,7 +215,7 @@ SESSIONS = {}
 
 # Limits how many ffmpeg/edit jobs run at the same time.
 # Extra jobs beyond this wait automatically instead of overloading the CPU.
-MAX_CONCURRENT_EDITS = 5
+MAX_CONCURRENT_EDITS = 3
 EDIT_SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT_EDITS)
 
 async def run_encode_job(func, *args):
@@ -602,11 +603,10 @@ def download_kick_clip(url, user_id):
 
     # Unique temporary working directory prevents two users from
     # accidentally overwriting each other's source file.
-    job_dir = UPLOAD_DIR / f"kick_{user_id}"
-
-    if job_dir.exists():
-        shutil.rmtree(job_dir, ignore_errors=True)
-
+    # Unique per-job folder (not shared per user) so a new clip
+    # request can never delete a previous clip that is still being
+    # edited or still has an active public download link.
+    job_dir = UPLOAD_DIR / f"kick_{user_id}_{uuid.uuid4().hex[:8]}"
     job_dir.mkdir(parents=True, exist_ok=True)
 
     output_template = str(
