@@ -673,6 +673,7 @@ class PipelineOrchestrator:
                     "hashtags": metadata.hashtags if metadata else [],
                     "tags": clip.tags,
                     "review_priority": clip.review_priority,
+                    "edit_plan": clip.edit_plan.to_options_dict() if getattr(clip, "edit_plan", None) else {},
                 }
             )
             candidates.append(candidate)

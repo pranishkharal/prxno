@@ -32,8 +32,20 @@ from rapidocr_onnxruntime import RapidOCR
 #   python -m pip install -U yt-dlp curl_cffi
 import yt_dlp
 
+# VOD Intelligence pipeline
+from vod_intelligence import (
+    get_job_manager,
+    PipelineOrchestrator,
+    run_vod_pipeline,
+    run_clip_pipeline,
+)
+
 
 load_dotenv()
+
+from pranixx_live_monitor import monitor_pranixx_live
+
+PRANIXX_LIVE_MONITOR_TASK = None
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
@@ -1961,8 +1973,8 @@ def edit_video(input_file, output_file, options, overlay_file=None, url_streamer
                 filter_complex += (
                     ";[2:v]"
                     "format=rgba,"
-                    f"scale={out_w}:-1:"
-                    "force_original_aspect_ratio=decrease"
+                    f"scale={out_w}:{out_h}:"
+                    "force_original_aspect_ratio=disable"
                     "[branding];"
                     "[stacked][branding]"
                     "overlay="
@@ -2292,6 +2304,25 @@ class EditView(discord.ui.View):
         self.split_photo_file = None
         self.url_streamer_hint = url_streamer_hint
         self.started = False
+
+    async def on_timeout(self):
+        """Release this edit session when the Discord edit panel expires."""
+
+        current = SESSIONS.get(self.user.id)
+
+        # Only remove this exact View.
+        # This prevents an expired old panel from deleting a newer session.
+        if current is self:
+            SESSIONS.pop(self.user.id, None)
+
+        try:
+            self.disable_all_items()
+        except Exception:
+            pass
+
+        print(
+            f"EDIT SESSION TIMEOUT: user={self.user.id}"
+        )
 
     async def interaction_check(self, interaction):
 
@@ -2811,6 +2842,7 @@ class EditView(discord.ui.View):
 async def on_ready():
 
     global AUTO_CLIP_MONITOR_TASK
+    global PRANIXX_LIVE_MONITOR_TASK
 
     print("----------------------------------")
     print(f"Logged in as {client.user}")
@@ -2839,7 +2871,107 @@ async def on_ready():
             name="kick-auto-clip-monitor"
         )
 
+    if (
+        PRANIXX_LIVE_MONITOR_TASK is None
+        or PRANIXX_LIVE_MONITOR_TASK.done()
+    ):
+        PRANIXX_LIVE_MONITOR_TASK = asyncio.create_task(
+            monitor_pranixx_live(client),
+            name="pranixx-live-monitor"
+        )
+
     print("----------------------------------")
+
+
+# ---------------------------------------------------------
+# VOD Intelligence
+# ---------------------------------------------------------
+
+async def start_vod_analysis(message, vod_url):
+    """Create and run a VOD Intelligence job using the shared JobManager."""
+
+    user_id = message.author.id
+    channel_id = message.channel.id
+
+    job_manager = get_job_manager()
+
+    job = job_manager.create_job(
+        vod_url=vod_url,
+        user_id=user_id,
+        channel_id=channel_id,
+    )
+
+    status = await message.channel.send(
+        "🧠 **VOD INTELLIGENCE STARTED**\\n\\n"
+        f"Job: `{job.id}`\\n"
+        "🔄 Analyzing the KICK VOD...\\n"
+        "This may take some time for long VODs."
+    )
+
+    async def run_pipeline():
+        try:
+            await job_manager.run_job(
+                job.id,
+                run_vod_pipeline,
+            )
+
+            finished_job = job_manager.get_job(job.id)
+
+            if not finished_job:
+                await status.edit(
+                    content=f"❌ VOD job `{job.id}` disappeared unexpectedly."
+                )
+                return
+
+            if finished_job.state.value == "candidates_found":
+                await status.edit(
+                    content=(
+                        "✅ **VOD ANALYSIS COMPLETE**\\n\\n"
+                        f"Job: `{job.id}`\\n"
+                        f"🎯 Candidates found: `{len(finished_job.candidates)}`\\n"
+                        "The VOD has been analyzed and edit plans are ready."
+                    )
+                )
+            elif finished_job.state.value == "failed":
+                error_message = (
+                    finished_job.error.message
+                    if finished_job.error
+                    else "Unknown error"
+                )
+                await status.edit(
+                    content=(
+                        "❌ **VOD ANALYSIS FAILED**\\n\\n"
+                        f"Job: `{job.id}`\\n"
+                        f"Error: `{error_message}`"
+                    )
+                )
+            else:
+                await status.edit(
+                    content=(
+                        "ℹ️ **VOD JOB FINISHED**\\n\\n"
+                        f"Job: `{job.id}`\\n"
+                        f"State: `{finished_job.state.value}`\\n"
+                        f"Candidates: `{len(finished_job.candidates)}`"
+                    )
+                )
+
+        except Exception as exc:
+            traceback.print_exc()
+            try:
+                await status.edit(
+                    content=(
+                        "❌ **VOD PIPELINE ERROR**\\n\\n"
+                        f"Job: `{job.id}`\\n"
+                        f"Error: `{str(exc)[:1500]}`"
+                    )
+                )
+            except Exception:
+                pass
+
+    asyncio.create_task(
+        run_pipeline(),
+        name=f"vod-analysis-{job.id}"
+    )
 
 
 # ---------------------------------------------------------
@@ -2853,6 +2985,39 @@ async def on_message(message):
         return
 
     content = message.content.strip()
+
+    # -----------------------------------------------------
+    # !vod
+    #
+    # Start the VOD Intelligence pipeline without touching
+    # the existing !edits KICK Clip workflow.
+    # -----------------------------------------------------
+
+    if content.lower().startswith("!vod"):
+        vod_url = clean_url_from_message(content)
+
+        if not vod_url:
+            await message.channel.send(
+                "🧠 **VOD INTELLIGENCE**\\n\\n"
+                "Use:\\n"
+                "`!vod https://kick.com/<streamer>/videos/<id>`"
+            )
+            return
+
+        from vod_intelligence import is_kick_vod_url
+
+        if not is_kick_vod_url(vod_url):
+            await message.channel.send(
+                "❌ That does not look like a valid KICK VOD URL.\\n\\n"
+                "Use a KICK VOD link containing `/videos/`."
+            )
+            return
+
+        await start_vod_analysis(
+            message,
+            vod_url
+        )
+        return
 
     if not content.lower().startswith("!edits"):
         return

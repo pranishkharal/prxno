@@ -81,6 +81,22 @@ class EditPlan:
             "enhance": self.enhance,
             "split_screen": self.split_screen,
             "auto_captions": self.auto_captions,
+            "caption_style": self.caption_style,
+            "silence_aggressiveness": self.silence_aggressiveness,
+            "preserve_pauses": self.preserve_pauses,
+            "custom_crop": self.custom_crop,
+            "color_grade": self.color_grade,
+            "editing_intensity": self.editing_intensity,
+            "audio_processing": self.audio_processing,
+            "hook_start": self.hook_start,
+            "payoff_timestamp": self.payoff_timestamp,
+            "ending_timestamp": self.ending_timestamp,
+            "hook_confidence": self.hook_confidence,
+            "context_confidence": self.context_confidence,
+            "caption_confidence": self.caption_confidence,
+            "split_screen_confidence": self.split_screen_confidence,
+            "reasoning": self.reasoning,
+            "warnings": self.warnings,
         }
 
 
